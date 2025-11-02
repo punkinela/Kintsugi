@@ -159,8 +159,9 @@ export default function Home() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Sparkles className="h-8 w-8 text-kintsugi-gold-500" />
-                <span className="ml-2 text-xl font-bold text-kintsugi-gold-700 dark:text-kintsugi-gold-300">Kintsugi</span>
+                <Zap className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
+                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
