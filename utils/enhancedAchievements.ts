@@ -133,7 +133,7 @@ export const ENHANCED_ACHIEVEMENTS: Omit<EnhancedAchievement, 'unlocked' | 'unlo
   },
   {
     id: 'accomplishment-100',
-    title: 'Remarkable Legend',
+    title: 'Accomplishment Legend',
     description: 'Log 100 accomplishments',
     icon: '👑',
     tier: 'platinum',
@@ -144,7 +144,7 @@ export const ENHANCED_ACHIEVEMENTS: Omit<EnhancedAchievement, 'unlocked' | 'unlo
   },
   {
     id: 'accomplishment-500',
-    title: 'Truly Remarkable',
+    title: 'Diamond Achiever',
     description: 'Log 500 accomplishments',
     icon: '💎',
     tier: 'diamond',
@@ -247,7 +247,7 @@ export const ENHANCED_ACHIEVEMENTS: Omit<EnhancedAchievement, 'unlocked' | 'unlo
   },
   {
     id: 'level-50',
-    title: 'The Remarkable One',
+    title: 'The Exceptional One',
     description: 'Reach maximum level 50',
     icon: '🏆',
     tier: 'diamond',

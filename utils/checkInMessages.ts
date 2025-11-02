@@ -51,7 +51,7 @@ export function getCheckInMessage(daysSinceLastVisit: number, userName?: string)
       message: `${name}, we've missed you! It's been over a week. Are you okay? 🫂`,
       emoji: '🫂',
       tone: 'caring',
-      actionPrompt: 'Remember: even small steps count. You don\'t have to be perfect to be remarkable.'
+      actionPrompt: 'Remember: even small steps count. You don\'t have to be perfect to be valued.'
     };
   }
   
@@ -90,7 +90,7 @@ export function getCheckInMessage(daysSinceLastVisit: number, userName?: string)
     message: `${name}! Welcome back like it's the first time! So glad you're here. ✨`,
     emoji: '✨',
     tone: 'celebrating',
-    actionPrompt: 'Every day is a chance to start fresh. Let\'s celebrate your remarkable journey - starting now!'
+    actionPrompt: 'Every day is a chance to start fresh. Let\'s celebrate your journey - starting now!'
   };
 }
 
@@ -111,7 +111,7 @@ export function getDaysSinceLastVisit(lastVisitDate: string): number {
 // Motivational messages for different scenarios
 export const motivationalMessages = {
   comeback: [
-    "The fact that you came back shows your commitment to growth. That's remarkable! 💪",
+    "The fact that you came back shows your commitment to growth. That's powerful! 💪",
     "Welcome back! Your journey doesn't have to be perfect, just persistent. 🌱",
     "You're here. That's the first step, and it counts! 🌟",
     "Life gets busy, but you made time for yourself today. That's self-care! 💜"
@@ -127,7 +127,7 @@ export const motivationalMessages = {
   longAbsence: [
     "No matter how long you've been away, you're always welcome back. 🤗",
     "There's no 'right' way to use this tool. You're here now, and that's perfect. ✨",
-    "Your worth isn't measured by how often you visit. You're remarkable, period. 💎",
+    "Your worth isn't measured by how often you visit. You're valued, period. 💎",
     "Sometimes we need breaks. Welcome back when you're ready - we're here! 🌸"
   ]
 };

@@ -168,7 +168,7 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
                   No accomplishments recorded yet
                 </p>
                 <p className="text-kintsugi-dark-700/60 dark:text-kintsugi-gold-200/60 text-sm mt-2">
-                  Start documenting your remarkable achievements!
+                  Start documenting your achievements!
                 </p>
               </div>
             ) : (

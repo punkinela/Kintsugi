@@ -126,6 +126,29 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
               />
             </div>
 
+            {/* Ethnicity */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Ethnicity/Cultural Background (Optional - helps personalize affirmations)
+              </label>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {['asian', 'black', 'hispanic', 'indigenous', 'white', 'multiracial', 'prefer-not-to-say'].map((ethnicity) => (
+                  <button
+                    key={ethnicity}
+                    type="button"
+                    onClick={() => setProfile({ ...profile, ethnicity: ethnicity as any })}
+                    className={`px-4 py-3 rounded-xl border-2 transition-all text-sm ${
+                      profile.ethnicity === ethnicity
+                        ? 'border-kintsugi-gold-600 bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:text-kintsugi-gold-200'
+                        : 'border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 hover:border-kintsugi-gold-300 dark:hover:border-kintsugi-gold-700'
+                    }`}
+                  >
+                    {ethnicity.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Privacy Note */}
             <div className="bg-kintsugi-gold-50/50 dark:bg-kintsugi-gold-900/10 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/30 rounded-xl p-4">
               <p className="text-sm text-kintsugi-gold-800/80 dark:text-kintsugi-gold-200/80">

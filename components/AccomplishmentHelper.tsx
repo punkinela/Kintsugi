@@ -287,7 +287,7 @@ export default function AccomplishmentHelper({ text, onTextChange, showHelper = 
                 {/* Major Accomplishments */}
                 <div>
                   <h5 className="font-semibold text-sm text-orange-800 dark:text-orange-300 mb-2 flex items-center gap-2">
-                    🏆 Major Wins (Remarkable Achievements!)
+                    🏆 Major Wins (Significant Achievements!)
                   </h5>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {accomplishmentExamples.major.slice(0, 4).map((example, index) => (
