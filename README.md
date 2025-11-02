@@ -1,4 +1,4 @@
-# I Am Remarkable
+# Kintsugi
 
 An empowering web application that delivers personalized affirmations to celebrate your accomplishments and recognize your worth. Built with Next.js, React, and Tailwind CSS.
 
@@ -196,4 +196,4 @@ MIT License - feel free to use this project for educational purposes.
 
 ## 🙏 Acknowledgments
 
-Inspired by the "I Am Remarkable" initiative by Google, which encourages people to celebrate their accomplishments.
+Inspired by initiatives that encourage people to celebrate their accomplishments and recognize their self-worth.

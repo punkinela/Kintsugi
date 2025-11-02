@@ -88,7 +88,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
               />
               <FAQItem 
                 question="What are levels and titles?"
-                answer="Levels represent your progress and mastery. You start at Level 1 (Newcomer) and can reach Level 50 (The Remarkable One). Each level requires more XP than the last. Your title changes at milestone levels (5, 10, 15, 20, 25, 30, 35, 40, 45, 50)."
+                answer="Levels represent your progress and mastery. You start at Level 1 (Newcomer) and can reach Level 50 (The Exceptional One). Each level requires more XP than the last. Your title changes at milestone levels (5, 10, 15, 20, 25, 30, 35, 40, 45, 50)."
               />
               <FAQItem 
                 question="What are daily challenges?"

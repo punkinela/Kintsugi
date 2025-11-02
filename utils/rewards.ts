@@ -22,7 +22,7 @@ export const REWARDS: Reward[] = [
   { id: 'badge-starter', name: 'Starter Badge', description: 'You\'ve begun your journey', icon: '🌱', type: 'badge', unlockLevel: 1, rarity: 'common' },
   { id: 'badge-achiever', name: 'Achiever Badge', description: 'Consistent progress', icon: '🎯', type: 'badge', unlockLevel: 10, rarity: 'rare' },
   { id: 'badge-champion', name: 'Champion Badge', description: 'True dedication', icon: '🏆', type: 'badge', unlockLevel: 25, rarity: 'epic' },
-  { id: 'badge-legend', name: 'Legend Badge', description: 'Remarkable achievement', icon: '👑', type: 'badge', unlockLevel: 50, rarity: 'legendary' },
+  { id: 'badge-legend', name: 'Legend Badge', description: 'Exceptional achievement', icon: '👑', type: 'badge', unlockLevel: 50, rarity: 'legendary' },
   
   // Feature rewards
   { id: 'feature-analytics', name: 'Advanced Analytics', description: 'Detailed progress analytics', icon: '📊', type: 'feature', unlockLevel: 7, rarity: 'rare' },
@@ -35,8 +35,8 @@ export const REWARDS: Reward[] = [
   { id: 'title-explorer', name: 'Explorer', description: 'Discovering your potential', icon: '🔍', type: 'title', unlockLevel: 5, rarity: 'common' },
   { id: 'title-achiever', name: 'Achiever', description: 'Making real progress', icon: '⭐', type: 'title', unlockLevel: 10, rarity: 'rare' },
   { id: 'title-champion', name: 'Champion', description: 'Leading by example', icon: '🏆', type: 'title', unlockLevel: 20, rarity: 'epic' },
-  { id: 'title-legend', name: 'Legend', description: 'Truly remarkable', icon: '💫', type: 'title', unlockLevel: 30, rarity: 'epic' },
-  { id: 'title-remarkable', name: 'The Remarkable One', description: 'Ultimate achievement', icon: '👑', type: 'title', unlockLevel: 50, rarity: 'legendary' }
+  { id: 'title-legend', name: 'Legend', description: 'Truly exceptional', icon: '💫', type: 'title', unlockLevel: 30, rarity: 'epic' },
+  { id: 'title-exceptional', name: 'The Exceptional One', description: 'Ultimate achievement', icon: '👑', type: 'title', unlockLevel: 50, rarity: 'legendary' }
 ];
 
 // Check and unlock rewards based on level

@@ -298,7 +298,7 @@ export function generateInsights(accomplishments: string[]): string[] {
   
   const highImpact = summary.impactDistribution.find(d => d.level === 'high' || d.level === 'exceptional');
   if (highImpact && highImpact.count >= 3) {
-    insights.push(`⭐ ${highImpact.count} of your accomplishments show high impact - that's remarkable!`);
+    insights.push(`⭐ ${highImpact.count} of your accomplishments show high impact - that's exceptional!`);
   }
   
   if (summary.strengthProfile.length >= 3) {

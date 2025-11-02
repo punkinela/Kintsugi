@@ -11,7 +11,7 @@ export const affirmations: Affirmation[] = [
   },
   {
     id: 'acc-2',
-    text: 'Every skill I possess today was once something I knew nothing about. My growth is remarkable.',
+    text: 'Every skill I possess today was once something I knew nothing about. My growth is extraordinary.',
     category: 'growth',
     tags: ['learning', 'development', 'progress'],
     emoji: '🌱',
@@ -64,7 +64,7 @@ export const affirmations: Affirmation[] = [
   },
   {
     id: 'women-4',
-    text: 'I balance multiple roles with grace, and each one showcases different aspects of my remarkable capabilities.',
+    text: 'I balance multiple roles with grace, and each one showcases different aspects of my exceptional capabilities.',
     category: 'strength',
     tags: ['balance', 'multifaceted', 'capability'],
     demographics: { gender: ['woman'] },
@@ -73,14 +73,14 @@ export const affirmations: Affirmation[] = [
   // Men-focused affirmations
   {
     id: 'men-1',
-    text: 'I embrace vulnerability as strength, not weakness. My emotional intelligence is remarkable.',
+    text: 'I embrace vulnerability as strength, not weakness. My emotional intelligence is powerful.',
     category: 'strength',
     tags: ['vulnerability', 'emotional-intelligence', 'growth'],
     demographics: { gender: ['man'] },
   },
   {
     id: 'men-2',
-    text: 'I challenge traditional expectations and define success on my own terms. That courage is remarkable.',
+    text: 'I challenge traditional expectations and define success on my own terms. That courage is inspiring.',
     category: 'growth',
     tags: ['authenticity', 'courage', 'individuality'],
     demographics: { gender: ['man'] },
@@ -96,7 +96,7 @@ export const affirmations: Affirmation[] = [
   // Non-binary focused affirmations
   {
     id: 'nb-1',
-    text: 'I exist authentically in a world still learning to see me. My courage to be myself is remarkable.',
+    text: 'I exist authentically in a world still learning to see me. My courage to be myself is powerful.',
     category: 'strength',
     tags: ['authenticity', 'courage', 'identity'],
     demographics: { gender: ['non-binary'] },
@@ -118,7 +118,7 @@ export const affirmations: Affirmation[] = [
   },
   {
     id: 'eth-2',
-    text: 'I navigate multiple cultural contexts with fluidity and grace. My adaptability is remarkable.',
+    text: 'I navigate multiple cultural contexts with fluidity and grace. My adaptability is exceptional.',
     category: 'strength',
     tags: ['cultural-intelligence', 'adaptability', 'fluidity'],
   },
@@ -144,7 +144,7 @@ export const affirmations: Affirmation[] = [
   },
   {
     id: 'prof-2',
-    text: 'I solve problems that others find challenging. My problem-solving ability is remarkable.',
+    text: 'I solve problems that others find challenging. My problem-solving ability is exceptional.',
     category: 'strength',
     tags: ['problem-solving', 'capability', 'skill'],
   },
@@ -156,7 +156,7 @@ export const affirmations: Affirmation[] = [
   },
   {
     id: 'prof-4',
-    text: 'I continuously learn and adapt in my field. My commitment to growth is remarkable.',
+    text: 'I continuously learn and adapt in my field. My commitment to growth is admirable.',
     category: 'growth',
     tags: ['learning', 'adaptation', 'development'],
   },
@@ -202,7 +202,7 @@ export const affirmations: Affirmation[] = [
   },
   {
     id: 'div-2',
-    text: 'I show up consistently even when motivation wanes. My discipline is remarkable.',
+    text: 'I show up consistently even when motivation wanes. My discipline is powerful.',
     category: 'strength',
     tags: ['discipline', 'consistency', 'commitment'],
   },
@@ -220,7 +220,7 @@ export const affirmations: Affirmation[] = [
   },
   {
     id: 'div-5',
-    text: 'I have learned from criticism without letting it diminish my self-worth. My growth mindset is remarkable.',
+    text: 'I have learned from criticism without letting it diminish my self-worth. My growth mindset is powerful.',
     category: 'growth',
     tags: ['growth-mindset', 'learning', 'resilience'],
   },

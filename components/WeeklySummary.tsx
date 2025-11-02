@@ -118,11 +118,11 @@ export default function WeeklySummary({ isOpen, onClose }: WeeklySummaryProps) {
   const handleShare = () => {
     if (!summary) return;
     
-    const shareText = `🌟 My Weekly Progress on I Am Remarkable:\n\n` +
+    const shareText = `🌟 My Weekly Progress on Kintsugi:\n\n` +
       `🔥 ${summary.weekly.currentStreak}-day streak\n` +
       `📝 ${summary.weekly.journalEntries} accomplishments documented\n` +
       `🏆 ${summary.weekly.achievements} achievements unlocked\n\n` +
-      `Recognizing my worth, one day at a time! #IAmRemarkable`;
+      `Recognizing my worth, one day at a time! #Kintsugi #SelfWorth`;
     
     if (navigator.share) {
       navigator.share({
@@ -318,7 +318,7 @@ export default function WeeklySummary({ isOpen, onClose }: WeeklySummaryProps) {
                 "Your accomplishments don't speak for themselves - you must give them voice."
               </p>
               <p className="text-sm opacity-90">
-                Keep documenting your remarkable journey! 🌟
+                Keep documenting your extraordinary journey! 🌟
               </p>
             </div>
           </div>

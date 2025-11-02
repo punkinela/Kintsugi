@@ -1,6 +1,6 @@
 import { EngagementData, StreakInfo, Achievement } from '@/types/engagement';
 
-const STORAGE_KEY = 'iamremarkable_engagement';
+const STORAGE_KEY = 'kintsugi_engagement';
 
 // Default engagement data
 const defaultEngagementData: EngagementData = {
@@ -130,7 +130,7 @@ const achievementDefinitions: Achievement[] = [
   {
     id: 'first-visit',
     title: 'Welcome!',
-    description: 'Started your remarkable journey',
+    description: 'Started your journey of growth',
     icon: '🌟',
   },
   {
