@@ -1,0 +1,111 @@
+'use client';
+
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Lightbulb, MessageCircle, Target, BookOpen, ArrowRight } from 'lucide-react';
+import { BiasInsight } from '@/types';
+
+interface BiasInsightModalProps {
+  insight: BiasInsight | null;
+  onClose: () => void;
+  onTakeAction?: () => void; // NEW: Callback for taking action
+}
+
+export default function BiasInsightModal({ insight, onClose, onTakeAction }: BiasInsightModalProps) {
+  if (!insight) return null;
+
+  const handleTakeAction = () => {
+    if (onTakeAction) {
+      onTakeAction();
+    }
+    onClose();
+  };
+
+  return (
+    <AnimatePresence>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          className="relative w-full max-w-2xl bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl p-8 max-h-[90vh] overflow-y-auto border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30"
+        >
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 p-2 rounded-full hover:bg-kintsugi-gold-100/50 dark:hover:bg-kintsugi-gold-900/30 transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-6 h-6 text-kintsugi-dark-700/80 dark:text-kintsugi-gold-200/80" />
+          </button>
+
+          {/* Header */}
+          <div className="mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-kintsugi-gold-600 to-kintsugi-gold-800 rounded-full mb-4">
+              <Lightbulb className="w-6 h-6 text-kintsugi-gold-50" />
+            </div>
+            <h2 className="text-3xl font-bold text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-2">
+              {insight.title}
+            </h2>
+          </div>
+
+          {/* Description */}
+          <div className="mb-6">
+            <p className="text-lg text-kintsugi-dark-800/90 dark:text-kintsugi-gold-200/90 leading-relaxed">
+              {insight.description}
+            </p>
+          </div>
+
+          {/* Reflection */}
+          <div className="bg-kintsugi-gold-50/50 dark:bg-kintsugi-gold-900/10 border-l-4 border-kintsugi-gold-400 rounded-r-xl p-6 mb-6">
+            <div className="flex items-start gap-3">
+              <MessageCircle className="w-6 h-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold text-kintsugi-gold-800 dark:text-kintsugi-gold-200 mb-2">
+                  Reflection Question
+                </h3>
+                <p className="text-kintsugi-gold-700/90 dark:text-kintsugi-gold-300/90">
+                  {insight.reflection}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Step */}
+          <div className="bg-kintsugi-gold-100/30 dark:bg-kintsugi-gold-900/20 border-l-4 border-kintsugi-gold-500 rounded-r-xl p-6">
+            <div className="flex items-start gap-3">
+              <Target className="w-6 h-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-300 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold text-kintsugi-gold-800 dark:text-kintsugi-gold-200 mb-2">
+                  Action Step
+                </h3>
+                <p className="text-kintsugi-gold-700/90 dark:text-kintsugi-gold-200/90">
+                  {insight.actionStep}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-3 mt-8">
+            {insight.actionType === 'journal' && onTakeAction && (
+              <button
+                onClick={handleTakeAction}
+                className="flex-1 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 text-kintsugi-dark-800 dark:text-kintsugi-gold-200 font-medium py-4 rounded-xl hover:bg-kintsugi-gold-50/50 dark:hover:bg-kintsugi-gold-900/20 transition-colors"
+              >
+                <BookOpen className="w-5 h-5" />
+                Document This
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            )}
+            <button
+              onClick={onClose}
+              className={`${insight.actionType === 'journal' && onTakeAction ? 'flex-1' : 'w-full'} bg-gradient-to-r from-kintsugi-gold-600 to-kintsugi-gold-800 text-kintsugi-gold-50 font-semibold py-4 rounded-xl hover:from-kintsugi-gold-700 hover:to-kintsugi-gold-900 transition-all`}
+            >
+              Got it!
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+}

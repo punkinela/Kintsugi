@@ -1,0 +1,5 @@
+node -v
+
+node -v
+npm --version
+node index.js
