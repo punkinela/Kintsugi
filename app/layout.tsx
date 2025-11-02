@@ -10,24 +10,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ 
-        margin: 0, 
-        padding: '1rem',
-        backgroundColor: '#fffbeb',
-        minHeight: '100vh',
-        color: '#1e1e2e'
-      }}>
+      <head>
+        <title>Own Your Impact - Track Your Wins & Advocate for Yourself</title>
+        <meta name="description" content="A professional tool to track your accomplishments, recognize bias, and advocate for your career growth." />
+      </head>
+      <body className="m-0 p-0 min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-slate-900">
         <ThemeProvider>
-          <div>
-            <h1 style={{
-              color: '#b45309',
-              textAlign: 'center',
-              margin: '2rem 0',
-              fontSize: '2rem',
-              fontWeight: 'bold'
-            }}>Kintsugi</h1>
-            {children}
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>

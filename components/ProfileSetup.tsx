@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { UserProfile } from '@/types';
-import { User, Sparkles } from 'lucide-react';
+import { User, Sparkles, Zap } from 'lucide-react';
 import SimpleAvatarPicker from './SimpleAvatarPicker';
 
 interface ProfileSetupProps {
@@ -51,14 +51,14 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
         <div className="bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-kintsugi-gold-100/30 dark:border-kintsugi-gold-900/30">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-kintsugi-gold-500 to-kintsugi-gold-700 rounded-full mb-4 shadow-lg">
-              <User className="w-8 h-8 text-kintsugi-gold-50" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-full mb-4 shadow-lg">
+              <User className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-2">
-              {isEditing ? 'Edit Your Profile' : 'Welcome to Kintsugi'}
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+              {isEditing ? 'Edit Your Profile' : 'Welcome to Own Your Impact'}
             </h1>
-            <p className="text-kintsugi-gold-800/80 dark:text-kintsugi-gold-200/80 text-lg">
-              {isEditing ? 'Update your avatar and profile information' : 'Celebrate your unique journey with golden affirmations'}
+            <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+              {isEditing ? 'Update your avatar and profile information' : 'A research-backed tool to track your wins, recognize bias, and advocate for your career growth'}
             </p>
           </div>
 
@@ -150,20 +150,20 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
             </div>
 
             {/* Privacy Note */}
-            <div className="bg-kintsugi-gold-50/50 dark:bg-kintsugi-gold-900/10 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/30 rounded-xl p-4">
-              <p className="text-sm text-kintsugi-gold-800/80 dark:text-kintsugi-gold-200/80">
-                <strong>Privacy Note:</strong> Your information is stored locally on your device and never sent to external servers. 
-                It is used only to personalize your affirmations.
+            <div className="bg-blue-50/50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800/30 rounded-xl p-4">
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                <strong>Privacy First:</strong> Your information stays on your device and is never sent to external servers.
+                We use it only to personalize insights and help you articulate your unique value proposition.
               </p>
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full px-6 py-4 bg-gradient-to-r from-kintsugi-gold-600 to-kintsugi-gold-800 text-kintsugi-gold-50 font-medium rounded-xl hover:from-kintsugi-gold-700 hover:to-kintsugi-gold-900 focus:outline-none focus:ring-2 focus:ring-kintsugi-gold-400 focus:ring-offset-2 transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-kintsugi-gold-500/20 flex items-center justify-center gap-2"
+              className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-blue-500/30 flex items-center justify-center gap-2"
             >
-              <Sparkles className="w-5 h-5" />
-              Start My Journey
+              <Zap className="w-5 h-5" />
+              Start Tracking My Impact
             </button>
 
             {/* Skip Button */}
