@@ -86,7 +86,7 @@ export default function FeedbackWidget({ onClose }: FeedbackWidgetProps) {
           {step === 'rating' && (
             <div>
               <p className="text-kintsugi-dark-700 dark:text-kintsugi-gold-100 mb-4 text-center">
-                We'd love to hear about your experience with Kintsugi!
+                We'd love to hear about your experience with Own Your Impact!
               </p>
               
               {/* Star Rating */}
@@ -160,7 +160,7 @@ export default function FeedbackWidget({ onClose }: FeedbackWidgetProps) {
                 Thank you!
               </h4>
               <p className="text-kintsugi-dark-700/80 dark:text-kintsugi-gold-200/80">
-                Your feedback helps us make Kintsugi even better!
+                Your feedback helps us make Own Your Impact even better!
               </p>
             </div>
           )}

@@ -12,7 +12,9 @@ import BiasInsightModal from '@/components/BiasInsightModal';
 import WeeklySummary from '@/components/WeeklySummary';
 import EnhancedProgressJournal from '@/components/EnhancedProgressJournal';
 import QuickCapture from '@/components/QuickCapture';
+import FeedbackWidget from '@/components/FeedbackWidget';
 import type { BiasInsight, UserProfile } from '@/types';
+import { shouldPromptFeedback } from '@/utils/analytics';
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -35,6 +37,7 @@ export default function Home() {
   const [showQuickCapture, setShowQuickCapture] = useState(false);
   const [showAccomplishments, setShowAccomplishments] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
 
   // Load user data
   useEffect(() => {
@@ -72,6 +75,20 @@ export default function Home() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showUserDropdown]);
+
+  // Check if feedback should be prompted
+  useEffect(() => {
+    if (isClient && !showSetup) {
+      // Wait 10 seconds before showing feedback
+      const timer = setTimeout(() => {
+        if (shouldPromptFeedback()) {
+          setShowFeedback(true);
+        }
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isClient, showSetup]);
 
   // Handle profile save
   const handleProfileSave = (profileData: { name: string; email?: string; emoji?: string; theme?: 'light' | 'dark' | 'system' }) => {
@@ -446,10 +463,15 @@ export default function Home() {
 
       {/* Bias Insight Modal */}
       {showBiasInsight && (
-        <BiasInsightModal 
+        <BiasInsightModal
           onClose={() => setShowBiasInsight(false)}
           insight={biasInsight}
         />
+      )}
+
+      {/* Feedback Widget */}
+      {showFeedback && (
+        <FeedbackWidget onClose={() => setShowFeedback(false)} />
       )}
     </div>
   );
