@@ -347,9 +347,9 @@ export function analyzeFunnel(): FunnelStage[] {
   const stages = [
     { stage: 'Visited App', users: visitCount, percentage: 100 },
     { stage: 'Completed Profile', users: userExists ? 1 : 0, percentage: 100 },
-    { stage: 'Viewed Affirmations', users: engagementData.affirmationsViewed, percentage: 0 },
-    { stage: 'Created Journal Entry', users: engagementData.journalEntries.length, percentage: 0 },
-    { stage: 'Unlocked Achievement', users: engagementData.achievements.length, percentage: 0 }
+    { stage: 'Viewed Affirmations', users: engagementData.affirmationsViewed > 0 ? 1 : 0, percentage: 0 },
+    { stage: 'Created Journal Entry', users: engagementData.journalEntries.length > 0 ? 1 : 0, percentage: 0 },
+    { stage: 'Unlocked Achievement', users: engagementData.achievements.length > 0 ? 1 : 0, percentage: 0 }
   ];
 
   // Calculate percentages and dropoff

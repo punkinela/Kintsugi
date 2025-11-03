@@ -437,18 +437,27 @@ export default function Home() {
                       </div>
                       <div className="ml-3">
                         <h3 className="text-sm font-medium text-kintsugi-gold-800 dark:text-kintsugi-gold-200">
-                          Weekly Reflection
+                          {biasInsight.title || 'Weekly Reflection'}
                         </h3>
                         <div className="mt-2 text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300">
-                          <p>You've been consistent with your reflections this week! Your focus on growth and learning is helping you build resilience.</p>
+                          <p>{biasInsight.description || "You've been consistent with your reflections this week! Your focus on growth and learning is helping you build resilience."}</p>
                         </div>
-                        <div className="mt-3">
+                        <div className="mt-3 flex items-center gap-3">
                           <button
                             type="button"
+                            onClick={() => setShowBiasInsight(true)}
                             className="inline-flex items-center text-sm font-medium text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-200"
                           >
                             View details
                             <ChevronRight className="ml-1 h-4 w-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={generateBiasInsight}
+                            disabled={biasInsightLoading}
+                            className="inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-md text-white bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                          >
+                            {biasInsightLoading ? 'Generating...' : 'Generate New Insight'}
                           </button>
                         </div>
                       </div>
