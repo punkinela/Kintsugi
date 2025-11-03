@@ -54,9 +54,9 @@ export function shouldPromptFeedback(): boolean {
 export function getUserSession(): UserSession {
   const userId = getUserId();
   const engagementData = getEngagementData();
-  const profile = localStorage.getItem('userProfile');
+  const profile = localStorage.getItem('kintsugiUser'); // Fixed: was 'userProfile'
   const lastFeedback = localStorage.getItem('lastFeedbackDate');
-  
+
   const userName = profile ? JSON.parse(profile).name : undefined;
   
   return {
@@ -79,22 +79,28 @@ export function getAnalyticsData(): AnalyticsData {
   const allFeedback = getAllFeedback();
   const session = getUserSession();
   const engagementData = getEngagementData();
-  
+
+  // Check if user exists
+  const userExists = !!localStorage.getItem('kintsugiUser');
+
   // Calculate average rating
   const totalRating = allFeedback.reduce((sum, f) => sum + f.rating, 0);
   const averageRating = allFeedback.length > 0 ? totalRating / allFeedback.length : 0;
-  
+
+  // Use visitCount, but default to 1 if user exists (they've at least visited once to create profile)
+  const visitCount = engagementData.visitCount > 0 ? engagementData.visitCount : (userExists ? 1 : 0);
+
   return {
-    totalUsers: 1, // In single-user mode, always 1
-    activeUsers: session.totalVisits > 0 ? 1 : 0,
+    totalUsers: userExists ? 1 : 0, // Show 1 if user profile exists
+    activeUsers: userExists ? 1 : 0, // Show 1 if user profile exists
     totalAccomplishments: engagementData.journalEntries.length,
     averageStreak: engagementData.currentStreak,
     feedbackCount: allFeedback.length,
     averageRating,
     userEngagement: {
-      daily: session.totalVisits,
-      weekly: session.currentStreak,
-      monthly: session.totalVisits
+      daily: visitCount,
+      weekly: engagementData.currentStreak > 0 ? engagementData.currentStreak : (userExists ? 1 : 0),
+      monthly: visitCount
     },
     featureUsage: {
       affirmationsViewed: engagementData.affirmationsViewed,
@@ -103,9 +109,9 @@ export function getAnalyticsData(): AnalyticsData {
       achievementsUnlocked: engagementData.achievements.length
     },
     userRetention: {
-      day1: session.totalVisits >= 2 ? 100 : 0,
-      day7: session.currentStreak >= 7 ? 100 : 0,
-      day30: session.totalVisits >= 30 ? 100 : 0
+      day1: visitCount >= 1 ? 100 : 0, // Changed from >= 2 to >= 1
+      day7: engagementData.currentStreak >= 7 ? 100 : 0,
+      day30: visitCount >= 30 ? 100 : 0
     }
   };
 }

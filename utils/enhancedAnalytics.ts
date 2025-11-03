@@ -166,11 +166,19 @@ export function analyzeDemographics(feedback: UserFeedback[]): DemographicsData 
     }
   });
 
-  // Get ethnicity from localStorage for current user
+  // Get ethnicity and other data from localStorage for current user
   const userProfile = localStorage.getItem('kintsugiUser');
   if (userProfile) {
     try {
       const profile = JSON.parse(userProfile);
+
+      // Add current user to demographics if not already counted
+      if (profile.gender && !Object.keys(byGender).length) {
+        byGender[profile.gender] = 1;
+      }
+      if (profile.profession && !Object.keys(byProfession).length) {
+        byProfession[profile.profession] = 1;
+      }
       if (profile.ethnicity) {
         byEthnicity[profile.ethnicity] = 1;
       }
@@ -332,9 +340,13 @@ export interface FunnelStage {
 export function analyzeFunnel(): FunnelStage[] {
   const engagementData = getEngagementData();
 
+  // Check if user exists
+  const userExists = typeof window !== 'undefined' && !!localStorage.getItem('kintsugiUser');
+  const visitCount = engagementData.visitCount > 0 ? engagementData.visitCount : (userExists ? 1 : 0);
+
   const stages = [
-    { stage: 'Visited App', users: engagementData.visitCount, percentage: 100 },
-    { stage: 'Completed Profile', users: engagementData.visitCount, percentage: 100 },
+    { stage: 'Visited App', users: visitCount, percentage: 100 },
+    { stage: 'Completed Profile', users: userExists ? 1 : 0, percentage: 100 },
     { stage: 'Viewed Affirmations', users: engagementData.affirmationsViewed, percentage: 0 },
     { stage: 'Created Journal Entry', users: engagementData.journalEntries.length, percentage: 0 },
     { stage: 'Unlocked Achievement', users: engagementData.achievements.length, percentage: 0 }
