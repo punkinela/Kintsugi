@@ -429,7 +429,7 @@ export default function Home() {
               <div className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow rounded-lg">
                 <div className="px-4 py-5 sm:p-6">
                   <h2 className="text-xl font-semibold text-kintsugi-dark-900 dark:text-white mb-6">Your Insights</h2>
-                  
+
                   <div className="bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/10 rounded-lg p-4 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800">
                     <div className="flex">
                       <div className="flex-shrink-0">
@@ -440,15 +440,24 @@ export default function Home() {
                           Weekly Reflection
                         </h3>
                         <div className="mt-2 text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300">
-                          <p>You've been consistent with your reflections this week! Your focus on growth and learning is helping you build resilience.</p>
+                          <p>{biasInsight.description || "You've been consistent with your reflections this week! Your focus on growth and learning is helping you build resilience."}</p>
                         </div>
-                        <div className="mt-3">
+                        <div className="mt-3 flex gap-3">
                           <button
                             type="button"
-                            className="inline-flex items-center text-sm font-medium text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-200"
+                            onClick={() => setShowBiasInsight(true)}
+                            className="inline-flex items-center text-sm font-medium text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-200 transition-colors"
                           >
                             View details
                             <ChevronRight className="ml-1 h-4 w-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={generateBiasInsight}
+                            disabled={biasInsightLoading}
+                            className="inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-md text-white bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                          >
+                            {biasInsightLoading ? 'Generating...' : 'Generate New Insight'}
                           </button>
                         </div>
                       </div>
