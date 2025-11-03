@@ -249,14 +249,14 @@ export interface ComparativeMetrics {
   previous: number;
   change: number;
   changePercent: number;
-  trend: 'up' | 'down' | 'stable';
+  trend: 'up' | 'down' | 'neutral';
 }
 
 export function compareWeekOverWeek(currentWeek: number, previousWeek: number): ComparativeMetrics {
   const change = currentWeek - previousWeek;
   const changePercent = previousWeek > 0 ? (change / previousWeek) * 100 : 0;
 
-  let trend: 'up' | 'down' | 'stable' = 'stable';
+  let trend: 'up' | 'down' | 'neutral' = 'neutral';
   if (changePercent > 5) trend = 'up';
   else if (changePercent < -5) trend = 'down';
 
