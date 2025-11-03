@@ -19,7 +19,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('home');
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showBiasInsight, setShowBiasInsight] = useState(false);
-  const [biasInsight, setBiasInsight] = useState<BiasInsight>({ 
+  const [biasInsight, setBiasInsight] = useState<BiasInsight>({
     id: '1',
     title: 'Weekly Reflection',
     description: 'Your personalized insight will appear here',
@@ -32,6 +32,7 @@ export default function Home() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [showSetup, setShowSetup] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showQuickCapture, setShowQuickCapture] = useState(false);
 
   // Load user data
   useEffect(() => {
@@ -313,7 +314,11 @@ export default function Home() {
               </div>
 
               {/* Quick Actions */}
-              <QuickCapture isOpen={true} onClose={() => {}} onSaved={() => {}} />
+              <QuickCapture
+                isOpen={showQuickCapture}
+                onClose={() => setShowQuickCapture(false)}
+                onSaved={() => setShowQuickCapture(false)}
+              />
 
               {/* Weekly Summary */}
               <WeeklySummary isOpen={false} onClose={() => {}} />
