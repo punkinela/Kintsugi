@@ -33,6 +33,7 @@ export default function Home() {
   const [showSetup, setShowSetup] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showQuickCapture, setShowQuickCapture] = useState(false);
+  const [showAccomplishments, setShowAccomplishments] = useState(false);
 
   // Load user data
   useEffect(() => {
@@ -329,10 +330,21 @@ export default function Home() {
             <div className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow rounded-lg">
               <div className="px-4 py-5 sm:p-6">
                 <h2 className="text-xl font-semibold text-kintsugi-dark-900 dark:text-white mb-6">My Journal</h2>
-                <EnhancedProgressJournal isOpen={true} onClose={() => {}} />
+                <button
+                  onClick={() => setShowAccomplishments(true)}
+                  className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all"
+                >
+                  Open Accomplishments Journal
+                </button>
               </div>
             </div>
           )}
+
+          {/* Accomplishments Modal */}
+          <EnhancedProgressJournal
+            isOpen={showAccomplishments}
+            onClose={() => setShowAccomplishments(false)}
+          />
 
           {activeTab === 'insights' && (
             <div className="space-y-6">
