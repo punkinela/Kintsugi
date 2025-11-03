@@ -34,6 +34,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [showQuickCapture, setShowQuickCapture] = useState(false);
   const [showAccomplishments, setShowAccomplishments] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   // Load user data
   useEffect(() => {
@@ -58,6 +59,19 @@ export default function Home() {
 
     loadUser();
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (showUserDropdown && !target.closest('.user-dropdown-container')) {
+        setShowUserDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showUserDropdown]);
 
   // Handle profile save
   const handleProfileSave = (profileData: { name: string; email?: string; emoji?: string; theme?: 'light' | 'dark' | 'system' }) => {
@@ -103,6 +117,20 @@ export default function Home() {
     localStorage.setItem('kintsugiUser', JSON.stringify(defaultUser));
     setUser(defaultUser);
     setShowSetup(false);
+  };
+
+  // Handle sign out
+  const handleSignOut = () => {
+    localStorage.removeItem('kintsugiUser');
+    setUser(null);
+    setShowSetup(true);
+    setShowUserDropdown(false);
+  };
+
+  // Handle edit profile
+  const handleEditProfile = () => {
+    setShowSetup(true);
+    setShowUserDropdown(false);
   };
 
   // Generate bias insight
@@ -191,16 +219,49 @@ export default function Home() {
               <button className="ml-4 p-1 rounded-full text-kintsugi-dark-400 hover:text-kintsugi-gold-600 dark:text-kintsugi-gold-400 dark:hover:text-kintsugi-gold-200">
                 <Bell className="h-6 w-6" />
               </button>
-              <div className="ml-4 flex items-center">
+              <div className="ml-4 flex items-center relative user-dropdown-container">
                 <div className="flex-shrink-0">
                   <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 text-kintsugi-gold-700 dark:text-kintsugi-gold-300 text-sm font-medium">
                     {user?.avatar || '👤'}
                   </span>
                 </div>
-                <button className="ml-2 text-kintsugi-dark-700 dark:text-kintsugi-gold-200 text-sm font-medium">
+                <button
+                  onClick={() => setShowUserDropdown(!showUserDropdown)}
+                  className="ml-2 text-kintsugi-dark-700 dark:text-kintsugi-gold-200 text-sm font-medium hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-100 transition-colors"
+                >
                   {user?.name || 'User'}
-                  <ChevronDown className="inline-block ml-1 h-4 w-4" />
+                  <ChevronDown className={`inline-block ml-1 h-4 w-4 transition-transform ${showUserDropdown ? 'rotate-180' : ''}`} />
                 </button>
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {showUserDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 top-12 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-kintsugi-dark-800 ring-1 ring-black ring-opacity-5 z-50"
+                    >
+                      <div className="py-1" role="menu">
+                        <button
+                          onClick={handleEditProfile}
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center"
+                        >
+                          <User className="h-4 w-4 mr-2" />
+                          Edit Profile
+                        </button>
+                        <button
+                          onClick={handleSignOut}
+                          className="w-full text-left px-4 py-2 text-sm text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center"
+                        >
+                          <X className="h-4 w-4 mr-2" />
+                          Sign Out
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
             <div className="-mr-2 flex items-center md:hidden">
