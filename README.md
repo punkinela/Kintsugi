@@ -1,6 +1,6 @@
-# Kintsugi
+# Own Your Impact
 
-An empowering web application that delivers personalized affirmations to celebrate your accomplishments and recognize your worth. Built with Next.js, React, and Tailwind CSS.
+A research-backed professional tool to track your accomplishments, recognize bias, and advocate for your career growth. Built with Next.js, React, and Tailwind CSS.
 
 ## 🌟 Features
 
