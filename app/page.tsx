@@ -68,6 +68,7 @@ export default function Home() {
   const [biasInsightLoading, setBiasInsightLoading] = useState(false);
   const [user, setUser] = useState<UserProfile | null>(null);
   const [showSetup, setShowSetup] = useState(false);
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showQuickCapture, setShowQuickCapture] = useState(false);
   const [showAccomplishments, setShowAccomplishments] = useState(false);
@@ -176,16 +177,30 @@ export default function Home() {
 
   // Handle profile save
   const handleProfileSave = (profileData: UserProfile) => {
+    // Preserve existing user data if editing
+    const existingUser = user || {} as Partial<UserProfile>;
+
     // Save the complete profile including demographics
     const newUser: UserProfile = {
+      ...existingUser, // Preserve any existing fields
       ...profileData,
-      id: profileData.id || '1',
+      id: profileData.id || existingUser.id || '1',
+      createdAt: existingUser.createdAt || profileData.createdAt || new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
+
+    // NEVER set name to 'Guest' if user has a real name
+    if (newUser.name === 'Guest' && existingUser.name && existingUser.name !== 'Guest') {
+      newUser.name = existingUser.name;
+    }
 
     localStorage.setItem('kintsugiUser', JSON.stringify(newUser));
     setUser(newUser);
     setShowSetup(false);
+    setIsEditingProfile(false);
+
+    // Trigger data refresh
+    window.dispatchEvent(new Event('kintsugi-data-updated'));
   };
 
   // Handle skip profile setup
@@ -222,7 +237,14 @@ export default function Home() {
   // Handle edit profile
   const handleEditProfile = () => {
     setShowSetup(true);
+    setIsEditingProfile(true);
     setShowUserDropdown(false);
+  };
+
+  // Handle cancel profile edit
+  const handleCancelProfileEdit = () => {
+    setShowSetup(false);
+    setIsEditingProfile(false);
   };
 
   // Keyboard shortcuts configuration
@@ -315,9 +337,11 @@ export default function Home() {
   if (showSetup) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900 p-4">
-        <ProfileSetup 
-          onComplete={handleProfileSave} 
+        <ProfileSetup
+          onComplete={handleProfileSave}
           initialProfile={user || undefined}
+          isEditing={isEditingProfile}
+          onCancel={handleCancelProfileEdit}
         />
       </div>
     );
