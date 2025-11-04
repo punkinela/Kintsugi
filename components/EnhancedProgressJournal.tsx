@@ -18,7 +18,14 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
     return getEngagementData().journalEntries;
   });
   const [showAddForm, setShowAddForm] = useState(false);
-  const [newEntry, setNewEntry] = useState({ accomplishment: '', reflection: '', category: '' });
+  const [newEntry, setNewEntry] = useState({
+    accomplishment: '',
+    reflection: '',
+    category: '',
+    mood: '' as 'great' | 'good' | 'neutral' | 'challenging' | 'difficult' | '',
+    tags: [] as string[]
+  });
+  const [tagInput, setTagInput] = useState('');
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [showAnalysis, setShowAnalysis] = useState(false);
   const [showInsights, setShowInsights] = useState(false);
@@ -54,17 +61,20 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
       date: new Date().toISOString(),
       accomplishment: newEntry.accomplishment,
       reflection: newEntry.reflection || undefined,
-      category: newEntry.category || (analysis?.categories[0] ? 
-        analysis.categories[0].charAt(0).toUpperCase() + analysis.categories[0].slice(1) : 
+      category: newEntry.category || (analysis?.categories[0] ?
+        analysis.categories[0].charAt(0).toUpperCase() + analysis.categories[0].slice(1) :
         'General'),
+      mood: newEntry.mood || undefined,
+      tags: newEntry.tags.length > 0 ? newEntry.tags : undefined,
     };
 
     const data = getEngagementData();
     data.journalEntries.unshift(entry);
     saveEngagementData(data);
-    
+
     setEntries(data.journalEntries);
-    setNewEntry({ accomplishment: '', reflection: '', category: '' });
+    setNewEntry({ accomplishment: '', reflection: '', category: '', mood: '', tags: [] });
+    setTagInput('');
     setShowAddForm(false);
     setShowAnalysis(false);
     setAnalysis(null);
@@ -382,6 +392,94 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
                     />
                   </div>
 
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      How are you feeling? (Optional)
+                    </label>
+                    <div className="grid grid-cols-5 gap-2">
+                      {(['great', 'good', 'neutral', 'challenging', 'difficult'] as const).map((mood) => (
+                        <button
+                          key={mood}
+                          type="button"
+                          onClick={() => setNewEntry({ ...newEntry, mood })}
+                          className={`px-3 py-2 rounded-xl border-2 transition-all ${
+                            newEntry.mood === mood
+                              ? 'border-purple-500 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
+                              : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:border-purple-300'
+                          }`}
+                        >
+                          <div className="text-2xl mb-1">
+                            {mood === 'great' && '😄'}
+                            {mood === 'good' && '🙂'}
+                            {mood === 'neutral' && '😐'}
+                            {mood === 'challenging' && '😟'}
+                            {mood === 'difficult' && '😞'}
+                          </div>
+                          <div className="text-xs capitalize">{mood}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Tags (Optional)
+                    </label>
+                    <div className="flex gap-2 mb-2">
+                      <input
+                        type="text"
+                        value={tagInput}
+                        onChange={(e) => setTagInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && tagInput.trim()) {
+                            e.preventDefault();
+                            if (!newEntry.tags.includes(tagInput.trim())) {
+                              setNewEntry({ ...newEntry, tags: [...newEntry.tags, tagInput.trim()] });
+                            }
+                            setTagInput('');
+                          }
+                        }}
+                        placeholder="Add a tag and press Enter"
+                        className="flex-1 px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (tagInput.trim() && !newEntry.tags.includes(tagInput.trim())) {
+                            setNewEntry({ ...newEntry, tags: [...newEntry.tags, tagInput.trim()] });
+                            setTagInput('');
+                          }
+                        }}
+                        className="px-4 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors"
+                      >
+                        Add
+                      </button>
+                    </div>
+                    {newEntry.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {newEntry.tags.map((tag, index) => (
+                          <span
+                            key={index}
+                            className="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm"
+                          >
+                            <Tag className="w-3 h-3" />
+                            {tag}
+                            <button
+                              type="button"
+                              onClick={() => setNewEntry({
+                                ...newEntry,
+                                tags: newEntry.tags.filter((_, i) => i !== index)
+                              })}
+                              className="ml-1 hover:text-purple-900 dark:hover:text-purple-100"
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   <div className="flex gap-3">
                     <button
                       onClick={handleAddEntry}
@@ -394,7 +492,8 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
                         setShowAddForm(false);
                         setShowAnalysis(false);
                         setAnalysis(null);
-                        setNewEntry({ accomplishment: '', reflection: '', category: '' });
+                        setNewEntry({ accomplishment: '', reflection: '', category: '', mood: '', tags: [] });
+                        setTagInput('');
                       }}
                       className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold py-3 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                     >

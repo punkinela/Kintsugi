@@ -500,8 +500,8 @@ export default function Home() {
                           <p className="text-white/80 text-sm font-medium">Current Streak</p>
                           <p className="text-white text-2xl font-bold mt-1">
                             {(() => {
-                              const streaks = JSON.parse(localStorage.getItem('kintsugi_streaks') || '{"current":0}');
-                              return streaks.current || 0;
+                              const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"currentStreak":0}');
+                              return engagement.currentStreak || 0;
                             })()} days 🔥
                           </p>
                         </div>
@@ -522,8 +522,8 @@ export default function Home() {
                           <p className="text-white/80 text-sm font-medium">Journal Entries</p>
                           <p className="text-white text-2xl font-bold mt-1">
                             {(() => {
-                              const entries = JSON.parse(localStorage.getItem('kintsugi_journal') || '[]');
-                              return entries.length || 0;
+                              const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
+                              return engagement.journalEntries?.length || 0;
                             })()} ✍️
                           </p>
                         </div>
@@ -544,8 +544,8 @@ export default function Home() {
                           <p className="text-white/80 text-sm font-medium">Achievements</p>
                           <p className="text-white text-2xl font-bold mt-1">
                             {(() => {
-                              const badges = JSON.parse(localStorage.getItem('kintsugi_badges') || '[]');
-                              return badges.length || 0;
+                              const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"achievements":[]}');
+                              return engagement.achievements?.length || 0;
                             })()} 🏆
                           </p>
                         </div>
@@ -616,7 +616,8 @@ export default function Home() {
                   {/* Journal Stats */}
                   <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
                     {(() => {
-                      const entries = JSON.parse(localStorage.getItem('kintsugi_journal') || '[]');
+                      const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
+                      const entries = engagement.journalEntries || [];
                       const today = new Date().toDateString();
                       const todayEntries = entries.filter((e: any) => new Date(e.date).toDateString() === today);
                       const thisWeek = entries.filter((e: any) => {
@@ -625,7 +626,7 @@ export default function Home() {
                         weekAgo.setDate(weekAgo.getDate() - 7);
                         return entryDate >= weekAgo;
                       });
-                      const totalWords = entries.reduce((sum: number, e: any) => sum + (e.content?.split(' ').length || 0), 0);
+                      const totalWords = entries.reduce((sum: number, e: any) => sum + (`${e.accomplishment} ${e.reflection || ''}`.split(' ').length || 0), 0);
 
                       return (
                         <>
@@ -690,8 +691,9 @@ export default function Home() {
                 </div>
                 <div className="p-6">
                   {(() => {
-                    const entries = JSON.parse(localStorage.getItem('kintsugi_journal') || '[]');
-                    const recentEntries = entries.slice(-3).reverse();
+                    const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
+                    const entries = engagement.journalEntries || [];
+                    const recentEntries = entries.slice(0, 3);
 
                     if (recentEntries.length === 0) {
                       return (
@@ -727,15 +729,24 @@ export default function Home() {
                           >
                             <div className="flex items-start justify-between mb-2">
                               <h4 className="font-semibold text-gray-900 dark:text-white">
-                                {entry.title || 'Untitled Entry'}
+                                {entry.category || 'Accomplishment'}
                               </h4>
                               <span className="text-sm text-gray-500 dark:text-gray-400">
                                 {new Date(entry.date).toLocaleDateString()}
                               </span>
                             </div>
                             <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
-                              {entry.content || entry.accomplishment || 'No content'}
+                              {entry.accomplishment}
                             </p>
+                            {entry.mood && (
+                              <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                                Mood: {entry.mood === 'great' && '😄 Great'}
+                                {entry.mood === 'good' && '🙂 Good'}
+                                {entry.mood === 'neutral' && '😐 Neutral'}
+                                {entry.mood === 'challenging' && '😟 Challenging'}
+                                {entry.mood === 'difficult' && '😞 Difficult'}
+                              </div>
+                            )}
                             {entry.tags && entry.tags.length > 0 && (
                               <div className="flex flex-wrap gap-2 mt-3">
                                 {entry.tags.slice(0, 3).map((tag: string, tagIdx: number) => (
