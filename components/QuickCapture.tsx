@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, X, Check } from 'lucide-react';
-import { getEngagementData, saveEngagementData } from '@/utils/engagement';
+import { getEngagementData, saveEngagementData, updateStreakFromEntries } from '@/utils/engagement';
+import { awardXP, incrementStat } from '@/utils/gamification';
 import { JournalEntry } from '@/types/engagement';
 
 interface QuickCaptureProps {
@@ -29,7 +30,20 @@ export default function QuickCapture({ isOpen, onClose, onSaved }: QuickCaptureP
     const data = getEngagementData();
     data.journalEntries.unshift(entry);
     saveEngagementData(data);
-    
+
+    // Update streak based on all journal entries
+    updateStreakFromEntries();
+
+    // Award XP for journal entry
+    const xpResult = awardXP('journal_entry');
+
+    // Update gamification stats
+    incrementStat('totalJournalEntries', 1);
+
+    // Trigger data update events for other components
+    window.dispatchEvent(new Event('kintsugi-data-updated'));
+    window.dispatchEvent(new Event('gamification-update'));
+
     setSaved(true);
     setTimeout(() => {
       setSaved(false);
