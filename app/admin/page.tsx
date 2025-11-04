@@ -149,7 +149,7 @@ export default function AdminDashboard() {
   }, [feedback]);
 
   const demographics = useMemo(() => {
-    if (!feedback.length) return null;
+    // Always call analyzeDemographics - it will check current user profile even if no feedback
     return analyzeDemographics(feedback);
   }, [feedback]);
 
