@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kintsugi Data Diagnostic</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f3f4f6;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        h1 { color: #1f2937; }
+        h2 { color: #374151; border-bottom: 2px solid #f59e0b; padding-bottom: 10px; }
+        pre {
+            background: #1f2937;
+            color: #10b981;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .stat {
+            display: inline-block;
+            margin: 10px 20px 10px 0;
+            padding: 10px 20px;
+            background: #f59e0b;
+            color: white;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .error { color: #ef4444; font-weight: bold; }
+        .success { color: #10b981; font-weight: bold; }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        button:hover { background: #2563eb; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Kintsugi Data Diagnostic</h1>
+    <p>This page will help us figure out why your data isn't syncing properly.</p>
+
+    <div class="section">
+        <h2>📊 Quick Stats</h2>
+        <div id="quick-stats"></div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Journal Entries</h2>
+        <div id="entries-info"></div>
+    </div>
+
+    <div class="section">
+        <h2>⚡ Gamification Data (XP & Level)</h2>
+        <div id="gamification-info"></div>
+    </div>
+
+    <div class="section">
+        <h2>🔥 Engagement Data (Streak)</h2>
+        <div id="engagement-info"></div>
+    </div>
+
+    <div class="section">
+        <h2>🛠️ Actions</h2>
+        <button onclick="recalculateXP()">Recalculate XP from Entries</button>
+        <button onclick="recalculateStreak()">Recalculate Streak</button>
+        <button onclick="exportData()">Export All Data</button>
+        <button onclick="location.reload()">Refresh Diagnostic</button>
+    </div>
+
+    <div class="section">
+        <h2>📋 Raw Data (for debugging)</h2>
+        <h3>kintsugi_engagement:</h3>
+        <pre id="raw-engagement"></pre>
+        <h3>gamificationData:</h3>
+        <pre id="raw-gamification"></pre>
+    </div>
+
+    <script>
+        function loadDiagnostic() {
+            // Load engagement data
+            const engagementStr = localStorage.getItem('kintsugi_engagement');
+            const engagement = engagementStr ? JSON.parse(engagementStr) : null;
+
+            // Load gamification data
+            const gamificationStr = localStorage.getItem('gamificationData');
+            const gamification = gamificationStr ? JSON.parse(gamificationStr) : null;
+
+            // Quick stats
+            const quickStats = document.getElementById('quick-stats');
+            if (engagement) {
+                const entries = engagement.journalEntries || [];
+                const today = new Date().toISOString().split('T')[0];
+                const todayEntries = entries.filter(e => e.date.startsWith(today));
+
+                quickStats.innerHTML = `
+                    <span class="stat">Total Entries: ${entries.length}</span>
+                    <span class="stat">Today's Entries: ${todayEntries.length}</span>
+                    <span class="stat">Current Streak: ${engagement.currentStreak || 0}</span>
+                    <span class="stat">XP: ${gamification ? gamification.xp : 0}</span>
+                    <span class="stat">Level: ${gamification ? gamification.level : 1}</span>
+                `;
+            } else {
+                quickStats.innerHTML = '<span class="error">No engagement data found!</span>';
+            }
+
+            // Entries info
+            const entriesInfo = document.getElementById('entries-info');
+            if (engagement && engagement.journalEntries) {
+                const entries = engagement.journalEntries;
+                const dates = entries.map(e => new Date(e.date).toLocaleDateString());
+                const uniqueDates = [...new Set(dates)];
+
+                entriesInfo.innerHTML = `
+                    <p><strong>Total Entries:</strong> ${entries.length}</p>
+                    <p><strong>Unique Days:</strong> ${uniqueDates.length}</p>
+                    <p><strong>Date Range:</strong> ${dates[dates.length - 1]} to ${dates[0]}</p>
+                    <p><strong>Last 10 Entry Dates:</strong></p>
+                    <ul>
+                        ${entries.slice(0, 10).map(e => `
+                            <li>${new Date(e.date).toLocaleString()} - ${e.accomplishment.substring(0, 50)}...</li>
+                        `).join('')}
+                    </ul>
+                `;
+            } else {
+                entriesInfo.innerHTML = '<span class="error">No entries found!</span>';
+            }
+
+            // Gamification info
+            const gamificationInfo = document.getElementById('gamification-info');
+            if (gamification) {
+                const titles = {
+                    1: 'Newcomer',
+                    2: 'Getting Started',
+                    3: 'Rising Star',
+                    4: 'Dedicated Writer',
+                    5: 'Explorer'
+                };
+                let title = 'Newcomer';
+                for (let level in titles) {
+                    if (gamification.level >= parseInt(level)) {
+                        title = titles[level];
+                    }
+                }
+
+                gamificationInfo.innerHTML = `
+                    <p><strong>Current Level:</strong> ${gamification.level}</p>
+                    <p><strong>Title:</strong> <span class="stat">${title}</span></p>
+                    <p><strong>Current XP:</strong> ${gamification.xp}</p>
+                    <p><strong>XP to Next Level:</strong> ${gamification.xpToNextLevel}</p>
+                    <p><strong>Total XP Earned:</strong> ${gamification.totalXpEarned}</p>
+                    <p><strong>Progress:</strong> ${Math.round((gamification.xp / gamification.xpToNextLevel) * 100)}%</p>
+                    <p><strong>Total Journal Entries (from stats):</strong> ${gamification.stats?.totalJournalEntries || 0}</p>
+                    <p><strong>Expected XP (50 per entry):</strong> ${(engagement?.journalEntries?.length || 0) * 50}</p>
+                    ${gamification.totalXpEarned < (engagement?.journalEntries?.length || 0) * 50 ?
+                        '<p class="error">⚠️ XP is LOWER than expected! Some entries did not award XP.</p>' :
+                        '<p class="success">✅ XP matches expected amount</p>'}
+                `;
+            } else {
+                gamificationInfo.innerHTML = '<span class="error">No gamification data found!</span>';
+            }
+
+            // Engagement info
+            const engagementInfo = document.getElementById('engagement-info');
+            if (engagement) {
+                engagementInfo.innerHTML = `
+                    <p><strong>Current Streak:</strong> ${engagement.currentStreak || 0} days</p>
+                    <p><strong>Longest Streak:</strong> ${engagement.longestStreak || 0} days</p>
+                    <p><strong>Last Visit:</strong> ${new Date(engagement.lastVisit).toLocaleString()}</p>
+                `;
+            } else {
+                engagementInfo.innerHTML = '<span class="error">No engagement data found!</span>';
+            }
+
+            // Raw data
+            document.getElementById('raw-engagement').textContent =
+                engagementStr ? JSON.stringify(JSON.parse(engagementStr), null, 2) : 'Not found';
+            document.getElementById('raw-gamification').textContent =
+                gamificationStr ? JSON.stringify(JSON.parse(gamificationStr), null, 2) : 'Not found';
+        }
+
+        function recalculateXP() {
+            const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+            const entries = engagement.journalEntries || [];
+
+            // Calculate XP: 50 per entry
+            const totalXP = entries.length * 50;
+
+            // Calculate level
+            let level = 1;
+            let xp = totalXP;
+            let xpToNextLevel = 400; // Level 2 requires 400 XP
+
+            while (xp >= xpToNextLevel && level < 50) {
+                xp -= xpToNextLevel;
+                level++;
+                xpToNextLevel = Math.floor(Math.pow(level + 1, 2) * 100);
+            }
+
+            const gamification = {
+                points: entries.length * 100,
+                level: level,
+                xp: xp,
+                xpToNextLevel: xpToNextLevel,
+                totalXpEarned: totalXP,
+                achievements: [],
+                dailyChallenges: [],
+                unlockedRewards: [],
+                stats: {
+                    totalAccomplishments: entries.length,
+                    totalAffirmationsViewed: 0,
+                    totalInsightsViewed: 0,
+                    totalJournalEntries: entries.length,
+                    longestStreak: engagement.longestStreak || 0,
+                    currentStreak: engagement.currentStreak || 0,
+                    totalVisits: 0,
+                    daysActive: 0,
+                    achievementsUnlocked: 0,
+                    challengesCompleted: 0
+                }
+            };
+
+            localStorage.setItem('gamificationData', JSON.stringify(gamification));
+            alert(`✅ XP Recalculated!\n\nTotal Entries: ${entries.length}\nTotal XP: ${totalXP}\nLevel: ${level}\n\nRefresh the app to see changes!`);
+            location.reload();
+        }
+
+        function recalculateStreak() {
+            const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+            const entries = engagement.journalEntries || [];
+
+            if (entries.length === 0) {
+                alert('No entries to calculate streak from!');
+                return;
+            }
+
+            // Get unique days
+            const uniqueDays = new Set();
+            entries.forEach(e => {
+                const date = new Date(e.date);
+                uniqueDays.add(date.toISOString().split('T')[0]);
+            });
+
+            const sortedDays = Array.from(uniqueDays).sort().reverse();
+
+            const today = new Date().toISOString().split('T')[0];
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+            let currentStreak = 0;
+            if (sortedDays[0] === today || sortedDays[0] === yesterdayStr) {
+                currentStreak = 1;
+                let checkDate = new Date(sortedDays[0]);
+
+                for (let i = 1; i < sortedDays.length; i++) {
+                    const expectedPrevDay = new Date(checkDate);
+                    expectedPrevDay.setDate(expectedPrevDay.getDate() - 1);
+                    const expectedStr = expectedPrevDay.toISOString().split('T')[0];
+
+                    if (sortedDays[i] === expectedStr) {
+                        currentStreak++;
+                        checkDate = new Date(sortedDays[i]);
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            engagement.currentStreak = currentStreak;
+            engagement.longestStreak = Math.max(currentStreak, engagement.longestStreak || 0);
+
+            localStorage.setItem('kintsugi_engagement', JSON.stringify(engagement));
+            alert(`✅ Streak Recalculated!\n\nCurrent Streak: ${currentStreak} days\n\nRefresh the app to see changes!`);
+            location.reload();
+        }
+
+        function exportData() {
+            const data = {
+                engagement: JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}'),
+                gamification: JSON.parse(localStorage.getItem('gamificationData') || '{}'),
+                user: JSON.parse(localStorage.getItem('kintsugiUser') || '{}')
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `kintsugi-data-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+
+        // Load on page load
+        loadDiagnostic();
+    </script>
+</body>
+</html>
