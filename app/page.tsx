@@ -30,6 +30,7 @@ import CustomAffirmationsManager from '@/components/CustomAffirmationsManager';
 import OnboardingTour from '@/components/OnboardingTour';
 import ReturnMotivation from '@/components/ReturnMotivation';
 import EngagingJournalPrompt from '@/components/EngagingJournalPrompt';
+import SocialProofTestimonials from '@/components/SocialProofTestimonials';
 
 // Phase 6: AI-Powered Features
 import AIInsightsDashboard from '@/components/AIInsightsDashboard';
@@ -628,6 +629,9 @@ export default function Home() {
 
               {/* Return Motivation - Next Goals */}
               <ReturnMotivation />
+
+              {/* Social Proof & Testimonials */}
+              <SocialProofTestimonials />
 
               {/* Phase 4: Daily Quote */}
               <QuoteOfTheDay />
