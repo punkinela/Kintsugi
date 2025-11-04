@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -37,6 +37,7 @@ import ExportManager from '@/components/ExportManager';
 // Phase 8: Enhanced UX
 import ThemeSelector from '@/components/ThemeSelector';
 import AdvancedSearch from '@/components/AdvancedSearch';
+import DataDiagnostic from '@/components/DataDiagnostic';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry } from '@/types/engagement';
@@ -68,7 +69,7 @@ export default function Home() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [settingsTab, setSettingsTab] = useState<'data' | 'appearance'>('data');
+  const [settingsTab, setSettingsTab] = useState<'data' | 'appearance' | 'diagnostic'>('data');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
 
@@ -821,46 +822,88 @@ export default function Home() {
 
           {activeTab === 'insights' && (
             <div className="space-y-6">
-              {/* AI Insights Card */}
-              <div className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow rounded-lg">
-                <div className="px-4 py-5 sm:p-6">
-                  <h2 className="text-xl font-semibold text-kintsugi-dark-900 dark:text-white mb-6">Your Insights</h2>
+              {/* Enhanced Insights Header */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 dark:from-blue-800 dark:via-indigo-800 dark:to-purple-900 rounded-2xl shadow-2xl overflow-hidden"
+              >
+                <div className="relative px-6 py-8 sm:px-8 sm:py-10">
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-56 h-56 bg-purple-300/10 rounded-full blur-3xl"></div>
 
-                  <div className="bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/10 rounded-lg p-4 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800">
-                    <div className="flex">
-                      <div className="flex-shrink-0">
-                        <Sparkles className="h-5 w-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
-                      </div>
-                      <div className="ml-3">
-                        <h3 className="text-sm font-medium text-kintsugi-gold-800 dark:text-kintsugi-gold-200">
-                          {biasInsight.title || 'Weekly Reflection'}
-                        </h3>
-                        <div className="mt-2 text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300">
-                          <p>{biasInsight.description || "You've been consistent with your reflections this week! Your focus on growth and learning is helping you build resilience."}</p>
-                        </div>
-                        <div className="mt-3 flex items-center gap-3">
-                          <button
-                            type="button"
-                            onClick={() => setShowBiasInsight(true)}
-                            className="inline-flex items-center text-sm font-medium text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-200"
-                          >
-                            View details
-                            <ChevronRight className="ml-1 h-4 w-4" />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={generateBiasInsight}
-                            disabled={biasInsightLoading}
-                            className="inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-md text-white bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                          >
-                            {biasInsightLoading ? 'Generating...' : 'Generate New Insight'}
-                          </button>
-                        </div>
-                      </div>
+                  <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                    <div>
+                      <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                        <Brain className="h-8 w-8" />
+                        Your Insights & Analytics
+                      </h2>
+                      <p className="text-white/90 text-lg">
+                        Discover patterns, analyze growth, and get AI-powered insights
+                      </p>
                     </div>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={generateBiasInsight}
+                      disabled={biasInsightLoading}
+                      className="flex-shrink-0 inline-flex items-center px-6 py-3 bg-white text-indigo-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Sparkles className="h-5 w-5 mr-2" />
+                      {biasInsightLoading ? 'Generating...' : 'Generate Insight'}
+                    </motion.button>
+                  </div>
+
+                  {/* Insights Stats */}
+                  <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                    >
+                      <p className="text-white/80 text-sm font-medium">AI Analyses</p>
+                      <p className="text-white text-2xl font-bold mt-1">
+                        {(() => {
+                          const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+                          return engagement.aiAnalysesRun || 0;
+                        })()}
+                      </p>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                    >
+                      <p className="text-white/80 text-sm font-medium">Patterns Found</p>
+                      <p className="text-white text-2xl font-bold mt-1">
+                        {(() => {
+                          const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+                          return engagement.patternsDetected || 0;
+                        })()}
+                      </p>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                    >
+                      <p className="text-white/80 text-sm font-medium">Exports Created</p>
+                      <p className="text-white text-2xl font-bold mt-1">
+                        {(() => {
+                          const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+                          return engagement.exportsCreated || 0;
+                        })()}
+                      </p>
+                    </motion.div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Phase 3: Advanced Analytics */}
               <MoodTracker />
@@ -966,6 +1009,16 @@ export default function Home() {
                   >
                     Appearance & Accessibility
                   </button>
+                  <button
+                    onClick={() => setSettingsTab('diagnostic')}
+                    className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
+                      settingsTab === 'diagnostic'
+                        ? 'border-kintsugi-gold-500 text-kintsugi-gold-600 dark:text-kintsugi-gold-400'
+                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}
+                  >
+                    Diagnostic
+                  </button>
                 </nav>
               </div>
 
@@ -984,6 +1037,10 @@ export default function Home() {
 
                 {settingsTab === 'appearance' && (
                   <ThemeSelector />
+                )}
+
+                {settingsTab === 'diagnostic' && (
+                  <DataDiagnostic />
                 )}
               </div>
             </motion.div>
