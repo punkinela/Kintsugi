@@ -27,6 +27,10 @@ import WritingPromptsPanel from '@/components/WritingPromptsPanel';
 import CustomAffirmationsManager from '@/components/CustomAffirmationsManager';
 import OnboardingTour from '@/components/OnboardingTour';
 
+// Phase 6: AI-Powered Features
+import AIInsightsDashboard from '@/components/AIInsightsDashboard';
+import AIPerformanceReviewGenerator from '@/components/AIPerformanceReviewGenerator';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { shouldPromptFeedback } from '@/utils/analytics';
 import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
@@ -823,6 +827,10 @@ export default function Home() {
               <MoodTracker />
               <WordCloudVisualization />
               <PersonalStatsDashboard />
+
+              {/* Phase 6: AI-Powered Features */}
+              <AIInsightsDashboard />
+              <AIPerformanceReviewGenerator />
             </div>
           )}
         </div>
