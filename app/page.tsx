@@ -25,6 +25,7 @@ import PersonalStatsDashboard from '@/components/PersonalStatsDashboard';
 import QuoteOfTheDay from '@/components/QuoteOfTheDay';
 import WritingPromptsPanel from '@/components/WritingPromptsPanel';
 import CustomAffirmationsManager from '@/components/CustomAffirmationsManager';
+import OnboardingTour from '@/components/OnboardingTour';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -907,6 +908,9 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Onboarding Tour */}
+      {!showSetup && <OnboardingTour />}
     </div>
   );
 }

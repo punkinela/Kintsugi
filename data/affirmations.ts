@@ -229,28 +229,79 @@ export const affirmations: Affirmation[] = [
 // Export bias insights from separate file
 export { biasInsights, getRandomBiasInsight, getBiasInsightsByCategory, getAllBiasCategories } from './biasInsights';
 
+// Display category mapping for user-friendly filtering
+export type DisplayCategory = 'all' | 'career' | 'personal' | 'wellness' | 'confidence';
+
+export const displayCategoryConfig = {
+  career: {
+    title: 'Career',
+    description: 'Professional growth and workplace achievements',
+    icon: '💼',
+    color: 'blue',
+    includes: ['accomplishment', 'growth', 'impact'],
+  },
+  personal: {
+    title: 'Personal',
+    description: 'Personal development and relationships',
+    icon: '🌟',
+    color: 'purple',
+    includes: ['strength', 'impact'],
+  },
+  wellness: {
+    title: 'Wellness',
+    description: 'Mental health and self-care',
+    icon: '🧘',
+    color: 'green',
+    includes: ['growth', 'strength'],
+  },
+  confidence: {
+    title: 'Confidence',
+    description: 'Self-advocacy and bias awareness',
+    icon: '💪',
+    color: 'amber',
+    includes: ['bias-awareness', 'accomplishment'],
+  },
+};
+
+export function getAffirmationsByDisplayCategory(
+  displayCategory: DisplayCategory,
+  profile?: { gender?: string; ethnicity?: string },
+  count?: number
+): Affirmation[] {
+  let filtered = affirmations;
+
+  // Filter by demographics if profile provided
+  if (profile) {
+    filtered = filtered.filter((aff) => {
+      if (!aff.demographics) return true;
+
+      if (profile.gender && aff.demographics.gender) {
+        return aff.demographics.gender.includes(profile.gender);
+      }
+
+      if (profile.ethnicity && aff.demographics.ethnicity) {
+        return aff.demographics.ethnicity.includes(profile.ethnicity);
+      }
+
+      return true;
+    });
+  }
+
+  // Filter by display category
+  if (displayCategory !== 'all') {
+    const config = displayCategoryConfig[displayCategory];
+    filtered = filtered.filter((aff) => config.includes.includes(aff.category));
+  }
+
+  // Shuffle
+  const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+
+  return count ? shuffled.slice(0, count) : shuffled;
+}
+
 export function getPersonalizedAffirmations(
   profile: { gender?: string; ethnicity?: string },
   count: number = 5
 ): Affirmation[] {
-  const filtered = affirmations.filter((aff) => {
-    // If no demographics specified, include universal affirmations
-    if (!aff.demographics) return true;
-    
-    // Check gender match
-    if (profile.gender && aff.demographics.gender) {
-      return aff.demographics.gender.includes(profile.gender);
-    }
-    
-    // Check ethnicity match
-    if (profile.ethnicity && aff.demographics.ethnicity) {
-      return aff.demographics.ethnicity.includes(profile.ethnicity);
-    }
-    
-    return true;
-  });
-  
-  // Shuffle and return requested count
-  const shuffled = [...filtered].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
+  return getAffirmationsByDisplayCategory('all', profile, count);
 }
