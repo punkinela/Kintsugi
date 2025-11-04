@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -13,8 +13,11 @@ import WeeklySummary from '@/components/WeeklySummary';
 import EnhancedProgressJournal from '@/components/EnhancedProgressJournal';
 import QuickCapture from '@/components/QuickCapture';
 import FeedbackWidget from '@/components/FeedbackWidget';
+import KeyboardShortcutsModal from '@/components/KeyboardShortcutsModal';
+import DataManagement from '@/components/DataManagement';
 import type { BiasInsight, UserProfile } from '@/types';
 import { shouldPromptFeedback } from '@/utils/analytics';
+import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -38,6 +41,8 @@ export default function Home() {
   const [showAccomplishments, setShowAccomplishments] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   // Load user data
   useEffect(() => {
@@ -149,6 +154,50 @@ export default function Home() {
     setShowSetup(true);
     setShowUserDropdown(false);
   };
+
+  // Keyboard shortcuts configuration
+  const shortcuts: KeyboardShortcut[] = [
+    {
+      key: 'h',
+      ctrl: true,
+      description: 'Go to Home tab',
+      action: () => setActiveTab('home'),
+    },
+    {
+      key: 'j',
+      ctrl: true,
+      description: 'Go to Journal tab',
+      action: () => setActiveTab('journal'),
+    },
+    {
+      key: 'i',
+      ctrl: true,
+      description: 'Go to Insights tab',
+      action: () => setActiveTab('insights'),
+    },
+    {
+      key: 'k',
+      ctrl: true,
+      description: 'Quick capture',
+      action: () => setShowQuickCapture(true),
+    },
+    {
+      key: 's',
+      ctrl: true,
+      shift: true,
+      description: 'Open settings',
+      action: () => setShowSettings(true),
+    },
+    {
+      key: '?',
+      shift: true,
+      description: 'Show keyboard shortcuts',
+      action: () => setShowKeyboardShortcuts(true),
+    },
+  ];
+
+  // Initialize keyboard shortcuts
+  useKeyboardShortcuts(shortcuts);
 
   // Generate bias insight
   const generateBiasInsight = async () => {
@@ -267,6 +316,26 @@ export default function Home() {
                         >
                           <User className="h-4 w-4 mr-2" />
                           Edit Profile
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowSettings(true);
+                            setShowUserDropdown(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center"
+                        >
+                          <Settings className="h-4 w-4 mr-2" />
+                          Settings & Data
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowKeyboardShortcuts(true);
+                            setShowUserDropdown(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center"
+                        >
+                          <Keyboard className="h-4 w-4 mr-2" />
+                          Keyboard Shortcuts
                         </button>
                         <button
                           onClick={handleSignOut}
@@ -481,6 +550,74 @@ export default function Home() {
       {/* Feedback Widget */}
       {showFeedback && (
         <FeedbackWidget onClose={() => setShowFeedback(false)} />
+      )}
+
+      {/* Keyboard Shortcuts Modal */}
+      {showKeyboardShortcuts && (
+        <KeyboardShortcutsModal
+          onClose={() => setShowKeyboardShortcuts(false)}
+          shortcuts={shortcuts}
+        />
+      )}
+
+      {/* Settings Modal */}
+      {showSettings && (
+        <div className="fixed inset-0 z-50 overflow-y-auto">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setShowSettings(false)}
+          />
+
+          {/* Modal */}
+          <div className="flex min-h-full items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-6 border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 rounded-lg">
+                    <Settings className="h-6 w-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">
+                      Settings & Data Management
+                    </h2>
+                    <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-300">
+                      Manage your data, backups, and preferences
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowSettings(false)}
+                  className="p-2 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
+                >
+                  <X className="h-5 w-5 text-kintsugi-dark-600 dark:text-kintsugi-gold-300" />
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 overflow-y-auto max-h-[calc(90vh-100px)]">
+                <DataManagement
+                  onDataImported={() => {
+                    setShowSettings(false);
+                  }}
+                  onDataCleared={() => {
+                    setShowSettings(false);
+                  }}
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
       )}
     </div>
   );
