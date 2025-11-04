@@ -153,9 +153,6 @@ export interface DemographicsData {
 }
 
 export function analyzeDemographics(feedback: UserFeedback[]): DemographicsData {
-  console.log('🔍 === DEMOGRAPHICS ANALYSIS START ===');
-  console.log('📊 Feedback count:', feedback.length);
-
   const byGender: Record<string, number> = {};
   const byProfession: Record<string, number> = {};
   const byEthnicity: Record<string, number> = {};
@@ -178,73 +175,47 @@ export function analyzeDemographics(feedback: UserFeedback[]): DemographicsData 
     }
   });
 
-  console.log('📈 After feedback processing:');
-  console.log('   Gender:', byGender);
-  console.log('   Profession:', byProfession);
-  console.log('   Ethnicity:', byEthnicity);
-
   // Always include current user's demographics if available and not already counted
   const userProfileStr = localStorage.getItem('kintsugiUser');
-  console.log('👤 User profile from localStorage:', userProfileStr ? 'EXISTS' : 'NOT FOUND');
 
   if (userProfileStr) {
     try {
       const profile = JSON.parse(userProfileStr);
-      console.log('✅ Parsed profile:', {
-        id: profile.id,
-        name: profile.name,
-        gender: profile.gender,
-        profession: profile.profession,
-        ethnicity: profile.ethnicity
-      });
-
       const shouldAddUser = !userIdsCounted.has(profile.id);
-      console.log('🤔 Should add user?', shouldAddUser);
 
       if (shouldAddUser) {
         let added = false;
         if (profile.gender) {
           byGender[profile.gender] = (byGender[profile.gender] || 0) + 1;
-          console.log('   ✓ Added gender:', profile.gender);
           added = true;
         }
         if (profile.profession) {
           byProfession[profile.profession] = (byProfession[profile.profession] || 0) + 1;
-          console.log('   ✓ Added profession:', profile.profession);
           added = true;
         }
         if (profile.ethnicity) {
           byEthnicity[profile.ethnicity] = (byEthnicity[profile.ethnicity] || 0) + 1;
-          console.log('   ✓ Added ethnicity:', profile.ethnicity);
           added = true;
         }
         if (added) {
           totalUsers = userIdsCounted.size + 1;
-          console.log('   ✓ Total users:', totalUsers);
-        } else {
-          console.log('   ⚠️  No demographic fields found in profile');
         }
       } else {
         totalUsers = userIdsCounted.size;
       }
     } catch (e) {
-      console.error('❌ Error parsing user profile:', e);
       totalUsers = userIdsCounted.size;
     }
   } else {
-    console.log('⚠️  No kintsugiUser in localStorage');
     totalUsers = userIdsCounted.size;
   }
 
-  const result = {
+  return {
     byGender,
     byProfession,
     byEthnicity,
     totalUsers
   };
-
-  console.log('🎯 === DEMOGRAPHICS RESULT ===', result);
-  return result;
 }
 
 // ============================================
