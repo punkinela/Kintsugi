@@ -10,6 +10,7 @@ interface ProfileSetupProps {
   onComplete: (profile: UserProfile) => void;
   initialProfile?: Partial<UserProfile>;
   isEditing?: boolean;
+  onCancel?: () => void;
 }
 
 const defaultProfile: UserProfile = {
@@ -28,7 +29,7 @@ const defaultProfile: UserProfile = {
   updatedAt: new Date().toISOString(),
 };
 
-export default function ProfileSetup({ onComplete, initialProfile, isEditing = false }: ProfileSetupProps) {
+export default function ProfileSetup({ onComplete, initialProfile, isEditing = false, onCancel }: ProfileSetupProps) {
   const [profile, setProfile] = useState<UserProfile>(() => ({
     ...defaultProfile,
     ...initialProfile,
@@ -38,6 +39,12 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onComplete(profile);
+  };
+
+  const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    }
   };
 
   return (
@@ -161,35 +168,45 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
               </p>
             </div>
 
-            {/* Submit Button */}
+            {/* Submit/Save Button */}
             <button
               type="submit"
               className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-blue-500/30 flex items-center justify-center gap-2"
             >
               <Zap className="w-5 h-5" />
-              Start Tracking My Impact
+              {isEditing ? 'Save Changes' : 'Start Tracking My Impact'}
             </button>
 
-            {/* Skip Button */}
-            <button
-              type="button"
-              onClick={() => onComplete({
-                ...defaultProfile,
-                name: 'Guest',
-                email: `guest-${Math.random().toString(36).substring(2, 10)}@kintsugi.app`,
-                preferences: {
-                  ...defaultProfile.preferences,
+            {/* Cancel Button (when editing) or Skip Button (when first setup) */}
+            {isEditing && onCancel ? (
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="w-full text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium py-3 transition-colors border-2 border-gray-300 dark:border-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-kintsugi-dark-700"
+              >
+                Cancel
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onComplete({
+                  ...defaultProfile,
+                  name: 'Guest',
+                  email: `guest-${Math.random().toString(36).substring(2, 10)}@kintsugi.app`,
+                  preferences: {
+                    ...defaultProfile.preferences,
+                    theme: 'system',
+                    notifications: false,
+                  },
                   theme: 'system',
                   notifications: false,
-                },
-                theme: 'system',
-                notifications: false,
-                skipped: true,
-              })}
-              className="w-full text-kintsugi-gold-700/70 dark:text-kintsugi-gold-400/70 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-200 font-medium py-2 transition-colors"
-            >
-              Skip for now
-            </button>
+                  skipped: true,
+                })}
+                className="w-full text-kintsugi-gold-700/70 dark:text-kintsugi-gold-400/70 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-200 font-medium py-2 transition-colors"
+              >
+                Skip for now
+              </button>
+            )}
           </form>
         </div>
       </motion.div>

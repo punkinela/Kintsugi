@@ -33,22 +33,42 @@ export default function EngagingJournalPrompt({ onOpenJournal }: EngagingJournal
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
-    const entries = engagement.journalEntries || [];
+    const loadData = () => {
+      const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+      const entries = engagement.journalEntries || [];
 
-    // Get last 3 entries
-    setRecentEntries(entries.slice(-3).reverse());
+      // Get last 3 entries
+      setRecentEntries(entries.slice(-3).reverse());
 
-    // Check if written today
-    const today = new Date().toDateString();
-    const writtenToday = entries.some((e: any) => new Date(e.date).toDateString() === today);
-    setTodayWritten(writtenToday);
+      // Check if written today
+      const today = new Date().toDateString();
+      const writtenToday = entries.some((e: any) => new Date(e.date).toDateString() === today);
+      setTodayWritten(writtenToday);
 
-    // Get streak
-    setStreak(engagement.currentStreak || 0);
+      // Get streak
+      setStreak(engagement.currentStreak || 0);
 
-    // Random prompt
-    setRandomPrompt(prompts[Math.floor(Math.random() * prompts.length)]);
+      // Random prompt (only set if not already set)
+      if (!randomPrompt) {
+        setRandomPrompt(prompts[Math.floor(Math.random() * prompts.length)]);
+      }
+    };
+
+    // Load data initially
+    loadData();
+
+    // Listen for storage changes from other tabs/components
+    const handleStorageChange = () => {
+      loadData();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('kintsugi-data-updated', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('kintsugi-data-updated', handleStorageChange);
+    };
   }, []);
 
   return (
