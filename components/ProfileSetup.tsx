@@ -37,7 +37,10 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('ProfileSetup: Submitting profile:', profile);
+    console.log('🔵 ProfileSetup: Submitting profile:', profile);
+    console.log('🔵 Gender:', profile.gender);
+    console.log('🔵 Profession:', profile.profession);
+    console.log('🔵 Ethnicity:', profile.ethnicity);
     onComplete(profile);
   };
 
@@ -99,7 +102,10 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                   <button
                     key={gender}
                     type="button"
-                    onClick={() => setProfile({ ...profile, gender: gender as any })}
+                    onClick={() => {
+                      console.log('🟢 Gender clicked:', gender);
+                      setProfile({ ...profile, gender: gender as any });
+                    }}
                     className={`px-4 py-3 rounded-xl border-2 transition-all ${
                       profile.gender === gender
                         ? 'border-kintsugi-gold-600 bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:text-kintsugi-gold-200'
@@ -120,7 +126,10 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
               <input
                 type="text"
                 value={profile.profession || ''}
-                onChange={(e) => setProfile({ ...profile, profession: e.target.value })}
+                onChange={(e) => {
+                  console.log('🟡 Profession changed:', e.target.value);
+                  setProfile({ ...profile, profession: e.target.value });
+                }}
                 placeholder="e.g., Software Engineer, Teacher, Entrepreneur"
                 className="w-full px-4 py-3 rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-colors"
               />
@@ -136,7 +145,10 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                   <button
                     key={ethnicity}
                     type="button"
-                    onClick={() => setProfile({ ...profile, ethnicity: ethnicity as any })}
+                    onClick={() => {
+                      console.log('🟣 Ethnicity clicked:', ethnicity);
+                      setProfile({ ...profile, ethnicity: ethnicity as any });
+                    }}
                     className={`px-4 py-3 rounded-xl border-2 transition-all text-sm ${
                       profile.ethnicity === ethnicity
                         ? 'border-kintsugi-gold-600 bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:text-kintsugi-gold-200'
