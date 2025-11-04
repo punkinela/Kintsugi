@@ -101,6 +101,9 @@ export const XP_VALUES: Record<string, XPAction> = {
 // Level titles and requirements
 export const LEVEL_TITLES: Record<number, string> = {
   1: 'Newcomer',
+  2: 'Getting Started',
+  3: 'Rising Star',
+  4: 'Dedicated Writer',
   5: 'Explorer',
   10: 'Believer',
   15: 'Achiever',
