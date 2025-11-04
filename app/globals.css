@@ -518,3 +518,161 @@ html {
     display: inline !important;
   }
 }
+
+/* ========================================
+   THEME SYSTEM
+   Multiple color themes support
+   ======================================== */
+
+:root {
+  --theme-primary: #d97706;
+  --theme-primary-light: #fef3c7;
+  --theme-primary-dark: #92400e;
+  --theme-secondary: #f59e0b;
+  --theme-accent: #fbbf24;
+  --theme-background: #ffffff;
+  --theme-surface: #fffbeb;
+  --theme-text: #1f2937;
+  --theme-text-secondary: #6b7280;
+  --theme-border: #fde68a;
+  --theme-gradient: linear-gradient(135deg, #fef3c7, #fde68a);
+}
+
+/* Apply theme variables to components */
+.theme-gold { /* Already default */ }
+
+.theme-professional {
+  /* Override via CSS variables */
+}
+
+.theme-energetic {
+  /* Override via CSS variables */
+}
+
+.theme-calm {
+  /* Override via CSS variables */
+}
+
+.theme-bold {
+  /* Override via CSS variables */
+}
+
+.theme-elegant {
+  /* Override via CSS variables */
+}
+
+/* ========================================
+   ACCESSIBILITY MODES
+   Enhanced accessibility features
+   ======================================== */
+
+/* High Contrast Mode */
+.accessibility-high-contrast {
+  filter: contrast(1.2);
+}
+
+.accessibility-high-contrast * {
+  border-color: #000 !important;
+}
+
+.accessibility-high-contrast button,
+.accessibility-high-contrast a {
+  outline: 2px solid currentColor !important;
+  outline-offset: 2px;
+}
+
+.accessibility-high-contrast .bg-gradient-to-r,
+.accessibility-high-contrast .bg-gradient-to-br,
+.accessibility-high-contrast [class*="bg-gradient"] {
+  background: var(--theme-primary) !important;
+}
+
+/* Reduced Motion Mode */
+.accessibility-reduced-motion *,
+.accessibility-reduced-motion *::before,
+.accessibility-reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Large Text Mode */
+.accessibility-large-text {
+  font-size: 18px !important;
+}
+
+.accessibility-large-text h1 {
+  font-size: 3rem !important;
+}
+
+.accessibility-large-text h2 {
+  font-size: 2.5rem !important;
+}
+
+.accessibility-large-text h3 {
+  font-size: 2rem !important;
+}
+
+.accessibility-large-text p,
+.accessibility-large-text li,
+.accessibility-large-text span {
+  font-size: 1.125rem !important;
+  line-height: 1.75 !important;
+}
+
+.accessibility-large-text .text-xs {
+  font-size: 0.875rem !important;
+}
+
+.accessibility-large-text .text-sm {
+  font-size: 1rem !important;
+}
+
+.accessibility-large-text button,
+.accessibility-large-text input,
+.accessibility-large-text textarea {
+  font-size: 1.125rem !important;
+  padding: 0.75rem 1.25rem !important;
+}
+
+/* Focus indicators for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid var(--theme-primary) !important;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--theme-primary) !important;
+  outline-offset: 2px;
+}
+
+/* Skip to content link for screen readers */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--theme-primary);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}

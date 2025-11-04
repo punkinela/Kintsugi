@@ -34,9 +34,15 @@ import AIPerformanceReviewGenerator from '@/components/AIPerformanceReviewGenera
 // Phase 7: Professional Tools
 import ExportManager from '@/components/ExportManager';
 
+// Phase 8: Enhanced UX
+import ThemeSelector from '@/components/ThemeSelector';
+import AdvancedSearch from '@/components/AdvancedSearch';
+
 import type { BiasInsight, UserProfile } from '@/types';
+import { JournalEntry } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
 import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
+import { initializeTheme } from '@/utils/themes';
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -62,6 +68,16 @@ export default function Home() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [settingsTab, setSettingsTab] = useState<'data' | 'appearance'>('data');
+  const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
+  const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
+
+  // Initialize theme system
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      initializeTheme();
+    }
+  }, []);
 
   // Load user data
   useEffect(() => {
@@ -86,6 +102,20 @@ export default function Home() {
 
     loadUser();
   }, []);
+
+  // Load journal entries
+  useEffect(() => {
+    if (isClient) {
+      try {
+        const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
+        const entries = engagement.journalEntries || [];
+        setJournalEntries(entries);
+        setFilteredJournalEntries(entries);
+      } catch (error) {
+        console.error('Error loading journal entries:', error);
+      }
+    }
+  }, [isClient]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -774,6 +804,12 @@ export default function Home() {
                   })()}
                 </div>
               </motion.div>
+
+              {/* Phase 8: Advanced Search */}
+              <AdvancedSearch
+                entries={journalEntries}
+                onResultsChange={setFilteredJournalEntries}
+              />
             </div>
           )}
 
@@ -907,16 +943,48 @@ export default function Home() {
                 </button>
               </div>
 
+              {/* Tabs */}
+              <div className="border-b border-gray-200 dark:border-gray-700">
+                <nav className="flex -mb-px">
+                  <button
+                    onClick={() => setSettingsTab('data')}
+                    className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
+                      settingsTab === 'data'
+                        ? 'border-kintsugi-gold-500 text-kintsugi-gold-600 dark:text-kintsugi-gold-400'
+                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}
+                  >
+                    Data Management
+                  </button>
+                  <button
+                    onClick={() => setSettingsTab('appearance')}
+                    className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
+                      settingsTab === 'appearance'
+                        ? 'border-kintsugi-gold-500 text-kintsugi-gold-600 dark:text-kintsugi-gold-400'
+                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}
+                  >
+                    Appearance & Accessibility
+                  </button>
+                </nav>
+              </div>
+
               {/* Content */}
-              <div className="p-6 overflow-y-auto max-h-[calc(90vh-100px)]">
-                <DataManagement
-                  onDataImported={() => {
-                    setShowSettings(false);
-                  }}
-                  onDataCleared={() => {
-                    setShowSettings(false);
-                  }}
-                />
+              <div className="p-6 overflow-y-auto max-h-[calc(90vh-160px)]">
+                {settingsTab === 'data' && (
+                  <DataManagement
+                    onDataImported={() => {
+                      setShowSettings(false);
+                    }}
+                    onDataCleared={() => {
+                      setShowSettings(false);
+                    }}
+                  />
+                )}
+
+                {settingsTab === 'appearance' && (
+                  <ThemeSelector />
+                )}
               </div>
             </motion.div>
           </div>
