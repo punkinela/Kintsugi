@@ -30,15 +30,22 @@ export default function PersonalStatsDashboard() {
   const [entries, setEntries] = useState<any[]>([]);
   const [stats, setStats] = useState<any>(null);
   const [patterns, setPatterns] = useState<any>(null);
+  const [timeSeriesData, setTimeSeriesData] = useState<any[]>([]);
   const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     const engagement = getEngagementData();
-    setEntries(engagement.journalEntries);
+    const journalEntries = engagement.journalEntries || [];
+    setEntries(journalEntries);
 
-    if (engagement.journalEntries.length > 0) {
-      setStats(calculatePersonalStats(engagement.journalEntries));
-      setPatterns(analyzeJournalingPatterns(engagement.journalEntries));
+    if (journalEntries.length > 0) {
+      setStats(calculatePersonalStats(journalEntries));
+      setPatterns(analyzeJournalingPatterns(journalEntries));
+      setTimeSeriesData(getEntriesTimeSeries(journalEntries, 'day'));
+    } else {
+      setStats(null);
+      setPatterns(null);
+      setTimeSeriesData([]);
     }
 
     // Listen for storage changes from other tabs/components
@@ -66,8 +73,6 @@ export default function PersonalStatsDashboard() {
       </div>
     );
   }
-
-  const timeSeriesData = getEntriesTimeSeries(entries, 'week');
 
   const exportStats = () => {
     const report = `
