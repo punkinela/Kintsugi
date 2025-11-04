@@ -37,10 +37,6 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('🔵 ProfileSetup: Submitting profile:', profile);
-    console.log('🔵 Gender:', profile.gender);
-    console.log('🔵 Profession:', profile.profession);
-    console.log('🔵 Ethnicity:', profile.ethnicity);
     onComplete(profile);
   };
 
@@ -72,7 +68,6 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                 currentAvatar={profile.avatar}
                 currentAvatarType={profile.avatarType}
                 onSelect={(avatar, type) => {
-                  console.log('Avatar selected:', avatar, type);
                   setProfile({ ...profile, avatar, avatarType: type });
                 }}
               />
@@ -103,7 +98,6 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                     key={gender}
                     type="button"
                     onClick={() => {
-                      console.log('🟢 Gender clicked:', gender);
                       setProfile({ ...profile, gender: gender as any });
                     }}
                     className={`px-4 py-3 rounded-xl border-2 transition-all ${
@@ -127,7 +121,6 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                 type="text"
                 value={profile.profession || ''}
                 onChange={(e) => {
-                  console.log('🟡 Profession changed:', e.target.value);
                   setProfile({ ...profile, profession: e.target.value });
                 }}
                 placeholder="e.g., Software Engineer, Teacher, Entrepreneur"
@@ -146,7 +139,6 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                     key={ethnicity}
                     type="button"
                     onClick={() => {
-                      console.log('🟣 Ethnicity clicked:', ethnicity);
                       setProfile({ ...profile, ethnicity: ethnicity as any });
                     }}
                     className={`px-4 py-3 rounded-xl border-2 transition-all text-sm ${

@@ -115,7 +115,6 @@ export default function Home() {
       updatedAt: new Date().toISOString(),
     };
 
-    console.log('💾 Saving user profile:', newUser);
     localStorage.setItem('kintsugiUser', JSON.stringify(newUser));
     setUser(newUser);
     setShowSetup(false);
