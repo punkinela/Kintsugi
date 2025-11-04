@@ -31,6 +31,9 @@ import OnboardingTour from '@/components/OnboardingTour';
 import AIInsightsDashboard from '@/components/AIInsightsDashboard';
 import AIPerformanceReviewGenerator from '@/components/AIPerformanceReviewGenerator';
 
+// Phase 7: Professional Tools
+import ExportManager from '@/components/ExportManager';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { shouldPromptFeedback } from '@/utils/analytics';
 import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
@@ -831,6 +834,9 @@ export default function Home() {
               {/* Phase 6: AI-Powered Features */}
               <AIInsightsDashboard />
               <AIPerformanceReviewGenerator />
+
+              {/* Phase 7: Professional Tools */}
+              <ExportManager />
             </div>
           )}
         </div>
