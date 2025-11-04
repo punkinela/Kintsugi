@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -444,33 +444,119 @@ export default function Home() {
         <div className="px-4 py-6 sm:px-0">
           {activeTab === 'home' && (
             <div className="space-y-6">
-              {/* Welcome Section */}
-              <div className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow rounded-lg">
-                <div className="px-4 py-5 sm:p-6">
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 rounded-md p-3">
-                      <Zap className="h-6 w-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
-                    </div>
-                    <div className="ml-5 w-0 flex-1">
-                      <h3 className="text-lg leading-6 font-medium text-kintsugi-dark-900 dark:text-white">
-                        Welcome back, {user?.name || 'Friend'}!
-                      </h3>
-                      <p className="mt-1 text-sm text-kintsugi-dark-500 dark:text-kintsugi-gold-300">
-                        Ready to reflect on your day and grow stronger?
-                      </p>
-                    </div>
-                    <div className="ml-4 flex-shrink-0">
-                      <button
-                        onClick={generateBiasInsight}
-                        disabled={biasInsightLoading}
-                        className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kintsugi-gold-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              {/* Enhanced Welcome Hero Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative overflow-hidden bg-gradient-to-br from-kintsugi-gold-500 via-amber-500 to-yellow-600 dark:from-kintsugi-gold-700 dark:via-amber-700 dark:to-yellow-800 rounded-2xl shadow-2xl"
+              >
+                {/* Decorative elements */}
+                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-64 h-64 bg-yellow-300/10 rounded-full blur-3xl"></div>
+
+                <div className="relative px-6 py-8 sm:px-8 sm:py-10">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div className="flex items-start gap-4">
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                        className="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg"
                       >
-                        {biasInsightLoading ? 'Thinking...' : 'Get Insight'}
-                      </button>
+                        <Sparkles className="h-10 w-10 text-white" />
+                      </motion.div>
+                      <div>
+                        <h2 className="text-3xl font-bold text-white mb-2">
+                          Welcome back, {user?.name || 'Friend'}! 👋
+                        </h2>
+                        <p className="text-white/90 text-lg">
+                          Your journey to growth and self-advocacy continues today
+                        </p>
+                      </div>
                     </div>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={generateBiasInsight}
+                      disabled={biasInsightLoading}
+                      className="flex-shrink-0 inline-flex items-center px-6 py-3 bg-white text-kintsugi-gold-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Lightbulb className="h-5 w-5 mr-2" />
+                      {biasInsightLoading ? 'Generating...' : 'Get Insight'}
+                    </motion.button>
+                  </div>
+
+                  {/* Quick Stats Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-white/80 text-sm font-medium">Current Streak</p>
+                          <p className="text-white text-2xl font-bold mt-1">
+                            {(() => {
+                              const streaks = JSON.parse(localStorage.getItem('kintsugi_streaks') || '{"current":0}');
+                              return streaks.current || 0;
+                            })()} days 🔥
+                          </p>
+                        </div>
+                        <div className="bg-white/20 rounded-full p-3">
+                          <Target className="h-6 w-6 text-white" />
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-white/80 text-sm font-medium">Journal Entries</p>
+                          <p className="text-white text-2xl font-bold mt-1">
+                            {(() => {
+                              const entries = JSON.parse(localStorage.getItem('kintsugi_journal') || '[]');
+                              return entries.length || 0;
+                            })()} ✍️
+                          </p>
+                        </div>
+                        <div className="bg-white/20 rounded-full p-3">
+                          <BookOpen className="h-6 w-6 text-white" />
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-white/80 text-sm font-medium">Achievements</p>
+                          <p className="text-white text-2xl font-bold mt-1">
+                            {(() => {
+                              const badges = JSON.parse(localStorage.getItem('kintsugi_badges') || '[]');
+                              return badges.length || 0;
+                            })()} 🏆
+                          </p>
+                        </div>
+                        <div className="bg-white/20 rounded-full p-3">
+                          <Award className="h-6 w-6 text-white" />
+                        </div>
+                      </div>
+                    </motion.div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Phase 4: Daily Quote */}
               <QuoteOfTheDay />
@@ -494,16 +580,190 @@ export default function Home() {
           )}
 
           {activeTab === 'journal' && (
-            <div className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow rounded-lg">
-              <div className="px-4 py-5 sm:p-6">
-                <h2 className="text-xl font-semibold text-kintsugi-dark-900 dark:text-white mb-6">My Journal</h2>
-                <button
-                  onClick={() => setShowAccomplishments(true)}
-                  className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all"
-                >
-                  Open Accomplishments Journal
-                </button>
-              </div>
+            <div className="space-y-6">
+              {/* Enhanced Journal Header */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 dark:from-purple-800 dark:via-pink-800 dark:to-rose-800 rounded-2xl shadow-2xl overflow-hidden"
+              >
+                <div className="relative px-6 py-8 sm:px-8 sm:py-10">
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-56 h-56 bg-pink-300/10 rounded-full blur-3xl"></div>
+
+                  <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                    <div>
+                      <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                        <BookOpen className="h-8 w-8" />
+                        My Accomplishment Journal
+                      </h2>
+                      <p className="text-white/90 text-lg">
+                        Track your wins, recognize patterns, and celebrate growth
+                      </p>
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => setShowAccomplishments(true)}
+                      className="flex-shrink-0 inline-flex items-center px-6 py-3 bg-white text-purple-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
+                    >
+                      <Sparkles className="h-5 w-5 mr-2" />
+                      Open Journal
+                    </motion.button>
+                  </div>
+
+                  {/* Journal Stats */}
+                  <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                    {(() => {
+                      const entries = JSON.parse(localStorage.getItem('kintsugi_journal') || '[]');
+                      const today = new Date().toDateString();
+                      const todayEntries = entries.filter((e: any) => new Date(e.date).toDateString() === today);
+                      const thisWeek = entries.filter((e: any) => {
+                        const entryDate = new Date(e.date);
+                        const weekAgo = new Date();
+                        weekAgo.setDate(weekAgo.getDate() - 7);
+                        return entryDate >= weekAgo;
+                      });
+                      const totalWords = entries.reduce((sum: number, e: any) => sum + (e.content?.split(' ').length || 0), 0);
+
+                      return (
+                        <>
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                          >
+                            <p className="text-white/80 text-sm font-medium">Total Entries</p>
+                            <p className="text-white text-2xl font-bold mt-1">{entries.length}</p>
+                          </motion.div>
+
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                          >
+                            <p className="text-white/80 text-sm font-medium">Today</p>
+                            <p className="text-white text-2xl font-bold mt-1">{todayEntries.length}</p>
+                          </motion.div>
+
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                          >
+                            <p className="text-white/80 text-sm font-medium">This Week</p>
+                            <p className="text-white text-2xl font-bold mt-1">{thisWeek.length}</p>
+                          </motion.div>
+
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                          >
+                            <p className="text-white/80 text-sm font-medium">Total Words</p>
+                            <p className="text-white text-2xl font-bold mt-1">{totalWords.toLocaleString()}</p>
+                          </motion.div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Recent Entries Preview */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg overflow-hidden"
+              >
+                <div className="px-6 py-5 border-b border-gray-200 dark:border-kintsugi-dark-700">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-kintsugi-gold-600" />
+                    Recent Entries
+                  </h3>
+                </div>
+                <div className="p-6">
+                  {(() => {
+                    const entries = JSON.parse(localStorage.getItem('kintsugi_journal') || '[]');
+                    const recentEntries = entries.slice(-3).reverse();
+
+                    if (recentEntries.length === 0) {
+                      return (
+                        <div className="text-center py-12">
+                          <BookOpen className="h-16 w-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" />
+                          <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                            No entries yet
+                          </h4>
+                          <p className="text-gray-600 dark:text-gray-400 mb-6">
+                            Start your journey by creating your first journal entry
+                          </p>
+                          <button
+                            onClick={() => setShowAccomplishments(true)}
+                            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg"
+                          >
+                            <Sparkles className="h-5 w-5 mr-2" />
+                            Create First Entry
+                          </button>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div className="space-y-4">
+                        {recentEntries.map((entry: any, idx: number) => (
+                          <motion.div
+                            key={entry.id || idx}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: idx * 0.1 }}
+                            className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl border border-purple-200 dark:border-purple-800/50 hover:shadow-md transition-shadow cursor-pointer"
+                            onClick={() => setShowAccomplishments(true)}
+                          >
+                            <div className="flex items-start justify-between mb-2">
+                              <h4 className="font-semibold text-gray-900 dark:text-white">
+                                {entry.title || 'Untitled Entry'}
+                              </h4>
+                              <span className="text-sm text-gray-500 dark:text-gray-400">
+                                {new Date(entry.date).toLocaleDateString()}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                              {entry.content || entry.accomplishment || 'No content'}
+                            </p>
+                            {entry.tags && entry.tags.length > 0 && (
+                              <div className="flex flex-wrap gap-2 mt-3">
+                                {entry.tags.slice(0, 3).map((tag: string, tagIdx: number) => (
+                                  <span
+                                    key={tagIdx}
+                                    className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
+                                  >
+                                    #{tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </motion.div>
+                        ))}
+                        <div className="pt-4 text-center">
+                          <button
+                            onClick={() => setShowAccomplishments(true)}
+                            className="text-purple-600 dark:text-purple-400 font-medium hover:underline flex items-center gap-2 mx-auto"
+                          >
+                            View all entries
+                            <ChevronRight className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+              </motion.div>
             </div>
           )}
 
