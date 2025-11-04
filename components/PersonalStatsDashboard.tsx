@@ -30,6 +30,7 @@ export default function PersonalStatsDashboard() {
   const [entries, setEntries] = useState<any[]>([]);
   const [stats, setStats] = useState<any>(null);
   const [patterns, setPatterns] = useState<any>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     const engagement = getEngagementData();
@@ -39,7 +40,21 @@ export default function PersonalStatsDashboard() {
       setStats(calculatePersonalStats(engagement.journalEntries));
       setPatterns(analyzeJournalingPatterns(engagement.journalEntries));
     }
-  }, []);
+
+    // Listen for storage changes from other tabs/components
+    const handleStorageChange = () => {
+      setRefreshKey(prev => prev + 1);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    // Also listen for custom event when data changes in same tab
+    window.addEventListener('kintsugi-data-updated', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('kintsugi-data-updated', handleStorageChange);
+    };
+  }, [refreshKey]);
 
   if (!stats) {
     return (
