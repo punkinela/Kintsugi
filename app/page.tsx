@@ -15,6 +15,8 @@ import QuickCapture from '@/components/QuickCapture';
 import FeedbackWidget from '@/components/FeedbackWidget';
 import KeyboardShortcutsModal from '@/components/KeyboardShortcutsModal';
 import DataManagement from '@/components/DataManagement';
+import AchievementNotification from '@/components/AchievementNotification';
+import AchievementsPanel from '@/components/AchievementsPanel';
 
 // Phase 3: Analytics & Insights
 import MoodTracker from '@/components/MoodTracker';
@@ -26,6 +28,7 @@ import QuoteOfTheDay from '@/components/QuoteOfTheDay';
 import WritingPromptsPanel from '@/components/WritingPromptsPanel';
 import CustomAffirmationsManager from '@/components/CustomAffirmationsManager';
 import OnboardingTour from '@/components/OnboardingTour';
+import ReturnMotivation from '@/components/ReturnMotivation';
 
 // Phase 6: AI-Powered Features
 import AIInsightsDashboard from '@/components/AIInsightsDashboard';
@@ -40,10 +43,11 @@ import AdvancedSearch from '@/components/AdvancedSearch';
 import DataDiagnostic from '@/components/DataDiagnostic';
 
 import type { BiasInsight, UserProfile } from '@/types';
-import { JournalEntry } from '@/types/engagement';
+import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
 import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
 import { initializeTheme } from '@/utils/themes';
+import { checkAndUnlockAchievements, getAchievementProgress, getEngagementData } from '@/utils/engagement';
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -72,6 +76,9 @@ export default function Home() {
   const [settingsTab, setSettingsTab] = useState<'data' | 'appearance' | 'diagnostic'>('data');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
+  const [showAchievementsPanel, setShowAchievementsPanel] = useState(false);
+  const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
+  const [allAchievements, setAllAchievements] = useState<Achievement[]>([]);
 
   // Initialize theme system
   useEffect(() => {
@@ -104,7 +111,7 @@ export default function Home() {
     loadUser();
   }, []);
 
-  // Load journal entries
+  // Load journal entries and achievements
   useEffect(() => {
     if (isClient) {
       try {
@@ -112,11 +119,31 @@ export default function Home() {
         const entries = engagement.journalEntries || [];
         setJournalEntries(entries);
         setFilteredJournalEntries(entries);
+
+        // Load all achievements (locked and unlocked)
+        const achievements = getAchievementProgress();
+        setAllAchievements(achievements);
       } catch (error) {
-        console.error('Error loading journal entries:', error);
+        console.error('Error loading data:', error);
       }
     }
   }, [isClient]);
+
+  // Check for new achievements whenever journal entries change
+  useEffect(() => {
+    if (isClient && journalEntries.length > 0) {
+      const engagementData = getEngagementData();
+      const newAchievements = checkAndUnlockAchievements(engagementData);
+      if (newAchievements.length > 0) {
+        // Show notification for the first new achievement
+        setNewAchievement(newAchievements[0]);
+        setTimeout(() => setNewAchievement(null), 5000);
+
+        // Reload all achievements to show updated state
+        setAllAchievements(getAchievementProgress());
+      }
+    }
+  }, [isClient, journalEntries.length]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -221,6 +248,12 @@ export default function Home() {
       ctrl: true,
       description: 'Quick capture',
       action: () => setShowQuickCapture(true),
+    },
+    {
+      key: 'a',
+      ctrl: true,
+      description: 'View achievements',
+      action: () => setShowAchievementsPanel(true),
     },
     {
       key: 's',
@@ -567,7 +600,11 @@ export default function Home() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setShowAchievementsPanel(true)}
+                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30 cursor-pointer hover:bg-white/30 transition-all"
+                      title="Click to view all achievements (Ctrl+A)"
                     >
                       <div className="flex items-center justify-between">
                         <div>
@@ -587,6 +624,9 @@ export default function Home() {
                   </div>
                 </div>
               </motion.div>
+
+              {/* Return Motivation - Next Goals */}
+              <ReturnMotivation />
 
               {/* Phase 4: Daily Quote */}
               <QuoteOfTheDay />
@@ -1047,6 +1087,19 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Achievement Notification Toast */}
+      <AchievementNotification
+        achievement={newAchievement}
+        onClose={() => setNewAchievement(null)}
+      />
+
+      {/* Achievements Panel Modal */}
+      <AchievementsPanel
+        isOpen={showAchievementsPanel}
+        onClose={() => setShowAchievementsPanel(false)}
+        achievements={allAchievements}
+      />
 
       {/* Onboarding Tour */}
       {!showSetup && <OnboardingTour />}
