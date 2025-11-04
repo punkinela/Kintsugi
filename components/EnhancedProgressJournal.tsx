@@ -79,8 +79,9 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
     // Update gamification stats
     incrementStat('totalJournalEntries', 1);
 
-    // Trigger data update event for other components
+    // Trigger data update events for other components
     window.dispatchEvent(new Event('kintsugi-data-updated'));
+    window.dispatchEvent(new Event('gamification-update'));
 
     setEntries(data.journalEntries);
     setNewEntry({ accomplishment: '', reflection: '', category: '', mood: '', tags: [] });

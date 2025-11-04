@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -122,7 +122,9 @@ export default function Home() {
 
   // Load journal entries and achievements
   useEffect(() => {
-    if (isClient) {
+    if (!isClient) return;
+
+    const loadData = () => {
       try {
         const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
         const entries = engagement.journalEntries || [];
@@ -135,7 +137,23 @@ export default function Home() {
       } catch (error) {
         console.error('Error loading data:', error);
       }
-    }
+    };
+
+    // Load data initially
+    loadData();
+
+    // Listen for data changes
+    const handleDataChange = () => {
+      loadData();
+    };
+
+    window.addEventListener('storage', handleDataChange);
+    window.addEventListener('kintsugi-data-updated', handleDataChange);
+
+    return () => {
+      window.removeEventListener('storage', handleDataChange);
+      window.removeEventListener('kintsugi-data-updated', handleDataChange);
+    };
   }, [isClient]);
 
   // Check for new achievements whenever journal entries change
@@ -708,11 +726,110 @@ export default function Home() {
               {/* Engaging Journal Prompt Component */}
               <EngagingJournalPrompt onOpenJournal={() => setShowAccomplishments(true)} />
 
+              {/* Journal Entries List */}
+              {journalEntries.length > 0 && (
+                <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                      <BookOpen className="h-6 w-6 text-kintsugi-gold-600" />
+                      Your Journal Entries ({journalEntries.length})
+                    </h3>
+                    <button
+                      onClick={() => setShowAccomplishments(true)}
+                      className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all flex items-center gap-2"
+                    >
+                      <Plus className="h-4 w-4" />
+                      Add Entry
+                    </button>
+                  </div>
+
+                  <div className="space-y-4">
+                    {journalEntries.slice(0, 10).map((entry: JournalEntry) => (
+                      <motion.div
+                        key={entry.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl border border-purple-200 dark:border-purple-800 hover:shadow-lg transition-shadow cursor-pointer"
+                        onClick={() => setShowAccomplishments(true)}
+                      >
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                              {new Date(entry.date).toLocaleDateString('en-US', {
+                                weekday: 'short',
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                              })}
+                            </p>
+                          </div>
+                          {entry.category && (
+                            <span className="px-3 py-1 bg-purple-600 text-white text-xs font-semibold rounded-full">
+                              {entry.category}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-gray-900 dark:text-white font-semibold text-lg mb-2">
+                          {entry.accomplishment}
+                        </p>
+                        {entry.reflection && (
+                          <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-2">
+                            {entry.reflection}
+                          </p>
+                        )}
+                        {entry.tags && entry.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mt-3">
+                            {entry.tags.map((tag, idx) => (
+                              <span key={idx} className="px-2 py-1 bg-white dark:bg-gray-700 text-purple-700 dark:text-purple-300 text-xs rounded-full border border-purple-200 dark:border-purple-700">
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {journalEntries.length > 10 && (
+                    <button
+                      onClick={() => setShowAccomplishments(true)}
+                      className="mt-6 w-full py-3 text-purple-700 dark:text-purple-300 font-semibold hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-xl transition-colors"
+                    >
+                      View All {journalEntries.length} Entries
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {journalEntries.length === 0 && (
+                <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-12 text-center">
+                  <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    No Entries Yet
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-6">
+                    Start your journey by adding your first journal entry!
+                  </p>
+                  <button
+                    onClick={() => setShowAccomplishments(true)}
+                    className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all inline-flex items-center gap-2"
+                  >
+                    <Plus className="h-5 w-5" />
+                    Add Your First Entry
+                  </button>
+                </div>
+              )}
+
               {/* Phase 8: Advanced Search */}
-              <AdvancedSearch
-                entries={journalEntries}
-                onResultsChange={setFilteredJournalEntries}
-              />
+              {journalEntries.length > 0 && (
+                <AdvancedSearch
+                  entries={journalEntries}
+                  onResultsChange={setFilteredJournalEntries}
+                />
+              )}
             </div>
           )}
 
