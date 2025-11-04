@@ -156,7 +156,10 @@ export function analyzeDemographics(feedback: UserFeedback[]): DemographicsData 
   const byGender: Record<string, number> = {};
   const byProfession: Record<string, number> = {};
   const byEthnicity: Record<string, number> = {};
+  let totalUsers = 0;
 
+  // Count demographics from feedback submissions
+  const userIdsCounted = new Set<string>();
   feedback.forEach(item => {
     if (item.userProfile?.gender) {
       byGender[item.userProfile.gender] = (byGender[item.userProfile.gender] || 0) + 1;
@@ -164,34 +167,54 @@ export function analyzeDemographics(feedback: UserFeedback[]): DemographicsData 
     if (item.userProfile?.profession) {
       byProfession[item.userProfile.profession] = (byProfession[item.userProfile.profession] || 0) + 1;
     }
+    if (item.userProfile?.ethnicity) {
+      byEthnicity[item.userProfile.ethnicity] = (byEthnicity[item.userProfile.ethnicity] || 0) + 1;
+    }
+    // Track unique users
+    if (item.userProfile?.id) {
+      userIdsCounted.add(item.userProfile.id);
+    }
   });
 
-  // Get ethnicity and other data from localStorage for current user
+  // Always include current user's demographics if available and not already counted
   const userProfile = localStorage.getItem('kintsugiUser');
   if (userProfile) {
     try {
       const profile = JSON.parse(userProfile);
 
-      // Add current user to demographics if not already counted
-      if (profile.gender && !Object.keys(byGender).length) {
-        byGender[profile.gender] = 1;
-      }
-      if (profile.profession && !Object.keys(byProfession).length) {
-        byProfession[profile.profession] = 1;
-      }
-      if (profile.ethnicity) {
-        byEthnicity[profile.ethnicity] = 1;
+      // Only add if not already counted from feedback
+      const shouldAddUser = !userIdsCounted.has(profile.id);
+
+      if (shouldAddUser) {
+        if (profile.gender) {
+          byGender[profile.gender] = (byGender[profile.gender] || 0) + 1;
+        }
+        if (profile.profession) {
+          byProfession[profile.profession] = (byProfession[profile.profession] || 0) + 1;
+        }
+        if (profile.ethnicity) {
+          byEthnicity[profile.ethnicity] = (byEthnicity[profile.ethnicity] || 0) + 1;
+        }
+        // Count current user if they have any demographic data
+        if (profile.gender || profile.profession || profile.ethnicity) {
+          totalUsers = userIdsCounted.size + 1;
+        }
+      } else {
+        totalUsers = userIdsCounted.size;
       }
     } catch (e) {
       console.error('Error parsing user profile:', e);
+      totalUsers = userIdsCounted.size;
     }
+  } else {
+    totalUsers = userIdsCounted.size;
   }
 
   return {
     byGender,
     byProfession,
     byEthnicity,
-    totalUsers: feedback.length
+    totalUsers
   };
 }
 

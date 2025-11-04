@@ -7,9 +7,11 @@ export interface UserFeedback {
   experience: 'poor' | 'fair' | 'good' | 'great' | 'excellent';
   comment?: string;
   userProfile?: {
+    id?: string;
     name?: string;
     gender?: string;
     profession?: string;
+    ethnicity?: string;
   };
   sessionData: {
     visitCount: number;

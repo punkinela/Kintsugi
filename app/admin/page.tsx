@@ -593,6 +593,30 @@ export default function AdminDashboard() {
         {/* DEMOGRAPHICS TAB */}
         {activeTab === 'demographics' && demographics && (
           <div className="space-y-6">
+            {/* Demographics Info Banner */}
+            {demographics.totalUsers === 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6"
+              >
+                <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200 mb-2">
+                  No Demographic Data Yet
+                </h3>
+                <p className="text-blue-700 dark:text-blue-300 mb-4">
+                  Demographic data comes from user feedback submissions. Once users submit feedback with their profile information, you'll see demographic breakdowns here.
+                </p>
+                <div className="text-sm text-blue-600 dark:text-blue-400">
+                  <strong>To collect demographics:</strong>
+                  <ul className="list-disc list-inside mt-2 space-y-1">
+                    <li>Users need to fill out their profile with optional demographic fields</li>
+                    <li>Users need to submit feedback through the FeedbackWidget</li>
+                    <li>Data will automatically populate in these charts</li>
+                  </ul>
+                </div>
+              </motion.div>
+            )}
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* By Gender */}
               <motion.div
@@ -602,20 +626,24 @@ export default function AdminDashboard() {
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">By Gender</h3>
                 <div className="space-y-3">
-                  {Object.entries(demographics.byGender).map(([gender, count]) => (
-                    <div key={gender}>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span className="capitalize text-gray-700 dark:text-gray-300">{gender}</span>
-                        <span className="font-semibold text-gray-900 dark:text-white">{count}</span>
+                  {Object.entries(demographics.byGender).length > 0 ? (
+                    Object.entries(demographics.byGender).map(([gender, count]) => (
+                      <div key={gender}>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span className="capitalize text-gray-700 dark:text-gray-300">{gender}</span>
+                          <span className="font-semibold text-gray-900 dark:text-white">{count}</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                          <div
+                            className="bg-kintsugi-gold-600 h-2.5 rounded-full"
+                            style={{ width: `${demographics.totalUsers > 0 ? (count / demographics.totalUsers) * 100 : 0}%` }}
+                          />
+                        </div>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                        <div
-                          className="bg-kintsugi-gold-600 h-2.5 rounded-full"
-                          style={{ width: `${(count / demographics.totalUsers) * 100}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
+                    ))
+                  ) : (
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">No gender data available</p>
+                  )}
                 </div>
               </motion.div>
 
@@ -628,20 +656,24 @@ export default function AdminDashboard() {
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">By Profession</h3>
                 <div className="space-y-3">
-                  {Object.entries(demographics.byProfession).map(([profession, count]) => (
-                    <div key={profession}>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span className="capitalize text-gray-700 dark:text-gray-300">{profession}</span>
-                        <span className="font-semibold text-gray-900 dark:text-white">{count}</span>
+                  {Object.entries(demographics.byProfession).length > 0 ? (
+                    Object.entries(demographics.byProfession).map(([profession, count]) => (
+                      <div key={profession}>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span className="capitalize text-gray-700 dark:text-gray-300">{profession}</span>
+                          <span className="font-semibold text-gray-900 dark:text-white">{count}</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                          <div
+                            className="bg-blue-600 h-2.5 rounded-full"
+                            style={{ width: `${demographics.totalUsers > 0 ? (count / demographics.totalUsers) * 100 : 0}%` }}
+                          />
+                        </div>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                        <div
-                          className="bg-blue-600 h-2.5 rounded-full"
-                          style={{ width: `${(count / demographics.totalUsers) * 100}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
+                    ))
+                  ) : (
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">No profession data available</p>
+                  )}
                 </div>
               </motion.div>
 
