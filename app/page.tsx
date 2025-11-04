@@ -81,6 +81,12 @@ export default function Home() {
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
   const [showAchievementsPanel, setShowAchievementsPanel] = useState(false);
   const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
+
+  // Homepage stats (reactive)
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [totalEntries, setTotalEntries] = useState(0);
+  const [totalAchievements, setTotalAchievements] = useState(0);
+  const [statsRefreshKey, setStatsRefreshKey] = useState(0);
   const [allAchievements, setAllAchievements] = useState<Achievement[]>([]);
 
   // Initialize theme system
@@ -147,6 +153,34 @@ export default function Home() {
       }
     }
   }, [isClient, journalEntries.length]);
+
+  // Load and refresh homepage stats
+  useEffect(() => {
+    if (!isClient) return;
+
+    const loadStats = () => {
+      const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"currentStreak":0,"journalEntries":[],"achievements":[]}');
+      setCurrentStreak(engagement.currentStreak || 0);
+      setTotalEntries(engagement.journalEntries?.length || 0);
+      setTotalAchievements(engagement.achievements?.length || 0);
+    };
+
+    // Load stats initially
+    loadStats();
+
+    // Listen for storage changes
+    const handleDataChange = () => {
+      loadStats();
+    };
+
+    window.addEventListener('storage', handleDataChange);
+    window.addEventListener('kintsugi-data-updated', handleDataChange);
+
+    return () => {
+      window.removeEventListener('storage', handleDataChange);
+      window.removeEventListener('kintsugi-data-updated', handleDataChange);
+    };
+  }, [isClient, statsRefreshKey]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -588,10 +622,7 @@ export default function Home() {
                         <div>
                           <p className="text-white/80 text-sm font-medium">Current Streak</p>
                           <p className="text-white text-2xl font-bold mt-1">
-                            {(() => {
-                              const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"currentStreak":0}');
-                              return engagement.currentStreak || 0;
-                            })()} days 🔥
+                            {currentStreak} days 🔥
                           </p>
                         </div>
                         <div className="bg-white/20 rounded-full p-3">
@@ -610,10 +641,7 @@ export default function Home() {
                         <div>
                           <p className="text-white/80 text-sm font-medium">Journal Entries</p>
                           <p className="text-white text-2xl font-bold mt-1">
-                            {(() => {
-                              const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
-                              return engagement.journalEntries?.length || 0;
-                            })()} ✍️
+                            {totalEntries} ✍️
                           </p>
                         </div>
                         <div className="bg-white/20 rounded-full p-3">
@@ -636,10 +664,7 @@ export default function Home() {
                         <div>
                           <p className="text-white/80 text-sm font-medium">Achievements</p>
                           <p className="text-white text-2xl font-bold mt-1">
-                            {(() => {
-                              const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"achievements":[]}');
-                              return engagement.achievements?.length || 0;
-                            })()} 🏆
+                            {totalAchievements} 🏆
                           </p>
                         </div>
                         <div className="bg-white/20 rounded-full p-3">

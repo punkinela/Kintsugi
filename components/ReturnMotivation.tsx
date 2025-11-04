@@ -11,10 +11,11 @@ export default function ReturnMotivation() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
-    const currentStreak = engagement.currentStreak || 0;
-    const journalEntries = engagement.journalEntries || [];
-    const achievements = engagement.achievements || [];
+    const loadGoals = () => {
+      const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+      const currentStreak = engagement.currentStreak || 0;
+      const journalEntries = engagement.journalEntries || [];
+      const achievements = engagement.achievements || [];
 
     // Calculate next goals
     const goals = [];
@@ -85,13 +86,30 @@ export default function ReturnMotivation() {
       });
     }
 
-    setNextGoals(goals.slice(0, 3)); // Show top 3 goals
+      setNextGoals(goals.slice(0, 3)); // Show top 3 goals
 
-    // Set streak info for reminder
-    setStreakInfo({
-      current: currentStreak,
-      lastEntry: journalEntries.length > 0 ? journalEntries[journalEntries.length - 1].date : null,
-    });
+      // Set streak info for reminder
+      setStreakInfo({
+        current: currentStreak,
+        lastEntry: journalEntries.length > 0 ? journalEntries[journalEntries.length - 1].date : null,
+      });
+    };
+
+    // Load goals initially
+    loadGoals();
+
+    // Listen for storage changes
+    const handleDataChange = () => {
+      loadGoals();
+    };
+
+    window.addEventListener('storage', handleDataChange);
+    window.addEventListener('kintsugi-data-updated', handleDataChange);
+
+    return () => {
+      window.removeEventListener('storage', handleDataChange);
+      window.removeEventListener('kintsugi-data-updated', handleDataChange);
+    };
   }, []);
 
   if (nextGoals.length === 0) {
