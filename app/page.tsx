@@ -49,7 +49,7 @@ import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
 import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
 import { initializeTheme } from '@/utils/themes';
-import { checkAndUnlockAchievements, getAchievementProgress, getEngagementData } from '@/utils/engagement';
+import { checkAndUnlockAchievements, getAchievementProgress, getEngagementData, updateStreakFromEntries } from '@/utils/engagement';
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -130,6 +130,11 @@ export default function Home() {
         const entries = engagement.journalEntries || [];
         setJournalEntries(entries);
         setFilteredJournalEntries(entries);
+
+        // Update streak based on journal entries
+        if (entries.length > 0) {
+          updateStreakFromEntries();
+        }
 
         // Load all achievements (locked and unlocked)
         const achievements = getAchievementProgress();

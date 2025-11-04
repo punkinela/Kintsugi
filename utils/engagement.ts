@@ -95,6 +95,97 @@ export function recordVisit(): StreakInfo {
   return streakInfo;
 }
 
+// Calculate streak from journal entries
+export function calculateStreakFromEntries(entries: any[]): { currentStreak: number; longestStreak: number } {
+  if (!entries || entries.length === 0) {
+    return { currentStreak: 0, longestStreak: 0 };
+  }
+
+  // Sort entries by date (newest first)
+  const sortedEntries = [...entries].sort((a, b) =>
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  // Get unique days (in YYYY-MM-DD format)
+  const uniqueDays = new Set<string>();
+  sortedEntries.forEach(entry => {
+    const date = new Date(entry.date);
+    const dayStr = date.toISOString().split('T')[0];
+    uniqueDays.add(dayStr);
+  });
+
+  const sortedDays = Array.from(uniqueDays).sort().reverse(); // Newest first
+
+  if (sortedDays.length === 0) {
+    return { currentStreak: 0, longestStreak: 0 };
+  }
+
+  // Calculate current streak
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayStr = today.toISOString().split('T')[0];
+
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+  let currentStreak = 0;
+
+  // Check if there's an entry today or yesterday
+  if (sortedDays[0] === todayStr || sortedDays[0] === yesterdayStr) {
+    currentStreak = 1;
+    let checkDate = new Date(sortedDays[0]);
+
+    // Count consecutive days going backwards
+    for (let i = 1; i < sortedDays.length; i++) {
+      const expectedPrevDay = new Date(checkDate);
+      expectedPrevDay.setDate(expectedPrevDay.getDate() - 1);
+      const expectedStr = expectedPrevDay.toISOString().split('T')[0];
+
+      if (sortedDays[i] === expectedStr) {
+        currentStreak++;
+        checkDate = new Date(sortedDays[i]);
+      } else {
+        break;
+      }
+    }
+  }
+
+  // Calculate longest streak
+  let longestStreak = 0;
+  let tempStreak = 1;
+
+  for (let i = 0; i < sortedDays.length - 1; i++) {
+    const currentDate = new Date(sortedDays[i]);
+    const nextDate = new Date(sortedDays[i + 1]);
+    const dayDiff = Math.floor((currentDate.getTime() - nextDate.getTime()) / (1000 * 60 * 60 * 24));
+
+    if (dayDiff === 1) {
+      tempStreak++;
+    } else {
+      longestStreak = Math.max(longestStreak, tempStreak);
+      tempStreak = 1;
+    }
+  }
+  longestStreak = Math.max(longestStreak, tempStreak);
+
+  return {
+    currentStreak,
+    longestStreak: Math.max(longestStreak, currentStreak)
+  };
+}
+
+// Update streak based on journal entries
+export function updateStreakFromEntries(): void {
+  const data = getEngagementData();
+  const { currentStreak, longestStreak } = calculateStreakFromEntries(data.journalEntries);
+
+  data.currentStreak = currentStreak;
+  data.longestStreak = longestStreak;
+
+  saveEngagementData(data);
+}
+
 // Record affirmation view
 export function recordAffirmationView(): void {
   const data = getEngagementData();

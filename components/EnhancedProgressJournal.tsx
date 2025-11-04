@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, BookOpen, Calendar, Tag, Sparkles, TrendingUp, Award, Download, BarChart3 } from 'lucide-react';
 import { JournalEntry } from '@/types/engagement';
-import { getEngagementData, saveEngagementData } from '@/utils/engagement';
+import { getEngagementData, saveEngagementData, updateStreakFromEntries } from '@/utils/engagement';
 import { analyzeAccomplishment, generateSummary, generateInsights, AnalysisResult } from '@/utils/accomplishmentAnalyzer';
 import { awardXP, incrementStat } from '@/utils/gamification';
 import AccomplishmentHelper from './AccomplishmentHelper';
@@ -72,6 +72,9 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
     const data = getEngagementData();
     data.journalEntries.unshift(entry);
     saveEngagementData(data);
+
+    // Update streak based on all journal entries
+    updateStreakFromEntries();
 
     // Award XP for journal entry
     const xpResult = awardXP('journal_entry');
