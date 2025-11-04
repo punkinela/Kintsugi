@@ -6,6 +6,7 @@ import { X, Plus, BookOpen, Calendar, Tag, Sparkles, TrendingUp, Award, Download
 import { JournalEntry } from '@/types/engagement';
 import { getEngagementData, saveEngagementData } from '@/utils/engagement';
 import { analyzeAccomplishment, generateSummary, generateInsights, AnalysisResult } from '@/utils/accomplishmentAnalyzer';
+import { awardXP, incrementStat } from '@/utils/gamification';
 import AccomplishmentHelper from './AccomplishmentHelper';
 
 interface EnhancedProgressJournalProps {
@@ -72,12 +73,26 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
     data.journalEntries.unshift(entry);
     saveEngagementData(data);
 
+    // Award XP for journal entry
+    const xpResult = awardXP('journal_entry');
+
+    // Update gamification stats
+    incrementStat('totalJournalEntries', 1);
+
+    // Trigger data update event for other components
+    window.dispatchEvent(new Event('kintsugi-data-updated'));
+
     setEntries(data.journalEntries);
     setNewEntry({ accomplishment: '', reflection: '', category: '', mood: '', tags: [] });
     setTagInput('');
     setShowAddForm(false);
     setShowAnalysis(false);
     setAnalysis(null);
+
+    // Show XP notification if leveled up
+    if (xpResult.leveledUp) {
+      console.log(`🎉 Level Up! You're now level ${xpResult.newLevel}!`);
+    }
   };
 
   const handleExport = () => {
