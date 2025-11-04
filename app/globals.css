@@ -189,3 +189,490 @@ html {
   border-color: var(--kintsugi-gold-500);
   box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
 }
+
+/* ========================================
+   PRINT STYLESHEET
+   Professional printing support
+   ======================================== */
+
+@media print {
+  /* Page setup */
+  @page {
+    margin: 2cm 1.5cm;
+    size: letter;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    line-height: 1.6;
+  }
+
+  /* Hide non-printable elements */
+  header,
+  nav,
+  button,
+  .no-print,
+  [role="navigation"],
+  [role="banner"],
+  .fixed,
+  .sticky,
+  .modal,
+  .dropdown,
+  .tooltip,
+  aside,
+  footer,
+  .animate-float,
+  .motion-div,
+  video,
+  audio,
+  iframe,
+  .bg-gradient-to-br,
+  .bg-gradient-to-r {
+    display: none !important;
+  }
+
+  /* Hide interactive elements */
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  button,
+  select,
+  .btn,
+  .button {
+    display: none !important;
+  }
+
+  /* Main content */
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Typography */
+  h1 {
+    font-size: 24pt;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 1em;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #333;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 14pt;
+    font-weight: 600;
+    color: #444;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    page-break-after: avoid;
+  }
+
+  p, li {
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #000;
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Links */
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    font-weight: normal;
+    color: #666;
+  }
+
+  a[href^="#"]:after,
+  a[href^="javascript"]:after {
+    content: "";
+  }
+
+  /* Journal entries */
+  .journal-entry,
+  .accomplishment-item,
+  .affirmation-card {
+    page-break-inside: avoid;
+    border: 1px solid #ddd !important;
+    padding: 1em;
+    margin-bottom: 1em;
+    background: white !important;
+  }
+
+  /* Cards and sections */
+  .card,
+  .section,
+  article {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 1.5em;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    page-break-inside: avoid;
+    margin-bottom: 1em;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    text-align: left;
+  }
+
+  th {
+    background: #f0f0f0 !important;
+    font-weight: bold;
+  }
+
+  /* Images */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+
+  /* Code blocks */
+  pre, code {
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+    padding: 0.5em;
+    page-break-inside: avoid;
+  }
+
+  /* Lists */
+  ul, ol {
+    margin-left: 1.5em;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  /* Badges and tags */
+  .badge,
+  .tag,
+  [class*="badge"],
+  [class*="tag"] {
+    border: 1px solid #000 !important;
+    padding: 2px 6px;
+    font-size: 9pt;
+    background: white !important;
+    color: #000 !important;
+  }
+
+  /* Stats and metrics */
+  .stat,
+  .metric,
+  .counter {
+    border: 1px solid #ddd !important;
+    padding: 0.5em !important;
+    background: #f9f9f9 !important;
+    color: #000 !important;
+  }
+
+  /* Forms */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    border: 1px solid #000 !important;
+    background: white !important;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-left: 3px solid #000 !important;
+    padding-left: 1em;
+    margin-left: 0;
+    font-style: italic;
+    page-break-inside: avoid;
+  }
+
+  /* Charts and graphs - hide or show alternative */
+  canvas,
+  svg[class*="recharts"] {
+    page-break-inside: avoid;
+  }
+
+  /* Weekly summary specific */
+  .weekly-summary {
+    page-break-before: always;
+  }
+
+  .accomplishment-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .accomplishment-list li {
+    padding-left: 2em;
+    position: relative;
+    margin-bottom: 1em;
+  }
+
+  .accomplishment-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0.5em;
+    font-weight: bold;
+  }
+
+  /* Header for print */
+  .print-header {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 2em;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1em;
+  }
+
+  .print-header h1 {
+    font-size: 20pt;
+    margin-bottom: 0.5em;
+  }
+
+  .print-header .date {
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Footer for print */
+  .print-footer {
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 9pt;
+    color: #666;
+    padding-top: 0.5em;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Page breaks */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  .page-break-after {
+    page-break-after: always;
+  }
+
+  .page-break-avoid {
+    page-break-inside: avoid;
+  }
+
+  /* Remove shadows and transitions */
+  * {
+    box-shadow: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Remove background colors from gradients */
+  [class*="gradient"],
+  [class*="bg-"] {
+    background: white !important;
+  }
+
+  /* Ensure dark mode doesn't affect print */
+  .dark,
+  .dark * {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Make emojis and icons printable */
+  .emoji,
+  [role="img"] {
+    display: inline !important;
+  }
+}
+
+/* ========================================
+   THEME SYSTEM
+   Multiple color themes support
+   ======================================== */
+
+:root {
+  --theme-primary: #d97706;
+  --theme-primary-light: #fef3c7;
+  --theme-primary-dark: #92400e;
+  --theme-secondary: #f59e0b;
+  --theme-accent: #fbbf24;
+  --theme-background: #ffffff;
+  --theme-surface: #fffbeb;
+  --theme-text: #1f2937;
+  --theme-text-secondary: #6b7280;
+  --theme-border: #fde68a;
+  --theme-gradient: linear-gradient(135deg, #fef3c7, #fde68a);
+}
+
+/* Apply theme variables to components */
+.theme-gold { /* Already default */ }
+
+.theme-professional {
+  /* Override via CSS variables */
+}
+
+.theme-energetic {
+  /* Override via CSS variables */
+}
+
+.theme-calm {
+  /* Override via CSS variables */
+}
+
+.theme-bold {
+  /* Override via CSS variables */
+}
+
+.theme-elegant {
+  /* Override via CSS variables */
+}
+
+/* ========================================
+   ACCESSIBILITY MODES
+   Enhanced accessibility features
+   ======================================== */
+
+/* High Contrast Mode */
+.accessibility-high-contrast {
+  filter: contrast(1.2);
+}
+
+.accessibility-high-contrast * {
+  border-color: #000 !important;
+}
+
+.accessibility-high-contrast button,
+.accessibility-high-contrast a {
+  outline: 2px solid currentColor !important;
+  outline-offset: 2px;
+}
+
+.accessibility-high-contrast .bg-gradient-to-r,
+.accessibility-high-contrast .bg-gradient-to-br,
+.accessibility-high-contrast [class*="bg-gradient"] {
+  background: var(--theme-primary) !important;
+}
+
+/* Reduced Motion Mode */
+.accessibility-reduced-motion *,
+.accessibility-reduced-motion *::before,
+.accessibility-reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Large Text Mode */
+.accessibility-large-text {
+  font-size: 18px !important;
+}
+
+.accessibility-large-text h1 {
+  font-size: 3rem !important;
+}
+
+.accessibility-large-text h2 {
+  font-size: 2.5rem !important;
+}
+
+.accessibility-large-text h3 {
+  font-size: 2rem !important;
+}
+
+.accessibility-large-text p,
+.accessibility-large-text li,
+.accessibility-large-text span {
+  font-size: 1.125rem !important;
+  line-height: 1.75 !important;
+}
+
+.accessibility-large-text .text-xs {
+  font-size: 0.875rem !important;
+}
+
+.accessibility-large-text .text-sm {
+  font-size: 1rem !important;
+}
+
+.accessibility-large-text button,
+.accessibility-large-text input,
+.accessibility-large-text textarea {
+  font-size: 1.125rem !important;
+  padding: 0.75rem 1.25rem !important;
+}
+
+/* Focus indicators for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid var(--theme-primary) !important;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--theme-primary) !important;
+  outline-offset: 2px;
+}
+
+/* Skip to content link for screen readers */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--theme-primary);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
