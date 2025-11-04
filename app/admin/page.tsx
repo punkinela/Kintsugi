@@ -114,6 +114,7 @@ export default function AdminDashboard() {
   const [error, setError] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d' | 'all'>('30d');
   const [activeTab, setActiveTab] = useState<'overview' | 'demographics' | 'journey' | 'insights'>('overview');
+  const [demographicsRefresh, setDemographicsRefresh] = useState(0);
 
   // Load data
   useEffect(() => {
@@ -137,6 +138,13 @@ export default function AdminDashboard() {
     loadData();
   }, []);
 
+  // Refresh demographics when tab is opened
+  useEffect(() => {
+    if (activeTab === 'demographics') {
+      setDemographicsRefresh(prev => prev + 1);
+    }
+  }, [activeTab]);
+
   // Computed analytics
   const sentimentData = useMemo(() => {
     if (!feedback.length) return { positive: 0, negative: 0, neutral: 0 };
@@ -150,8 +158,12 @@ export default function AdminDashboard() {
 
   const demographics = useMemo(() => {
     // Always call analyzeDemographics - it will check current user profile even if no feedback
-    return analyzeDemographics(feedback);
-  }, [feedback]);
+    // Force refresh when demographicsRefresh changes (when tab is opened)
+    const result = analyzeDemographics(feedback);
+    console.log('Demographics calculated:', result);
+    console.log('Current user profile:', localStorage.getItem('kintsugiUser'));
+    return result;
+  }, [feedback, demographicsRefresh]);
 
   const engagementTrend = useMemo(() => {
     const days = dateRange === '7d' ? 7 : dateRange === '30d' ? 30 : 90;
