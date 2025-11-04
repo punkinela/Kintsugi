@@ -107,23 +107,15 @@ export default function Home() {
   }, [isClient, showSetup]);
 
   // Handle profile save
-  const handleProfileSave = (profileData: { name: string; email?: string; emoji?: string; theme?: 'light' | 'dark' | 'system' }) => {
+  const handleProfileSave = (profileData: UserProfile) => {
+    // Save the complete profile including demographics
     const newUser: UserProfile = {
-      id: '1',
-      name: profileData.name,
-      email: profileData.email || '',
-      avatar: profileData.emoji || '👤',
-      avatarType: 'emoji',
-      preferences: {
-        theme: profileData.theme || 'system',
-        notifications: true,
-      },
-      theme: profileData.theme || 'system',
-      notifications: true,
-      createdAt: new Date().toISOString(),
+      ...profileData,
+      id: profileData.id || '1',
       updatedAt: new Date().toISOString(),
     };
 
+    console.log('💾 Saving user profile:', newUser);
     localStorage.setItem('kintsugiUser', JSON.stringify(newUser));
     setUser(newUser);
     setShowSetup(false);
