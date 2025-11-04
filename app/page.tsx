@@ -15,6 +15,17 @@ import QuickCapture from '@/components/QuickCapture';
 import FeedbackWidget from '@/components/FeedbackWidget';
 import KeyboardShortcutsModal from '@/components/KeyboardShortcutsModal';
 import DataManagement from '@/components/DataManagement';
+
+// Phase 3: Analytics & Insights
+import MoodTracker from '@/components/MoodTracker';
+import WordCloudVisualization from '@/components/WordCloudVisualization';
+import PersonalStatsDashboard from '@/components/PersonalStatsDashboard';
+
+// Phase 4: Content Features
+import QuoteOfTheDay from '@/components/QuoteOfTheDay';
+import WritingPromptsPanel from '@/components/WritingPromptsPanel';
+import CustomAffirmationsManager from '@/components/CustomAffirmationsManager';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { shouldPromptFeedback } from '@/utils/analytics';
 import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
@@ -461,6 +472,15 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Phase 4: Daily Quote */}
+              <QuoteOfTheDay />
+
+              {/* Phase 4: Writing Prompts */}
+              <WritingPromptsPanel />
+
+              {/* Phase 4: Custom Affirmations */}
+              <CustomAffirmationsManager />
+
               {/* Quick Actions */}
               <QuickCapture
                 isOpen={showQuickCapture}
@@ -495,10 +515,11 @@ export default function Home() {
 
           {activeTab === 'insights' && (
             <div className="space-y-6">
+              {/* AI Insights Card */}
               <div className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow rounded-lg">
                 <div className="px-4 py-5 sm:p-6">
                   <h2 className="text-xl font-semibold text-kintsugi-dark-900 dark:text-white mb-6">Your Insights</h2>
-                  
+
                   <div className="bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/10 rounded-lg p-4 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800">
                     <div className="flex">
                       <div className="flex-shrink-0">
@@ -534,6 +555,11 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+
+              {/* Phase 3: Advanced Analytics */}
+              <MoodTracker />
+              <WordCloudVisualization />
+              <PersonalStatsDashboard />
             </div>
           )}
         </div>
