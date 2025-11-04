@@ -28,6 +28,9 @@ export interface JournalEntry {
   accomplishment: string;
   reflection?: string;
   category?: string;
+  tags?: string[];
+  mood?: 'great' | 'good' | 'neutral' | 'challenging' | 'difficult';
+  favorite?: boolean;
 }
 
 export interface StreakInfo {
