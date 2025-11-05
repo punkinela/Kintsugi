@@ -136,9 +136,12 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
             <Sparkles className="h-8 w-8" />
           </div>
           <div className="flex-1">
-            <h2 className="text-3xl font-bold mb-2">Community Insights</h2>
-            <p className="text-white/90 text-lg">
-              Voices of transformation: Your community's journey from breaks to gold
+            <h2 className="text-3xl font-bold mb-2">Community Insights: Owning Impact Together</h2>
+            <p className="text-white/90 text-lg mb-1">
+              See how your community is learning to own both wins and resilience
+            </p>
+            <p className="text-white/80 text-sm">
+              Every voice reflects the journey: celebrating accomplishments while honoring the challenges that made them stronger
             </p>
           </div>
         </div>
@@ -426,8 +429,13 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
         transition={{ delay: 0.9 }}
         className="bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 text-center"
       >
-        <p className="text-sm text-gray-700 dark:text-gray-300 italic">
-          "Every voice in your community represents a unique journey. Like Kintsugi pottery, their feedback—positive or challenging—helps you repair and strengthen your offering with golden seams."
+        <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+          Your Community Is Learning to Own Their Impact
+        </p>
+        <p className="text-xs text-gray-700 dark:text-gray-300 italic">
+          Every voice represents a journey of documenting wins and honoring resilience. Like Kintsugi pottery,
+          both positive feedback and constructive challenges help create golden seams—improving your offering
+          while teaching your community that their complete story (accomplishments + growth) matters.
         </p>
       </motion.div>
     </div>

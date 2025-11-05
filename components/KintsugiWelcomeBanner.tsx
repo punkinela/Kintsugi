@@ -59,19 +59,23 @@ export default function KintsugiWelcomeBanner({
               </h2>
               <p className="text-white/90 text-lg mb-3">
                 {user?.profession ? (
-                  <>Your journey as a {user.profession} continues</>
+                  <>Own your impact as a {user.profession}—wins, challenges, and all</>
                 ) : (
-                  <>Your journey continues</>
+                  <>Own your impact—wins, challenges, and all</>
                 )}
               </p>
 
-              {/* Kintsugi Philosophy Quote */}
+              {/* Unified Philosophy Quote */}
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                <p className="text-white/95 text-sm italic mb-2">
-                  "金継ぎ (Kintsugi): The art of embracing your cracks and filling them with gold."
+                <p className="text-white/95 text-sm font-semibold mb-2">
+                  Own Your Impact + Kintsugi Philosophy
                 </p>
-                <p className="text-white/80 text-xs">
-                  Your imperfections, challenges, and struggles are not flaws to hide—they are the golden seams that make you unique, resilient, and beautiful.
+                <p className="text-white/90 text-xs mb-2">
+                  Your impact isn't just your accomplishments—it's also how you've grown through challenges.
+                  Like Kintsugi pottery repaired with gold, your struggles make your story MORE valuable, not less.
+                </p>
+                <p className="text-white/80 text-xs italic">
+                  "Celebrate your wins AND honor your resilience. Both are part of owning your impact."
                 </p>
               </div>
             </div>
@@ -98,9 +102,9 @@ export default function KintsugiWelcomeBanner({
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Your Healing Journey</p>
+                  <p className="text-white/80 text-sm font-medium">Consistent Impact</p>
                   <p className="text-white text-2xl font-bold mt-1">{currentStreak} days 🔥</p>
-                  <p className="text-white/70 text-xs mt-1">Building resilience daily</p>
+                  <p className="text-white/70 text-xs mt-1">Showing up daily</p>
                 </div>
                 <div className="bg-white/20 rounded-full p-3">
                   <TrendingUp className="h-6 w-6 text-white" />
@@ -116,9 +120,9 @@ export default function KintsugiWelcomeBanner({
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Moments Captured</p>
+                  <p className="text-white/80 text-sm font-medium">Your Impact Story</p>
                   <p className="text-white text-2xl font-bold mt-1">{totalEntries} ✍️</p>
-                  <p className="text-white/70 text-xs mt-1">Honoring your story</p>
+                  <p className="text-white/70 text-xs mt-1">Wins + growth documented</p>
                 </div>
                 <div className="bg-white/20 rounded-full p-3">
                   <Heart className="h-6 w-6 text-white" />
@@ -134,9 +138,9 @@ export default function KintsugiWelcomeBanner({
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Golden Repairs</p>
+                  <p className="text-white/80 text-sm font-medium">Golden Moments</p>
                   <p className="text-white text-2xl font-bold mt-1">{goldenMoments} ✨</p>
-                  <p className="text-white/70 text-xs mt-1">Transformations tracked</p>
+                  <p className="text-white/70 text-xs mt-1">Challenges turned to gold</p>
                 </div>
                 <div className="bg-white/20 rounded-full p-3">
                   <Sparkles className="h-6 w-6 text-white" />

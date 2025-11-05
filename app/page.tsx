@@ -65,6 +65,7 @@ import JournalProgressDashboard from '@/components/JournalProgressDashboard';
 import KintsugiWelcomeBanner from '@/components/KintsugiWelcomeBanner';
 import GoldenRepairsPanel from '@/components/GoldenRepairsPanel';
 import KintsugiQuotes from '@/components/KintsugiQuotes';
+import UnifiedPhilosophyCard from '@/components/UnifiedPhilosophyCard';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
@@ -684,6 +685,9 @@ export default function Home() {
 
               {/* Golden Repairs Panel */}
               <GoldenRepairsPanel entries={journalEntries} />
+
+              {/* Unified Philosophy Explanation */}
+              <UnifiedPhilosophyCard />
 
               {/* Return Motivation - Next Goals */}
               <ReturnMotivation />
