@@ -53,6 +53,14 @@ import ProgressRing from '@/components/ProgressRing';
 import FloatingActionButton from '@/components/FloatingActionButton';
 import CelebrationModal from '@/components/CelebrationModal';
 
+// Phase 10: Journal Engagement & Retention (Research-Backed)
+import StreakCalendar from '@/components/StreakCalendar';
+import JournalPromptCarousel from '@/components/JournalPromptCarousel';
+import QuickEntryCard from '@/components/QuickEntryCard';
+import CommunityStats from '@/components/CommunityStats';
+import MilestoneTracker from '@/components/MilestoneTracker';
+import JournalProgressDashboard from '@/components/JournalProgressDashboard';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -799,10 +807,69 @@ export default function Home() {
 
           {activeTab === 'journal' && (
             <div className="space-y-6">
-              {/* Engaging Journal Prompt Component */}
-              <EngagingJournalPrompt onOpenJournal={() => setShowAccomplishments(true)} />
+              {/* Phase 10: Research-Backed Engagement Components */}
 
-              {/* Journal Entries List */}
+              {/* Quick Entry Card - Friction Reduction (BJ Fogg) */}
+              <QuickEntryCard
+                onSave={(text) => {
+                  // Create quick entry
+                  const quickEntry: JournalEntry = {
+                    id: `quick-${Date.now()}`,
+                    date: new Date().toISOString(),
+                    accomplishment: text,
+                    reflection: '',
+                    category: 'Quick Entry',
+                    tags: ['quick'],
+                  };
+
+                  // Save to engagement data
+                  const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
+                  engagement.journalEntries = engagement.journalEntries || [];
+                  engagement.journalEntries.push(quickEntry);
+                  localStorage.setItem('kintsugi_engagement', JSON.stringify(engagement));
+
+                  // Trigger data refresh
+                  window.dispatchEvent(new Event('kintsugi-data-updated'));
+
+                  // Show success toast
+                  addToast({
+                    type: 'success',
+                    title: 'Quick Entry Saved!',
+                    message: 'Building your journaling habit, one entry at a time.',
+                    duration: 3000
+                  });
+                }}
+              />
+
+              {/* Personalized Prompt Carousel */}
+              <JournalPromptCarousel
+                user={user}
+                onSelectPrompt={(prompt) => {
+                  // Pre-fill the full journal with the prompt
+                  setShowAccomplishments(true);
+                  // The prompt will be used in the EnhancedProgressJournal component
+                }}
+              />
+
+              {/* Two-Column Layout for Stats */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Streak Calendar - Loss Aversion */}
+                <StreakCalendar entries={journalEntries} />
+
+                {/* Community Stats - Social Proof */}
+                <CommunityStats userEntryCount={journalEntries.length} />
+              </div>
+
+              {/* Progress Dashboard - Visual Progress */}
+              <JournalProgressDashboard entries={journalEntries} />
+
+              {/* Milestone Tracker - Gamification */}
+              <MilestoneTracker
+                entryCount={journalEntries.length}
+                currentStreak={currentStreak}
+              />
+
+              {/* Original Journal Entries List */}
               {journalEntries.length > 0 && (
                 <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
                   <div className="flex items-center justify-between mb-6">
