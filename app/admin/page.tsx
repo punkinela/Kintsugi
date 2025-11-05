@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import {
   Users, TrendingUp, Star, MessageCircle, Award, BookOpen,
   Download, Calendar, Target, BarChart3, Home, Filter,
-  TrendingDown, Minus, Activity, Brain, Map, Layers
+  TrendingDown, Minus, Activity, Brain, Map, Layers, User
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import {
