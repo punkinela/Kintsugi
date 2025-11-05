@@ -242,7 +242,12 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
                 dataKey="date"
                 stroke="#6b7280"
                 style={{ fontSize: '12px' }}
-                tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                tickFormatter={(value) => {
+                  // Parse as local date to avoid timezone shift
+                  const [year, month, day] = value.split('-').map(Number);
+                  const date = new Date(year, month - 1, day);
+                  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                }}
               />
               <YAxis stroke="#6b7280" style={{ fontSize: '12px' }} />
               <Tooltip
@@ -252,7 +257,12 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
                   borderRadius: '8px',
                   color: '#fff'
                 }}
-                labelFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                labelFormatter={(value) => {
+                  // Parse as local date to avoid timezone shift
+                  const [year, month, day] = value.split('-').map(Number);
+                  const date = new Date(year, month - 1, day);
+                  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                }}
               />
               <Line type="monotone" dataKey="count" stroke="#f59e0b" strokeWidth={2} />
             </LineChart>
