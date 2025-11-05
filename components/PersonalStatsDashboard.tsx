@@ -235,8 +235,8 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
             <TrendingUp className="h-5 w-5 text-kintsugi-gold-600" />
             Entries Over Time
           </h3>
-          <ResponsiveContainer width="100%" height={250}>
-            <LineChart data={timeSeriesData}>
+          <ResponsiveContainer width="100%" height={250} key={refreshKey}>
+            <LineChart data={timeSeriesData} key={`line-chart-${refreshKey}`}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis
                 dataKey="date"
@@ -252,6 +252,7 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
                   borderRadius: '8px',
                   color: '#fff'
                 }}
+                labelFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
               />
               <Line type="monotone" dataKey="count" stroke="#f59e0b" strokeWidth={2} />
             </LineChart>
