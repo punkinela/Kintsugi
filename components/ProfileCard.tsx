@@ -2,6 +2,7 @@
 
 import { User, Briefcase, Users, MapPin, Edit, CheckCircle, AlertCircle } from 'lucide-react';
 import { UserProfile } from '@/types';
+import ProgressRing from './ProgressRing';
 
 interface ProfileCardProps {
   user: UserProfile;
@@ -52,33 +53,34 @@ export default function ProfileCard({ user, onEdit }: ProfileCardProps) {
         </div>
 
         {/* Completion indicator */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-700 dark:text-gray-300 font-medium">
-              Profile Completion
-            </span>
-            <span className={`font-semibold ${isComplete ? 'text-green-600 dark:text-green-400' : 'text-amber-600 dark:text-amber-400'}`}>
-              {completionPercentage}%
-            </span>
+        <div className="flex items-center gap-6">
+          <ProgressRing
+            progress={completionPercentage}
+            size={100}
+            strokeWidth={8}
+            color={isComplete ? '#10B981' : '#D4AF37'}
+            backgroundColor={isComplete ? '#D1FAE5' : '#FEF3C7'}
+            showPercentage={true}
+          />
+          <div className="flex-1 space-y-2">
+            <div>
+              <h4 className="text-base font-semibold text-gray-900 dark:text-white">
+                Profile Completion
+              </h4>
+              {!isComplete && (
+                <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1 mt-1">
+                  <AlertCircle className="h-4 w-4" />
+                  Complete your profile for personalized affirmations
+                </p>
+              )}
+              {isComplete && (
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center gap-1 mt-1">
+                  <CheckCircle className="h-4 w-4" />
+                  Your profile is complete!
+                </p>
+              )}
+            </div>
           </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
-            <div
-              className={`h-full rounded-full transition-all ${isComplete ? 'bg-gradient-to-r from-green-500 to-emerald-500' : 'bg-gradient-to-r from-kintsugi-gold-500 to-amber-500'}`}
-              style={{ width: `${completionPercentage}%` }}
-            />
-          </div>
-          {!isComplete && (
-            <p className="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1">
-              <AlertCircle className="h-3 w-3" />
-              Complete your profile for personalized affirmations
-            </p>
-          )}
-          {isComplete && (
-            <p className="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
-              <CheckCircle className="h-3 w-3" />
-              Your profile is complete!
-            </p>
-          )}
         </div>
       </div>
 

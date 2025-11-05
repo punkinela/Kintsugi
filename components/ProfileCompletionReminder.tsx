@@ -3,6 +3,7 @@
 import { AlertCircle, CheckCircle, User, ArrowRight } from 'lucide-react';
 import { UserProfile } from '@/types';
 import { motion } from 'framer-motion';
+import ProgressRing from './ProgressRing';
 
 interface ProfileCompletionReminderProps {
   user: UserProfile;
@@ -60,11 +61,16 @@ export default function ProfileCompletionReminder({ user, onCompleteProfile }: P
       className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-2 border-blue-200 dark:border-blue-800/50 rounded-xl p-6 shadow-lg"
     >
       <div className="flex items-start gap-4">
-        {/* Icon */}
+        {/* Progress Ring */}
         <div className="flex-shrink-0">
-          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center">
-            <AlertCircle className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-          </div>
+          <ProgressRing
+            progress={completion.percentage}
+            size={80}
+            strokeWidth={6}
+            color="#4F46E5"
+            backgroundColor="#E0E7FF"
+            showPercentage={true}
+          />
         </div>
 
         {/* Content */}
@@ -76,19 +82,11 @@ export default function ProfileCompletionReminder({ user, onCompleteProfile }: P
             You're {completion.percentage}% done! Add your {missingFields.slice(0, 2).join(' and ')}{missingFields.length > 2 ? ', and more' : ''} to get affirmations tailored specifically for you.
           </p>
 
-          {/* Progress Bar */}
+          {/* Fields Status */}
           <div className="mb-4">
-            <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
-              <span>Profile Completion</span>
-              <span className="font-semibold">{completion.completed} of {completion.total} fields</span>
-            </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${completion.percentage}%` }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
-              />
+            <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 mb-2">
+              <span className="font-semibold">Profile Completion</span>
+              <span>{completion.completed} of {completion.total} fields</span>
             </div>
           </div>
 
