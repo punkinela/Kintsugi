@@ -61,6 +61,11 @@ import CommunityStats from '@/components/CommunityStats';
 import MilestoneTracker from '@/components/MilestoneTracker';
 import JournalProgressDashboard from '@/components/JournalProgressDashboard';
 
+// Phase 11: Kintsugi Philosophy Integration
+import KintsugiWelcomeBanner from '@/components/KintsugiWelcomeBanner';
+import GoldenRepairsPanel from '@/components/GoldenRepairsPanel';
+import KintsugiQuotes from '@/components/KintsugiQuotes';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -655,128 +660,30 @@ export default function Home() {
         <div className="px-4 py-6 sm:px-0">
           {activeTab === 'home' && (
             <div className="space-y-6">
-              {/* Enhanced Welcome Hero Section */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="relative overflow-hidden bg-gradient-to-br from-kintsugi-gold-500 via-amber-500 to-yellow-600 dark:from-kintsugi-gold-700 dark:via-amber-700 dark:to-yellow-800 rounded-2xl shadow-2xl"
-              >
-                {/* Decorative elements */}
-                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-64 h-64 bg-yellow-300/10 rounded-full blur-3xl"></div>
+              {/* Kintsugi Welcome Banner */}
+              <KintsugiWelcomeBanner
+                user={user}
+                currentStreak={currentStreak}
+                totalEntries={totalEntries}
+                onGetInsight={generateBiasInsight}
+                isLoading={biasInsightLoading}
+              />
 
-                <div className="relative px-6 py-8 sm:px-8 sm:py-10">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                    <div className="flex items-start gap-4">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                        className="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg"
-                      >
-                        <Sparkles className="h-10 w-10 text-white" />
-                      </motion.div>
-                      <div>
-                        <h2 className="text-3xl font-bold text-white mb-2">
-                          Welcome back, {user?.name || 'Friend'}! 👋
-                        </h2>
-                        <p className="text-white/90 text-lg">
-                          {user?.profession ? (
-                            <>Your journey as a {user.profession} to growth and self-advocacy continues today</>
-                          ) : (
-                            <>Your journey to growth and self-advocacy continues today</>
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={generateBiasInsight}
-                      disabled={biasInsightLoading}
-                      className="flex-shrink-0 inline-flex items-center px-6 py-3 bg-white text-kintsugi-gold-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <Lightbulb className="h-5 w-5 mr-2" />
-                      {biasInsightLoading ? 'Generating...' : 'Get Insight'}
-                    </motion.button>
-                  </div>
-
-                  {/* Profile Completion Reminder */}
-                  {user && (
-                    <div className="mt-6 profile-reminder">
-                      <ProfileCompletionReminder
-                        user={user}
-                        onCompleteProfile={handleEditProfile}
-                      />
-                    </div>
-                  )}
-
-                  {/* Quick Stats Cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-white/80 text-sm font-medium">Current Streak</p>
-                          <p className="text-white text-2xl font-bold mt-1">
-                            <AnimatedCounter value={currentStreak} className="inline" /> days 🔥
-                          </p>
-                        </div>
-                        <div className="bg-white/20 rounded-full p-3">
-                          <Target className="h-6 w-6 text-white" />
-                        </div>
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-white/80 text-sm font-medium">Journal Entries</p>
-                          <p className="text-white text-2xl font-bold mt-1">
-                            <AnimatedCounter value={totalEntries} className="inline" /> ✍️
-                          </p>
-                        </div>
-                        <div className="bg-white/20 rounded-full p-3">
-                          <BookOpen className="h-6 w-6 text-white" />
-                        </div>
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.5 }}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => setShowAchievementsPanel(true)}
-                      className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30 cursor-pointer hover:bg-white/30 transition-all"
-                      title="Click to view all achievements (Ctrl+A)"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-white/80 text-sm font-medium">Achievements</p>
-                          <p className="text-white text-2xl font-bold mt-1">
-                            <AnimatedCounter value={totalAchievements} className="inline" /> 🏆
-                          </p>
-                        </div>
-                        <div className="bg-white/20 rounded-full p-3">
-                          <Award className="h-6 w-6 text-white" />
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
+              {/* Profile Completion Reminder */}
+              {user && (
+                <div className="profile-reminder">
+                  <ProfileCompletionReminder
+                    user={user}
+                    onCompleteProfile={handleEditProfile}
+                  />
                 </div>
-              </motion.div>
+              )}
+
+              {/* Kintsugi Quotes Widget */}
+              <KintsugiQuotes />
+
+              {/* Golden Repairs Panel */}
+              <GoldenRepairsPanel entries={journalEntries} />
 
               {/* Return Motivation - Next Goals */}
               <ReturnMotivation />

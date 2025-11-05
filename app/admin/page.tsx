@@ -15,6 +15,7 @@ import KintsugiJournalInsights from '@/components/KintsugiJournalInsights';
 import StreakCalendar from '@/components/StreakCalendar';
 import JournalProgressDashboard from '@/components/JournalProgressDashboard';
 import MilestoneTracker from '@/components/MilestoneTracker';
+import KintsugiUserJourney from '@/components/KintsugiUserJourney';
 import {
   getAnalyticsData,
   getAllFeedback,
@@ -136,6 +137,7 @@ export default function AdminDashboard() {
   const [demographicsRefresh, setDemographicsRefresh] = useState(0);
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [currentStreak, setCurrentStreak] = useState(0);
+  const [user, setUser] = useState<any>(null);
 
   // Load data
   useEffect(() => {
@@ -150,6 +152,12 @@ export default function AdminDashboard() {
         const engagementData = getEngagementData();
         setJournalEntries(engagementData.journalEntries || []);
         setCurrentStreak(engagementData.currentStreak || 0);
+
+        // Load user profile
+        const storedUser = localStorage.getItem('userProfile');
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
+        }
 
         setAnalytics(analyticsData);
         setFeedback(feedbackData);
@@ -903,45 +911,9 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* USER JOURNEY TAB */}
+        {/* USER JOURNEY TAB - Kintsugi Philosophy */}
         {activeTab === 'journey' && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
-          >
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-6 flex items-center">
-              <Map className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
-              User Journey Timeline
-            </h3>
-            <div className="relative">
-              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-kintsugi-gold-300 dark:bg-kintsugi-gold-700"></div>
-              <div className="space-y-6">
-                {journey.map((step, index) => (
-                  <div key={index} className="relative pl-12">
-                    <div className="absolute left-0 w-8 h-8 bg-kintsugi-gold-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-semibold text-sm">{index + 1}</span>
-                    </div>
-                    <div className="bg-gray-50 dark:bg-kintsugi-dark-700 p-4 rounded-lg">
-                      <h4 className="font-semibold text-gray-900 dark:text-white">{step.step}</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                        {new Date(step.timestamp).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit'
-                        })}
-                      </p>
-                      <span className="inline-flex items-center px-2 py-1 mt-2 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                        Completed
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          <KintsugiUserJourney entries={journalEntries} user={user} />
         )}
 
         {/* INSIGHTS TAB - User Feedback */}
