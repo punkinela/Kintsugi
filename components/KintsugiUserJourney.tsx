@@ -131,9 +131,12 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
             <BookOpen className="h-8 w-8" />
           </div>
           <div className="flex-1">
-            <h3 className="text-2xl font-bold mb-2">Your Kintsugi Journey</h3>
-            <p className="text-white/90">
-              Like the ancient art of Kintsugi, your journey transforms breaks into beauty
+            <h3 className="text-2xl font-bold mb-2">Owning Your Impact: The Journey</h3>
+            <p className="text-white/90 mb-2">
+              Your path from documenting wins to embracing your complete story—resilience and all
+            </p>
+            <p className="text-white/80 text-sm">
+              Like Kintsugi pottery, each challenge you've overcome adds golden value to your impact
             </p>
           </div>
         </div>
@@ -246,8 +249,11 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
 
         {/* Bottom message */}
         <div className="mt-8 p-4 bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50">
-          <p className="text-sm text-gray-700 dark:text-gray-300 text-center italic">
-            "金継ぎ (Kintsugi) teaches us that where we've been broken, we can choose to fill with gold. Your journey is your masterpiece."
+          <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center mb-2">
+            Own Your Impact = Your Wins + Your Resilience
+          </p>
+          <p className="text-xs text-gray-700 dark:text-gray-300 text-center italic">
+            "Like Kintsugi pottery (金継ぎ), where you've been broken and how you've repaired yourself with gold—that's part of your impact story. Your journey is your masterpiece."
           </p>
         </div>
       </div>

@@ -60,24 +60,28 @@ export default function GoldenRepairsPanel({ entries }: GoldenRepairsPanelProps)
           <div>
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Your Golden Repairs</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Moments where you turned cracks into gold ✨
+              The full scope of your impact: wins + growth through challenges ✨
             </p>
           </div>
         </div>
         <div className="hidden sm:block px-4 py-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 rounded-full">
           <p className="text-kintsugi-gold-700 dark:text-kintsugi-gold-300 font-semibold text-sm">
-            {goldenMoments.length} transformations
+            {goldenMoments.length} impact moments
           </p>
         </div>
       </div>
 
-      {/* Kintsugi Philosophy Quote */}
+      {/* Unified Philosophy Message */}
       <div className="bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-xl p-4 mb-6 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50">
-        <p className="text-sm text-gray-700 dark:text-gray-300 italic">
-          "Kintsugi teaches us that breakage and repair are part of the history of an object, not something to disguise."
+        <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+          Own Your Impact = Accomplishments + Resilience
         </p>
-        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
-          Below are your moments of growth—where challenges became opportunities for transformation.
+        <p className="text-xs text-gray-700 dark:text-gray-300 mb-2">
+          When you document a challenge you've overcome, you're not showing weakness—you're demonstrating resilience that ADDS to your impact.
+          Like Kintsugi pottery, the challenges you've repaired with your effort become golden seams in your professional story.
+        </p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 italic">
+          Below are entries where you showed growth, learned from difficulty, or achieved despite obstacles. Each is proof of your full impact.
         </p>
       </div>
 
@@ -143,8 +147,12 @@ export default function GoldenRepairsPanel({ entries }: GoldenRepairsPanelProps)
 
       {/* Bottom message */}
       <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
+        <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Own Your Impact: The Complete Picture
+        </p>
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          Every challenge you face and overcome adds another golden seam to your masterpiece. Keep journaling to track your transformation.
+          Don't hide the challenges that made you stronger. Document your wins AND your resilience.
+          Together, they tell the story of your true impact—golden seams and all.
         </p>
       </div>
     </motion.div>
