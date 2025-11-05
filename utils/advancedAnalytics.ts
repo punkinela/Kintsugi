@@ -357,11 +357,18 @@ export function getEntriesTimeSeries(entries: JournalEntry[], groupBy: 'day' | '
     let key: string;
 
     if (groupBy === 'day') {
-      key = date.toISOString().split('T')[0];
+      // Use local date instead of UTC to match user's timezone
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      key = `${year}-${month}-${day}`;
     } else if (groupBy === 'week') {
       const weekStart = new Date(date);
       weekStart.setDate(date.getDate() - date.getDay());
-      key = weekStart.toISOString().split('T')[0];
+      const year = weekStart.getFullYear();
+      const month = String(weekStart.getMonth() + 1).padStart(2, '0');
+      const day = String(weekStart.getDate()).padStart(2, '0');
+      key = `${year}-${month}-${day}`;
     } else {
       key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
     }
