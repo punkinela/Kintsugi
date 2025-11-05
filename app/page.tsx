@@ -46,6 +46,13 @@ import DataDiagnostic from '@/components/DataDiagnostic';
 import ProfileCard from '@/components/ProfileCard';
 import ProfileCompletionReminder from '@/components/ProfileCompletionReminder';
 
+// Phase 9: Interactivity & Polish
+import ToastNotification, { useToast } from '@/components/ToastNotification';
+import AnimatedCounter from '@/components/AnimatedCounter';
+import ProgressRing from '@/components/ProgressRing';
+import FloatingActionButton from '@/components/FloatingActionButton';
+import CelebrationModal from '@/components/CelebrationModal';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -83,6 +90,11 @@ export default function Home() {
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
   const [showAchievementsPanel, setShowAchievementsPanel] = useState(false);
   const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
+
+  // Phase 9: Interactive components
+  const { toasts, addToast, removeToast } = useToast();
+  const [showCelebration, setShowCelebration] = useState(false);
+  const [celebrationData, setCelebrationData] = useState({ title: '', message: '', type: 'achievement' as const });
 
   // Homepage stats (reactive)
   const [currentStreak, setCurrentStreak] = useState(0);
@@ -173,11 +185,27 @@ export default function Home() {
         setNewAchievement(newAchievements[0]);
         setTimeout(() => setNewAchievement(null), 5000);
 
+        // Show celebration modal
+        setCelebrationData({
+          title: `Achievement Unlocked!`,
+          message: newAchievements[0].description,
+          type: 'achievement'
+        });
+        setShowCelebration(true);
+
+        // Show toast notification
+        addToast({
+          type: 'success',
+          title: 'Achievement Unlocked!',
+          message: newAchievements[0].title,
+          duration: 5000
+        });
+
         // Reload all achievements to show updated state
         setAllAchievements(getAchievementProgress());
       }
     }
-  }, [isClient, journalEntries.length]);
+  }, [isClient, journalEntries.length, addToast]);
 
   // Load and refresh homepage stats
   useEffect(() => {
@@ -257,6 +285,14 @@ export default function Home() {
     setUser(newUser);
     setShowSetup(false);
     setIsEditingProfile(false);
+
+    // Show success toast
+    addToast({
+      type: 'success',
+      title: 'Profile Updated',
+      message: 'Your profile has been saved successfully!',
+      duration: 3000
+    });
 
     // Trigger data refresh
     window.dispatchEvent(new Event('kintsugi-data-updated'));
@@ -680,7 +716,7 @@ export default function Home() {
                         <div>
                           <p className="text-white/80 text-sm font-medium">Current Streak</p>
                           <p className="text-white text-2xl font-bold mt-1">
-                            {currentStreak} days 🔥
+                            <AnimatedCounter value={currentStreak} className="inline" /> days 🔥
                           </p>
                         </div>
                         <div className="bg-white/20 rounded-full p-3">
@@ -699,7 +735,7 @@ export default function Home() {
                         <div>
                           <p className="text-white/80 text-sm font-medium">Journal Entries</p>
                           <p className="text-white text-2xl font-bold mt-1">
-                            {totalEntries} ✍️
+                            <AnimatedCounter value={totalEntries} className="inline" /> ✍️
                           </p>
                         </div>
                         <div className="bg-white/20 rounded-full p-3">
@@ -722,7 +758,7 @@ export default function Home() {
                         <div>
                           <p className="text-white/80 text-sm font-medium">Achievements</p>
                           <p className="text-white text-2xl font-bold mt-1">
-                            {totalAchievements} 🏆
+                            <AnimatedCounter value={totalAchievements} className="inline" /> 🏆
                           </p>
                         </div>
                         <div className="bg-white/20 rounded-full p-3">
@@ -924,10 +960,13 @@ export default function Home() {
                     >
                       <p className="text-white/80 text-sm font-medium">AI Analyses</p>
                       <p className="text-white text-2xl font-bold mt-1">
-                        {(() => {
-                          const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
-                          return engagement.aiAnalysesRun || 0;
-                        })()}
+                        <AnimatedCounter
+                          value={(() => {
+                            const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+                            return engagement.aiAnalysesRun || 0;
+                          })()}
+                          className="inline"
+                        />
                       </p>
                     </motion.div>
 
@@ -939,10 +978,13 @@ export default function Home() {
                     >
                       <p className="text-white/80 text-sm font-medium">Patterns Found</p>
                       <p className="text-white text-2xl font-bold mt-1">
-                        {(() => {
-                          const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
-                          return engagement.patternsDetected || 0;
-                        })()}
+                        <AnimatedCounter
+                          value={(() => {
+                            const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+                            return engagement.patternsDetected || 0;
+                          })()}
+                          className="inline"
+                        />
                       </p>
                     </motion.div>
 
@@ -954,10 +996,13 @@ export default function Home() {
                     >
                       <p className="text-white/80 text-sm font-medium">Exports Created</p>
                       <p className="text-white text-2xl font-bold mt-1">
-                        {(() => {
-                          const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
-                          return engagement.exportsCreated || 0;
-                        })()}
+                        <AnimatedCounter
+                          value={(() => {
+                            const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+                            return engagement.exportsCreated || 0;
+                          })()}
+                          className="inline"
+                        />
                       </p>
                     </motion.div>
                   </div>
@@ -1138,6 +1183,26 @@ export default function Home() {
         isOpen={showAchievementsPanel}
         onClose={() => setShowAchievementsPanel(false)}
         achievements={allAchievements}
+      />
+
+      {/* Floating Action Button */}
+      {!showSetup && (
+        <FloatingActionButton
+          onQuickCapture={() => setShowQuickCapture(true)}
+          onNewEntry={() => setShowAccomplishments(true)}
+        />
+      )}
+
+      {/* Toast Notifications */}
+      <ToastNotification toasts={toasts} onDismiss={removeToast} />
+
+      {/* Celebration Modal */}
+      <CelebrationModal
+        isOpen={showCelebration}
+        onClose={() => setShowCelebration(false)}
+        title={celebrationData.title}
+        message={celebrationData.message}
+        type={celebrationData.type}
       />
 
       {/* Onboarding Tour */}

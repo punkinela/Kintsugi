@@ -8,6 +8,9 @@ import {
   TrendingDown, Minus, Activity, Brain, Map, Layers, User
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
+import DashboardCard from '@/components/DashboardCard';
+import LoadingSkeleton from '@/components/LoadingSkeleton';
+import EmptyState from '@/components/EmptyState';
 import {
   getAnalyticsData,
   getAllFeedback,
@@ -76,27 +79,37 @@ const StatCard = ({ title, value, icon, trend, trendType = 'neutral', color = 'f
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow-lg rounded-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 hover:shadow-xl transition-shadow"
+      whileHover={{ y: -5, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300 }}
+      className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow-lg rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 hover:shadow-2xl hover:border-kintsugi-gold-300 dark:hover:border-kintsugi-gold-700 transition-all cursor-pointer group"
     >
-      <div className="p-5">
+      <div className="p-6">
         <div className="flex items-center">
-          <div className={`flex-shrink-0 bg-gradient-to-r ${color} rounded-md p-3 text-white`}>
+          <motion.div
+            whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+            transition={{ duration: 0.5 }}
+            className={`flex-shrink-0 bg-gradient-to-r ${color} rounded-xl p-3 text-white shadow-lg group-hover:shadow-xl transition-shadow`}
+          >
             {icon}
-          </div>
+          </motion.div>
           <div className="ml-5 w-0 flex-1">
             <dl>
               <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
                 {title}
               </dt>
-              <dd className="flex items-baseline">
-                <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+              <dd className="flex items-baseline mt-1">
+                <div className="text-3xl font-bold text-gray-900 dark:text-white">
                   {value}
                 </div>
                 {trend && (
-                  <div className={`ml-2 flex items-center text-sm font-semibold ${trendColors[trendType]}`}>
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className={`ml-2 flex items-center text-sm font-semibold ${trendColors[trendType]}`}
+                  >
                     <TrendIcon className="h-4 w-4 mr-1" />
                     {trend}
-                  </div>
+                  </motion.div>
                 )}
               </dd>
             </dl>
@@ -211,11 +224,25 @@ export default function AdminDashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kintsugi-gold-500 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-300">Loading dashboard...</p>
+      <div className="min-h-screen bg-gradient-to-br from-kintsugi-gold-50 via-white to-amber-50 dark:from-kintsugi-dark-900 dark:via-kintsugi-dark-900 dark:to-kintsugi-dark-800">
+        {/* Header Skeleton */}
+        <div className="bg-gradient-to-r from-kintsugi-gold-600 to-amber-600 dark:from-kintsugi-gold-700 dark:to-amber-700 shadow-xl">
+          <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div className="animate-pulse">
+              <div className="h-8 bg-white/30 rounded w-64 mb-2"></div>
+              <div className="h-4 bg-white/20 rounded w-48"></div>
+            </div>
+          </div>
         </div>
+
+        {/* Content Skeleton */}
+        <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <LoadingSkeleton variant="stat" count={4} className="mb-6" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <LoadingSkeleton variant="chart" />
+            <LoadingSkeleton variant="chart" />
+          </div>
+        </main>
       </div>
     );
   }
@@ -255,18 +282,37 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900">
-      <header className="bg-gradient-to-r from-kintsugi-gold-600 to-kintsugi-gold-700 shadow-lg">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-3xl font-bold text-white">Own Your Impact - Admin Dashboard</h1>
-              <p className="text-kintsugi-gold-100 text-sm mt-1">Advanced Analytics & Insights</p>
-            </div>
-            <div className="flex items-center space-x-4">
+    <div className="min-h-screen bg-gradient-to-br from-kintsugi-gold-50 via-white to-amber-50 dark:from-kintsugi-dark-900 dark:via-kintsugi-dark-900 dark:to-kintsugi-dark-800">
+      <header className="bg-gradient-to-r from-kintsugi-gold-600 via-amber-600 to-orange-500 dark:from-kintsugi-gold-700 dark:via-amber-700 dark:to-orange-600 shadow-2xl relative overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 relative">
+          <div className="flex justify-between items-start mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+                  <BarChart3 className="h-8 w-8 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-4xl font-bold text-white drop-shadow-lg">Admin Dashboard</h1>
+                  <p className="text-white/90 text-base mt-1">Advanced Analytics & Insights</p>
+                </div>
+              </div>
+            </motion.div>
+            <div className="flex items-center space-x-3">
               <Link
                 href="/"
-                className="inline-flex items-center px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-md transition-colors"
+                className="inline-flex items-center px-4 py-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-xl transition-all shadow-lg hover:shadow-xl font-medium"
               >
                 <Home className="h-4 w-4 mr-2" />
                 Back to App
@@ -276,47 +322,29 @@ export default function AdminDashboard() {
           </div>
 
           {/* Tabs */}
-          <div className="mt-6 flex space-x-4">
-            <button
-              onClick={() => setActiveTab('overview')}
-              className={`px-4 py-2 rounded-md transition-colors ${
-                activeTab === 'overview'
-                  ? 'bg-white text-kintsugi-gold-700 font-semibold'
-                  : 'text-white hover:bg-white/20'
-              }`}
-            >
-              Overview
-            </button>
-            <button
-              onClick={() => setActiveTab('demographics')}
-              className={`px-4 py-2 rounded-md transition-colors ${
-                activeTab === 'demographics'
-                  ? 'bg-white text-kintsugi-gold-700 font-semibold'
-                  : 'text-white hover:bg-white/20'
-              }`}
-            >
-              Demographics
-            </button>
-            <button
-              onClick={() => setActiveTab('journey')}
-              className={`px-4 py-2 rounded-md transition-colors ${
-                activeTab === 'journey'
-                  ? 'bg-white text-kintsugi-gold-700 font-semibold'
-                  : 'text-white hover:bg-white/20'
-              }`}
-            >
-              User Journey
-            </button>
-            <button
-              onClick={() => setActiveTab('insights')}
-              className={`px-4 py-2 rounded-md transition-colors ${
-                activeTab === 'insights'
-                  ? 'bg-white text-kintsugi-gold-700 font-semibold'
-                  : 'text-white hover:bg-white/20'
-              }`}
-            >
-              Insights
-            </button>
+          <div className="flex gap-2 flex-wrap">
+            {[
+              { id: 'overview', label: 'Overview', icon: BarChart3 },
+              { id: 'demographics', label: 'Demographics', icon: Users },
+              { id: 'journey', label: 'User Journey', icon: Map },
+              { id: 'insights', label: 'Insights', icon: Brain }
+            ].map((tab, index) => (
+              <motion.button
+                key={tab.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl transition-all font-medium ${
+                  activeTab === tab.id
+                    ? 'bg-white text-kintsugi-gold-700 shadow-lg scale-105'
+                    : 'bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:scale-105'
+                }`}
+              >
+                <tab.icon className="h-4 w-4" />
+                {tab.label}
+              </motion.button>
+            ))}
           </div>
         </div>
       </header>
