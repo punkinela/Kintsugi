@@ -605,6 +605,56 @@ export default function AdminDashboard() {
         {/* DEMOGRAPHICS TAB */}
         {activeTab === 'demographics' && demographics && (
           <div className="space-y-6">
+            {/* Your Profile Section */}
+            {(() => {
+              const userProfileStr = typeof window !== 'undefined' ? localStorage.getItem('kintsugiUser') : null;
+              if (userProfileStr) {
+                try {
+                  const profile = JSON.parse(userProfileStr);
+                  return (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 border-2 border-kintsugi-gold-300 dark:border-kintsugi-gold-700/50 rounded-lg p-6"
+                    >
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                        <User className="h-5 w-5 text-kintsugi-gold-600" />
+                        Your Profile
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="bg-white dark:bg-kintsugi-dark-700 rounded-lg p-4">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Name</p>
+                          <p className="text-gray-900 dark:text-white font-semibold">{profile.name || 'Not set'}</p>
+                        </div>
+                        <div className="bg-white dark:bg-kintsugi-dark-700 rounded-lg p-4">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Gender Identity</p>
+                          <p className="text-gray-900 dark:text-white font-semibold capitalize">
+                            {profile.gender ? profile.gender.replace(/-/g, ' ') : 'Not set'}
+                          </p>
+                        </div>
+                        <div className="bg-white dark:bg-kintsugi-dark-700 rounded-lg p-4">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Profession</p>
+                          <p className="text-gray-900 dark:text-white font-semibold">{profile.profession || 'Not set'}</p>
+                        </div>
+                        <div className="bg-white dark:bg-kintsugi-dark-700 rounded-lg p-4 md:col-span-3">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Ethnicity/Cultural Background</p>
+                          <p className="text-gray-900 dark:text-white font-semibold capitalize">
+                            {profile.ethnicity ? profile.ethnicity.replace(/-/g, ' ') : 'Not set'}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-4">
+                        This is your current profile. Demographics shown below include all users (if multiple users have used this app on this device).
+                      </p>
+                    </motion.div>
+                  );
+                } catch {
+                  return null;
+                }
+              }
+              return null;
+            })()}
+
             {/* Demographics Info Banner */}
             {demographics.totalUsers === 0 && (
               <motion.div
