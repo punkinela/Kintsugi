@@ -46,6 +46,13 @@ import DataDiagnostic from '@/components/DataDiagnostic';
 import ProfileCard from '@/components/ProfileCard';
 import ProfileCompletionReminder from '@/components/ProfileCompletionReminder';
 
+// Phase 9: Interactivity & Polish
+import ToastNotification, { useToast } from '@/components/ToastNotification';
+import AnimatedCounter from '@/components/AnimatedCounter';
+import ProgressRing from '@/components/ProgressRing';
+import FloatingActionButton from '@/components/FloatingActionButton';
+import CelebrationModal from '@/components/CelebrationModal';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
