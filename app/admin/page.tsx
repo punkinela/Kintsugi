@@ -11,6 +11,10 @@ import ThemeToggle from '@/components/ThemeToggle';
 import DashboardCard from '@/components/DashboardCard';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import EmptyState from '@/components/EmptyState';
+import KintsugiJournalInsights from '@/components/KintsugiJournalInsights';
+import StreakCalendar from '@/components/StreakCalendar';
+import JournalProgressDashboard from '@/components/JournalProgressDashboard';
+import MilestoneTracker from '@/components/MilestoneTracker';
 import {
   getAnalyticsData,
   getAllFeedback,
@@ -33,6 +37,8 @@ import {
   getUserJourney
 } from '@/utils/enhancedAnalytics';
 import { AnalyticsData, UserFeedback } from '@/types/analytics';
+import { JournalEntry } from '@/types/engagement';
+import { getEngagementData } from '@/utils/engagement';
 import Link from 'next/link';
 import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
@@ -126,8 +132,10 @@ export default function AdminDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d' | 'all'>('30d');
-  const [activeTab, setActiveTab] = useState<'overview' | 'demographics' | 'journey' | 'insights'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'journal' | 'demographics' | 'journey' | 'insights'>('overview');
   const [demographicsRefresh, setDemographicsRefresh] = useState(0);
+  const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
+  const [currentStreak, setCurrentStreak] = useState(0);
 
   // Load data
   useEffect(() => {
@@ -137,6 +145,11 @@ export default function AdminDashboard() {
 
         const analyticsData = getAnalyticsData();
         const feedbackData = getAllFeedback();
+
+        // Load journal entries from engagement data
+        const engagementData = getEngagementData();
+        setJournalEntries(engagementData.journalEntries || []);
+        setCurrentStreak(engagementData.currentStreak || 0);
 
         setAnalytics(analyticsData);
         setFeedback(feedbackData);
@@ -325,6 +338,7 @@ export default function AdminDashboard() {
           <div className="flex gap-2 flex-wrap">
             {[
               { id: 'overview', label: 'Overview', icon: BarChart3 },
+              { id: 'journal', label: 'Kintsugi Journal', icon: BookOpen },
               { id: 'demographics', label: 'Demographics', icon: Users },
               { id: 'journey', label: 'User Journey', icon: Map },
               { id: 'insights', label: 'Insights', icon: Brain }
@@ -627,6 +641,26 @@ export default function AdminDashboard() {
                 ))}
               </div>
             </motion.div>
+          </div>
+        )}
+
+        {/* KINTSUGI JOURNAL TAB */}
+        {activeTab === 'journal' && (
+          <div className="space-y-6">
+            {/* Kintsugi Philosophy & Insights */}
+            <KintsugiJournalInsights entries={journalEntries} />
+
+            {/* Streak Calendar & Progress in Two Columns */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <StreakCalendar entries={journalEntries} />
+              <JournalProgressDashboard entries={journalEntries} />
+            </div>
+
+            {/* Milestone Tracker */}
+            <MilestoneTracker
+              entryCount={journalEntries.length}
+              currentStreak={currentStreak}
+            />
           </div>
         )}
 
