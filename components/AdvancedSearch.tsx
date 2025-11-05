@@ -95,7 +95,11 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
 
       if (filters.dateRange === 'custom' && filters.customStartDate) {
         startDate = new Date(filters.customStartDate);
-        const endDate = filters.customEndDate ? new Date(filters.customEndDate) : now;
+        startDate.setHours(0, 0, 0, 0);
+
+        const endDate = filters.customEndDate ? new Date(filters.customEndDate) : new Date();
+        endDate.setHours(23, 59, 59, 999); // Include entire end date
+
         results = results.filter(entry => {
           const entryDate = new Date(entry.date);
           return entryDate >= startDate && entryDate <= endDate;
@@ -114,6 +118,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
           default:
             startDate = new Date(0);
         }
+        startDate.setHours(0, 0, 0, 0);
         results = results.filter(entry => new Date(entry.date) >= startDate);
       }
     }
