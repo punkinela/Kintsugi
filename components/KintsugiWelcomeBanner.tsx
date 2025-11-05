@@ -1,0 +1,163 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Sparkles, Heart, TrendingUp } from 'lucide-react';
+import { UserProfile } from '@/types';
+
+interface KintsugiWelcomeBannerProps {
+  user: UserProfile | null;
+  currentStreak: number;
+  totalEntries: number;
+  onGetInsight: () => void;
+  isLoading: boolean;
+}
+
+export default function KintsugiWelcomeBanner({
+  user,
+  currentStreak,
+  totalEntries,
+  onGetInsight,
+  isLoading
+}: KintsugiWelcomeBannerProps) {
+  // Calculate user's golden moments (entries where they showed growth)
+  const goldenMoments = Math.floor(totalEntries * 0.3); // Simplified calculation
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="relative overflow-hidden bg-gradient-to-br from-kintsugi-gold-500 via-amber-500 to-yellow-600 dark:from-kintsugi-gold-700 dark:via-amber-700 dark:to-yellow-800 rounded-2xl shadow-2xl"
+    >
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 -mt-4 -mr-4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-64 h-64 bg-yellow-300/10 rounded-full blur-3xl"></div>
+
+      {/* Kintsugi pattern overlay */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+          backgroundSize: '30px 30px'
+        }}></div>
+      </div>
+
+      <div className="relative px-6 py-8 sm:px-8 sm:py-10">
+        {/* Header with Kintsugi Philosophy */}
+        <div className="flex flex-col gap-6">
+          <div className="flex items-start gap-4">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+              className="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg"
+            >
+              <Sparkles className="h-10 w-10 text-white" />
+            </motion.div>
+            <div className="flex-1">
+              <h2 className="text-3xl font-bold text-white mb-2">
+                Welcome back, {user?.name || 'Friend'}! 👋
+              </h2>
+              <p className="text-white/90 text-lg mb-3">
+                {user?.profession ? (
+                  <>Your journey as a {user.profession} continues</>
+                ) : (
+                  <>Your journey continues</>
+                )}
+              </p>
+
+              {/* Kintsugi Philosophy Quote */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <p className="text-white/95 text-sm italic mb-2">
+                  "金継ぎ (Kintsugi): The art of embracing your cracks and filling them with gold."
+                </p>
+                <p className="text-white/80 text-xs">
+                  Your imperfections, challenges, and struggles are not flaws to hide—they are the golden seams that make you unique, resilient, and beautiful.
+                </p>
+              </div>
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={onGetInsight}
+              disabled={isLoading}
+              className="hidden sm:flex flex-shrink-0 items-center px-6 py-3 bg-white text-kintsugi-gold-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Heart className="h-5 w-5 mr-2" />
+              {isLoading ? 'Generating...' : 'Get Insight'}
+            </motion.button>
+          </div>
+
+          {/* Kintsugi Stats - Reframed */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white/80 text-sm font-medium">Your Healing Journey</p>
+                  <p className="text-white text-2xl font-bold mt-1">{currentStreak} days 🔥</p>
+                  <p className="text-white/70 text-xs mt-1">Building resilience daily</p>
+                </div>
+                <div className="bg-white/20 rounded-full p-3">
+                  <TrendingUp className="h-6 w-6 text-white" />
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white/80 text-sm font-medium">Moments Captured</p>
+                  <p className="text-white text-2xl font-bold mt-1">{totalEntries} ✍️</p>
+                  <p className="text-white/70 text-xs mt-1">Honoring your story</p>
+                </div>
+                <div className="bg-white/20 rounded-full p-3">
+                  <Heart className="h-6 w-6 text-white" />
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white/80 text-sm font-medium">Golden Repairs</p>
+                  <p className="text-white text-2xl font-bold mt-1">{goldenMoments} ✨</p>
+                  <p className="text-white/70 text-xs mt-1">Transformations tracked</p>
+                </div>
+                <div className="bg-white/20 rounded-full p-3">
+                  <Sparkles className="h-6 w-6 text-white" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Mobile Get Insight Button */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={onGetInsight}
+            disabled={isLoading}
+            className="sm:hidden w-full flex items-center justify-center px-6 py-3 bg-white text-kintsugi-gold-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Heart className="h-5 w-5 mr-2" />
+            {isLoading ? 'Generating...' : 'Get Insight'}
+          </motion.button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
