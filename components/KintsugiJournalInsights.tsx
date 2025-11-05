@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, TrendingUp, Heart, BookOpen, Award, Target, Flame } from 'lucide-react';
+import { Sparkles, TrendingUp, Heart, BookOpen, Award, Target } from 'lucide-react';
 import { JournalEntry } from '@/types/engagement';
 import { useMemo } from 'react';
 import AnimatedCounter from './AnimatedCounter';
@@ -25,7 +25,6 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
       };
     }
 
-    // Calculate total words (rough estimate)
     const totalWords = entries.reduce((sum, entry) => {
       const words = (entry.accomplishment?.length || 0) + (entry.reflection?.length || 0);
       return sum + Math.floor(words / 5);
@@ -33,53 +32,51 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
 
     const averageLength = Math.floor(totalWords / entries.length);
 
-    // Detect growth narratives (entries mentioning growth, learned, better, etc.)
     const growthKeywords = ['learn', 'grow', 'better', 'improve', 'progress', 'achieve', 'succeed'];
     const growthStories = entries.filter(entry => {
-      const text = `${entry.accomplishment} ${entry.reflection}`.toLowerCase();
-      return growthKeywords.some(keyword => text.includes(keyword));
+      const text = String(entry.accomplishment || '') + ' ' + String(entry.reflection || '');
+      return growthKeywords.some(keyword => text.toLowerCase().includes(keyword));
     }).length;
 
-    // Resilience mentions (overcome, challenge, resilient, etc.)
     const resilienceKeywords = ['overcome', 'challenge', 'difficult', 'hard', 'persist', 'resilient', 'strong'];
     const resilienceMentions = entries.filter(entry => {
-      const text = `${entry.accomplishment} ${entry.reflection}`.toLowerCase();
-      return resilienceKeywords.some(keyword => text.includes(keyword));
+      const text = String(entry.accomplishment || '') + ' ' + String(entry.reflection || '');
+      return resilienceKeywords.some(keyword => text.toLowerCase().includes(keyword));
     }).length;
 
-    // Most active month
-    const monthCounts: { [key: string]: number } = {};
+    const monthCounts: Record<string, number> = {};
     entries.forEach(entry => {
       const date = new Date(entry.date);
-      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      const monthKey = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0');
       monthCounts[monthKey] = (monthCounts[monthKey] || 0) + 1;
     });
-    const mostActiveMonth = Object.entries(monthCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'No data';
-    const [year, month] = mostActiveMonth.split('-');
-    const monthName = new Date(parseInt(year), parseInt(month) - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    
+    let monthName = 'No data';
+    const sortedMonths = Object.entries(monthCounts).sort((a, b) => b[1] - a[1]);
+    if (sortedMonths.length > 0) {
+      const [year, month] = sortedMonths[0][0].split('-');
+      monthName = new Date(parseInt(year), parseInt(month) - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    }
 
-    // Healing journey score (percentage of entries with positive sentiment)
     const positiveKeywords = ['happy', 'proud', 'grateful', 'excited', 'joy', 'success', 'accomplish', 'achieve', 'win'];
     const positiveEntries = entries.filter(entry => {
-      const text = `${entry.accomplishment} ${entry.reflection}`.toLowerCase();
-      return positiveKeywords.some(keyword => text.includes(keyword));
+      const text = String(entry.accomplishment || '') + ' ' + String(entry.reflection || '');
+      return positiveKeywords.some(keyword => text.toLowerCase().includes(keyword));
     }).length;
     const healingJourney = Math.round((positiveEntries / entries.length) * 100);
 
-    // Gold moments (exceptional entries - longer than average + positive)
     const goldMoments = entries.filter(entry => {
       const words = Math.floor(((entry.accomplishment?.length || 0) + (entry.reflection?.length || 0)) / 5);
-      const text = `${entry.accomplishment} ${entry.reflection}`.toLowerCase();
+      const text = String(entry.accomplishment || '') + ' ' + String(entry.reflection || '');
       const isLong = words > averageLength * 1.5;
-      const isPositive = positiveKeywords.some(keyword => text.includes(keyword));
+      const isPositive = positiveKeywords.some(keyword => text.toLowerCase().includes(keyword));
       return isLong && isPositive;
     }).length;
 
-    // Transformation rate (entries showing change over time)
     const transformationKeywords = ['changed', 'different', 'new', 'transform', 'realize', 'understand', 'perspective'];
     const transformationEntries = entries.filter(entry => {
-      const text = `${entry.accomplishment} ${entry.reflection}`.toLowerCase();
-      return transformationKeywords.some(keyword => text.includes(keyword));
+      const text = String(entry.accomplishment || '') + ' ' + String(entry.reflection || '');
+      return transformationKeywords.some(keyword => text.toLowerCase().includes(keyword));
     }).length;
     const transformationRate = Math.round((transformationEntries / entries.length) * 100);
 
@@ -117,14 +114,16 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
   }
 
   return (
-    <div className="space-y-6">
-      {/* Hero Message - Kintsugi Philosophy */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="space-y-6"
+    >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="bg-gradient-to-r from-kintsugi-gold-500 via-amber-500 to-yellow-600 dark:from-kintsugi-gold-700 dark:via-amber-700 dark:to-yellow-800 rounded-2xl shadow-2xl p-8 text-white relative overflow-hidden"
       >
-        {/* Decorative pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
@@ -168,9 +167,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
         </div>
       </motion.div>
 
-      {/* Kintsugi Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Growth Stories */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -188,7 +185,6 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           </p>
         </motion.div>
 
-        {/* Resilience Moments */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -207,7 +203,6 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           </p>
         </motion.div>
 
-        {/* Gold Moments */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -226,7 +221,6 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           </p>
         </motion.div>
 
-        {/* Transformation Rate */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -246,9 +240,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
         </motion.div>
       </div>
 
-      {/* Journey Insights */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Your Healing Journey */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -295,7 +287,6 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           </div>
         </motion.div>
 
-        {/* The Kintsugi Metaphor */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -333,7 +324,6 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
         </motion.div>
       </div>
 
-      {/* Writing Habits */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -366,16 +356,21 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
             </p>
           </div>
           <div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Entries Per Month</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Consistency</p>
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
-              <AnimatedCounter value={Math.round((entries.length / Math.max(1, Math.ceil((new Date().getTime() - new Date(entries[entries.length - 1].date).getTime()) / (1000 * 60 * 60 * 24 * 30))))} />
+              <AnimatedCounter value={(() => {
+                const oldestDate = new Date(entries[entries.length - 1].date).getTime();
+                const now = new Date().getTime();
+                const monthsActive = Math.max(1, Math.ceil((now - oldestDate) / (1000 * 60 * 60 * 24 * 30)));
+                return Math.round(entries.length / monthsActive);
+              })()} />
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-              Consistency builds transformation
+              Entries per month
             </p>
           </div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
