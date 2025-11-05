@@ -43,6 +43,8 @@ import ExportManager from '@/components/ExportManager';
 import ThemeSelector from '@/components/ThemeSelector';
 import AdvancedSearch from '@/components/AdvancedSearch';
 import DataDiagnostic from '@/components/DataDiagnostic';
+import ProfileCard from '@/components/ProfileCard';
+import ProfileCompletionReminder from '@/components/ProfileCompletionReminder';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
@@ -76,7 +78,7 @@ export default function Home() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [settingsTab, setSettingsTab] = useState<'data' | 'appearance' | 'diagnostic'>('data');
+  const [settingsTab, setSettingsTab] = useState<'profile' | 'data' | 'appearance' | 'diagnostic'>('profile');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
   const [showAchievementsPanel, setShowAchievementsPanel] = useState(false);
@@ -464,8 +466,27 @@ export default function Home() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute right-0 top-12 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-kintsugi-dark-800 ring-1 ring-black ring-opacity-5 z-50"
+                      className="absolute right-0 top-12 mt-2 w-64 rounded-md shadow-lg bg-white dark:bg-kintsugi-dark-800 ring-1 ring-black ring-opacity-5 z-50"
                     >
+                      {/* User Info Header */}
+                      <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-kintsugi-gold-400 to-kintsugi-gold-600 flex items-center justify-center text-lg shadow">
+                            {user?.avatar || '👤'}
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                              {user?.name || 'User'}
+                            </p>
+                            {user?.profession && (
+                              <p className="text-xs text-gray-500 dark:text-gray-400">
+                                {user.profession}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="py-1" role="menu">
                         <button
                           onClick={handleEditProfile}
@@ -617,7 +638,11 @@ export default function Home() {
                           Welcome back, {user?.name || 'Friend'}! 👋
                         </h2>
                         <p className="text-white/90 text-lg">
-                          Your journey to growth and self-advocacy continues today
+                          {user?.profession ? (
+                            <>Your journey as a {user.profession} to growth and self-advocacy continues today</>
+                          ) : (
+                            <>Your journey to growth and self-advocacy continues today</>
+                          )}
                         </p>
                       </div>
                     </div>
@@ -632,6 +657,16 @@ export default function Home() {
                       {biasInsightLoading ? 'Generating...' : 'Get Insight'}
                     </motion.button>
                   </div>
+
+                  {/* Profile Completion Reminder */}
+                  {user && (
+                    <div className="mt-6 profile-reminder">
+                      <ProfileCompletionReminder
+                        user={user}
+                        onCompleteProfile={handleEditProfile}
+                      />
+                    </div>
+                  )}
 
                   {/* Quick Stats Cards */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
@@ -1014,6 +1049,16 @@ export default function Home() {
               <div className="border-b border-gray-200 dark:border-gray-700">
                 <nav className="flex -mb-px">
                   <button
+                    onClick={() => setSettingsTab('profile')}
+                    className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
+                      settingsTab === 'profile'
+                        ? 'border-kintsugi-gold-500 text-kintsugi-gold-600 dark:text-kintsugi-gold-400'
+                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}
+                  >
+                    Profile
+                  </button>
+                  <button
                     onClick={() => setSettingsTab('data')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'data'
@@ -1048,6 +1093,16 @@ export default function Home() {
 
               {/* Content */}
               <div className="p-6 overflow-y-auto max-h-[calc(90vh-160px)]">
+                {settingsTab === 'profile' && user && (
+                  <ProfileCard
+                    user={user}
+                    onEdit={() => {
+                      setIsEditingProfile(true);
+                      setShowSettings(false);
+                    }}
+                  />
+                )}
+
                 {settingsTab === 'data' && (
                   <DataManagement
                     onDataImported={() => {
