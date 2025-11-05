@@ -16,6 +16,7 @@ import StreakCalendar from '@/components/StreakCalendar';
 import JournalProgressDashboard from '@/components/JournalProgressDashboard';
 import MilestoneTracker from '@/components/MilestoneTracker';
 import KintsugiUserJourney from '@/components/KintsugiUserJourney';
+import KintsugiInsightsDashboard from '@/components/KintsugiInsightsDashboard';
 import {
   getAnalyticsData,
   getAllFeedback,
@@ -916,90 +917,9 @@ export default function AdminDashboard() {
           <KintsugiUserJourney entries={journalEntries} user={user} />
         )}
 
-        {/* INSIGHTS TAB - User Feedback */}
+        {/* INSIGHTS TAB - Kintsugi Community Analytics */}
         {activeTab === 'insights' && (
-          <div className="bg-white dark:bg-kintsugi-dark-800 shadow-lg rounded-lg overflow-hidden border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50">
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
-                <MessageCircle className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
-                User Feedback & Reviews
-              </h2>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                {feedback.length} {feedback.length === 1 ? 'response' : 'responses'}
-              </span>
-            </div>
-            {feedback.length === 0 ? (
-              <div className="p-12 text-center">
-                <MessageCircle className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No feedback yet</h3>
-                <p className="text-gray-600 dark:text-gray-400">User feedback will appear here once submitted</p>
-              </div>
-            ) : (
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                {feedback.map((item) => {
-                  const sentiment = item.comment ? analyzeSentiment(item.comment) : null;
-                  return (
-                    <div key={item.id} className="p-6 hover:bg-gray-50 dark:hover:bg-kintsugi-dark-700 transition-colors">
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0">
-                          <div className="flex items-center">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`h-5 w-5 ${i < item.rating ? 'text-yellow-400' : 'text-gray-300'}`}
-                                fill={i < item.rating ? 'currentColor' : 'none'}
-                              />
-                            ))}
-                          </div>
-                          <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                            {new Date(item.timestamp).toLocaleDateString()}
-                          </div>
-                        </div>
-                        <div className="ml-4 flex-1">
-                          <div className="flex items-center justify-between">
-                            <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-                              {item.userProfile?.name || 'Anonymous User'}
-                            </h3>
-                            <div className="flex items-center gap-2">
-                              {sentiment && (
-                                <span
-                                  className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                    sentiment.sentiment === 'positive'
-                                      ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                                      : sentiment.sentiment === 'negative'
-                                      ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
-                                      : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
-                                  }`}
-                                >
-                                  {sentiment.sentiment}
-                                </span>
-                              )}
-                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-kintsugi-gold-100 text-kintsugi-gold-800 dark:bg-kintsugi-gold-900/30 dark:text-kintsugi-gold-200">
-                                {item.userProfile?.profession || 'User'}
-                              </span>
-                            </div>
-                          </div>
-                          {item.comment && (
-                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">{item.comment}</p>
-                          )}
-                          <div className="mt-2 flex items-center text-xs text-gray-500 dark:text-gray-400">
-                            <span>Experience: </span>
-                            <span className="ml-1 font-medium capitalize">{item.experience}</span>
-                            <span className="mx-2">•</span>
-                            <span>Visits: {item.sessionData.visitCount}</span>
-                            <span className="mx-2">•</span>
-                            <span>Streak: {item.sessionData.currentStreak} days</span>
-                            <span className="mx-2">•</span>
-                            <span>Accomplishments: {item.sessionData.accomplishmentsLogged}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+          <KintsugiInsightsDashboard feedback={feedback} />
         )}
       </main>
     </div>
