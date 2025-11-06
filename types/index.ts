@@ -26,11 +26,18 @@ export interface Affirmation {
   text: string;
   category: 'accomplishment' | 'strength' | 'growth' | 'impact' | 'bias-awareness';
   tags: string[];
-  emoji?: string; // NEW: Emoticon for visual appeal
+  emoji?: string; // Emoticon for visual appeal
   demographics?: {
     gender?: string[];
     ethnicity?: string[];
   };
+  journeyStage?: ('skeptic' | 'engaged' | 'advocate')[]; // NEW: Journey stage targeting
+  research?: {
+    citation: string;
+    year: number;
+    finding: string;
+    link?: string;
+  }; // NEW: Research backing for credibility
 }
 
 export interface BiasInsight {
