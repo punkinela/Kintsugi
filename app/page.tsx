@@ -1138,7 +1138,9 @@ export default function Home() {
       )}
 
       {/* Settings Modal */}
+      {console.log('📋 Settings Modal JSX block reached, showSettings:', showSettings)}
       <AnimatePresence>
+        {showSettings && console.log('✨ AnimatePresence condition TRUE - about to render modal')}
         {showSettings && (
           <div
             className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
