@@ -1132,7 +1132,15 @@ export default function Home() {
       {/* Settings Modal */}
       <AnimatePresence>
         {showSettings && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            onClick={(e) => {
+              // Only close if clicking directly on backdrop, not modal content
+              if (e.target === e.currentTarget) {
+                setShowSettings(false);
+              }
+            }}
+          >
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -1251,13 +1259,6 @@ export default function Home() {
                 )}
               </div>
             </motion.div>
-
-            {/* Close on backdrop click */}
-            <div
-              className="absolute inset-0 -z-10"
-              onClick={() => setShowSettings(false)}
-              aria-hidden="true"
-            />
           </div>
         )}
       </AnimatePresence>
