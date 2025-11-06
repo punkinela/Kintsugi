@@ -619,14 +619,13 @@ html {
 }
 
 /* Make all semi-transparent backgrounds OPAQUE in high-contrast mode */
-.accessibility-high-contrast [class*="bg-white/"],
-.accessibility-high-contrast [class*="bg-black/"],
-.accessibility-high-contrast [class*="bg-gray/"] {
+/* But exclude modal overlays which need to stay dark */
+.accessibility-high-contrast [class*="bg-white/"] {
   background-color: rgb(255, 255, 255) !important;
   border: 2px solid #000 !important;
 }
 
-/* Make modal overlays solid but still visible as overlays */
+/* Modal overlays should stay dark for contrast */
 .accessibility-high-contrast .fixed.inset-0 {
   background-color: rgba(0, 0, 0, 0.95) !important;
 }
