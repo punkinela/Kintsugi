@@ -79,6 +79,39 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
             </span>
           ))}
         </div>
+
+        {/* Research Citation */}
+        {affirmation.research && (
+          <div className="mt-6 pt-6 border-t border-kintsugi-gold-100/30 dark:border-kintsugi-gold-900/30">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl flex-shrink-0">📚</span>
+              <div className="flex-1">
+                <p className="text-xs font-semibold text-kintsugi-gold-700 dark:text-kintsugi-gold-400 mb-1">
+                  Research-Backed
+                </p>
+                <p className="text-sm text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-2">
+                  {affirmation.research.finding}
+                </p>
+                <p className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-500">
+                  <span className="font-medium">{affirmation.research.citation} ({affirmation.research.year})</span>
+                  {affirmation.research.link && (
+                    <>
+                      {' · '}
+                      <a
+                        href={affirmation.research.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-300 transition-colors"
+                      >
+                        View Study
+                      </a>
+                    </>
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );
