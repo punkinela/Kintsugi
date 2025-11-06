@@ -1132,13 +1132,13 @@ export default function Home() {
       {/* Settings Modal */}
       <AnimatePresence>
         {showSettings && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowSettings(false)}>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm pointer-events-none"
               aria-hidden="true"
             />
 
@@ -1147,7 +1147,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col"
+              className="relative z-10 w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
@@ -1251,6 +1251,13 @@ export default function Home() {
                 )}
               </div>
             </motion.div>
+
+            {/* Close on backdrop click */}
+            <div
+              className="absolute inset-0 -z-10"
+              onClick={() => setShowSettings(false)}
+              aria-hidden="true"
+            />
           </div>
         )}
       </AnimatePresence>
