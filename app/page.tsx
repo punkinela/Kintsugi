@@ -1138,32 +1138,29 @@ export default function Home() {
       )}
 
       {/* Settings Modal */}
-      <AnimatePresence>
-        {showSettings && (
-          <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-            style={{ backgroundColor: 'rgba(255, 0, 0, 0.3)' }}
-            onClick={(e) => {
-              console.log('🔧 CONTAINER CLICKED - Build: Nov 6, 2025');
-              console.log('Target:', e.target);
-              console.log('CurrentTarget:', e.currentTarget);
-              console.log('Is backdrop click?', e.target === e.currentTarget);
-              // Only close if clicking directly on backdrop, not modal content
-              if (e.target === e.currentTarget) {
-                setShowSettings(false);
-              }
-            }}
-          >
+      {showSettings && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+          style={{ backgroundColor: 'rgba(255, 0, 0, 0.3)' }}
+          onClick={(e) => {
+            console.log('🔧 CONTAINER CLICKED - Build: Nov 6, 2025');
+            console.log('Target:', e.target);
+            console.log('CurrentTarget:', e.currentTarget);
+            console.log('Target children:', (e.target as HTMLElement).children.length);
+            console.log('Is backdrop click?', e.target === e.currentTarget);
+            // Only close if clicking directly on backdrop, not modal content
+            if (e.target === e.currentTarget) {
+              setShowSettings(false);
+            }
+          }}
+        >
             {/* TEST TEXT - Should be visible */}
             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: '48px', color: 'lime', zIndex: 99999, backgroundColor: 'black', padding: '20px' }}>
               HELLO! CAN YOU SEE THIS TEXT?
             </div>
 
             {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               className="absolute inset-0 bg-black/50 backdrop-blur-sm pointer-events-none"
               aria-hidden="true"
               style={{ border: '5px solid blue' }}
@@ -1289,7 +1286,6 @@ export default function Home() {
             </div>
           </div>
         )}
-      </AnimatePresence>
 
       {/* Achievement Notification Toast */}
       <AchievementNotification
