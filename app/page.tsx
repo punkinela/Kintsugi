@@ -1132,24 +1132,22 @@ export default function Home() {
       {/* Settings Modal */}
       <AnimatePresence>
         {showSettings && (
-          <>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowSettings(false)}>
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm"
-              onClick={() => setShowSettings(false)}
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              aria-hidden="true"
             />
 
-          {/* Modal */}
-          <div className="fixed inset-0 z-[70] overflow-y-auto pointer-events-none">
-            <div className="flex min-h-full items-center justify-center p-4">
+            {/* Modal */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] overflow-hidden pointer-events-auto"
+              className="relative w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
@@ -1222,7 +1220,7 @@ export default function Home() {
               </div>
 
               {/* Content */}
-              <div className="p-6 overflow-y-auto max-h-[calc(90vh-160px)]">
+              <div className="flex-1 overflow-y-auto p-6">
                 {settingsTab === 'profile' && user && (
                   <ProfileCard
                     user={user}
@@ -1253,9 +1251,7 @@ export default function Home() {
                 )}
               </div>
             </motion.div>
-            </div>
           </div>
-          </>
         )}
       </AnimatePresence>
 
