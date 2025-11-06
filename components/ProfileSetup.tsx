@@ -63,9 +63,14 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
               {isEditing ? 'Edit Your Profile' : 'Welcome to Own Your Impact'}
             </h1>
-            <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-              {isEditing ? 'Update your avatar and profile information' : 'A research-backed tool to track your wins, recognize bias, and advocate for your career growth'}
+            <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto mb-3">
+              {isEditing ? 'Update your avatar and profile information' : 'A research-backed tool to document your complete impact—wins AND resilience'}
             </p>
+            {!isEditing && (
+              <p className="text-gray-500 dark:text-gray-400 text-sm max-w-2xl mx-auto">
+                Inspired by Kintsugi (金継ぎ)—the Japanese art of repairing broken pottery with gold—we believe your challenges make you MORE valuable. Your impact = Accomplishments + Growth through challenges.
+              </p>
+            )}
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

@@ -14,27 +14,27 @@ interface OnboardingStep {
 const onboardingSteps: OnboardingStep[] = [
   {
     title: 'Welcome to Own Your Impact! 👋',
-    description: 'Track your accomplishments, recognize bias, and advocate for your career growth. This research-backed tool helps you document wins and build confidence.',
+    description: 'Track your accomplishments AND your resilience. This research-backed tool helps you document your complete impact story—wins + growth through challenges. Inspired by Kintsugi (金継ぎ), the Japanese art of repairing broken pottery with gold, we believe challenges make you MORE valuable.',
     icon: <Sparkles className="h-12 w-12" />,
   },
   {
-    title: 'Track Your Wins',
-    description: 'Use the Journal tab to document accomplishments, add reflections, and track your mood. Your wins build up over time to create a powerful record of your growth.',
+    title: 'Document Your Full Impact',
+    description: 'Use the Journal tab to capture accomplishments AND moments of growth through challenges. Both build your professional story. Your resilience navigating obstacles is PART of your impact, not something to hide.',
     icon: <BookOpen className="h-12 w-12" />,
   },
   {
     title: 'Get Insights',
-    description: 'The Insights tab shows your patterns, mood trends, and personalized bias insights. See how you\'ve grown and identify areas where you might be minimizing your achievements.',
+    description: 'The Insights tab shows your patterns, mood trends, and personalized bias insights. See both your wins and how you\'ve grown through challenges—your complete impact picture.',
     icon: <TrendingUp className="h-12 w-12" />,
   },
   {
-    title: 'Earn Achievements',
-    description: 'Build streaks, complete milestones, and unlock achievements as you consistently document your journey. Gamification makes tracking your progress fun!',
+    title: 'Celebrate Wins + Resilience',
+    description: 'Build streaks, complete milestones, and unlock achievements for consistently documenting your journey. We celebrate BOTH accomplishments and the challenges you\'ve overcome—they\'re all golden moments.',
     icon: <Award className="h-12 w-12" />,
   },
   {
     title: 'Quick Tips',
-    description: '• Press Ctrl+K for quick capture\n• Press Shift+? for keyboard shortcuts\n• Your data stays private on your device\n• Export your accomplishments for performance reviews',
+    description: '• Press Ctrl+K for quick capture\n• Press Shift+? for keyboard shortcuts\n• Your data stays private on your device\n• Export your full impact story for performance reviews\n• Remember: Impact = Wins + Resilience',
     icon: <Zap className="h-12 w-12" />,
   },
 ];

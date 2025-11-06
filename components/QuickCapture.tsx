@@ -89,7 +89,7 @@ export default function QuickCapture({ isOpen, onClose, onSaved }: QuickCaptureP
                   Quick Capture
                 </h2>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Capture your win right now!
+                  Capture your win or a moment of growth!
                 </p>
               </div>
             </div>
