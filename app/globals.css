@@ -587,13 +587,7 @@ html {
   background: var(--theme-primary) !important;
 }
 
-/* Disable backdrop-blur in high-contrast mode - it conflicts with the contrast filter */
-.accessibility-high-contrast *,
-.accessibility-high-contrast *::before,
-.accessibility-high-contrast *::after {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
+/* NOTE: Backdrop-blur disabling for high-contrast mode is defined after @supports blocks below for proper precedence */
 
 /* Reduced Motion Mode */
 .accessibility-reduced-motion *,
@@ -695,6 +689,23 @@ html {
 * {
   -webkit-tap-highlight-color: transparent;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Disable backdrop-blur in high-contrast mode - placed after @supports to ensure proper precedence */
+.accessibility-high-contrast .backdrop-blur-sm,
+.accessibility-high-contrast .backdrop-blur,
+.accessibility-high-contrast .backdrop-blur-md,
+.accessibility-high-contrast [class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Also disable for all elements as a catch-all */
+.accessibility-high-contrast *,
+.accessibility-high-contrast *::before,
+.accessibility-high-contrast *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* Mobile touch targets */
