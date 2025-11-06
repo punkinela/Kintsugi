@@ -1135,6 +1135,7 @@ export default function Home() {
           <div
             className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
             onClick={(e) => {
+              console.log('🔧 SETTINGS MODAL BUILD: Nov 6, 2025 - Latest deployment');
               // Only close if clicking directly on backdrop, not modal content
               if (e.target === e.currentTarget) {
                 setShowSettings(false);
