@@ -1165,16 +1165,21 @@ export default function Home() {
             />
 
             {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative z-10 w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col pointer-events-auto"
-              style={{ border: '10px solid yellow', backgroundColor: 'red' }}
+            <div
+              className="relative z-10 w-full max-w-4xl rounded-2xl shadow-2xl max-h-[90vh] flex flex-col pointer-events-auto"
+              style={{
+                border: '10px solid yellow',
+                backgroundColor: 'red',
+                minHeight: '500px',
+                minWidth: '800px',
+                opacity: 1,
+                display: 'flex'
+              }}
               onClick={(e) => {
                 console.log('🎯 MODAL CONTENT CLICKED');
                 e.stopPropagation();
               }}
+              onMouseEnter={() => console.log('🖱️ Mouse entered modal')}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
@@ -1276,7 +1281,7 @@ export default function Home() {
                   <DataDiagnostic />
                 )}
               </div>
-            </motion.div>
+            </div>
           </div>
         )}
       </AnimatePresence>
