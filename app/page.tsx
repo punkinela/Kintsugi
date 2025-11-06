@@ -1130,16 +1130,17 @@ export default function Home() {
       )}
 
       {/* Settings Modal */}
-      {showSettings && (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={() => setShowSettings(false)}
-          />
+      <AnimatePresence>
+        {showSettings && (
+          <div className="fixed inset-0 z-50 overflow-y-auto">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setShowSettings(false)}
+            />
 
           {/* Modal */}
           <div className="flex min-h-full items-center justify-center p-4">
@@ -1253,7 +1254,8 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* Achievement Notification Toast */}
       <AchievementNotification
