@@ -153,7 +153,7 @@ export default function JournalPromptCarousel({ user, onSelectPrompt }: JournalP
               Today's Prompt
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Personalized for your journey
+              Document wins + growth (Impact = Both!)
             </p>
           </div>
         </div>
