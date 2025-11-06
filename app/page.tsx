@@ -1154,6 +1154,11 @@ export default function Home() {
               }
             }}
           >
+            {/* TEST TEXT - Should be visible */}
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: '48px', color: 'lime', zIndex: 99999, backgroundColor: 'black', padding: '20px' }}>
+              HELLO! CAN YOU SEE THIS TEXT?
+            </div>
+
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
