@@ -11,13 +11,12 @@ interface AchievementsPanelProps {
 }
 
 export default function AchievementsPanel({ isOpen, onClose, achievements }: AchievementsPanelProps) {
-  if (!isOpen) return null;
-
   const unlocked = achievements.filter(a => a.unlockedAt);
   const locked = achievements.filter(a => !a.unlockedAt);
 
   return (
     <AnimatePresence>
+      {isOpen && (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -136,6 +135,7 @@ export default function AchievementsPanel({ isOpen, onClose, achievements }: Ach
           </div>
         </motion.div>
       </div>
+      )}
     </AnimatePresence>
   );
 }

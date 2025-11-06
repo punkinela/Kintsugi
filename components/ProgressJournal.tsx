@@ -43,10 +43,9 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   };
 
-  if (!isOpen) return null;
-
   return (
     <AnimatePresence>
+      {isOpen && (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -209,6 +208,7 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
           </div>
         </motion.div>
       </div>
+      )}
     </AnimatePresence>
   );
 }

@@ -153,8 +153,6 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
     }
   };
 
-  if (!isOpen) return null;
-
   const summary = entries.length > 0 ? generateSummary(entries.map(e => e.accomplishment)) : null;
   const insights = entries.length > 0 ? generateInsights(entries.map(e => e.accomplishment)) : [];
 
