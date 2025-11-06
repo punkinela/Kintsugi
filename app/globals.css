@@ -645,6 +645,62 @@ html {
   padding: 0.75rem 1.25rem !important;
 }
 
+/* ========================================
+   CROSS-BROWSER COMPATIBILITY
+   Fallbacks for backdrop-filter and other modern CSS
+   ======================================== */
+
+/* Backdrop blur support with fallbacks for Safari, Firefox, and older browsers */
+@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+  .backdrop-blur-sm {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  .backdrop-blur {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .backdrop-blur-md {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  .dark .backdrop-blur-sm,
+  .dark .backdrop-blur,
+  .dark .backdrop-blur-md {
+    background-color: rgba(30, 41, 59, 0.95) !important;
+  }
+}
+
+/* Ensure smooth rendering across all browsers */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile touch targets */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
 /* Focus indicators for keyboard navigation */
 *:focus-visible {
   outline: 3px solid var(--theme-primary) !important;

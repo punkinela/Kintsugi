@@ -96,6 +96,7 @@ export default function Home() {
   const [showQuickCapture, setShowQuickCapture] = useState(false);
   const [showAccomplishments, setShowAccomplishments] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -249,18 +250,21 @@ export default function Home() {
     };
   }, [isClient, statsRefreshKey]);
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (showUserDropdown && !target.closest('.user-dropdown-container')) {
         setShowUserDropdown(false);
       }
+      if (showNotifications && !target.closest('.notifications-container')) {
+        setShowNotifications(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showUserDropdown]);
+  }, [showUserDropdown, showNotifications]);
 
   // Check if feedback should be prompted
   useEffect(() => {
@@ -491,9 +495,110 @@ export default function Home() {
             </div>
             <div className="hidden md:ml-6 md:flex md:items-center">
               <ThemeToggle />
-              <button className="ml-4 p-1 rounded-full text-kintsugi-dark-400 hover:text-kintsugi-gold-600 dark:text-kintsugi-gold-400 dark:hover:text-kintsugi-gold-200">
-                <Bell className="h-6 w-6" />
-              </button>
+
+              {/* Notifications Bell */}
+              <div className="ml-4 relative notifications-container">
+                <button
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className="p-1 rounded-full text-kintsugi-dark-400 hover:text-kintsugi-gold-600 dark:text-kintsugi-gold-400 dark:hover:text-kintsugi-gold-200 transition-colors"
+                  aria-label="Notifications"
+                >
+                  <Bell className="h-6 w-6" />
+                </button>
+
+                {/* Notifications Dropdown */}
+                <AnimatePresence>
+                  {showNotifications && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 top-12 mt-2 w-80 rounded-xl shadow-lg bg-white dark:bg-kintsugi-dark-800 ring-1 ring-black ring-opacity-5 z-50 overflow-hidden"
+                    >
+                      {/* Header */}
+                      <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20">
+                        <h3 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                          <Bell className="h-4 w-4" />
+                          Notifications
+                        </h3>
+                      </div>
+
+                      {/* Notifications List */}
+                      <div className="max-h-96 overflow-y-auto">
+                        {currentStreak >= 7 && (
+                          <div className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-kintsugi-dark-700 transition-colors border-b border-gray-100 dark:border-gray-700">
+                            <div className="flex items-start gap-3">
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 flex items-center justify-center">
+                                <Zap className="h-4 w-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                              </div>
+                              <div className="flex-1">
+                                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                                  Amazing streak! 🔥
+                                </p>
+                                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                                  You've journaled for {currentStreak} days straight. Keep up the momentum!
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {totalEntries >= 10 && totalEntries % 10 === 0 && (
+                          <div className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-kintsugi-dark-700 transition-colors border-b border-gray-100 dark:border-gray-700">
+                            <div className="flex items-start gap-3">
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                                <Sparkles className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                              </div>
+                              <div className="flex-1">
+                                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                                  Milestone reached!
+                                </p>
+                                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                                  You've created {totalEntries} journal entries. Your impact story is growing!
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {journalEntries.length === 0 && (
+                          <div className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-kintsugi-dark-700 transition-colors border-b border-gray-100 dark:border-gray-700">
+                            <div className="flex items-start gap-3">
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                <Lightbulb className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                              </div>
+                              <div className="flex-1">
+                                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                                  Start your journey
+                                </p>
+                                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                                  Create your first journal entry to begin owning your impact!
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {currentStreak < 7 && totalEntries < 10 && journalEntries.length > 0 && (
+                          <div className="px-4 py-8 text-center">
+                            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 mb-3">
+                              <Check className="h-6 w-6 text-gray-400" />
+                            </div>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                              You're all caught up!
+                            </p>
+                            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                              Keep journaling to unlock more achievements
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <div className="ml-4 flex items-center relative user-dropdown-container">
                 <div className="flex-shrink-0">
                   <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 text-kintsugi-gold-700 dark:text-kintsugi-gold-300 text-sm font-medium">
