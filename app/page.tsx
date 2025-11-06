@@ -68,6 +68,10 @@ import GoldenRepairsPanel from '@/components/GoldenRepairsPanel';
 import KintsugiQuotes from '@/components/KintsugiQuotes';
 import UnifiedPhilosophyCard from '@/components/UnifiedPhilosophyCard';
 
+// Phase 12: Research-Backed Enhancements (Journey Stages, Spaced Repetition, Fresh Start Effect)
+import JourneyAwareAffirmation from '@/components/JourneyAwareAffirmation';
+import FreshStartWelcome from '@/components/FreshStartWelcome';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -789,6 +793,9 @@ export default function Home() {
                 isLoading={biasInsightLoading}
               />
 
+              {/* Fresh Start Welcome - Research-Backed Return Messaging */}
+              {user && <FreshStartWelcome userId={user.id} />}
+
               {/* Profile Completion Reminder */}
               {user && (
                 <div className="profile-reminder">
@@ -819,6 +826,9 @@ export default function Home() {
 
               {/* Phase 4: Writing Prompts */}
               <WritingPromptsPanel />
+
+              {/* Journey-Aware Affirmations - Research-Backed with Spaced Repetition */}
+              {user && <JourneyAwareAffirmation profile={user} />}
 
               {/* Phase 4: Custom Affirmations */}
               <CustomAffirmationsManager />

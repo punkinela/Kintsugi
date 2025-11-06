@@ -97,10 +97,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     window.dispatchEvent(event);
   }, [applyTheme]);
 
-  // Toggle between light, dark, and system
+  // Toggle between light and dark (skip system for direct toggle)
   const toggleTheme = useCallback(() => {
-    setTheme(theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light');
-  }, [theme, setTheme]);
+    // If currently system, check resolved theme to toggle appropriately
+    const currentTheme = theme === 'system' ? resolvedTheme : theme;
+    setTheme(currentTheme === 'light' ? 'dark' : 'light');
+  }, [theme, resolvedTheme, setTheme]);
 
   // Don't render anything until we're mounted on the client
   if (!mounted) {
