@@ -1135,10 +1135,8 @@ export default function Home() {
           <div
             className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
             onClick={(e) => {
-              console.log('Outer div clicked', e.target, e.currentTarget);
               // Only close if clicking directly on backdrop, not modal content
               if (e.target === e.currentTarget) {
-                console.log('Closing modal - backdrop clicked');
                 setShowSettings(false);
               }
             }}
@@ -1158,10 +1156,7 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               className="relative z-10 w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col pointer-events-auto"
-              onClick={(e) => {
-                console.log('Modal clicked - stopping propagation');
-                e.stopPropagation();
-              }}
+              onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
