@@ -1,9 +1,11 @@
 // Service Worker for Own Your Impact PWA
 // Provides offline support and caching
+// IMPORTANT: Increment version numbers when deploying changes to force cache refresh
 
-const CACHE_NAME = 'own-your-impact-v1';
-const STATIC_CACHE = 'static-v1';
-const DYNAMIC_CACHE = 'dynamic-v1';
+const CACHE_VERSION = '2025-11-06-v2'; // Update this date/version on each deploy
+const CACHE_NAME = `own-your-impact-${CACHE_VERSION}`;
+const STATIC_CACHE = `static-${CACHE_VERSION}`;
+const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
 
 // Assets to cache on install
 const STATIC_ASSETS = [
