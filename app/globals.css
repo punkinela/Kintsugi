@@ -618,6 +618,29 @@ html {
   -webkit-backdrop-filter: none !important;
 }
 
+/* Make all semi-transparent backgrounds OPAQUE in high-contrast mode */
+.accessibility-high-contrast [class*="bg-white/"],
+.accessibility-high-contrast [class*="bg-black/"],
+.accessibility-high-contrast [class*="bg-gray/"] {
+  background-color: rgb(255, 255, 255) !important;
+  border: 2px solid #000 !important;
+}
+
+/* Make modal overlays solid but still visible as overlays */
+.accessibility-high-contrast .fixed.inset-0 {
+  background-color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Ensure cards and containers with backdrop-blur are fully opaque */
+.accessibility-high-contrast .bg-white\/10,
+.accessibility-high-contrast .bg-white\/20,
+.accessibility-high-contrast .bg-white\/30,
+.accessibility-high-contrast .bg-white\/60,
+.accessibility-high-contrast .bg-white\/90 {
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0) !important;
+}
+
 /* Reduced Motion Mode */
 .accessibility-reduced-motion *,
 .accessibility-reduced-motion *::before,
