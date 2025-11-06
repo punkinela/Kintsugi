@@ -1153,11 +1153,21 @@ export default function Home() {
             />
 
             {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative z-10 w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col pointer-events-auto"
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 10,
+                width: '100%',
+                maxWidth: '1000px',
+                backgroundColor: 'red',
+                border: '10px solid yellow',
+                borderRadius: '20px',
+                maxHeight: '90vh',
+                display: 'flex',
+                flexDirection: 'column',
+                pointerEvents: 'auto',
+                padding: '20px'
+              }}
               onClick={(e) => {
                 console.log('Modal clicked - stopping propagation');
                 e.stopPropagation();
@@ -1263,7 +1273,7 @@ export default function Home() {
                   <DataDiagnostic />
                 )}
               </div>
-            </motion.div>
+            </div>
           </div>
         )}
       </AnimatePresence>
