@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import PWAInstallPrompt from '@/components/PWAInstallPrompt';
 import EmergencyResetButton from '@/components/EmergencyResetButton';
+import BackupStatusIndicator from '@/components/BackupStatusIndicator';
 import './globals.css';
 
 export default function RootLayout({
@@ -54,6 +55,7 @@ export default function RootLayout({
         <ThemeProvider>
           {children}
           <PWAInstallPrompt />
+          <BackupStatusIndicator />
           <EmergencyResetButton />
         </ThemeProvider>
       </body>
