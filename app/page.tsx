@@ -1143,7 +1143,7 @@ export default function Home() {
             />
 
           {/* Modal */}
-          <div className="flex min-h-full items-center justify-center p-4">
+          <div className="relative z-10 flex min-h-full items-center justify-center p-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
