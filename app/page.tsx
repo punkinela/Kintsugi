@@ -1132,23 +1132,24 @@ export default function Home() {
       {/* Settings Modal */}
       <AnimatePresence>
         {showSettings && (
-          <div className="fixed inset-0 z-50 overflow-y-auto">
+          <>
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+              className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
               onClick={() => setShowSettings(false)}
             />
 
           {/* Modal */}
-          <div className="relative z-10 flex min-h-full items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 overflow-y-auto pointer-events-none">
+            <div className="flex min-h-full items-center justify-center p-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] overflow-hidden"
+              className="relative w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] overflow-hidden pointer-events-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
@@ -1252,8 +1253,9 @@ export default function Home() {
                 )}
               </div>
             </motion.div>
+            </div>
           </div>
-        </div>
+          </>
         )}
       </AnimatePresence>
 
