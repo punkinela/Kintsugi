@@ -250,11 +250,6 @@ export default function Home() {
     };
   }, [isClient, statsRefreshKey]);
 
-  // Debug: Track showSettings state changes
-  useEffect(() => {
-    console.log('🔍 showSettings state changed to:', showSettings);
-  }, [showSettings]);
-
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -657,11 +652,8 @@ export default function Home() {
                         </button>
                         <button
                           onClick={() => {
-                            console.log('🚀 SETTINGS BUTTON CLICKED - Opening modal');
-                            console.log('showSettings before:', showSettings);
                             setShowSettings(true);
                             setShowUserDropdown(false);
-                            console.log('setShowSettings(true) called');
                           }}
                           className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center"
                         >
@@ -1140,41 +1132,17 @@ export default function Home() {
       {/* Settings Modal */}
       {showSettings && (
         <div
-          className="fixed inset-0 flex items-center justify-center p-4"
-          style={{
-            backgroundColor: 'rgba(255, 0, 0, 0.5)',
-            position: 'fixed',
-            top: '0',
-            left: '0',
-            right: '0',
-            bottom: '0',
-            zIndex: 999999,
-            display: 'flex',
-            visibility: 'visible',
-            opacity: 1
-          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
           onClick={(e) => {
-            console.log('🔧 CONTAINER CLICKED - Build: Nov 6, 2025');
-            console.log('Target:', e.target);
-            console.log('CurrentTarget:', e.currentTarget);
-            console.log('Target children:', (e.target as HTMLElement).children.length);
-            console.log('Is backdrop click?', e.target === e.currentTarget);
-            // Only close if clicking directly on backdrop, not modal content
             if (e.target === e.currentTarget) {
               setShowSettings(false);
             }
           }}
         >
-            <h1 style={{ fontSize: '100px', color: 'white', backgroundColor: 'blue', margin: 0, padding: '50px' }}>
-              TEST TEST TEST
-            </h1>
-
-            <div style={{ width: '800px', height: '500px', backgroundColor: 'yellow', border: '20px solid green' }}
-              onClick={(e) => {
-                console.log('🎯 YELLOW BOX CLICKED');
-                e.stopPropagation();
-              }}
-            >
+          <div
+            className="relative w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
                 <div className="flex items-center gap-3">
