@@ -11,8 +11,6 @@ interface BiasInsightModalProps {
 }
 
 export default function BiasInsightModal({ insight, onClose, onTakeAction }: BiasInsightModalProps) {
-  if (!insight) return null;
-
   const handleTakeAction = () => {
     if (onTakeAction) {
       onTakeAction();
