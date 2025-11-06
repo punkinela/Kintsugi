@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   Download,
@@ -11,7 +11,9 @@ import {
   Database,
   CheckCircle,
   AlertCircle,
-  Info
+  Info,
+  Clock,
+  RotateCcw
 } from 'lucide-react';
 import {
   exportDataAsJSON,
@@ -21,6 +23,14 @@ import {
   getDataStats,
   markBackupCompleted
 } from '@/utils/dataManagement';
+import {
+  getAllBackups,
+  restoreFromBackup,
+  downloadBackup,
+  importBackup,
+  getBackupStats,
+  type BackupData
+} from '@/utils/autoBackup';
 
 interface DataManagementProps {
   onDataImported?: () => void;
@@ -31,7 +41,15 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
   const [stats, setStats] = useState(getDataStats());
   const [importing, setImporting] = useState(false);
   const [importStatus, setImportStatus] = useState<'success' | 'error' | null>(null);
+  const [autoBackups, setAutoBackups] = useState<BackupData[]>([]);
+  const [backupStats, setBackupStats] = useState<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // Load auto-backups
+    setAutoBackups(getAllBackups());
+    setBackupStats(getBackupStats());
+  }, []);
 
   const handleExportJSON = () => {
     exportDataAsJSON();
@@ -84,6 +102,17 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
       onDataCleared?.();
       window.location.reload();
     }
+  };
+
+  const handleRestoreFromAutoBackup = (backup: BackupData) => {
+    if (confirm(`Restore data from ${new Date(backup.timestamp).toLocaleString()}?\n\nThis will replace your current data.`)) {
+      restoreFromBackup(backup);
+      window.location.reload();
+    }
+  };
+
+  const handleDownloadAutoBackup = (backup: BackupData) => {
+    downloadBackup(backup);
   };
 
   return (
@@ -221,6 +250,64 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
           </motion.div>
         )}
       </div>
+
+      {/* Auto-Backup History */}
+      {autoBackups.length > 0 && (
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="text-sm font-semibold text-kintsugi-dark-900 dark:text-white uppercase tracking-wide">
+              Auto-Backup History
+            </h4>
+            <span className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+              {autoBackups.length} backup{autoBackups.length !== 1 ? 's' : ''} available
+            </span>
+          </div>
+
+          <div className="space-y-2 max-h-64 overflow-y-auto">
+            {autoBackups.map((backup, index) => (
+              <div
+                key={backup.version}
+                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-kintsugi-dark-900/50 rounded-lg border border-gray-200 dark:border-kintsugi-dark-700 hover:border-kintsugi-gold-300 dark:hover:border-kintsugi-gold-700 transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  <Clock className="h-4 w-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                  <div>
+                    <div className="text-sm font-medium text-kintsugi-dark-900 dark:text-white">
+                      {new Date(backup.timestamp).toLocaleString()}
+                    </div>
+                    <div className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+                      {index === 0 ? 'Most recent' : `${index + 1} backup${index === 1 ? '' : 's'} ago`}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleDownloadAutoBackup(backup)}
+                    className="p-2 bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-900/50 rounded-lg transition-colors"
+                    title="Download this backup"
+                  >
+                    <Download className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  </button>
+                  <button
+                    onClick={() => handleRestoreFromAutoBackup(backup)}
+                    className="p-2 bg-green-100 dark:bg-green-900/30 hover:bg-green-200 dark:hover:bg-green-900/50 rounded-lg transition-colors"
+                    title="Restore from this backup"
+                  >
+                    <RotateCcw className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+            <div className="flex items-start gap-2 text-xs text-blue-700 dark:text-blue-400">
+              <Info className="h-4 w-4 flex-shrink-0 mt-0.5" />
+              <span>Auto-backups are created every 5 minutes. Up to 10 backups are kept. Download important backups to keep them permanently.</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Danger Zone */}
       <div className="bg-red-50 dark:bg-red-900/10 rounded-xl p-6 border border-red-200 dark:border-red-900/50">
