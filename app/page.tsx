@@ -1140,8 +1140,19 @@ export default function Home() {
       {/* Settings Modal */}
       {showSettings && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-          style={{ backgroundColor: 'rgba(255, 0, 0, 0.3)' }}
+          className="fixed inset-0 flex items-center justify-center p-4"
+          style={{
+            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            zIndex: 999999,
+            display: 'flex',
+            visibility: 'visible',
+            opacity: 1
+          }}
           onClick={(e) => {
             console.log('🔧 CONTAINER CLICKED - Build: Nov 6, 2025');
             console.log('Target:', e.target);
@@ -1155,27 +1166,63 @@ export default function Home() {
           }}
         >
             {/* TEST TEXT - Should be visible */}
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: '48px', color: 'lime', zIndex: 99999, backgroundColor: 'black', padding: '20px' }}>
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              fontSize: '72px',
+              fontWeight: 'bold',
+              color: 'lime',
+              zIndex: 9999999,
+              backgroundColor: 'black',
+              padding: '40px',
+              border: '10px solid lime',
+              display: 'block',
+              visibility: 'visible',
+              opacity: 1,
+              pointerEvents: 'auto'
+            }}>
               HELLO! CAN YOU SEE THIS TEXT?
             </div>
 
             {/* Backdrop */}
             <div
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm pointer-events-none"
-              aria-hidden="true"
-              style={{ border: '5px solid blue' }}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                backdropFilter: 'blur(8px)',
+                pointerEvents: 'none',
+                border: '5px solid blue',
+                zIndex: 1,
+                display: 'block',
+                visibility: 'visible',
+                opacity: 1
+              }}
             />
 
             {/* Modal */}
             <div
-              className="relative z-10 w-full max-w-4xl rounded-2xl shadow-2xl max-h-[90vh] flex flex-col pointer-events-auto"
               style={{
-                border: '10px solid yellow',
+                position: 'relative',
+                zIndex: 999999,
+                width: '100%',
+                maxWidth: '900px',
+                border: '15px solid yellow',
                 backgroundColor: 'red',
-                minHeight: '500px',
-                minWidth: '800px',
+                minHeight: '600px',
+                minWidth: '900px',
                 opacity: 1,
-                display: 'flex'
+                display: 'flex',
+                flexDirection: 'column',
+                pointerEvents: 'auto',
+                visibility: 'visible',
+                borderRadius: '16px',
+                boxShadow: '0 0 100px rgba(255, 255, 0, 0.9)'
               }}
               onClick={(e) => {
                 console.log('🎯 MODAL CONTENT CLICKED');
