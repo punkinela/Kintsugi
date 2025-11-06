@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -45,6 +45,7 @@ import AdvancedSearch from '@/components/AdvancedSearch';
 import DataDiagnostic from '@/components/DataDiagnostic';
 import ProfileCard from '@/components/ProfileCard';
 import ProfileCompletionReminder from '@/components/ProfileCompletionReminder';
+import FAQSidebar from '@/components/FAQSidebar';
 
 // Phase 9: Interactivity & Polish
 import ToastNotification, { useToast } from '@/components/ToastNotification';
@@ -100,6 +101,7 @@ export default function Home() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showFAQ, setShowFAQ] = useState(false);
   const [settingsTab, setSettingsTab] = useState<'profile' | 'data' | 'appearance' | 'diagnostic'>('profile');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
@@ -597,6 +599,18 @@ export default function Home() {
                     </motion.div>
                   )}
                 </AnimatePresence>
+              </div>
+
+              {/* FAQ Help Button */}
+              <div className="ml-4">
+                <button
+                  onClick={() => setShowFAQ(true)}
+                  className="p-1 rounded-full text-kintsugi-dark-400 hover:text-kintsugi-gold-600 dark:text-kintsugi-gold-400 dark:hover:text-kintsugi-gold-200 transition-colors"
+                  aria-label="Help & FAQ"
+                  title="Help & FAQ"
+                >
+                  <HelpCircle className="h-6 w-6" />
+                </button>
               </div>
 
               <div className="ml-4 flex items-center relative user-dropdown-container">
@@ -1282,6 +1296,9 @@ export default function Home() {
 
       {/* Onboarding Tour */}
       {!showSetup && <OnboardingTour />}
+
+      {/* FAQ Sidebar */}
+      <FAQSidebar isOpen={showFAQ} onClose={() => setShowFAQ(false)} />
     </div>
   );
 }

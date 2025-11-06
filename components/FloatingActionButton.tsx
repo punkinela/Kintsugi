@@ -34,14 +34,14 @@ export default function FloatingActionButton({ onQuickCapture, onNewEntry }: Flo
   ];
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="fixed bottom-6 left-6 z-40">
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute bottom-20 right-0 space-y-3"
+            className="absolute bottom-20 left-0 space-y-3"
           >
             {actions.map((action, index) => (
               <motion.button
@@ -50,7 +50,7 @@ export default function FloatingActionButton({ onQuickCapture, onNewEntry }: Flo
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 20, scale: 0.5 }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.1, x: -5 }}
+                whileHover={{ scale: 1.1, x: 5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={action.onClick}
                 className={`flex items-center gap-3 px-4 py-3 bg-gradient-to-r ${action.color} text-white rounded-full shadow-lg hover:shadow-xl transition-shadow group`}
