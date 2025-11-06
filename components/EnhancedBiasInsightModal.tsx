@@ -16,10 +16,6 @@ export default function EnhancedBiasInsightModal({ insight, onClose, onTakeActio
   const [showResearch, setShowResearch] = useState(false);
   const [interactionComplete, setInteractionComplete] = useState(false);
 
-  if (!insight) return null;
-
-  const research = getResearchForInsight(insight.id);
-
   const handleTakeAction = () => {
     if (onTakeAction) {
       onTakeAction();
@@ -27,8 +23,11 @@ export default function EnhancedBiasInsightModal({ insight, onClose, onTakeActio
     onClose();
   };
 
+  const research = insight ? getResearchForInsight(insight.id) : null;
+
   return (
     <AnimatePresence>
+      {insight && (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -249,6 +248,7 @@ export default function EnhancedBiasInsightModal({ insight, onClose, onTakeActio
           </div>
         </motion.div>
       </div>
+      )}
     </AnimatePresence>
   );
 }
