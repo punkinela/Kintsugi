@@ -15,6 +15,7 @@ import QuickCapture from '@/components/QuickCapture';
 import FeedbackWidget from '@/components/FeedbackWidget';
 import KeyboardShortcutsModal from '@/components/KeyboardShortcutsModal';
 import DataManagement from '@/components/DataManagement';
+import UserSettings from '@/components/UserSettings';
 
 // Phase 3: Analytics & Insights
 import MoodTracker from '@/components/MoodTracker';
@@ -54,6 +55,7 @@ export default function Home() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [settingsTab, setSettingsTab] = useState<'preferences' | 'data'>('preferences');
 
   // Load user data
   useEffect(() => {
@@ -879,38 +881,72 @@ export default function Home() {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 rounded-lg">
-                    <Settings className="h-6 w-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+              <div className="border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+                <div className="flex items-center justify-between p-6 pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 rounded-lg">
+                      <Settings className="h-6 w-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">
+                        Settings
+                      </h2>
+                      <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-300">
+                        Manage your preferences and data
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">
-                      Settings & Data Management
-                    </h2>
-                    <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-300">
-                      Manage your data, backups, and preferences
-                    </p>
-                  </div>
+                  <button
+                    onClick={() => setShowSettings(false)}
+                    className="p-2 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
+                  >
+                    <X className="h-5 w-5 text-kintsugi-dark-600 dark:text-kintsugi-gold-300" />
+                  </button>
                 </div>
-                <button
-                  onClick={() => setShowSettings(false)}
-                  className="p-2 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
-                >
-                  <X className="h-5 w-5 text-kintsugi-dark-600 dark:text-kintsugi-gold-300" />
-                </button>
+
+                {/* Tabs */}
+                <div className="flex gap-1 px-6">
+                  <button
+                    onClick={() => setSettingsTab('preferences')}
+                    className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
+                      settingsTab === 'preferences'
+                        ? 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 border-b-2 border-kintsugi-gold-500'
+                        : 'text-kintsugi-dark-600 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-400'
+                    }`}
+                  >
+                    Preferences
+                  </button>
+                  <button
+                    onClick={() => setSettingsTab('data')}
+                    className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
+                      settingsTab === 'data'
+                        ? 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 border-b-2 border-kintsugi-gold-500'
+                        : 'text-kintsugi-dark-600 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-400'
+                    }`}
+                  >
+                    Data Management
+                  </button>
+                </div>
               </div>
 
               {/* Content */}
-              <div className="p-6 overflow-y-auto max-h-[calc(90vh-100px)]">
-                <DataManagement
-                  onDataImported={() => {
-                    setShowSettings(false);
-                  }}
-                  onDataCleared={() => {
-                    setShowSettings(false);
-                  }}
-                />
+              <div className="p-6 overflow-y-auto max-h-[calc(90vh-160px)]">
+                {settingsTab === 'preferences' && (
+                  <UserSettings
+                    user={user}
+                    onUserUpdate={(updatedUser) => setUser(updatedUser)}
+                  />
+                )}
+                {settingsTab === 'data' && (
+                  <DataManagement
+                    onDataImported={() => {
+                      setShowSettings(false);
+                    }}
+                    onDataCleared={() => {
+                      setShowSettings(false);
+                    }}
+                  />
+                )}
               </div>
             </motion.div>
           </div>
