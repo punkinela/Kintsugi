@@ -1165,51 +1165,15 @@ export default function Home() {
             }
           }}
         >
-            {/* TEST TEXT - Should be visible */}
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              fontSize: '72px',
-              fontWeight: 'bold',
-              color: 'lime',
-              zIndex: 9999999,
-              backgroundColor: 'black',
-              padding: '40px',
-              border: '10px solid lime',
-              display: 'block',
-              visibility: 'visible',
-              opacity: 1,
-              pointerEvents: 'auto'
-            }}>
-              HELLO! CAN YOU SEE THIS TEXT?
-            </div>
+            <h1 style={{ fontSize: '100px', color: 'white', backgroundColor: 'blue', margin: 0, padding: '50px' }}>
+              TEST TEST TEST
+            </h1>
 
-            {/* Modal */}
-            <div
-              style={{
-                position: 'relative',
-                zIndex: 999999,
-                width: '100%',
-                maxWidth: '900px',
-                border: '15px solid yellow',
-                backgroundColor: 'red',
-                minHeight: '600px',
-                minWidth: '900px',
-                opacity: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                pointerEvents: 'auto',
-                visibility: 'visible',
-                borderRadius: '16px',
-                boxShadow: '0 0 100px rgba(255, 255, 0, 0.9)'
-              }}
+            <div style={{ width: '800px', height: '500px', backgroundColor: 'yellow', border: '20px solid green' }}
               onClick={(e) => {
-                console.log('🎯 MODAL CONTENT CLICKED');
+                console.log('🎯 YELLOW BOX CLICKED');
                 e.stopPropagation();
               }}
-              onMouseEnter={() => console.log('🖱️ Mouse entered modal')}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
