@@ -2,7 +2,7 @@
 // Provides offline support and caching
 // IMPORTANT: Increment version numbers when deploying changes to force cache refresh
 
-const CACHE_VERSION = '2025-11-06-v3'; // Update this date/version on each deploy
+const CACHE_VERSION = '2025-11-06-v4'; // Update this date/version on each deploy
 const CACHE_NAME = `own-your-impact-${CACHE_VERSION}`;
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;

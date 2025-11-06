@@ -587,6 +587,14 @@ html {
   background: var(--theme-primary) !important;
 }
 
+/* Disable backdrop-blur in high-contrast mode - it conflicts with the contrast filter */
+.accessibility-high-contrast *,
+.accessibility-high-contrast *::before,
+.accessibility-high-contrast *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 /* Reduced Motion Mode */
 .accessibility-reduced-motion *,
 .accessibility-reduced-motion *::before,
