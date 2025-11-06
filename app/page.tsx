@@ -1135,10 +1135,8 @@ export default function Home() {
           <div
             className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
             onClick={(e) => {
-              console.log('Outer div clicked', e.target, e.currentTarget);
               // Only close if clicking directly on backdrop, not modal content
               if (e.target === e.currentTarget) {
-                console.log('Closing modal - backdrop clicked');
                 setShowSettings(false);
               }
             }}
@@ -1153,25 +1151,12 @@ export default function Home() {
             />
 
             {/* Modal */}
-            <div
-              style={{
-                position: 'relative',
-                zIndex: 10,
-                width: '100%',
-                maxWidth: '1000px',
-                backgroundColor: 'red',
-                border: '10px solid yellow',
-                borderRadius: '20px',
-                maxHeight: '90vh',
-                display: 'flex',
-                flexDirection: 'column',
-                pointerEvents: 'auto',
-                padding: '20px'
-              }}
-              onClick={(e) => {
-                console.log('Modal clicked - stopping propagation');
-                e.stopPropagation();
-              }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative z-10 w-full max-w-4xl bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
@@ -1273,7 +1258,7 @@ export default function Home() {
                   <DataDiagnostic />
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
         )}
       </AnimatePresence>
