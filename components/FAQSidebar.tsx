@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { HelpCircle, ChevronDown, X } from 'lucide-react';
+import { HelpCircle, ChevronDown, X, Send, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 
 interface FAQSidebarProps {
@@ -59,6 +59,34 @@ const FAQItem = ({
 };
 
 export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
+  const [question, setQuestion] = useState('');
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmitQuestion = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!question.trim()) return;
+
+    // Save question to localStorage for tracking
+    const questions = JSON.parse(localStorage.getItem('kintsugi_user_questions') || '[]');
+    questions.push({
+      question: question.trim(),
+      email: email.trim() || null,
+      timestamp: new Date().toISOString(),
+      id: Date.now()
+    });
+    localStorage.setItem('kintsugi_user_questions', JSON.stringify(questions));
+
+    // Show success message
+    setSubmitted(true);
+    setQuestion('');
+    setEmail('');
+
+    // Reset success message after 3 seconds
+    setTimeout(() => setSubmitted(false), 3000);
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -71,7 +99,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
             onClick={onClose}
           />
-          
+
           {/* Sidebar */}
           <motion.div
             initial={{ x: '100%' }}
@@ -301,6 +329,73 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                 }
                 research="Neff (2003) & Dai et al. (2014): Self-compassion and fresh starts drive sustained engagement"
               />
+
+              {/* Ask a Question Section */}
+              <div className="mt-8 pt-6 border-t-2 border-purple-200 dark:border-purple-800">
+                <h3 className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-4">
+                  Have a Question?
+                </h3>
+
+                {submitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 flex items-start gap-3"
+                  >
+                    <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-sm font-semibold text-green-800 dark:text-green-300 mb-1">
+                        Question Submitted!
+                      </p>
+                      <p className="text-xs text-green-700 dark:text-green-400">
+                        Thank you for your question. We've saved it and will work on adding it to the FAQ.
+                      </p>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmitQuestion} className="space-y-3">
+                    <div>
+                      <label htmlFor="question" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Your Question <span className="text-red-500">*</span>
+                      </label>
+                      <textarea
+                        id="question"
+                        value={question}
+                        onChange={(e) => setQuestion(e.target.value)}
+                        placeholder="What would you like to know?"
+                        required
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 text-sm"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Email (optional)
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="your@email.com"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 text-sm"
+                      />
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                        Leave your email if you'd like a response
+                      </p>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                    >
+                      <Send className="w-4 h-4" />
+                      Submit Question
+                    </button>
+                  </form>
+                )}
+              </div>
             </div>
           </motion.div>
         </>

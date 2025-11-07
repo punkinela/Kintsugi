@@ -794,7 +794,7 @@ export default function Home() {
               />
 
               {/* Fresh Start Welcome - Research-Backed Return Messaging */}
-              {user && <FreshStartWelcome userId={user.id} />}
+              {user && <FreshStartWelcome userName={user.name} />}
 
               {/* Profile Completion Reminder */}
               {user && (

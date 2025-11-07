@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 import {
   Users, TrendingUp, Star, MessageCircle, Award, BookOpen,
   Download, Calendar, Target, BarChart3, Home, Filter,
-  TrendingDown, Minus, Activity, Brain, Map, Layers, User
+  TrendingDown, Minus, Activity, Brain, Map, Layers, User,
+  HelpCircle
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import DashboardCard from '@/components/DashboardCard';
@@ -139,6 +140,7 @@ export default function AdminDashboard() {
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [currentStreak, setCurrentStreak] = useState(0);
   const [user, setUser] = useState<any>(null);
+  const [userQuestions, setUserQuestions] = useState<any[]>([]);
 
   // Load data
   useEffect(() => {
@@ -159,6 +161,10 @@ export default function AdminDashboard() {
         if (storedUser) {
           setUser(JSON.parse(storedUser));
         }
+
+        // Load user questions from FAQ
+        const questions = JSON.parse(localStorage.getItem('kintsugi_user_questions') || '[]');
+        setUserQuestions(questions);
 
         setAnalytics(analyticsData);
         setFeedback(feedbackData);
@@ -649,6 +655,56 @@ export default function AdminDashboard() {
                   </div>
                 ))}
               </div>
+            </motion.div>
+
+            {/* User Questions from FAQ */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+            >
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
+                <HelpCircle className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
+                User Questions ({userQuestions.length})
+              </h3>
+              {userQuestions.length > 0 ? (
+                <div className="space-y-3 max-h-96 overflow-y-auto">
+                  {userQuestions.slice().reverse().map((q) => (
+                    <div
+                      key={q.id}
+                      className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg border border-gray-200 dark:border-gray-600"
+                    >
+                      <p className="text-sm text-gray-900 dark:text-white font-medium mb-2">
+                        {q.question}
+                      </p>
+                      <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+                        <span>
+                          {new Date(q.timestamp).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric',
+                            hour: 'numeric',
+                            minute: '2-digit'
+                          })}
+                        </span>
+                        {q.email && (
+                          <span className="flex items-center gap-1">
+                            <MessageCircle className="w-3 h-3" />
+                            {q.email}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-48 text-gray-500 dark:text-gray-400">
+                  <HelpCircle className="w-12 h-12 mb-3 opacity-50" />
+                  <p className="text-sm">No user questions yet</p>
+                  <p className="text-xs mt-1">Questions submitted via FAQ will appear here</p>
+                </div>
+              )}
             </motion.div>
           </div>
         )}
