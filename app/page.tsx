@@ -27,6 +27,7 @@ import PersonalStatsDashboard from '@/components/PersonalStatsDashboard';
 import QuoteOfTheDay from '@/components/QuoteOfTheDay';
 import WritingPromptsPanel from '@/components/WritingPromptsPanel';
 import CustomAffirmationsManager from '@/components/CustomAffirmationsManager';
+import PersonalizedWisdom from '@/components/PersonalizedWisdom';
 import OnboardingTour from '@/components/OnboardingTour';
 import ReturnMotivation from '@/components/ReturnMotivation';
 import EngagingJournalPrompt from '@/components/EngagingJournalPrompt';
@@ -894,6 +895,9 @@ export default function Home() {
 
               {/* Kintsugi Quotes Widget */}
               <KintsugiQuotes />
+
+              {/* Personalized Cultural Wisdom - NEW FEATURE */}
+              <PersonalizedWisdom user={user} />
 
               {/* Golden Repairs Panel */}
               <GoldenRepairsPanel entries={journalEntries} />
