@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Palette, Sun, Moon, Monitor, Eye, Zap, Type, Check } from 'lucide-react';
+import { Palette, Sun, Moon, Monitor, Eye, Zap, Type, Check, RotateCcw } from 'lucide-react';
 import {
   getCurrentTheme,
   setCurrentTheme,
@@ -39,6 +39,15 @@ export default function ThemeSelector() {
   const handleAccessibilityModeChange = (mode: AccessibilityMode) => {
     setAccessibilityModeState(mode);
     setCurrentAccessibilityMode(mode);
+  };
+
+  const handleResetAll = () => {
+    // Reset to Kintsugi Gold theme
+    handleThemeChange('gold');
+    // Reset to system color mode
+    handleColorModeChange('system');
+    // Reset to default accessibility
+    handleAccessibilityModeChange('default');
   };
 
   const themes = getThemeList();
@@ -91,13 +100,28 @@ export default function ThemeSelector() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
-          <Palette className="h-6 w-6 text-kintsugi-gold-600" />
-          Appearance & Accessibility
-        </h2>
-        <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
-          Customize your experience with themes and accessibility options
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
+              <Palette className="h-6 w-6 text-kintsugi-gold-600" />
+              Appearance & Accessibility
+            </h2>
+            <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+              Customize your experience with themes and accessibility options
+            </p>
+          </div>
+
+          {/* Reset Button */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleResetAll}
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-kintsugi-gold-500 to-kintsugi-gold-600 hover:from-kintsugi-gold-600 hover:to-kintsugi-gold-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
+          >
+            <RotateCcw className="h-4 w-4" />
+            Reset All
+          </motion.button>
+        </div>
       </div>
 
       {/* Color Themes */}

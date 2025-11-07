@@ -581,31 +581,40 @@ html {
    Enhanced accessibility features
    ======================================== */
 
-/* High Contrast Mode */
+/* High Contrast Mode - SUBTLE, Kintsugi-Friendly Version */
 .accessibility-high-contrast {
-  filter: contrast(1.2);
+  /* Slightly increase contrast without destroying the theme */
+  filter: contrast(1.1) brightness(1.05);
 }
 
-.accessibility-high-contrast * {
-  border-color: #000 !important;
-}
-
+/* Make text SLIGHTLY bolder in high contrast for better readability */
+.accessibility-high-contrast h1,
+.accessibility-high-contrast h2,
+.accessibility-high-contrast h3,
 .accessibility-high-contrast button,
 .accessibility-high-contrast a {
-  outline: 2px solid currentColor !important;
-  outline-offset: 2px;
+  font-weight: 600;
 }
 
-.accessibility-high-contrast .bg-gradient-to-r,
-.accessibility-high-contrast .bg-gradient-to-br,
-.accessibility-high-contrast [class*="bg-gradient"] {
-  background: var(--theme-primary) !important;
+/* Improve focus indicators in high contrast mode */
+.accessibility-high-contrast *:focus-visible {
+  outline: 3px solid var(--theme-primary, #d97706) !important;
+  outline-offset: 3px;
 }
 
-/* Disable ALL backdrop-filters in high-contrast mode - critical for visibility */
-.accessibility-high-contrast *,
-.accessibility-high-contrast *::before,
-.accessibility-high-contrast *::after,
+/* Make borders slightly more visible WITHOUT forcing them to black */
+.accessibility-high-contrast * {
+  border-width: 1px;
+}
+
+/* Ensure buttons/links have clear visual distinction */
+.accessibility-high-contrast button,
+.accessibility-high-contrast a[class*="btn"] {
+  outline: 1px solid currentColor;
+  outline-offset: -1px;
+}
+
+/* Disable backdrop-blur in high-contrast for better visibility */
 .accessibility-high-contrast .backdrop-blur-sm,
 .accessibility-high-contrast .backdrop-blur,
 .accessibility-high-contrast .backdrop-blur-md,
@@ -618,26 +627,18 @@ html {
   -webkit-backdrop-filter: none !important;
 }
 
-/* Make all semi-transparent backgrounds OPAQUE in high-contrast mode */
-/* But exclude modal overlays which need to stay dark */
+/* Make semi-transparent backgrounds more opaque for better readability */
 .accessibility-high-contrast [class*="bg-white/"] {
-  background-color: rgb(255, 255, 255) !important;
-  border: 2px solid #000 !important;
+  background-color: rgba(255, 255, 255, 0.98) !important;
 }
 
-/* Modal overlays should stay dark for contrast */
-.accessibility-high-contrast .fixed.inset-0 {
-  background-color: rgba(0, 0, 0, 0.95) !important;
+.accessibility-high-contrast .dark [class*="bg-white/"] {
+  background-color: rgba(30, 41, 59, 0.98) !important;
 }
 
-/* Ensure cards and containers with backdrop-blur are fully opaque */
-.accessibility-high-contrast .bg-white\/10,
-.accessibility-high-contrast .bg-white\/20,
-.accessibility-high-contrast .bg-white\/30,
-.accessibility-high-contrast .bg-white\/60,
-.accessibility-high-contrast .bg-white\/90 {
-  background-color: rgb(255, 255, 255) !important;
-  color: rgb(0, 0, 0) !important;
+/* Modal overlays stay dark for good contrast */
+.accessibility-high-contrast .fixed.inset-0[class*="bg-black"] {
+  background-color: rgba(0, 0, 0, 0.9) !important;
 }
 
 /* Reduced Motion Mode */
