@@ -141,103 +141,106 @@ html {
 /* ========================================
    THEME-AWARE UTILITY CLASSES
    These use CSS variables and respond to theme changes
+   MUST be in @layer utilities to be processed by Tailwind
    ======================================== */
 
-/* Backgrounds - using !important to override Tailwind classes */
-.theme-bg-primary {
-  background-color: var(--theme-primary) !important;
-}
+@layer utilities {
+  /* Backgrounds - using !important to override Tailwind classes */
+  .theme-bg-primary {
+    background-color: var(--theme-primary) !important;
+  }
 
-.theme-bg-primary-light {
-  background-color: var(--theme-primary-light) !important;
-}
+  .theme-bg-primary-light {
+    background-color: var(--theme-primary-light) !important;
+  }
 
-.theme-bg-primary-dark {
-  background-color: var(--theme-primary-dark) !important;
-}
+  .theme-bg-primary-dark {
+    background-color: var(--theme-primary-dark) !important;
+  }
 
-.theme-bg-secondary {
-  background-color: var(--theme-secondary) !important;
-}
+  .theme-bg-secondary {
+    background-color: var(--theme-secondary) !important;
+  }
 
-.theme-bg-accent {
-  background-color: var(--theme-accent) !important;
-}
+  .theme-bg-accent {
+    background-color: var(--theme-accent) !important;
+  }
 
-.theme-bg-surface {
-  background-color: var(--theme-surface) !important;
-}
+  .theme-bg-surface {
+    background-color: var(--theme-surface) !important;
+  }
 
-/* Text Colors - using !important to override Tailwind classes */
-.theme-text-primary {
-  color: var(--theme-primary) !important;
-}
+  /* Text Colors - using !important to override Tailwind classes */
+  .theme-text-primary {
+    color: var(--theme-primary) !important;
+  }
 
-.theme-text-secondary {
-  color: var(--theme-secondary) !important;
-}
+  .theme-text-secondary {
+    color: var(--theme-secondary) !important;
+  }
 
-.theme-text-accent {
-  color: var(--theme-accent) !important;
-}
+  .theme-text-accent {
+    color: var(--theme-accent) !important;
+  }
 
-.theme-text-main {
-  color: var(--theme-text) !important;
-}
+  .theme-text-main {
+    color: var(--theme-text) !important;
+  }
 
-.theme-text-muted {
-  color: var(--theme-text-secondary) !important;
-}
+  .theme-text-muted {
+    color: var(--theme-text-secondary) !important;
+  }
 
-/* Borders - using !important to override Tailwind classes */
-.theme-border-primary {
-  border-color: var(--theme-primary) !important;
-}
+  /* Borders - using !important to override Tailwind classes */
+  .theme-border-primary {
+    border-color: var(--theme-primary) !important;
+  }
 
-.theme-border-accent {
-  border-color: var(--theme-accent) !important;
-}
+  .theme-border-accent {
+    border-color: var(--theme-accent) !important;
+  }
 
-.theme-border-light {
-  border-color: var(--theme-border) !important;
-}
+  .theme-border-light {
+    border-color: var(--theme-border) !important;
+  }
 
-/* Gradients */
-.theme-gradient {
-  background: var(--theme-gradient) !important;
-}
+  /* Gradients */
+  .theme-gradient {
+    background: var(--theme-gradient) !important;
+  }
 
-.theme-gradient-to-r {
-  background: linear-gradient(to right, var(--theme-primary), var(--theme-secondary)) !important;
-}
+  .theme-gradient-to-r {
+    background: linear-gradient(to right, var(--theme-primary), var(--theme-secondary)) !important;
+  }
 
-.theme-gradient-to-br {
-  background: linear-gradient(to bottom right, var(--theme-primary-light), var(--theme-accent)) !important;
-}
+  .theme-gradient-to-br {
+    background: linear-gradient(to bottom right, var(--theme-primary-light), var(--theme-accent)) !important;
+  }
 
-/* Buttons using theme colors */
-.theme-btn-primary {
-  background: linear-gradient(to right, var(--theme-primary), var(--theme-secondary)) !important;
-  color: white !important;
-  transition: all 0.2s;
-}
+  /* Buttons using theme colors */
+  .theme-btn-primary {
+    background: linear-gradient(to right, var(--theme-primary), var(--theme-secondary)) !important;
+    color: white !important;
+    transition: all 0.2s;
+  }
 
-.theme-btn-primary:hover {
-  background: var(--theme-primary-dark) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
+  .theme-btn-primary:hover {
+    background: var(--theme-primary-dark) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 
-/* Card backgrounds with theme */
-.theme-card {
-  background-color: var(--theme-surface) !important;
-  border: 1px solid var(--theme-border) !important;
-}
+  /* Card backgrounds with theme */
+  .theme-card {
+    background-color: var(--theme-surface) !important;
+    border: 1px solid var(--theme-border) !important;
+  }
 
-/* Focus rings with theme color */
-.theme-focus:focus-visible {
-  outline: 2px solid var(--theme-primary) !important;
-  outline-offset: 2px;
+  /* Focus rings with theme color */
+  .theme-focus:focus-visible {
+    outline: 2px solid var(--theme-primary) !important;
+    outline-offset: 2px;
+  }
 }
 
 /* Component styles */
