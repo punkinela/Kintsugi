@@ -524,7 +524,7 @@ export default function Home() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8 theme-text-primary" />
+                <Zap className="h-8 w-8 theme-text-primary" style={{ color: 'var(--theme-primary)' }} />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
               </div>
@@ -536,6 +536,10 @@ export default function Home() {
                       ? 'theme-border-primary theme-text-primary'
                       : 'border-transparent text-gray-500'
                   }`}
+                  style={activeTab === 'home' ? {
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : undefined}
                 >
                   Home
                 </button>
@@ -546,6 +550,10 @@ export default function Home() {
                       ? 'theme-border-primary theme-text-primary'
                       : 'border-transparent text-gray-500'
                   }`}
+                  style={activeTab === 'journal' ? {
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : undefined}
                 >
                   Journal
                 </button>
@@ -556,6 +564,10 @@ export default function Home() {
                       ? 'theme-border-primary theme-text-primary'
                       : 'border-transparent text-gray-500'
                   }`}
+                  style={activeTab === 'insights' ? {
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : undefined}
                 >
                   Insights
                 </button>
@@ -795,6 +807,11 @@ export default function Home() {
                       ? 'theme-bg-primary-light theme-border-primary theme-text-primary'
                       : 'bg-transparent border-transparent text-gray-500'
                   }`}
+                  style={activeTab === 'home' ? {
+                    backgroundColor: 'var(--theme-primary-light)',
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : undefined}
                 >
                   Home
                 </button>
@@ -808,6 +825,11 @@ export default function Home() {
                       ? 'theme-bg-primary-light theme-border-primary theme-text-primary'
                       : 'bg-transparent border-transparent text-gray-500'
                   }`}
+                  style={activeTab === 'journal' ? {
+                    backgroundColor: 'var(--theme-primary-light)',
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : undefined}
                 >
                   Journal
                 </button>
@@ -821,13 +843,24 @@ export default function Home() {
                       ? 'theme-bg-primary-light theme-border-primary theme-text-primary'
                       : 'bg-transparent border-transparent text-gray-500'
                   }`}
+                  style={activeTab === 'insights' ? {
+                    backgroundColor: 'var(--theme-primary-light)',
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : undefined}
                 >
                   Insights
                 </button>
                 <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
-                      <span className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg theme-bg-primary-light theme-text-primary">
+                      <span
+                        className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg theme-bg-primary-light theme-text-primary"
+                        style={{
+                          backgroundColor: 'var(--theme-primary-light)',
+                          color: 'var(--theme-primary)'
+                        }}
+                      >
                         {user?.avatar || '👤'}
                       </span>
                     </div>
