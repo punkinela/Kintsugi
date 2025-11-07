@@ -181,6 +181,68 @@ export default function Home() {
     });
   }, [activeTab, themeColors, themeVersion]);
 
+  // BULLETPROOF FIX: Inject dynamic CSS rules directly into document head
+  // This bypasses React's rendering and ensures styles are ALWAYS applied
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    console.log('💉 Injecting theme CSS rules for version:', themeVersion);
+
+    const styleId = 'kintsugi-dynamic-theme-styles';
+    let styleTag = document.getElementById(styleId) as HTMLStyleElement;
+
+    if (!styleTag) {
+      styleTag = document.createElement('style');
+      styleTag.id = styleId;
+      document.head.appendChild(styleTag);
+      console.log('✅ Created new style tag');
+    }
+
+    // Generate CSS rules with actual color values and !important to override everything
+    styleTag.textContent = `
+      /* Navigation Tab Styles - Version ${themeVersion} */
+      .nav-tab-active-v${themeVersion} {
+        border-color: ${themeColors.primary} !important;
+        color: ${themeColors.primary} !important;
+      }
+
+      .nav-tab-inactive-v${themeVersion} {
+        border-color: transparent !important;
+        color: #6b7280 !important;
+      }
+
+      /* Mobile Navigation Styles - Version ${themeVersion} */
+      .nav-mobile-active-v${themeVersion} {
+        background-color: ${themeColors.primaryLight} !important;
+        border-color: ${themeColors.primary} !important;
+        color: ${themeColors.primary} !important;
+      }
+
+      .nav-mobile-inactive-v${themeVersion} {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        color: #6b7280 !important;
+      }
+
+      /* Header Icon Style - Version ${themeVersion} */
+      .header-icon-v${themeVersion} {
+        color: ${themeColors.primary} !important;
+      }
+
+      /* Mobile Avatar Style - Version ${themeVersion} */
+      .mobile-avatar-v${themeVersion} {
+        background-color: ${themeColors.primaryLight} !important;
+        color: ${themeColors.primary} !important;
+      }
+    `;
+
+    console.log('✅ CSS rules injected:', {
+      primary: themeColors.primary,
+      primaryLight: themeColors.primaryLight,
+      version: themeVersion
+    });
+  }, [themeVersion, themeColors]);
+
   // Load user data
   useEffect(() => {
     const loadUser = () => {
@@ -524,38 +586,32 @@ export default function Home() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8" style={{ color: themeColors.primary }} />
+                <Zap className={`h-8 w-8 header-icon-v${themeVersion}`} />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
                   onClick={() => setActiveTab('home')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
-                  style={{
-                    borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'home' ? themeColors.primary : '#6b7280'
-                  }}
+                  className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
+                    activeTab === 'home' ? `nav-tab-active-v${themeVersion}` : `nav-tab-inactive-v${themeVersion}`
+                  }`}
                 >
                   Home
                 </button>
                 <button
                   onClick={() => setActiveTab('journal')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
-                  style={{
-                    borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
-                  }}
+                  className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
+                    activeTab === 'journal' ? `nav-tab-active-v${themeVersion}` : `nav-tab-inactive-v${themeVersion}`
+                  }`}
                 >
                   Journal
                 </button>
                 <button
                   onClick={() => setActiveTab('insights')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
-                  style={{
-                    borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
-                  }}
+                  className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
+                    activeTab === 'insights' ? `nav-tab-active-v${themeVersion}` : `nav-tab-inactive-v${themeVersion}`
+                  }`}
                 >
                   Insights
                 </button>
@@ -790,12 +846,9 @@ export default function Home() {
                     setActiveTab('home');
                     setShowMobileMenu(false);
                   }}
-                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  style={{
-                    backgroundColor: activeTab === 'home' ? themeColors.primaryLight : 'transparent',
-                    borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'home' ? themeColors.primary : '#6b7280'
-                  }}
+                  className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors w-full text-left ${
+                    activeTab === 'home' ? `nav-mobile-active-v${themeVersion}` : `nav-mobile-inactive-v${themeVersion}`
+                  }`}
                 >
                   Home
                 </button>
@@ -804,12 +857,9 @@ export default function Home() {
                     setActiveTab('journal');
                     setShowMobileMenu(false);
                   }}
-                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  style={{
-                    backgroundColor: activeTab === 'journal' ? themeColors.primaryLight : 'transparent',
-                    borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
-                  }}
+                  className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors w-full text-left ${
+                    activeTab === 'journal' ? `nav-mobile-active-v${themeVersion}` : `nav-mobile-inactive-v${themeVersion}`
+                  }`}
                 >
                   Journal
                 </button>
@@ -818,25 +868,16 @@ export default function Home() {
                     setActiveTab('insights');
                     setShowMobileMenu(false);
                   }}
-                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  style={{
-                    backgroundColor: activeTab === 'insights' ? themeColors.primaryLight : 'transparent',
-                    borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
-                  }}
+                  className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors w-full text-left ${
+                    activeTab === 'insights' ? `nav-mobile-active-v${themeVersion}` : `nav-mobile-inactive-v${themeVersion}`
+                  }`}
                 >
                   Insights
                 </button>
                 <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
-                      <span
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg"
-                        style={{
-                          backgroundColor: themeColors.primaryLight,
-                          color: themeColors.primary
-                        }}
-                      >
+                      <span className={`inline-flex items-center justify-center h-10 w-10 rounded-full text-lg mobile-avatar-v${themeVersion}`}>
                         {user?.avatar || '👤'}
                       </span>
                     </div>
