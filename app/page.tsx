@@ -550,7 +550,7 @@ export default function Home() {
                     color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
                   }}
                 >
-                  Journal
+                  Impact Log
                 </button>
                 <button
                   key={`nav-insights-${themeVersion}`}
@@ -609,7 +609,7 @@ export default function Home() {
                                   Amazing streak! 🔥
                                 </p>
                                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                                  You've journaled for {currentStreak} days straight. Keep up the momentum!
+                                  You've documented impact for {currentStreak} days straight. Keep up the momentum!
                                 </p>
                               </div>
                             </div>
@@ -627,7 +627,7 @@ export default function Home() {
                                   Milestone reached!
                                 </p>
                                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                                  You've created {totalEntries} journal entries. Your impact story is growing!
+                                  You've created {totalEntries} impact entries. Your impact story is growing!
                                 </p>
                               </div>
                             </div>
@@ -645,7 +645,7 @@ export default function Home() {
                                   Start your journey
                                 </p>
                                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                                  Create your first journal entry to begin owning your impact!
+                                  Create your first impact entry to begin owning your impact!
                                 </p>
                               </div>
                             </div>
@@ -661,7 +661,7 @@ export default function Home() {
                               You're all caught up!
                             </p>
                             <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                              Keep journaling to unlock more achievements
+                              Keep documenting to unlock more achievements
                             </p>
                           </div>
                         )}
@@ -815,7 +815,7 @@ export default function Home() {
                     color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
                   }}
                 >
-                  Journal
+                  Impact Log
                 </button>
                 <button
                   onClick={() => {
@@ -1005,7 +1005,7 @@ export default function Home() {
                   <div className="flex items-center justify-between mb-6">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
                       <BookOpen className="h-6 w-6 theme-text-primary" />
-                      Your Journal Entries ({journalEntries.length})
+                      Your Impact Log ({journalEntries.length})
                     </h3>
                     <button
                       onClick={() => setShowAccomplishments(true)}
@@ -1084,7 +1084,7 @@ export default function Home() {
                     No Entries Yet
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Start your journey by adding your first journal entry!
+                    Start your journey by documenting your first impact!
                   </p>
                   <button
                     onClick={() => setShowAccomplishments(true)}
