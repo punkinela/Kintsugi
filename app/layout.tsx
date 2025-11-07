@@ -31,6 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <title>Own Your Impact - Track Your Wins & Advocate for Yourself</title>
         <meta name="description" content="A professional tool to track your accomplishments, recognize bias, and advocate for your career growth." />
 
