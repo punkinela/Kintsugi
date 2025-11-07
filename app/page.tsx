@@ -524,38 +524,38 @@ export default function Home() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8" style={{ color: 'var(--theme-primary)' }} />
+                <Zap className="h-8 w-8 theme-text-primary" />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
                   onClick={() => setActiveTab('home')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
-                  style={{
-                    borderColor: activeTab === 'home' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280'
-                  }}
+                  className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
+                    activeTab === 'home'
+                      ? 'theme-border-primary theme-text-primary'
+                      : 'border-transparent text-gray-500'
+                  }`}
                 >
                   Home
                 </button>
                 <button
                   onClick={() => setActiveTab('journal')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
-                  style={{
-                    borderColor: activeTab === 'journal' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280'
-                  }}
+                  className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
+                    activeTab === 'journal'
+                      ? 'theme-border-primary theme-text-primary'
+                      : 'border-transparent text-gray-500'
+                  }`}
                 >
                   Journal
                 </button>
                 <button
                   onClick={() => setActiveTab('insights')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
-                  style={{
-                    borderColor: activeTab === 'insights' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280'
-                  }}
+                  className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
+                    activeTab === 'insights'
+                      ? 'theme-border-primary theme-text-primary'
+                      : 'border-transparent text-gray-500'
+                  }`}
                 >
                   Insights
                 </button>
@@ -790,12 +790,11 @@ export default function Home() {
                     setActiveTab('home');
                     setShowMobileMenu(false);
                   }}
-                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  style={{
-                    backgroundColor: activeTab === 'home' ? 'var(--theme-primary-light)' : 'transparent',
-                    borderColor: activeTab === 'home' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280'
-                  }}
+                  className={`block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors ${
+                    activeTab === 'home'
+                      ? 'theme-bg-primary-light theme-border-primary theme-text-primary'
+                      : 'bg-transparent border-transparent text-gray-500'
+                  }`}
                 >
                   Home
                 </button>
@@ -804,12 +803,11 @@ export default function Home() {
                     setActiveTab('journal');
                     setShowMobileMenu(false);
                   }}
-                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  style={{
-                    backgroundColor: activeTab === 'journal' ? 'var(--theme-primary-light)' : 'transparent',
-                    borderColor: activeTab === 'journal' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280'
-                  }}
+                  className={`block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors ${
+                    activeTab === 'journal'
+                      ? 'theme-bg-primary-light theme-border-primary theme-text-primary'
+                      : 'bg-transparent border-transparent text-gray-500'
+                  }`}
                 >
                   Journal
                 </button>
@@ -818,25 +816,18 @@ export default function Home() {
                     setActiveTab('insights');
                     setShowMobileMenu(false);
                   }}
-                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  style={{
-                    backgroundColor: activeTab === 'insights' ? 'var(--theme-primary-light)' : 'transparent',
-                    borderColor: activeTab === 'insights' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280'
-                  }}
+                  className={`block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors ${
+                    activeTab === 'insights'
+                      ? 'theme-bg-primary-light theme-border-primary theme-text-primary'
+                      : 'bg-transparent border-transparent text-gray-500'
+                  }`}
                 >
                   Insights
                 </button>
                 <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
-                      <span
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg"
-                        style={{
-                          backgroundColor: 'var(--theme-primary-light)',
-                          color: 'var(--theme-primary)'
-                        }}
-                      >
+                      <span className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg theme-bg-primary-light theme-text-primary">
                         {user?.avatar || '👤'}
                       </span>
                     </div>
