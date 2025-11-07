@@ -532,7 +532,7 @@ export default function Home() {
                 <button
                   key={`nav-home-${themeVersion}`}
                   onClick={() => setActiveTab('home')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   style={{
                     borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
                     color: activeTab === 'home' ? themeColors.primary : '#6b7280'
@@ -543,7 +543,7 @@ export default function Home() {
                 <button
                   key={`nav-journal-${themeVersion}`}
                   onClick={() => setActiveTab('journal')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   style={{
                     borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
                     color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
@@ -554,7 +554,7 @@ export default function Home() {
                 <button
                   key={`nav-insights-${themeVersion}`}
                   onClick={() => setActiveTab('insights')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   style={{
                     borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
                     color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
