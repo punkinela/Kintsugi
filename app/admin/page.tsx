@@ -305,7 +305,7 @@ export default function AdminDashboard() {
   const featureUsageData = [
     { name: 'Affirmations', value: analytics.featureUsage.affirmationsViewed },
     { name: 'Insights', value: analytics.featureUsage.insightsViewed },
-    { name: 'Journal', value: analytics.featureUsage.journalEntries },
+    { name: 'Impact Log', value: analytics.featureUsage.journalEntries },
     { name: 'Achievements', value: analytics.featureUsage.achievementsUnlocked }
   ];
 
@@ -353,7 +353,7 @@ export default function AdminDashboard() {
           <div className="flex gap-2 flex-wrap">
             {[
               { id: 'overview', label: 'Overview', icon: BarChart3 },
-              { id: 'journal', label: 'Kintsugi Journal', icon: BookOpen },
+              { id: 'journal', label: 'Impact Log', icon: BookOpen },
               { id: 'demographics', label: 'Demographics', icon: Users },
               { id: 'journey', label: 'User Journey', icon: Map },
               { id: 'insights', label: 'Insights', icon: Brain }
@@ -709,7 +709,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* KINTSUGI JOURNAL TAB */}
+        {/* IMPACT LOG TAB */}
         {activeTab === 'journal' && (
           <div className="space-y-6">
             {/* Kintsugi Philosophy & Insights */}
