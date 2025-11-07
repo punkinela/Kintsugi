@@ -275,6 +275,7 @@ export function getCurrentTheme(): ThemeId {
 export function setCurrentTheme(themeId: ThemeId): void {
   if (typeof window === 'undefined') return;
 
+  console.log('🎨 Setting theme to:', themeId);
   localStorage.setItem(THEME_STORAGE_KEY, themeId);
 
   // Track theme changes for achievement
@@ -335,11 +336,20 @@ export function setCurrentAccessibilityMode(mode: AccessibilityMode): void {
 export function applyTheme(themeId: ThemeId): void {
   if (typeof window === 'undefined') return;
 
+  console.log('✨ Applying theme:', themeId);
+
   const theme = themes[themeId];
   const colorMode = getCurrentColorMode();
   const isDark = colorMode === 'dark' || (colorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   const colors = isDark ? theme.colors.dark : theme.colors.light;
+
+  console.log('🎨 Theme colors:', {
+    primary: colors.primary,
+    secondary: colors.secondary,
+    accent: colors.accent,
+    mode: isDark ? 'dark' : 'light'
+  });
 
   // Apply CSS variables
   document.documentElement.style.setProperty('--theme-primary', colors.primary);
@@ -357,6 +367,8 @@ export function applyTheme(themeId: ThemeId): void {
   // Add theme class to body
   document.body.className = document.body.className.replace(/theme-\w+/g, '');
   document.body.classList.add(`theme-${themeId}`);
+
+  console.log('✅ Theme applied successfully');
 }
 
 export function applyColorMode(mode: ColorMode): void {

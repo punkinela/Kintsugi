@@ -1168,10 +1168,10 @@ export default function Home() {
             onClick={(e) => e.stopPropagation()}
           >
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+              <div className="flex items-center justify-between p-6 border-b theme-border-light">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 rounded-lg">
-                    <Settings className="h-6 w-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                  <div className="p-2 theme-bg-primary-light rounded-lg">
+                    <Settings className="h-6 w-6 theme-text-primary" />
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">
@@ -1184,7 +1184,7 @@ export default function Home() {
                 </div>
                 <button
                   onClick={() => setShowSettings(false)}
-                  className="p-2 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
+                  className="p-2 hover:theme-bg-primary-light rounded-lg transition-colors"
                 >
                   <X className="h-5 w-5 text-kintsugi-dark-600 dark:text-kintsugi-gold-300" />
                 </button>
@@ -1197,7 +1197,7 @@ export default function Home() {
                     onClick={() => setSettingsTab('profile')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'profile'
-                        ? 'border-kintsugi-gold-500 text-kintsugi-gold-600 dark:text-kintsugi-gold-400'
+                        ? 'theme-border-primary theme-text-primary'
                         : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                     }`}
                   >
@@ -1207,7 +1207,7 @@ export default function Home() {
                     onClick={() => setSettingsTab('data')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'data'
-                        ? 'border-kintsugi-gold-500 text-kintsugi-gold-600 dark:text-kintsugi-gold-400'
+                        ? 'theme-border-primary theme-text-primary'
                         : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                     }`}
                   >
@@ -1217,7 +1217,7 @@ export default function Home() {
                     onClick={() => setSettingsTab('appearance')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'appearance'
-                        ? 'border-kintsugi-gold-500 text-kintsugi-gold-600 dark:text-kintsugi-gold-400'
+                        ? 'theme-border-primary theme-text-primary'
                         : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                     }`}
                   >
@@ -1227,7 +1227,7 @@ export default function Home() {
                     onClick={() => setSettingsTab('diagnostic')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'diagnostic'
-                        ? 'border-kintsugi-gold-500 text-kintsugi-gold-600 dark:text-kintsugi-gold-400'
+                        ? 'theme-border-primary theme-text-primary'
                         : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                     }`}
                   >
