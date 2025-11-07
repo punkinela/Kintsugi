@@ -84,6 +84,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('home');
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showBiasInsight, setShowBiasInsight] = useState(false);
+  const [themeVersion, setThemeVersion] = useState(0); // Force re-render when theme changes
   const [biasInsight, setBiasInsight] = useState<BiasInsight>({
     id: '1',
     title: 'Weekly Reflection',
@@ -129,6 +130,35 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       initializeTheme();
     }
+  }, []);
+
+  // Listen for theme changes and force re-render
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    let lastThemeChange = localStorage.getItem('kintsugi_theme_changes') || '0';
+
+    const handleThemeChange = () => {
+      // Increment to force re-render of navigation
+      setThemeVersion(prev => prev + 1);
+    };
+
+    // Listen for storage events (when theme changes in another tab or from Settings)
+    window.addEventListener('storage', handleThemeChange);
+
+    // Also check periodically for theme changes (in case storage event doesn't fire)
+    const interval = setInterval(() => {
+      const currentThemeChange = localStorage.getItem('kintsugi_theme_changes') || '0';
+      if (currentThemeChange !== lastThemeChange) {
+        lastThemeChange = currentThemeChange;
+        handleThemeChange();
+      }
+    }, 500);
+
+    return () => {
+      window.removeEventListener('storage', handleThemeChange);
+      clearInterval(interval);
+    };
   }, []);
 
   // Load user data
