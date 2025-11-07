@@ -518,8 +518,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 transition-colors duration-200">
-      {/* Header */}
-      <header className="bg-white dark:bg-kintsugi-dark-800 shadow-sm">
+      {/* Header - key forces complete remount when theme changes */}
+      <header key={`header-${themeVersion}`} className="bg-white dark:bg-kintsugi-dark-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
