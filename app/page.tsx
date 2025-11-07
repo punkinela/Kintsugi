@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle } from 'lucide-react';
 
@@ -76,7 +76,7 @@ import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
 import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
-import { initializeTheme } from '@/utils/themes';
+import { initializeTheme, getCurrentThemeColors } from '@/utils/themes';
 import { checkAndUnlockAchievements, getAchievementProgress, getEngagementData, updateStreakFromEntries } from '@/utils/engagement';
 
 export default function Home() {
@@ -154,6 +154,13 @@ export default function Home() {
       window.removeEventListener('storage', handleThemeChange);
     };
   }, []);
+
+  // Get actual theme colors (not CSS variables) to use in inline styles
+  // This recomputes whenever themeVersion changes, forcing React to see new color values
+  const themeColors = useMemo(() => {
+    if (typeof window === 'undefined') return { primary: '#d97706', primaryLight: '#fef3c7' };
+    return getCurrentThemeColors();
+  }, [themeVersion]);
 
   // Load user data
   useEffect(() => {
@@ -498,7 +505,7 @@ export default function Home() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8" style={{ color: 'var(--theme-primary)', ['--theme-version' as any]: themeVersion }} />
+                <Zap className="h-8 w-8" style={{ color: themeColors.primary }} />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
               </div>
@@ -507,9 +514,8 @@ export default function Home() {
                   onClick={() => setActiveTab('home')}
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
-                    borderColor: activeTab === 'home' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280',
-                    ['--theme-version' as any]: themeVersion
+                    borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'home' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Home
@@ -518,9 +524,8 @@ export default function Home() {
                   onClick={() => setActiveTab('journal')}
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
-                    borderColor: activeTab === 'journal' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280',
-                    ['--theme-version' as any]: themeVersion
+                    borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Journal
@@ -529,9 +534,8 @@ export default function Home() {
                   onClick={() => setActiveTab('insights')}
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
-                    borderColor: activeTab === 'insights' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280',
-                    ['--theme-version' as any]: themeVersion
+                    borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Insights
@@ -769,10 +773,9 @@ export default function Home() {
                   }}
                   className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                   style={{
-                    backgroundColor: activeTab === 'home' ? 'var(--theme-primary-light)' : 'transparent',
-                    borderColor: activeTab === 'home' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280',
-                    ['--theme-version' as any]: themeVersion
+                    backgroundColor: activeTab === 'home' ? themeColors.primaryLight : 'transparent',
+                    borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'home' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Home
@@ -784,10 +787,9 @@ export default function Home() {
                   }}
                   className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                   style={{
-                    backgroundColor: activeTab === 'journal' ? 'var(--theme-primary-light)' : 'transparent',
-                    borderColor: activeTab === 'journal' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280',
-                    ['--theme-version' as any]: themeVersion
+                    backgroundColor: activeTab === 'journal' ? themeColors.primaryLight : 'transparent',
+                    borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Journal
@@ -799,10 +801,9 @@ export default function Home() {
                   }}
                   className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                   style={{
-                    backgroundColor: activeTab === 'insights' ? 'var(--theme-primary-light)' : 'transparent',
-                    borderColor: activeTab === 'insights' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280',
-                    ['--theme-version' as any]: themeVersion
+                    backgroundColor: activeTab === 'insights' ? themeColors.primaryLight : 'transparent',
+                    borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Insights
@@ -813,9 +814,8 @@ export default function Home() {
                       <span
                         className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg"
                         style={{
-                          backgroundColor: 'var(--theme-primary-light)',
-                          color: 'var(--theme-primary)',
-                          ['--theme-version' as any]: themeVersion
+                          backgroundColor: themeColors.primaryLight,
+                          color: themeColors.primary
                         }}
                       >
                         {user?.avatar || '👤'}

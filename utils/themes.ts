@@ -272,6 +272,26 @@ export function getCurrentTheme(): ThemeId {
   return 'gold';
 }
 
+/**
+ * Get the current theme's color values (not CSS variables, but actual hex colors)
+ * This is used for inline styles to avoid browser caching issues with CSS variables
+ */
+export function getCurrentThemeColors(): ThemeColors {
+  if (typeof window === 'undefined') {
+    return themes.gold.colors.light;
+  }
+
+  const themeId = getCurrentTheme();
+  const colorMode = getCurrentColorMode();
+  const theme = themes[themeId];
+
+  // Determine if we should use dark mode
+  const isDark = colorMode === 'dark' ||
+    (colorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+  return isDark ? theme.colors.dark : theme.colors.light;
+}
+
 export function setCurrentTheme(themeId: ThemeId): void {
   if (typeof window === 'undefined') return;
 
