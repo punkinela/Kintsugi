@@ -158,9 +158,28 @@ export default function Home() {
   // Get actual theme colors (not CSS variables) to use in inline styles
   // This recomputes whenever themeVersion changes, forcing React to see new color values
   const themeColors = useMemo(() => {
-    if (typeof window === 'undefined') return { primary: '#d97706', primaryLight: '#fef3c7' };
-    return getCurrentThemeColors();
+    if (typeof window === 'undefined') {
+      console.log('⚠️ SSR: Using default gold colors');
+      return { primary: '#d97706', primaryLight: '#fef3c7' };
+    }
+    const colors = getCurrentThemeColors();
+    console.log('🎨 useMemo recomputed themeColors:', {
+      primary: colors.primary,
+      primaryLight: colors.primaryLight,
+      themeVersion
+    });
+    return colors;
   }, [themeVersion]);
+
+  // DEBUG: Log when navigation renders with color values
+  useEffect(() => {
+    console.log('🖼️ Navigation rendering with:', {
+      activeTab,
+      primaryColor: themeColors.primary,
+      primaryLightColor: themeColors.primaryLight,
+      themeVersion
+    });
+  }, [activeTab, themeColors, themeVersion]);
 
   // Load user data
   useEffect(() => {
