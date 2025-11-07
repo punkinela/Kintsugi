@@ -132,32 +132,26 @@ export default function Home() {
     }
   }, []);
 
-  // Listen for theme changes and force re-render
+  // CRITICAL FIX: Listen for theme changes and force IMMEDIATE re-render
+  // This replaces the unreliable 500ms polling mechanism with instant event-based updates
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    let lastThemeChange = localStorage.getItem('kintsugi_theme_changes') || '0';
-
     const handleThemeChange = () => {
-      // Increment to force re-render of navigation
+      console.log('🔄 Theme change detected - forcing navigation re-render');
+      // Increment to force re-render of ALL navigation tabs with updated CSS variables
       setThemeVersion(prev => prev + 1);
     };
 
-    // Listen for storage events (when theme changes in another tab or from Settings)
+    // Listen for our custom 'theme-changed' event (dispatched from utils/themes.ts)
+    window.addEventListener('theme-changed', handleThemeChange);
+
+    // Also listen for storage events (when theme changes in another tab)
     window.addEventListener('storage', handleThemeChange);
 
-    // Also check periodically for theme changes (in case storage event doesn't fire)
-    const interval = setInterval(() => {
-      const currentThemeChange = localStorage.getItem('kintsugi_theme_changes') || '0';
-      if (currentThemeChange !== lastThemeChange) {
-        lastThemeChange = currentThemeChange;
-        handleThemeChange();
-      }
-    }, 500);
-
     return () => {
+      window.removeEventListener('theme-changed', handleThemeChange);
       window.removeEventListener('storage', handleThemeChange);
-      clearInterval(interval);
     };
   }, []);
 

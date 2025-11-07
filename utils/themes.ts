@@ -283,6 +283,10 @@ export function setCurrentTheme(themeId: ThemeId): void {
   localStorage.setItem('kintsugi_theme_changes', String(changes + 1));
 
   applyTheme(themeId);
+
+  // CRITICAL FIX: Dispatch custom event to trigger IMMEDIATE React re-renders
+  // This eliminates the 500ms polling delay and ensures navigation updates instantly
+  window.dispatchEvent(new CustomEvent('theme-changed', { detail: { themeId } }));
 }
 
 export function getCurrentColorMode(): ColorMode {
@@ -305,6 +309,9 @@ export function setCurrentColorMode(mode: ColorMode): void {
 
   localStorage.setItem(COLOR_MODE_STORAGE_KEY, mode);
   applyColorMode(mode);
+
+  // CRITICAL FIX: Dispatch custom event to trigger IMMEDIATE React re-renders
+  window.dispatchEvent(new CustomEvent('theme-changed', { detail: { mode } }));
 }
 
 export function getCurrentAccessibilityMode(): AccessibilityMode {
