@@ -124,6 +124,38 @@ export default function ThemeSelector() {
         </div>
       </div>
 
+      {/* THEME PREVIEW BOX - Shows if themes are working */}
+      <div
+        className="theme-bg-primary p-8 rounded-xl shadow-lg border-4 border-white dark:border-gray-700"
+        style={{ backgroundColor: 'var(--theme-primary)' }}
+      >
+        <div className="text-center">
+          <h3 className="text-white text-3xl font-bold mb-3">
+            Current Theme: {themes.find(t => t.id === selectedTheme)?.name}
+          </h3>
+          <p className="text-white text-lg mb-4">
+            ✨ If this box changes colors when you click themes below, it's working! ✨
+          </p>
+          <div className="flex justify-center gap-4 mt-4">
+            <div
+              className="w-16 h-16 rounded-lg border-4 border-white shadow-md"
+              style={{ backgroundColor: 'var(--theme-primary)' }}
+              title="Primary Color"
+            />
+            <div
+              className="w-16 h-16 rounded-lg border-4 border-white shadow-md"
+              style={{ backgroundColor: 'var(--theme-secondary)' }}
+              title="Secondary Color"
+            />
+            <div
+              className="w-16 h-16 rounded-lg border-4 border-white shadow-md"
+              style={{ backgroundColor: 'var(--theme-accent)' }}
+              title="Accent Color"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Color Themes */}
       <div>
         <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4">
