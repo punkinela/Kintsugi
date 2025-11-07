@@ -138,6 +138,108 @@ html {
   background: linear-gradient(135deg, var(--kintsugi-gold-800), var(--kintsugi-gold-900));
 }
 
+/* ========================================
+   THEME-AWARE UTILITY CLASSES
+   These use CSS variables and respond to theme changes
+   ======================================== */
+
+/* Backgrounds */
+.theme-bg-primary {
+  background-color: var(--theme-primary);
+}
+
+.theme-bg-primary-light {
+  background-color: var(--theme-primary-light);
+}
+
+.theme-bg-primary-dark {
+  background-color: var(--theme-primary-dark);
+}
+
+.theme-bg-secondary {
+  background-color: var(--theme-secondary);
+}
+
+.theme-bg-accent {
+  background-color: var(--theme-accent);
+}
+
+.theme-bg-surface {
+  background-color: var(--theme-surface);
+}
+
+/* Text Colors */
+.theme-text-primary {
+  color: var(--theme-primary);
+}
+
+.theme-text-secondary {
+  color: var(--theme-secondary);
+}
+
+.theme-text-accent {
+  color: var(--theme-accent);
+}
+
+.theme-text-main {
+  color: var(--theme-text);
+}
+
+.theme-text-muted {
+  color: var(--theme-text-secondary);
+}
+
+/* Borders */
+.theme-border-primary {
+  border-color: var(--theme-primary);
+}
+
+.theme-border-accent {
+  border-color: var(--theme-accent);
+}
+
+.theme-border-light {
+  border-color: var(--theme-border);
+}
+
+/* Gradients */
+.theme-gradient {
+  background: var(--theme-gradient);
+}
+
+.theme-gradient-to-r {
+  background: linear-gradient(to right, var(--theme-primary), var(--theme-secondary));
+}
+
+.theme-gradient-to-br {
+  background: linear-gradient(to bottom right, var(--theme-primary-light), var(--theme-accent));
+}
+
+/* Buttons using theme colors */
+.theme-btn-primary {
+  background: linear-gradient(to right, var(--theme-primary), var(--theme-secondary));
+  color: white;
+  transition: all 0.2s;
+}
+
+.theme-btn-primary:hover {
+  background: var(--theme-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card backgrounds with theme */
+.theme-card {
+  background-color: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+}
+
+/* Focus rings with theme color */
+.theme-focus:focus-visible {
+  outline: 2px solid var(--theme-primary);
+  outline-offset: 2px;
+}
+
 /* Component styles */
 .btn {
   display: inline-flex;

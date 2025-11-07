@@ -103,11 +103,11 @@ export default function ThemeSelector() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
-              <Palette className="h-6 w-6 text-kintsugi-gold-600" />
+              <Palette className="h-6 w-6 theme-text-primary" />
               Appearance & Accessibility
             </h2>
             <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
-              Change color mode (light/dark) and accessibility options
+              Personalize with themes, color modes, and accessibility options
             </p>
           </div>
 
@@ -116,7 +116,7 @@ export default function ThemeSelector() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleResetAll}
-            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-kintsugi-gold-500 to-kintsugi-gold-600 hover:from-kintsugi-gold-600 hover:to-kintsugi-gold-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all text-sm"
+            className="flex items-center gap-2 px-4 py-2.5 theme-btn-primary text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all text-sm"
           >
             <RotateCcw className="h-4 w-4" />
             Reset All
@@ -124,19 +124,8 @@ export default function ThemeSelector() {
         </div>
       </div>
 
-      {/* Note about Kintsugi Theme */}
-      <div className="bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-gold-700">
-        <h4 className="font-semibold text-kintsugi-dark-900 dark:text-kintsugi-gold-200 mb-2 flex items-center gap-2">
-          ✨ Kintsugi Gold Theme
-        </h4>
-        <p className="text-sm text-kintsugi-dark-700 dark:text-kintsugi-gold-300">
-          The app uses the signature Kintsugi Gold color scheme inspired by the Japanese art of golden repair.
-          You can change between light and dark modes below.
-        </p>
-      </div>
-
-      {/* Color Themes - Hidden for now since only Gold works */}
-      <div className="hidden">
+      {/* Color Themes */}
+      <div>
         <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4">
           Color Theme
         </h3>
@@ -149,12 +138,12 @@ export default function ThemeSelector() {
               onClick={() => handleThemeChange(theme.id)}
               className={`relative p-6 rounded-xl border-2 transition-all text-left ${
                 selectedTheme === theme.id
-                  ? 'border-kintsugi-gold-500 bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20'
-                  : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-kintsugi-dark-800 hover:border-kintsugi-gold-300'
+                  ? 'theme-border-primary theme-bg-primary-light'
+                  : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-kintsugi-dark-800 hover:theme-border-accent'
               }`}
             >
               {selectedTheme === theme.id && (
-                <div className="absolute top-4 right-4 w-6 h-6 bg-kintsugi-gold-600 rounded-full flex items-center justify-center">
+                <div className="absolute top-4 right-4 w-6 h-6 theme-bg-primary rounded-full flex items-center justify-center">
                   <Check className="h-4 w-4 text-white" />
                 </div>
               )}
@@ -203,8 +192,8 @@ export default function ThemeSelector() {
               onClick={() => handleColorModeChange(mode.mode)}
               className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
                 colorMode === mode.mode
-                  ? 'border-kintsugi-gold-500 bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20'
-                  : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-kintsugi-dark-800 hover:border-kintsugi-gold-300'
+                  ? 'theme-border-primary theme-bg-primary-light'
+                  : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-kintsugi-dark-800 hover:theme-border-accent'
               }`}
             >
               {mode.icon}
@@ -230,12 +219,12 @@ export default function ThemeSelector() {
               onClick={() => handleAccessibilityModeChange(mode.mode)}
               className={`relative flex items-start gap-3 p-4 rounded-xl border-2 transition-all text-left ${
                 accessibilityMode === mode.mode
-                  ? 'border-kintsugi-gold-500 bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20'
-                  : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-kintsugi-dark-800 hover:border-kintsugi-gold-300'
+                  ? 'theme-border-primary theme-bg-primary-light'
+                  : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-kintsugi-dark-800 hover:theme-border-accent'
               }`}
             >
               {accessibilityMode === mode.mode && (
-                <div className="absolute top-4 right-4 w-6 h-6 bg-kintsugi-gold-600 rounded-full flex items-center justify-center">
+                <div className="absolute top-4 right-4 w-6 h-6 theme-bg-primary rounded-full flex items-center justify-center">
                   <Check className="h-4 w-4 text-white" />
                 </div>
               )}
@@ -257,14 +246,15 @@ export default function ThemeSelector() {
       {/* Tips */}
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
         <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-2 flex items-center gap-2">
-          💡 Appearance Tips
+          💡 Personalization Tips
         </h4>
         <ul className="text-sm text-blue-800 dark:text-blue-300 space-y-1">
+          <li>• Choose a color theme that resonates with you</li>
           <li>• Light mode: Best for daytime use and bright environments</li>
           <li>• Dark mode: Easy on the eyes in low-light conditions</li>
-          <li>• System mode: Automatically matches your device's current theme</li>
+          <li>• System mode: Automatically matches your device preferences</li>
+          <li>• Accessibility modes improve usability for specific needs</li>
           <li>• All settings are saved locally and persist across sessions</li>
-          <li>• Use "Reset All" button above to restore defaults</li>
         </ul>
       </div>
     </div>
