@@ -504,7 +504,7 @@ export default function Home() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8" style={{ color: 'var(--theme-primary)' }} />
+                <Zap className="h-8 w-8" style={{ color: 'var(--theme-primary)', ['--theme-version' as any]: themeVersion }} />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
               </div>
@@ -514,7 +514,8 @@ export default function Home() {
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
                     borderColor: activeTab === 'home' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280'
+                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280',
+                    ['--theme-version' as any]: themeVersion
                   }}
                 >
                   Home
@@ -524,7 +525,8 @@ export default function Home() {
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
                     borderColor: activeTab === 'journal' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280'
+                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280',
+                    ['--theme-version' as any]: themeVersion
                   }}
                 >
                   Journal
@@ -534,7 +536,8 @@ export default function Home() {
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
                     borderColor: activeTab === 'insights' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280'
+                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280',
+                    ['--theme-version' as any]: themeVersion
                   }}
                 >
                   Insights
@@ -774,7 +777,8 @@ export default function Home() {
                   style={{
                     backgroundColor: activeTab === 'home' ? 'var(--theme-primary-light)' : 'transparent',
                     borderColor: activeTab === 'home' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280'
+                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280',
+                    ['--theme-version' as any]: themeVersion
                   }}
                 >
                   Home
@@ -788,7 +792,8 @@ export default function Home() {
                   style={{
                     backgroundColor: activeTab === 'journal' ? 'var(--theme-primary-light)' : 'transparent',
                     borderColor: activeTab === 'journal' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280'
+                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280',
+                    ['--theme-version' as any]: themeVersion
                   }}
                 >
                   Journal
@@ -802,7 +807,8 @@ export default function Home() {
                   style={{
                     backgroundColor: activeTab === 'insights' ? 'var(--theme-primary-light)' : 'transparent',
                     borderColor: activeTab === 'insights' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280'
+                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280',
+                    ['--theme-version' as any]: themeVersion
                   }}
                 >
                   Insights
@@ -814,7 +820,8 @@ export default function Home() {
                         className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg"
                         style={{
                           backgroundColor: 'var(--theme-primary-light)',
-                          color: 'var(--theme-primary)'
+                          color: 'var(--theme-primary)',
+                          ['--theme-version' as any]: themeVersion
                         }}
                       >
                         {user?.avatar || '👤'}
