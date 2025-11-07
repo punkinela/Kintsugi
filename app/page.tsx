@@ -530,6 +530,7 @@ export default function Home() {
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
+                  key={`nav-home-${themeVersion}`}
                   onClick={() => setActiveTab('home')}
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
@@ -540,6 +541,7 @@ export default function Home() {
                   Home
                 </button>
                 <button
+                  key={`nav-journal-${themeVersion}`}
                   onClick={() => setActiveTab('journal')}
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
@@ -550,6 +552,7 @@ export default function Home() {
                   Journal
                 </button>
                 <button
+                  key={`nav-insights-${themeVersion}`}
                   onClick={() => setActiveTab('insights')}
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
