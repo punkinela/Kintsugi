@@ -68,7 +68,7 @@ export default function ThemeSelector() {
     {
       mode: 'high-contrast',
       name: 'High Contrast',
-      description: 'Enhanced contrast for better visibility',
+      description: 'Slightly bolder text (subtle change)',
       icon: <Eye className="h-5 w-5" />,
     },
     {
@@ -98,7 +98,7 @@ export default function ThemeSelector() {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
+      {/* Header with Reset Button */}
       <div>
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -107,7 +107,7 @@ export default function ThemeSelector() {
               Appearance & Accessibility
             </h2>
             <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
-              Customize your experience with themes and accessibility options
+              Change color mode (light/dark) and accessibility options
             </p>
           </div>
 
@@ -116,7 +116,7 @@ export default function ThemeSelector() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleResetAll}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-kintsugi-gold-500 to-kintsugi-gold-600 hover:from-kintsugi-gold-600 hover:to-kintsugi-gold-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-kintsugi-gold-500 to-kintsugi-gold-600 hover:from-kintsugi-gold-600 hover:to-kintsugi-gold-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all text-sm"
           >
             <RotateCcw className="h-4 w-4" />
             Reset All
@@ -124,8 +124,19 @@ export default function ThemeSelector() {
         </div>
       </div>
 
-      {/* Color Themes */}
-      <div>
+      {/* Note about Kintsugi Theme */}
+      <div className="bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-gold-700">
+        <h4 className="font-semibold text-kintsugi-dark-900 dark:text-kintsugi-gold-200 mb-2 flex items-center gap-2">
+          ✨ Kintsugi Gold Theme
+        </h4>
+        <p className="text-sm text-kintsugi-dark-700 dark:text-kintsugi-gold-300">
+          The app uses the signature Kintsugi Gold color scheme inspired by the Japanese art of golden repair.
+          You can change between light and dark modes below.
+        </p>
+      </div>
+
+      {/* Color Themes - Hidden for now since only Gold works */}
+      <div className="hidden">
         <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4">
           Color Theme
         </h3>
@@ -246,13 +257,14 @@ export default function ThemeSelector() {
       {/* Tips */}
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
         <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-2 flex items-center gap-2">
-          💡 Customization Tips
+          💡 Appearance Tips
         </h4>
         <ul className="text-sm text-blue-800 dark:text-blue-300 space-y-1">
-          <li>• Themes change the overall color palette of the app</li>
-          <li>• System mode automatically matches your device preferences</li>
-          <li>• Accessibility modes improve usability for specific needs</li>
+          <li>• Light mode: Best for daytime use and bright environments</li>
+          <li>• Dark mode: Easy on the eyes in low-light conditions</li>
+          <li>• System mode: Automatically matches your device's current theme</li>
           <li>• All settings are saved locally and persist across sessions</li>
+          <li>• Use "Reset All" button above to restore defaults</li>
         </ul>
       </div>
     </div>
