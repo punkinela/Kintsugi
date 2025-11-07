@@ -482,18 +482,30 @@ export default function Home() {
                 <button
                   onClick={() => setActiveTab('home')}
                   className={`${activeTab === 'home' ? 'theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-400 hover:theme-border-accent hover:theme-text-primary'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  style={activeTab === 'home' ? {
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : {}}
                 >
                   Home
                 </button>
                 <button
                   onClick={() => setActiveTab('journal')}
                   className={`${activeTab === 'journal' ? 'theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-400 hover:theme-border-accent hover:theme-text-primary'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  style={activeTab === 'journal' ? {
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : {}}
                 >
                   Journal
                 </button>
                 <button
                   onClick={() => setActiveTab('insights')}
                   className={`${activeTab === 'insights' ? 'theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-400 hover:theme-border-accent hover:theme-text-primary'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  style={activeTab === 'insights' ? {
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : {}}
                 >
                   Insights
                 </button>
@@ -729,6 +741,11 @@ export default function Home() {
                     setShowMobileMenu(false);
                   }}
                   className={`${activeTab === 'home' ? 'theme-bg-primary-light theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-300 hover:theme-bg-primary-light hover:theme-border-accent hover:theme-text-primary'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+                  style={activeTab === 'home' ? {
+                    backgroundColor: 'var(--theme-primary-light)',
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : {}}
                 >
                   Home
                 </button>
@@ -738,6 +755,11 @@ export default function Home() {
                     setShowMobileMenu(false);
                   }}
                   className={`${activeTab === 'journal' ? 'theme-bg-primary-light theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-300 hover:theme-bg-primary-light hover:theme-border-accent hover:theme-text-primary'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+                  style={activeTab === 'journal' ? {
+                    backgroundColor: 'var(--theme-primary-light)',
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : {}}
                 >
                   Journal
                 </button>
@@ -747,6 +769,11 @@ export default function Home() {
                     setShowMobileMenu(false);
                   }}
                   className={`${activeTab === 'insights' ? 'theme-bg-primary-light theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-300 hover:theme-bg-primary-light hover:theme-border-accent hover:theme-text-primary'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+                  style={activeTab === 'insights' ? {
+                    backgroundColor: 'var(--theme-primary-light)',
+                    borderColor: 'var(--theme-primary)',
+                    color: 'var(--theme-primary)'
+                  } : {}}
                 >
                   Insights
                 </button>
