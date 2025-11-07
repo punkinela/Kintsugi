@@ -474,26 +474,26 @@ export default function Home() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                <Zap className="h-8 w-8 theme-text-primary" />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
                   onClick={() => setActiveTab('home')}
-                  className={`${activeTab === 'home' ? 'border-kintsugi-gold-500 text-kintsugi-gold-700 dark:text-kintsugi-gold-300' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-400 hover:border-kintsugi-gold-300 hover:text-kintsugi-gold-700 dark:hover:text-kintsugi-gold-200'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  className={`${activeTab === 'home' ? 'theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-400 hover:theme-border-accent hover:theme-text-primary'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                 >
                   Home
                 </button>
                 <button
                   onClick={() => setActiveTab('journal')}
-                  className={`${activeTab === 'journal' ? 'border-kintsugi-gold-500 text-kintsugi-gold-700 dark:text-kintsugi-gold-300' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-400 hover:border-kintsugi-gold-300 hover:text-kintsugi-gold-700 dark:hover:text-kintsugi-gold-200'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  className={`${activeTab === 'journal' ? 'theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-400 hover:theme-border-accent hover:theme-text-primary'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                 >
                   Journal
                 </button>
                 <button
                   onClick={() => setActiveTab('insights')}
-                  className={`${activeTab === 'insights' ? 'border-kintsugi-gold-500 text-kintsugi-gold-700 dark:text-kintsugi-gold-300' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-400 hover:border-kintsugi-gold-300 hover:text-kintsugi-gold-700 dark:hover:text-kintsugi-gold-200'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  className={`${activeTab === 'insights' ? 'theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-400 hover:theme-border-accent hover:theme-text-primary'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                 >
                   Insights
                 </button>
@@ -506,7 +506,7 @@ export default function Home() {
               <div className="ml-4 relative notifications-container">
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
-                  className="p-1 rounded-full text-kintsugi-dark-400 hover:text-kintsugi-gold-600 dark:text-kintsugi-gold-400 dark:hover:text-kintsugi-gold-200 transition-colors"
+                  className="p-1 rounded-full text-kintsugi-dark-400 hover:theme-text-primary dark:text-kintsugi-gold-400 dark:hover:theme-text-accent transition-colors"
                   aria-label="Notifications"
                 >
                   <Bell className="h-6 w-6" />
@@ -523,8 +523,8 @@ export default function Home() {
                       className="absolute right-0 top-12 mt-2 w-80 rounded-xl shadow-lg bg-white dark:bg-kintsugi-dark-800 ring-1 ring-black ring-opacity-5 z-50 overflow-hidden"
                     >
                       {/* Header */}
-                      <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20">
-                        <h3 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                      <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 theme-gradient-to-r">
+                        <h3 className="text-sm font-semibold text-white dark:text-white flex items-center gap-2">
                           <Bell className="h-4 w-4" />
                           Notifications
                         </h3>
@@ -535,8 +535,8 @@ export default function Home() {
                         {currentStreak >= 7 && (
                           <div className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-kintsugi-dark-700 transition-colors border-b border-gray-100 dark:border-gray-700">
                             <div className="flex items-start gap-3">
-                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 flex items-center justify-center">
-                                <Zap className="h-4 w-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full theme-bg-primary-light flex items-center justify-center">
+                                <Zap className="h-4 w-4 theme-text-primary" />
                               </div>
                               <div className="flex-1">
                                 <p className="text-sm font-medium text-gray-900 dark:text-white">
@@ -728,7 +728,7 @@ export default function Home() {
                     setActiveTab('home');
                     setShowMobileMenu(false);
                   }}
-                  className={`${activeTab === 'home' ? 'bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/30 border-kintsugi-gold-500 text-kintsugi-gold-700 dark:text-kintsugi-gold-200' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-300 hover:bg-kintsugi-gold-50 dark:hover:bg-kintsugi-gold-900/20 hover:border-kintsugi-gold-300 hover:text-kintsugi-gold-700 dark:hover:text-kintsugi-gold-200'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+                  className={`${activeTab === 'home' ? 'theme-bg-primary-light theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-300 hover:theme-bg-primary-light hover:theme-border-accent hover:theme-text-primary'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
                 >
                   Home
                 </button>
@@ -737,7 +737,7 @@ export default function Home() {
                     setActiveTab('journal');
                     setShowMobileMenu(false);
                   }}
-                  className={`${activeTab === 'journal' ? 'bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/30 border-kintsugi-gold-500 text-kintsugi-gold-700 dark:text-kintsugi-gold-200' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-300 hover:bg-kintsugi-gold-50 dark:hover:bg-kintsugi-gold-900/20 hover:border-kintsugi-gold-300 hover:text-kintsugi-gold-700 dark:hover:text-kintsugi-gold-200'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+                  className={`${activeTab === 'journal' ? 'theme-bg-primary-light theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-300 hover:theme-bg-primary-light hover:theme-border-accent hover:theme-text-primary'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
                 >
                   Journal
                 </button>
@@ -746,14 +746,14 @@ export default function Home() {
                     setActiveTab('insights');
                     setShowMobileMenu(false);
                   }}
-                  className={`${activeTab === 'insights' ? 'bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/30 border-kintsugi-gold-500 text-kintsugi-gold-700 dark:text-kintsugi-gold-200' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-300 hover:bg-kintsugi-gold-50 dark:hover:bg-kintsugi-gold-900/20 hover:border-kintsugi-gold-300 hover:text-kintsugi-gold-700 dark:hover:text-kintsugi-gold-200'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+                  className={`${activeTab === 'insights' ? 'theme-bg-primary-light theme-border-primary theme-text-primary' : 'border-transparent text-kintsugi-dark-500 dark:text-kintsugi-gold-300 hover:theme-bg-primary-light hover:theme-border-accent hover:theme-text-primary'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
                 >
                   Insights
                 </button>
-                <div className="pt-4 pb-3 border-t border-kintsugi-gold-200 dark:border-kintsugi-gold-800">
+                <div className="pt-4 pb-3 border-t theme-border-light">
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
-                      <span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 text-kintsugi-gold-700 dark:text-kintsugi-gold-300 text-lg">
+                      <span className="inline-flex items-center justify-center h-10 w-10 rounded-full theme-bg-primary-light theme-text-primary text-lg">
                         {user?.avatar || '👤'}
                       </span>
                     </div>
@@ -914,12 +914,12 @@ export default function Home() {
                 <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
                   <div className="flex items-center justify-between mb-6">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                      <BookOpen className="h-6 w-6 text-kintsugi-gold-600" />
+                      <BookOpen className="h-6 w-6 theme-text-primary" />
                       Your Journal Entries ({journalEntries.length})
                     </h3>
                     <button
                       onClick={() => setShowAccomplishments(true)}
-                      className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all flex items-center gap-2"
+                      className="theme-btn-primary px-4 py-2 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-2"
                     >
                       <Plus className="h-4 w-4" />
                       Add Entry
@@ -1028,12 +1028,15 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 dark:from-blue-800 dark:via-indigo-800 dark:to-purple-900 rounded-2xl shadow-2xl overflow-hidden"
+                className="theme-gradient-to-br rounded-2xl shadow-2xl overflow-hidden"
+                style={{
+                  background: 'linear-gradient(to bottom right, var(--theme-primary), var(--theme-secondary), var(--theme-accent))'
+                }}
               >
                 <div className="relative px-6 py-8 sm:px-8 sm:py-10">
                   {/* Decorative elements */}
                   <div className="absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-                  <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-56 h-56 bg-purple-300/10 rounded-full blur-3xl"></div>
+                  <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-56 h-56 bg-white/10 rounded-full blur-3xl"></div>
 
                   <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
                     <div>
@@ -1050,7 +1053,7 @@ export default function Home() {
                       whileTap={{ scale: 0.95 }}
                       onClick={generateBiasInsight}
                       disabled={biasInsightLoading}
-                      className="flex-shrink-0 inline-flex items-center px-6 py-3 bg-white text-indigo-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-shrink-0 inline-flex items-center px-6 py-3 bg-white theme-text-primary font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <Sparkles className="h-5 w-5 mr-2" />
                       {biasInsightLoading ? 'Generating...' : 'Generate Insight'}
