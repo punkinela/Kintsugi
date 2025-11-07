@@ -27,6 +27,7 @@ import PersonalStatsDashboard from '@/components/PersonalStatsDashboard';
 import QuoteOfTheDay from '@/components/QuoteOfTheDay';
 import WritingPromptsPanel from '@/components/WritingPromptsPanel';
 import CustomAffirmationsManager from '@/components/CustomAffirmationsManager';
+import PersonalizedWisdom from '@/components/PersonalizedWisdom';
 import OnboardingTour from '@/components/OnboardingTour';
 import ReturnMotivation from '@/components/ReturnMotivation';
 import EngagingJournalPrompt from '@/components/EngagingJournalPrompt';
@@ -532,7 +533,7 @@ export default function Home() {
                 <button
                   key={`nav-home-${themeVersion}`}
                   onClick={() => setActiveTab('home')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   style={{
                     borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
                     color: activeTab === 'home' ? themeColors.primary : '#6b7280'
@@ -543,7 +544,7 @@ export default function Home() {
                 <button
                   key={`nav-journal-${themeVersion}`}
                   onClick={() => setActiveTab('journal')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   style={{
                     borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
                     color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
@@ -554,7 +555,7 @@ export default function Home() {
                 <button
                   key={`nav-insights-${themeVersion}`}
                   onClick={() => setActiveTab('insights')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   style={{
                     borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
                     color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
@@ -894,6 +895,9 @@ export default function Home() {
 
               {/* Kintsugi Quotes Widget */}
               <KintsugiQuotes />
+
+              {/* Personalized Cultural Wisdom - NEW FEATURE */}
+              <PersonalizedWisdom user={user} />
 
               {/* Golden Repairs Panel */}
               <GoldenRepairsPanel entries={journalEntries} />
@@ -1302,7 +1306,8 @@ export default function Home() {
                   >
                     Data Management
                   </button>
-                  <button
+                  {/* Appearance tab temporarily disabled for presentation */}
+                  {/* <button
                     onClick={() => setSettingsTab('appearance')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'appearance'
@@ -1311,7 +1316,7 @@ export default function Home() {
                     }`}
                   >
                     Appearance & Accessibility
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => setSettingsTab('diagnostic')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
