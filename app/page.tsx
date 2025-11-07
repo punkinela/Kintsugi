@@ -524,7 +524,7 @@ export default function Home() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8 theme-text-primary" style={{ color: 'var(--theme-primary)' }} />
+                <Zap className="h-8 w-8" style={{ color: themeColors.primary }} />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
               </div>
@@ -533,8 +533,8 @@ export default function Home() {
                   onClick={() => setActiveTab('home')}
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
-                    borderColor: activeTab === 'home' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280'
+                    borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'home' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Home
@@ -543,8 +543,8 @@ export default function Home() {
                   onClick={() => setActiveTab('journal')}
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
-                    borderColor: activeTab === 'journal' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280'
+                    borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Journal
@@ -553,8 +553,8 @@ export default function Home() {
                   onClick={() => setActiveTab('insights')}
                   className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
                   style={{
-                    borderColor: activeTab === 'insights' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280'
+                    borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Insights
@@ -792,9 +792,9 @@ export default function Home() {
                   }}
                   className="block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                   style={{
-                    backgroundColor: activeTab === 'home' ? 'var(--theme-primary-light)' : 'transparent',
-                    borderColor: activeTab === 'home' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'home' ? 'var(--theme-primary)' : '#6b7280'
+                    backgroundColor: activeTab === 'home' ? themeColors.primaryLight : 'transparent',
+                    borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'home' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Home
@@ -806,9 +806,9 @@ export default function Home() {
                   }}
                   className="block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                   style={{
-                    backgroundColor: activeTab === 'journal' ? 'var(--theme-primary-light)' : 'transparent',
-                    borderColor: activeTab === 'journal' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'journal' ? 'var(--theme-primary)' : '#6b7280'
+                    backgroundColor: activeTab === 'journal' ? themeColors.primaryLight : 'transparent',
+                    borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Journal
@@ -820,9 +820,9 @@ export default function Home() {
                   }}
                   className="block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                   style={{
-                    backgroundColor: activeTab === 'insights' ? 'var(--theme-primary-light)' : 'transparent',
-                    borderColor: activeTab === 'insights' ? 'var(--theme-primary)' : 'transparent',
-                    color: activeTab === 'insights' ? 'var(--theme-primary)' : '#6b7280'
+                    backgroundColor: activeTab === 'insights' ? themeColors.primaryLight : 'transparent',
+                    borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
+                    color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
                   }}
                 >
                   Insights
@@ -833,8 +833,8 @@ export default function Home() {
                       <span
                         className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg"
                         style={{
-                          backgroundColor: 'var(--theme-primary-light)',
-                          color: 'var(--theme-primary)'
+                          backgroundColor: themeColors.primaryLight,
+                          color: themeColors.primary
                         }}
                       >
                         {user?.avatar || '👤'}
