@@ -1302,7 +1302,8 @@ export default function Home() {
                   >
                     Data Management
                   </button>
-                  <button
+                  {/* Appearance tab temporarily disabled for presentation */}
+                  {/* <button
                     onClick={() => setSettingsTab('appearance')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'appearance'
@@ -1311,7 +1312,7 @@ export default function Home() {
                     }`}
                   >
                     Appearance & Accessibility
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => setSettingsTab('diagnostic')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
