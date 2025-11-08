@@ -36,7 +36,7 @@ export default function KintsugiPromptsCarousel({ onSelectPrompt }: KintsugiProm
   const principleColors = {
     mushin: 'from-blue-500 to-indigo-500',
     'wabi-sabi': 'from-purple-500 to-pink-500',
-    kintsukuroi: 'from-amber-500 to-orange-500',
+    kintsukuroi: 'from-theme-primary to-orange-500',
     mottainai: 'from-green-500 to-emerald-500',
     'mono-no-aware': 'from-rose-500 to-red-500'
   };
@@ -44,7 +44,7 @@ export default function KintsugiPromptsCarousel({ onSelectPrompt }: KintsugiProm
   const bgColors = {
     mushin: 'from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20',
     'wabi-sabi': 'from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20',
-    kintsukuroi: 'from-amber-50 to-orange-50 ',
+    kintsukuroi: 'from-theme-primary-light to-orange-50 ',
     mottainai: 'from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20',
     'mono-no-aware': 'from-rose-50 to-red-50 dark:from-rose-900/20 dark:to-red-900/20'
   };
@@ -61,7 +61,7 @@ export default function KintsugiPromptsCarousel({ onSelectPrompt }: KintsugiProm
                 Kintsugi Reflection Prompts
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Philosophy-guided journaling
+                Philosophy-guided Impact Loging
               </p>
             </div>
           </div>

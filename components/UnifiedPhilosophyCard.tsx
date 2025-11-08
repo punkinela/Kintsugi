@@ -8,7 +8,7 @@ export default function UnifiedPhilosophyCard() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative bg-gradient-to-br from-kintsugi-gold-50 via-amber-50 to-yellow-50 dark:from-kintsugi-gold-900/30 dark:via-amber-900/20 dark:to-yellow-900/30 rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50 overflow-hidden"
+      className="relative bg-gradient-to-br from-theme-primary-light  to-yellow-50 dark:from-theme-primary/30  dark:to-yellow-900/30 rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50 overflow-hidden"
     >
       {/* Decorative pattern */}
       <div className="absolute inset-0 opacity-5">
@@ -38,7 +38,7 @@ export default function UnifiedPhilosophyCard() {
         {/* Main Message */}
         <div className="bg-white/60 dark:bg-kintsugi-dark-800/60 backdrop-blur-sm rounded-xl p-5 mb-4">
           <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed mb-3">
-            <span className="font-bold text-kintsugi-gold-700 dark:theme-text-secondary">Your impact</span> isn't just your accomplishments.
+            <span className="font-bold text-theme-primary dark:theme-text-secondary">Your impact</span> isn't just your accomplishments.
             It's also how you've <span className="font-bold">grown through challenges</span>.
           </p>
           <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
@@ -63,9 +63,9 @@ export default function UnifiedPhilosophyCard() {
           <div className="bg-gradient-to-br theme-bg-primary-light  rounded-xl p-4 border-2 theme-border-accent dark:theme-border-primary/50">
             <div className="flex items-center gap-2 mb-2">
               <TrendingUp className="h-5 w-5 theme-text-primary dark:theme-text-secondary" />
-              <p className="font-bold text-kintsugi-gold-900 dark:theme-text-secondary text-sm">Own Your Resilience</p>
+              <p className="font-bold text-theme-primary dark:theme-text-secondary text-sm">Own Your Resilience</p>
             </div>
-            <p className="text-xs text-kintsugi-gold-800 dark:theme-text-secondary">
+            <p className="text-xs text-theme-primary dark:theme-text-secondary">
               Honor how you've grown through challenges. Your "cracks" filled with gold ARE part of your impact.
             </p>
           </div>

@@ -116,7 +116,7 @@ export default function EnhancedStreakTracker() {
                   achieved
                     ? 'bg-gradient-to-br ' + milestone.color + ' border-transparent text-white'
                     : isNext
-                    ? 'border-kintsugi-gold-400 theme-bg-primary-light dark:bg-kintsugi-gold-900/20'
+                    ? 'border-theme-secondary theme-bg-primary-light dark:bg-theme-primary/20'
                     : 'theme-border-light dark:border-kintsugi-dark-600 bg-gray-50 dark:bg-kintsugi-dark-900/50'
                 }`}
               >

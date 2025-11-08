@@ -118,7 +118,7 @@ export default function JournalProgressDashboard({ entries }: JournalProgressDas
       {
         title: 'Total Days',
         value: Object.keys(entriesByDate).length,
-        subtitle: 'unique days journaled',
+        subtitle: 'unique days Impact Loged',
         icon: Calendar,
         color: 'from-rose-500 to-red-500'
       }
@@ -258,7 +258,7 @@ export default function JournalProgressDashboard({ entries }: JournalProgressDas
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={`w-full rounded-t-lg ${
                     isCurrentWeek
-                      ? 'bg-gradient-to-t from-kintsugi-gold-500 to-amber-400'
+                      ? 'bg-gradient-to-t from-theme-primary to-theme-secondary'
                       : 'bg-gradient-to-t from-indigo-500 to-purple-500'
                   } min-h-[20px] relative group cursor-pointer`}
                   title={`${count} ${count === 1 ? 'entry' : 'entries'}`}
@@ -289,7 +289,7 @@ export default function JournalProgressDashboard({ entries }: JournalProgressDas
           <p className="text-sm text-gray-700 dark:text-gray-300">
             {weeklyData[weeklyData.length - 1] > weeklyData[weeklyData.length - 2] ? (
               <>
-                <strong className="text-green-600 dark:text-green-400">📈 Trending Up!</strong> You're journaling more this week. Keep the momentum going!
+                <strong className="text-green-600 dark:text-green-400">📈 Trending Up!</strong> You're Impact Loging more this week. Keep the momentum going!
               </>
             ) : weeklyData[weeklyData.length - 1] === weeklyData[weeklyData.length - 2] ? (
               <>

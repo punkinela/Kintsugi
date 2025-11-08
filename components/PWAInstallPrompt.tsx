@@ -57,7 +57,7 @@ export default function PWAInstallPrompt() {
         exit={{ opacity: 0, y: 50 }}
         className="fixed bottom-4 right-4 z-50 max-w-sm"
       >
-        <div className="bg-gradient-to-br from-kintsugi-gold-500 to-orange-500 rounded-2xl p-4 shadow-2xl text-white">
+        <div className="bg-gradient-to-br from-theme-primary to-orange-500 rounded-2xl p-4 shadow-2xl text-white">
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-white/20 rounded-lg">

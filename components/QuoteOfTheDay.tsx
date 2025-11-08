@@ -94,7 +94,7 @@ export default function QuoteOfTheDay() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="relative bg-gradient-to-br from-kintsugi-gold-50 to-orange-50  rounded-2xl p-8 border theme-border-light dark:theme-border-primary overflow-hidden"
+          className="relative bg-gradient-to-br from-theme-primary-light to-orange-50  rounded-2xl p-8 border theme-border-light dark:theme-border-primary overflow-hidden"
         >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
@@ -141,7 +141,7 @@ export default function QuoteOfTheDay() {
             </blockquote>
 
             <div className="flex items-center justify-between">
-              <cite className="text-lg font-medium text-kintsugi-gold-700 dark:theme-text-secondary not-italic">
+              <cite className="text-lg font-medium text-theme-primary dark:theme-text-secondary not-italic">
                 — {currentQuote.author}
               </cite>
 
@@ -180,7 +180,7 @@ export default function QuoteOfTheDay() {
                     className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors capitalize ${
                       selectedCategory === cat
                         ? 'theme-bg-primary text-white'
-                        : 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40'
+                        : 'theme-bg-primary-light dark:bg-theme-primary/20 text-theme-primary dark:theme-text-secondary hover:bg-theme-accent dark:hover:bg-theme-primary/40'
                     }`}
                   >
                     {cat}
@@ -244,7 +244,7 @@ function QuoteCard({
       className={`bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border-2 cursor-pointer transition-all ${
         isSelected
           ? 'theme-border-primary shadow-lg'
-          : 'theme-border-light dark:border-kintsugi-dark-700 hover:border-kintsugi-gold-400'
+          : 'theme-border-light dark:border-kintsugi-dark-700 hover:border-theme-secondary'
       }`}
       onClick={onSelect}
     >

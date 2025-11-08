@@ -104,10 +104,10 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           Begin Your Kintsugi Journey
         </h3>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Like the Japanese art of Kintsugi, your journal will transform challenges into golden wisdom.
+          Like the Japanese art of Kintsugi, your Impact Log will transform challenges into golden wisdom.
         </p>
         <p className="text-sm text-gray-500 dark:text-gray-500">
-          Start journaling to see your healing story unfold here.
+          Start Impact Loging to see your healing story unfold here.
         </p>
       </motion.div>
     );
@@ -122,7 +122,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-kintsugi-gold-500 via-amber-500 to-yellow-600 dark:from-kintsugi-gold-700 dark:via-amber-700 dark:to-yellow-800 rounded-2xl shadow-2xl p-8 text-white relative overflow-hidden"
+        className="bg-gradient-to-r theme-gradient-to-r  rounded-2xl shadow-2xl p-8 text-white relative overflow-hidden"
       >
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -208,7 +208,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
           whileHover={{ scale: 1.03, y: -5 }}
-          className="bg-gradient-to-br from-kintsugi-gold-500 to-amber-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden"
+          className="bg-gradient-to-br from-theme-primary to-theme-primary rounded-xl p-6 text-white shadow-lg relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
           <Award className="h-8 w-8 mb-3 relative" />
@@ -299,11 +299,11 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           </h3>
           <div className="space-y-3">
             <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-              <strong className="text-kintsugi-gold-700 dark:theme-text-secondary">Kintsugi (金継ぎ)</strong> is the Japanese art of repairing broken pottery with gold, treating the breakage and repair as part of the object's history rather than something to disguise.
+              <strong className="text-theme-primary dark:theme-text-secondary">Kintsugi (金継ぎ)</strong> is the Japanese art of repairing broken pottery with gold, treating the breakage and repair as part of the object's history rather than something to disguise.
             </p>
             <div className="bg-white/50 dark:bg-black/20 rounded-lg p-4">
               <p className="text-sm text-gray-800 dark:text-gray-200 italic">
-                "Your journal is your Kintsugi. Each entry fills the cracks of difficult days with golden wisdom. Your challenges become the most beautiful parts of your story."
+                "Your Impact Log is your Kintsugi. Each entry fills the cracks of difficult days with golden wisdom. Your challenges become the most beautiful parts of your story."
               </p>
             </div>
             <div className="grid grid-cols-3 gap-3 pt-3">

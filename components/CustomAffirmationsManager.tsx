@@ -115,7 +115,7 @@ export default function CustomAffirmationsManager() {
             </button>
             <button
               onClick={() => setShowNewForm(true)}
-              className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+              className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-theme-primary text-white rounded-lg transition-colors font-medium"
             >
               <Plus className="h-4 w-4" />
               New
@@ -186,7 +186,7 @@ export default function CustomAffirmationsManager() {
             </p>
             <button
               onClick={() => setShowNewForm(true)}
-              className="theme-text-primary hover:text-kintsugi-gold-700 font-medium"
+              className="theme-text-primary hover:text-theme-primary font-medium"
             >
               Create your first affirmation
             </button>
@@ -250,7 +250,7 @@ function AffirmationCard({
               {affirmation.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2 py-0.5 text-xs rounded theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary"
+                  className="px-2 py-0.5 text-xs rounded theme-bg-primary-light dark:bg-theme-primary/20 text-theme-primary dark:theme-text-secondary"
                 >
                   #{tag}
                 </span>
@@ -379,7 +379,7 @@ function NewAffirmationForm({
               <button
                 type="button"
                 onClick={handleAddTag}
-                className="px-4 py-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary rounded-lg hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40"
+                className="px-4 py-2 theme-bg-primary-light dark:bg-theme-primary/20 text-theme-primary dark:theme-text-secondary rounded-lg hover:bg-theme-accent dark:hover:bg-theme-primary/40"
               >
                 Add
               </button>
@@ -390,7 +390,7 @@ function NewAffirmationForm({
                   <span
                     key={tag}
                     onClick={() => setTags(tags.filter(t => t !== tag))}
-                    className="px-2 py-1 text-xs rounded theme-bg-primary text-white cursor-pointer hover:bg-kintsugi-gold-700"
+                    className="px-2 py-1 text-xs rounded theme-bg-primary text-white cursor-pointer hover:bg-theme-primary"
                   >
                     #{tag} ×
                   </span>
@@ -410,7 +410,7 @@ function NewAffirmationForm({
             <button
               type="submit"
               disabled={text.trim().length < 10}
-              className="flex-1 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-2 theme-bg-primary hover:bg-theme-primary text-white rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Create
             </button>

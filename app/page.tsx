@@ -103,7 +103,7 @@ export default function Home() {
     title: 'Weekly Reflection',
     description: 'Your personalized insight will appear here',
     reflection: '',
-    actionStep: 'Reflect on this insight in your journal',
+    actionStep: 'Reflect on this insight in your Impact Log',
     actionType: 'journal',
     research: []
   });
@@ -191,7 +191,7 @@ export default function Home() {
     loadUser();
   }, []);
 
-  // Load journal entries and achievements
+  // Load impact entries and achievements
   useEffect(() => {
     if (!isClient) return;
 
@@ -202,7 +202,7 @@ export default function Home() {
         setJournalEntries(entries);
         setFilteredJournalEntries(entries);
 
-        // Update streak based on journal entries
+        // Update streak based on impact entries
         if (entries.length > 0) {
           updateStreakFromEntries();
         }
@@ -232,7 +232,7 @@ export default function Home() {
     };
   }, [isClient]);
 
-  // Check for new achievements whenever journal entries change
+  // Check for new achievements whenever impact entries change
   useEffect(() => {
     if (isClient && journalEntries.length > 0) {
       const engagementData = getEngagementData();
@@ -466,7 +466,7 @@ export default function Home() {
         ...biasInsight,
         description: mockDescription,
         reflection: 'Consider how this pattern shows up in your daily life.',
-        actionStep: 'Reflect on this insight in your journal',
+        actionStep: 'Reflect on this insight in your Impact Log',
         research: [{
           citation: 'Dweck, C. (2006). Mindset: The New Psychology of Success',
           year: 2006,
@@ -929,7 +929,7 @@ export default function Home() {
                   addToast({
                     type: 'success',
                     title: 'Quick Entry Saved!',
-                    message: 'Building your journaling habit, one entry at a time.',
+                    message: 'Building your Impact Loging habit, one entry at a time.',
                     duration: 3000
                   });
                 }}

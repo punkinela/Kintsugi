@@ -35,7 +35,7 @@ export default function DashboardCard({
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             {Icon && (
-              <div className="p-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/30 rounded-lg">
+              <div className="p-2 theme-bg-primary-light dark:bg-theme-primary/30 rounded-lg">
                 <Icon className={`h-5 w-5 ${iconColor}`} />
               </div>
             )}

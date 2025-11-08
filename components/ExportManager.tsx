@@ -23,7 +23,7 @@ export default function ExportManager() {
 
   const handleExport = async (format: 'csv' | 'markdown' | 'pdf' | 'word') => {
     if (entries.length === 0) {
-      alert('No journal entries to export. Create some entries first!');
+      alert('No impact entries to export. Create some entries first!');
       return;
     }
 
@@ -106,12 +106,12 @@ export default function ExportManager() {
           Export Your Accomplishments
         </h2>
         <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
-          Download your journal entries in your preferred format
+          Download your Impact Log entries in your preferred format
         </p>
       </div>
 
       {/* Stats */}
-      <div className="theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded-xl p-4 border theme-border-light dark:theme-border-primary">
+      <div className="theme-bg-primary-light dark:bg-theme-primary/20 rounded-xl p-4 border theme-border-light dark:theme-border-primary">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
@@ -232,7 +232,7 @@ export default function ExportManager() {
             No Entries to Export
           </h3>
           <p className="text-gray-700 dark:text-gray-300">
-            Start journaling your accomplishments to enable export functionality.
+            Start Impact Loging your accomplishments to enable export functionality.
           </p>
         </div>
       )}

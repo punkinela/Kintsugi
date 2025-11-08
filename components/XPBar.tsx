@@ -96,7 +96,7 @@ export default function XPBar({ compact = false }: XPBarProps) {
                   </div>
                   <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
                     <div 
-                      className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 h-full rounded-full" 
+                      className="bg-gradient-to-r theme-gradient-to-r h-full rounded-full" 
                       style={{ width: `${Math.min(100, (levelInfo.xp / levelInfo.xpToNextLevel) * 100)}%` }}
                     />
                   </div>

@@ -24,7 +24,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-xl hover:theme-bg-primary-light/50 dark:hover:bg-kintsugi-gold-900/20 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kintsugi-gold-500 dark:focus:ring-kintsugi-gold-400"
+      className="p-2 rounded-xl hover:theme-bg-primary-light/50 dark:hover:bg-theme-primary/20 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-primary dark:focus:ring-theme-secondary"
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
       title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >

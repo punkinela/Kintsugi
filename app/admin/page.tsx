@@ -158,7 +158,7 @@ export default function AdminDashboard() {
         const analyticsData = getAnalyticsData();
         const feedbackData = getAllFeedback();
 
-        // Load journal entries from engagement data
+        // Load impact entries from engagement data
         const engagementData = getEngagementData();
         setJournalEntries(engagementData.journalEntries || []);
         setCurrentStreak(engagementData.currentStreak || 0);

@@ -119,7 +119,7 @@ export default function WritingPromptsPanel() {
                 className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors capitalize ${
                   selectedCategory === cat
                     ? 'theme-bg-primary text-white'
-                    : 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40'
+                    : 'theme-bg-primary-light dark:bg-theme-primary/20 text-theme-primary dark:theme-text-secondary hover:bg-theme-accent dark:hover:bg-theme-primary/40'
                 }`}
               >
                 {cat}
@@ -147,7 +147,7 @@ export default function WritingPromptsPanel() {
                 className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors capitalize ${
                   selectedDifficulty === diff
                     ? 'theme-bg-primary text-white'
-                    : 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40'
+                    : 'theme-bg-primary-light dark:bg-theme-primary/20 text-theme-primary dark:theme-text-secondary hover:bg-theme-accent dark:hover:bg-theme-primary/40'
                 }`}
               >
                 {diff}
@@ -207,7 +207,7 @@ export default function WritingPromptsPanel() {
             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all ${
               wasUsed
                 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 cursor-default'
-                : 'theme-bg-primary hover:bg-kintsugi-gold-700 text-white'
+                : 'theme-bg-primary hover:bg-theme-primary text-white'
             }`}
           >
             <Check className="h-5 w-5" />

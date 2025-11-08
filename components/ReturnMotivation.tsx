@@ -40,7 +40,7 @@ export default function ReturnMotivation() {
       });
     }
 
-    // Journal entry goals
+    // Impact entry goals
     const entryCount = journalEntries.length;
     const nextEntryMilestone = entryCount < 5 ? 5 : entryCount < 10 ? 10 : entryCount < 25 ? 25 : entryCount < 50 ? 50 : entryCount < 100 ? 100 : entryCount + 100;
     const entriesUntilMilestone = nextEntryMilestone - entryCount;

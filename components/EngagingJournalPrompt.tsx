@@ -97,7 +97,7 @@ export default function EngagingJournalPrompt({ onOpenJournal }: EngagingJournal
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white">You're on fire! 🔥</h3>
-                  <p className="text-white/90">You've journaled today - keep the momentum going!</p>
+                  <p className="text-white/90">You've Impact Loged today - keep the momentum going!</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4 mt-6">
@@ -182,7 +182,7 @@ export default function EngagingJournalPrompt({ onOpenJournal }: EngagingJournal
             </h4>
             <button
               onClick={onOpenJournal}
-              className="text-sm theme-text-primary hover:text-kintsugi-gold-700 font-medium"
+              className="text-sm theme-text-primary hover:text-theme-primary font-medium"
             >
               View All
             </button>
@@ -257,7 +257,7 @@ export default function EngagingJournalPrompt({ onOpenJournal }: EngagingJournal
       <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-2xl p-6 border-2 border-indigo-200 dark:border-indigo-800">
         <h4 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-indigo-600" />
-          Why journal today?
+          Why Impact Log today?
         </h4>
         <ul className="space-y-2">
           <li className="flex items-start gap-2 text-gray-700 dark:text-gray-300">

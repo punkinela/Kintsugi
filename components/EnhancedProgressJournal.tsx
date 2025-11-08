@@ -74,10 +74,10 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
     data.journalEntries.unshift(entry);
     saveEngagementData(data);
 
-    // Update streak based on all journal entries
+    // Update streak based on all impact entries
     updateStreakFromEntries();
 
-    // Award XP for journal entry
+    // Award XP for impact entry
     const xpResult = awardXP('journal_entry');
 
     // Update gamification stats

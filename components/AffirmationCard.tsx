@@ -12,11 +12,11 @@ interface AffirmationCardProps {
 
 export default function AffirmationCard({ affirmation, onRefresh }: AffirmationCardProps) {
   const categoryColors = {
-    accomplishment: 'from-kintsugi-gold-500 to-kintsugi-gold-700',
-    strength: 'from-kintsugi-gold-400 to-kintsugi-gold-600',
-    growth: 'from-kintsugi-gold-300 to-kintsugi-gold-500',
-    impact: 'from-kintsugi-gold-600 to-kintsugi-gold-800',
-    'bias-awareness': 'from-kintsugi-gold-200 to-kintsugi-gold-400',
+    accomplishment: 'from-theme-primary to-theme-primary',
+    strength: 'from-theme-secondary to-theme-primary',
+    growth: 'from-theme-secondary to-theme-primary',
+    impact: 'from-theme-primary to-theme-primary',
+    'bias-awareness': 'from-theme-accent to-theme-secondary',
   };
 
   const categoryIcons = {
@@ -37,17 +37,17 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
     >
       <div className={`absolute inset-0 bg-gradient-to-br ${categoryColors[affirmation.category]} opacity-10 rounded-3xl blur-xl`}></div>
       
-      <div className="relative bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-kintsugi-gold-100/30 dark:border-kintsugi-gold-900/30">
+      <div className="relative bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-theme-accent/30 dark:border-theme-primary/30">
         {/* Category Badge */}
-        <div className="flex items-center justify-between text-sm text-kintsugi-gold-800/70 dark:theme-text-secondary/70">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full theme-bg-primary-light/50 dark:bg-kintsugi-gold-900/20">
+        <div className="flex items-center justify-between text-sm text-theme-primary/70 dark:theme-text-secondary/70">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full theme-bg-primary-light/50 dark:bg-theme-primary/20">
             <span className="text-lg">{categoryIcons[affirmation.category]}</span>
             {affirmation.category.replace('-', ' ').toUpperCase()}
           </span>
           
           <button
             onClick={onRefresh}
-            className="w-5 h-5 text-kintsugi-gold-700/70 dark:theme-text-secondary/70 group-hover:theme-text-primary dark:group-hover:theme-text-secondary transition-colors"
+            className="w-5 h-5 text-theme-primary/70 dark:theme-text-secondary/70 group-hover:theme-text-primary dark:group-hover:theme-text-secondary transition-colors"
             aria-label="Get new affirmation"
           >
             <RefreshCw className="w-5 h-5 theme-text-primary dark:theme-text-secondary group-hover:rotate-180 transition-transform duration-500" />
@@ -62,7 +62,7 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
             </div>
             <Sparkles className="absolute -top-4 -left-4 w-8 h-8 theme-text-secondary opacity-50" />
           </div>
-          <p className="text-2xl md:text-3xl font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-6 leading-relaxed">
+          <p className="text-2xl md:text-3xl font-medium text-kintsugi-dark-900 dark:text-theme-accent mb-6 leading-relaxed">
             {affirmation.text}
           </p>
           <Sparkles className="absolute -bottom-4 -right-4 w-8 h-8 theme-text-secondary opacity-50" />
@@ -73,7 +73,7 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
           {affirmation.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1.5 text-xs font-medium rounded-full theme-bg-primary-light/50 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:theme-text-secondary"
+              className="px-3 py-1.5 text-xs font-medium rounded-full theme-bg-primary-light/50 dark:bg-theme-primary/20 text-theme-primary dark:theme-text-secondary"
             >
               #{tag}
             </span>
@@ -82,11 +82,11 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
 
         {/* Research Citation */}
         {affirmation.research && (
-          <div className="mt-6 pt-6 border-t border-kintsugi-gold-100/30 dark:border-kintsugi-gold-900/30">
+          <div className="mt-6 pt-6 border-t border-theme-accent/30 dark:border-theme-primary/30">
             <div className="flex items-start gap-3">
               <span className="text-2xl flex-shrink-0">📚</span>
               <div className="flex-1">
-                <p className="text-xs font-semibold text-kintsugi-gold-700 dark:theme-text-secondary mb-1">
+                <p className="text-xs font-semibold text-theme-primary dark:theme-text-secondary mb-1">
                   Research-Backed
                 </p>
                 <p className="text-sm text-kintsugi-dark-700 dark:theme-text-secondary mb-2">

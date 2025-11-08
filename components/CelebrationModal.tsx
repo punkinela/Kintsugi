@@ -159,7 +159,7 @@ export default function CelebrationModal({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={onClose}
-                  className="w-full px-6 py-3 bg-gradient-to-r theme-gradient-to-r text-white font-semibold rounded-xl hover:from-kintsugi-gold-600 hover:to-amber-600 transition-all shadow-lg"
+                  className="w-full px-6 py-3 bg-gradient-to-r theme-gradient-to-r text-white font-semibold rounded-xl hover:from-theme-primary hover:to-theme-primary transition-all shadow-lg"
                 >
                   Awesome!
                 </motion.button>

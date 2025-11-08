@@ -300,7 +300,7 @@ export default function StrengthArchaeology({ entries }: StrengthArchaeologyProp
             <div className="text-center py-12">
               <Gem className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-600 dark:text-gray-400">
-                Add more journal entries to discover hidden strengths
+                Add more impact entries to discover hidden strengths
               </p>
             </div>
           ) : (

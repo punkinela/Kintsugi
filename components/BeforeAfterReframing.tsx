@@ -167,12 +167,12 @@ export default function BeforeAfterReframing({ entries }: BeforeAfterReframingPr
               </div>
 
               {/* Golden Bridge Animation */}
-              <div className="relative h-2 bg-gradient-to-r from-red-300 via-amber-400 to-green-300">
+              <div className="relative h-2 bg-gradient-to-r from-red-300 via-yellow-400 to-green-300">
                 <motion.div
                   initial={{ width: '0%' }}
                   animate={{ width: '100%' }}
                   transition={{ duration: 2, delay: index * 0.1 }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500 to-transparent opacity-70"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-500 to-transparent opacity-70"
                 />
               </div>
             </motion.div>

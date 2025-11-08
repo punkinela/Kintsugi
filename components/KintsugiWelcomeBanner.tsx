@@ -27,7 +27,7 @@ export default function KintsugiWelcomeBanner({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative overflow-hidden bg-gradient-to-br from-kintsugi-gold-500 via-amber-500 to-yellow-600 dark:from-kintsugi-gold-700 dark:via-amber-700 dark:to-yellow-800 rounded-2xl shadow-2xl"
+      className="relative overflow-hidden bg-gradient-to-br theme-gradient-to-r  rounded-2xl shadow-2xl"
     >
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 -mt-4 -mr-4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
@@ -85,7 +85,7 @@ export default function KintsugiWelcomeBanner({
               whileTap={{ scale: 0.95 }}
               onClick={onGetInsight}
               disabled={isLoading}
-              className="hidden sm:flex flex-shrink-0 items-center px-6 py-3 bg-white text-kintsugi-gold-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="hidden sm:flex flex-shrink-0 items-center px-6 py-3 bg-white theme-text-primary font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Heart className="h-5 w-5 mr-2" />
               {isLoading ? 'Generating...' : 'Get Insight'}
@@ -155,7 +155,7 @@ export default function KintsugiWelcomeBanner({
             whileTap={{ scale: 0.98 }}
             onClick={onGetInsight}
             disabled={isLoading}
-            className="sm:hidden w-full flex items-center justify-center px-6 py-3 bg-white text-kintsugi-gold-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="sm:hidden w-full flex items-center justify-center px-6 py-3 bg-white theme-text-primary font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Heart className="h-5 w-5 mr-2" />
             {isLoading ? 'Generating...' : 'Get Insight'}

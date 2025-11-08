@@ -29,7 +29,7 @@ export default function WordCloudVisualization() {
       case 'negative':
         return 'text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300';
       default:
-        return 'theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-700 dark:hover:theme-text-secondary';
+        return 'theme-text-primary dark:theme-text-secondary hover:text-theme-primary dark:hover:theme-text-secondary';
     }
   };
 
@@ -40,7 +40,7 @@ export default function WordCloudVisualization() {
       case 'negative':
         return 'bg-red-100 dark:bg-red-900/20';
       default:
-        return 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20';
+        return 'theme-bg-primary-light dark:bg-theme-primary/20';
     }
   };
 
@@ -78,7 +78,7 @@ export default function WordCloudVisualization() {
             Word Cloud
           </h2>
           <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
-            Most frequently used words in your journal
+            Most frequently used words in your Impact Log
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export default function WordCloudVisualization() {
         <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-12 border theme-border-light dark:border-kintsugi-dark-700 text-center">
           <Cloud className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
           <p className="text-kintsugi-dark-600 dark:theme-text-secondary">
-            Not enough data to generate word cloud. Keep journaling!
+            Not enough data to generate word cloud. Keep Impact Loging!
           </p>
         </div>
       )}
@@ -163,7 +163,7 @@ export default function WordCloudVisualization() {
             <span className="text-sm text-green-600 dark:text-green-400 font-medium">Positive</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded"></div>
+            <div className="w-4 h-4 theme-bg-primary-light dark:bg-theme-primary/20 rounded"></div>
             <span className="text-sm theme-text-primary dark:theme-text-secondary font-medium">Neutral</span>
           </div>
           <div className="flex items-center gap-2">

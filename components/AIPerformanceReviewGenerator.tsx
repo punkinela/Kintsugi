@@ -123,7 +123,7 @@ export default function AIPerformanceReviewGenerator() {
           AI Performance Review Generator
         </h2>
         <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
-          Transform your journal entries into professional performance review content
+          Transform your Impact Log entries into professional performance review content
         </p>
       </div>
 

@@ -48,13 +48,13 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-kintsugi-gold-50 via-kintsugi-gold-100/50 to-kintsugi-gold-50/50 dark:from-kintsugi-dark-900 dark:via-kintsugi-dark-800 dark:to-kintsugi-dark-900">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-theme-primary-light via-theme-accent/50 to-theme-primary-light/50 dark:from-kintsugi-dark-900 dark:via-kintsugi-dark-800 dark:to-kintsugi-dark-900">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-2xl"
       >
-        <div className="bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-kintsugi-gold-100/30 dark:border-kintsugi-gold-900/30">
+        <div className="bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-theme-accent/30 dark:border-theme-primary/30">
           {/* Header */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-full mb-4 shadow-lg">
@@ -95,7 +95,7 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                 value={profile.name || ''}
                 onChange={(e) => setProfile({ ...profile, name: e.target.value })}
                 placeholder="Your name"
-                className="w-full px-4 py-3 rounded-xl border theme-border-light dark:theme-border-primary/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 rounded-xl border theme-border-light dark:theme-border-primary/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-theme-accent focus:ring-2 focus:ring-theme-primary focus:border-transparent transition-colors"
               />
             </div>
 
@@ -114,8 +114,8 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                     }}
                     className={`px-4 py-3 rounded-xl border-2 transition-all ${
                       profile.gender === gender
-                        ? 'theme-border-primary theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:theme-text-secondary'
-                        : 'theme-border-light dark:theme-border-primary/50 hover:theme-border-accent dark:hover:border-kintsugi-gold-700'
+                        ? 'theme-border-primary theme-bg-primary-light dark:bg-theme-primary/20 text-theme-primary dark:theme-text-secondary'
+                        : 'theme-border-light dark:theme-border-primary/50 hover:theme-border-accent dark:hover:border-theme-primary'
                     }`}
                   >
                     {gender.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
@@ -136,7 +136,7 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                   setProfile({ ...profile, profession: e.target.value });
                 }}
                 placeholder="e.g., Software Engineer, Teacher, Entrepreneur"
-                className="w-full px-4 py-3 rounded-xl border theme-border-light dark:theme-border-primary/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 rounded-xl border theme-border-light dark:theme-border-primary/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-theme-accent focus:ring-2 focus:ring-theme-primary focus:border-transparent transition-colors"
               />
             </div>
 
@@ -155,8 +155,8 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                     }}
                     className={`px-4 py-3 rounded-xl border-2 transition-all text-sm ${
                       profile.ethnicity === ethnicity
-                        ? 'theme-border-primary theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:theme-text-secondary'
-                        : 'theme-border-light dark:theme-border-primary/50 hover:theme-border-accent dark:hover:border-kintsugi-gold-700'
+                        ? 'theme-border-primary theme-bg-primary-light dark:bg-theme-primary/20 text-theme-primary dark:theme-text-secondary'
+                        : 'theme-border-light dark:theme-border-primary/50 hover:theme-border-accent dark:hover:border-theme-primary'
                     }`}
                   >
                     {ethnicity.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
@@ -207,7 +207,7 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                   notifications: false,
                   skipped: true,
                 })}
-                className="w-full text-kintsugi-gold-700/70 dark:theme-text-secondary/70 hover:text-kintsugi-gold-900 dark:hover:theme-text-secondary font-medium py-2 transition-colors"
+                className="w-full text-theme-primary/70 dark:theme-text-secondary/70 hover:text-theme-primary dark:hover:theme-text-secondary font-medium py-2 transition-colors"
               >
                 Skip for now
               </button>

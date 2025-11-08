@@ -68,16 +68,16 @@ export default function FeedbackWidget({ onClose }: FeedbackWidgetProps) {
         className="fixed bottom-6 right-6 z-50 w-96 bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-2xl shadow-2xl border-2 theme-border-light/80 dark:theme-border-primary/50 overflow-hidden"
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-kintsugi-gold-600 to-kintsugi-gold-800 p-4 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-theme-primary to-theme-primary p-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <MessageCircle className="w-5 h-5 text-kintsugi-gold-50" />
-            <h3 className="font-bold text-kintsugi-gold-50">How is your experience?</h3>
+            <MessageCircle className="w-5 h-5 text-theme-primary-light" />
+            <h3 className="font-bold text-theme-primary-light">How is your experience?</h3>
           </div>
           <button
             onClick={onClose}
             className="p-1 hover:theme-bg-primary-light/20 rounded-full transition-colors"
           >
-            <X className="w-5 h-5 text-kintsugi-gold-50" />
+            <X className="w-5 h-5 text-theme-primary-light" />
           </button>
         </div>
 
@@ -85,7 +85,7 @@ export default function FeedbackWidget({ onClose }: FeedbackWidgetProps) {
         <div className="p-6">
           {step === 'rating' && (
             <div>
-              <p className="text-kintsugi-dark-700 dark:text-kintsugi-gold-100 mb-4 text-center">
+              <p className="text-kintsugi-dark-700 dark:text-theme-accent mb-4 text-center">
                 We'd love to hear about your experience with Own Your Impact!
               </p>
               
@@ -102,8 +102,8 @@ export default function FeedbackWidget({ onClose }: FeedbackWidgetProps) {
                     <Star
                       className={`w-10 h-10 transition-colors ${
                         (hoveredStar !== null ? star <= hoveredStar : star <= (rating || 0))
-                          ? 'fill-kintsugi-gold-500 theme-text-primary'
-                          : 'theme-text-secondary dark:text-kintsugi-gold-800/50'
+                          ? 'fill-theme-primary theme-text-primary'
+                          : 'theme-text-secondary dark:text-theme-primary/50'
                       }`}
                     />
                   </button>
@@ -112,7 +112,7 @@ export default function FeedbackWidget({ onClose }: FeedbackWidgetProps) {
 
               {/* Rating Label */}
               {hoveredStar && (
-                <p className="text-center text-sm font-medium text-kintsugi-gold-700 dark:theme-text-secondary">
+                <p className="text-center text-sm font-medium text-theme-primary dark:theme-text-secondary">
                   {ratingLabels[hoveredStar as keyof typeof ratingLabels]}
                 </p>
               )}
@@ -121,7 +121,7 @@ export default function FeedbackWidget({ onClose }: FeedbackWidgetProps) {
 
           {step === 'comment' && (
             <div>
-              <p className="text-kintsugi-dark-800 dark:text-kintsugi-gold-100 mb-4">
+              <p className="text-kintsugi-dark-800 dark:text-theme-accent mb-4">
                 Thanks for the {rating}-star rating! 🌟
               </p>
               <p className="text-sm text-kintsugi-dark-700/80 dark:theme-text-secondary/80 mb-3">
@@ -132,20 +132,20 @@ export default function FeedbackWidget({ onClose }: FeedbackWidgetProps) {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="What do you love? What could be better?"
-                className="w-full px-4 py-3 rounded-xl border theme-border-light dark:theme-border-primary/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent resize-none transition-colors"
+                className="w-full px-4 py-3 rounded-xl border theme-border-light dark:theme-border-primary/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-theme-accent focus:ring-2 focus:ring-theme-primary focus:border-transparent resize-none transition-colors"
                 rows={4}
               />
 
               <div className="flex gap-2 mt-4">
                 <button
                   onClick={() => setStep('rating')}
-                  className="flex-1 px-4 py-2 rounded-xl border theme-border-light dark:theme-border-primary/50 hover:theme-bg-primary-light/50 dark:hover:bg-kintsugi-gold-900/20 transition-colors"
+                  className="flex-1 px-4 py-2 rounded-xl border theme-border-light dark:theme-border-primary/50 hover:theme-bg-primary-light/50 dark:hover:bg-theme-primary/20 transition-colors"
                 >
                   Back
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="flex-1 px-4 py-2 rounded-xl bg-gradient-to-r from-kintsugi-gold-600 to-kintsugi-gold-800 text-kintsugi-gold-50 font-semibold hover:from-kintsugi-gold-700 hover:to-kintsugi-gold-900 transition-all"
+                  className="flex-1 px-4 py-2 rounded-xl bg-gradient-to-r from-theme-primary to-theme-primary text-theme-primary-light font-semibold hover:from-theme-primary hover:to-theme-primary transition-all"
                 >
                   Submit
                 </button>
@@ -156,7 +156,7 @@ export default function FeedbackWidget({ onClose }: FeedbackWidgetProps) {
           {step === 'thanks' && (
             <div className="text-center py-4">
               <div className="text-6xl mb-4">🎉</div>
-              <h4 className="text-xl font-bold text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-2">
+              <h4 className="text-xl font-bold text-kintsugi-dark-900 dark:text-theme-accent mb-2">
                 Thank you!
               </h4>
               <p className="text-kintsugi-dark-700/80 dark:theme-text-secondary/80">

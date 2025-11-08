@@ -15,12 +15,12 @@ export default function StreakDisplay({ currentStreak, longestStreak }: StreakDi
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-kintsugi-gold-600 to-kintsugi-gold-800 rounded-full text-kintsugi-gold-50 shadow-lg border border-kintsugi-gold-400/30"
+        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-theme-primary to-theme-primary rounded-full text-theme-primary-light shadow-lg border border-theme-secondary/30"
       >
         <Flame className="w-5 h-5 theme-text-secondary" />
         <div className="flex flex-col">
-          <span className="text-xs font-medium text-kintsugi-gold-100/90">Streak</span>
-          <span className="text-lg font-bold leading-none text-kintsugi-gold-50">{currentStreak}</span>
+          <span className="text-xs font-medium text-theme-accent/90">Streak</span>
+          <span className="text-lg font-bold leading-none text-theme-primary-light">{currentStreak}</span>
         </div>
       </motion.div>
 
@@ -30,12 +30,12 @@ export default function StreakDisplay({ currentStreak, longestStreak }: StreakDi
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.1 }}
-          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-kintsugi-gold-500 to-kintsugi-gold-700 rounded-full text-kintsugi-gold-50 shadow-lg border border-kintsugi-gold-400/20"
+          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-theme-primary to-theme-primary rounded-full text-theme-primary-light shadow-lg border border-theme-secondary/20"
         >
           <Trophy className="w-5 h-5 theme-text-secondary" />
           <div className="flex flex-col">
-            <span className="text-xs font-medium text-kintsugi-gold-100/90">Best</span>
-            <span className="text-lg font-bold leading-none text-kintsugi-gold-50">{longestStreak}</span>
+            <span className="text-xs font-medium text-theme-accent/90">Best</span>
+            <span className="text-lg font-bold leading-none text-theme-primary-light">{longestStreak}</span>
           </div>
         </motion.div>
       )}

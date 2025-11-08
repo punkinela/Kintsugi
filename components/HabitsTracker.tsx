@@ -76,7 +76,7 @@ export default function HabitsTracker() {
 
         <button
           onClick={() => setShowNewHabit(true)}
-          className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+          className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-theme-primary text-white rounded-lg transition-colors font-medium"
         >
           <Plus className="h-4 w-4" />
           New Habit
@@ -85,7 +85,7 @@ export default function HabitsTracker() {
 
       {/* Today's Progress */}
       {todayHabits.length > 0 && (
-        <div className="bg-gradient-to-br from-kintsugi-gold-50 to-orange-50  rounded-xl p-4 border theme-border-light dark:theme-border-primary">
+        <div className="bg-gradient-to-br from-theme-primary-light to-orange-50  rounded-xl p-4 border theme-border-light dark:theme-border-primary">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary">
               Today's Progress
@@ -299,7 +299,7 @@ function NewHabitModal({
                   type="button"
                   onClick={() => setColor(c)}
                   className={`w-8 h-8 rounded-full ${c} transition-transform ${
-                    color === c ? 'scale-125 ring-2 ring-kintsugi-gold-500 ring-offset-2' : ''
+                    color === c ? 'scale-125 ring-2 ring-theme-primary ring-offset-2' : ''
                   }`}
                 />
               ))}
@@ -360,7 +360,7 @@ function NewHabitModal({
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+              className="flex-1 px-4 py-2 theme-bg-primary hover:bg-theme-primary text-white rounded-lg transition-colors font-medium"
             >
               Create Habit
             </button>

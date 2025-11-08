@@ -31,10 +31,10 @@ export default function QuickCapture({ isOpen, onClose, onSaved }: QuickCaptureP
     data.journalEntries.unshift(entry);
     saveEngagementData(data);
 
-    // Update streak based on all journal entries
+    // Update streak based on all impact entries
     updateStreakFromEntries();
 
-    // Award XP for journal entry
+    // Award XP for impact entry
     const xpResult = awardXP('journal_entry');
 
     // Update gamification stats
@@ -126,7 +126,7 @@ export default function QuickCapture({ isOpen, onClose, onSaved }: QuickCaptureP
                   <button
                     onClick={handleQuickSave}
                     disabled={!text.trim()}
-                    className="flex-1 bg-gradient-to-r theme-gradient-to-r text-white font-semibold py-3 rounded-xl hover:from-yellow-500 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+                    className="flex-1 bg-gradient-to-r theme-gradient-to-r text-white font-semibold py-3 rounded-xl hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
                   >
                     <Zap className="w-5 h-5" />
                     Quick Save
