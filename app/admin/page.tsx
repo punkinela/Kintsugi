@@ -18,6 +18,13 @@ import JournalProgressDashboard from '@/components/JournalProgressDashboard';
 import MilestoneTracker from '@/components/MilestoneTracker';
 import KintsugiUserJourney from '@/components/KintsugiUserJourney';
 import KintsugiInsightsDashboard from '@/components/KintsugiInsightsDashboard';
+// Phase 13: Kintsugi Philosophy Features
+import TransformationHeatmap from '@/components/TransformationHeatmap';
+import StrengthArchaeology from '@/components/StrengthArchaeology';
+import JourneyRichnessScore from '@/components/JourneyRichnessScore';
+import InteractiveKintsugiVessel from '@/components/InteractiveKintsugiVessel';
+import GoldenSeamTimeline from '@/components/GoldenSeamTimeline';
+import KintsugiPortfolioGenerator from '@/components/KintsugiPortfolioGenerator';
 import {
   getAnalyticsData,
   getAllFeedback,
@@ -715,6 +722,15 @@ export default function AdminDashboard() {
             {/* Kintsugi Philosophy & Insights */}
             <KintsugiJournalInsights entries={journalEntries} />
 
+            {/* Phase 13: Journey Richness Score - User Story Quality */}
+            <JourneyRichnessScore entries={journalEntries} />
+
+            {/* Phase 13: Transformation Heatmap - Golden Repair Days */}
+            <TransformationHeatmap entries={journalEntries} monthsToShow={6} />
+
+            {/* Phase 13: Golden Seam Timeline - Challenge-to-Growth Connections */}
+            <GoldenSeamTimeline entries={journalEntries} />
+
             {/* Streak Calendar & Progress in Two Columns */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <StreakCalendar entries={journalEntries} />
@@ -975,7 +991,22 @@ export default function AdminDashboard() {
 
         {/* INSIGHTS TAB - Kintsugi Community Analytics */}
         {activeTab === 'insights' && (
-          <KintsugiInsightsDashboard feedback={feedback} />
+          <div className="space-y-6">
+            <KintsugiInsightsDashboard feedback={feedback} />
+
+            {/* Phase 13: Strength Archaeology - AI Strength Discovery */}
+            <StrengthArchaeology entries={journalEntries} />
+
+            {/* Phase 13: Interactive Kintsugi Vessel - 3D Visualization */}
+            <InteractiveKintsugiVessel entries={journalEntries} />
+
+            {/* Phase 13: Kintsugi Portfolio Generator - Professional Export */}
+            <KintsugiPortfolioGenerator
+              entries={journalEntries}
+              userName={user?.name || 'User'}
+              userProfession={user?.profession || 'Professional'}
+            />
+          </div>
         )}
       </main>
     </div>
