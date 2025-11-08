@@ -78,7 +78,7 @@ export default function WordCloudVisualization() {
             Word Cloud
           </h2>
           <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
-            Most frequently used words in your journal
+            Most frequently used words in your Impact Log
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export default function WordCloudVisualization() {
         <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-12 border theme-border-light dark:border-kintsugi-dark-700 text-center">
           <Cloud className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
           <p className="text-kintsugi-dark-600 dark:theme-text-secondary">
-            Not enough data to generate word cloud. Keep journaling!
+            Not enough data to generate word cloud. Keep Impact Loging!
           </p>
         </div>
       )}

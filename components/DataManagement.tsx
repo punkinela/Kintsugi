@@ -168,7 +168,7 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
                   Export Complete Backup (JSON)
                 </div>
                 <div className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary">
-                  All data including profile, journal, achievements
+                  All data including profile, Impact Log, achievements
                 </div>
               </div>
             </div>

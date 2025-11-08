@@ -68,7 +68,7 @@ export default function PersonalStatsDashboard() {
       <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-12 border theme-border-light dark:border-kintsugi-dark-700 text-center">
         <BarChart3 className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
         <p className="text-kintsugi-dark-600 dark:theme-text-secondary">
-          Start journaling to see your personal statistics!
+          Start Impact Loging to see your personal statistics!
         </p>
       </div>
     );
@@ -122,7 +122,7 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
             Personal Statistics
           </h2>
           <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
-            Comprehensive overview of your journaling journey
+            Comprehensive overview of your Impact Loging journey
           </p>
         </div>
 

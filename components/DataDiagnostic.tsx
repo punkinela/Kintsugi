@@ -38,7 +38,7 @@ export default function DataDiagnostic() {
                 preview: parsed,
               };
 
-              // Check for journal entries
+              // Check for impact entries
               if (key.includes('engagement') || key.includes('journal')) {
                 if (parsed.journalEntries) {
                   results.journalEntriesFound = parsed.journalEntries.length;
@@ -60,11 +60,11 @@ export default function DataDiagnostic() {
       const engagement = results.data['kintsugi_engagement'];
       if (!engagement) {
         results.issues.push('kintsugi_engagement key not found - this explains missing stats');
-        results.suggestions.push('Initialize engagement data by creating a journal entry');
+        results.suggestions.push('Initialize engagement data by creating a impact entry');
       } else {
         if (!engagement.preview.journalEntries || engagement.preview.journalEntries.length === 0) {
-          results.issues.push('No journal entries found in kintsugi_engagement');
-          results.suggestions.push('Journal entries may be stored under a different key');
+          results.issues.push('No impact entries found in kintsugi_engagement');
+          results.suggestions.push('Impact entries may be stored under a different key');
         }
         if (!engagement.preview.currentStreak || engagement.preview.currentStreak === 0) {
           results.issues.push('Streak is 0 - may need to be recalculated');
@@ -78,7 +78,7 @@ export default function DataDiagnostic() {
       // Check for orphaned data
       const journalKeys = results.keys.filter((k: string) => k.includes('journal'));
       if (journalKeys.length > 1) {
-        results.issues.push(`Multiple journal-related keys found: ${journalKeys.join(', ')}`);
+        results.issues.push(`Multiple Impact Log-related keys found: ${journalKeys.join(', ')}`);
         results.suggestions.push('Data may be fragmented across multiple keys');
       }
 

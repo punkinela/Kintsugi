@@ -104,10 +104,10 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           Begin Your Kintsugi Journey
         </h3>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Like the Japanese art of Kintsugi, your journal will transform challenges into golden wisdom.
+          Like the Japanese art of Kintsugi, your Impact Log will transform challenges into golden wisdom.
         </p>
         <p className="text-sm text-gray-500 dark:text-gray-500">
-          Start journaling to see your healing story unfold here.
+          Start Impact Loging to see your healing story unfold here.
         </p>
       </motion.div>
     );
@@ -122,7 +122,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-theme-primary via-amber-500 to-yellow-600 dark:from-theme-primary dark:via-amber-500 dark:to-yellow-800 rounded-2xl shadow-2xl p-8 text-white relative overflow-hidden"
+        className="bg-gradient-to-r theme-gradient-to-r  rounded-2xl shadow-2xl p-8 text-white relative overflow-hidden"
       >
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -303,7 +303,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
             </p>
             <div className="bg-white/50 dark:bg-black/20 rounded-lg p-4">
               <p className="text-sm text-gray-800 dark:text-gray-200 italic">
-                "Your journal is your Kintsugi. Each entry fills the cracks of difficult days with golden wisdom. Your challenges become the most beautiful parts of your story."
+                "Your Impact Log is your Kintsugi. Each entry fills the cracks of difficult days with golden wisdom. Your challenges become the most beautiful parts of your story."
               </p>
             </div>
             <div className="grid grid-cols-3 gap-3 pt-3">

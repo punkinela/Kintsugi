@@ -340,7 +340,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
                         rating >= 4
                           ? 'bg-gradient-to-r theme-gradient-to-r'
                           : rating === 3
-                          ? 'bg-gradient-to-r from-yellow-400 to-yellow-500'
+                          ? 'bg-gradient-to-r theme-gradient-to-r'
                           : 'bg-gradient-to-r from-orange-400 to-red-500'
                       }`}
                     />

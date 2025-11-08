@@ -25,7 +25,7 @@ export default function MilestoneTracker({ entryCount, currentStreak }: Mileston
     {
       id: 'first-entry',
       title: 'First Step',
-      description: 'Create your first journal entry',
+      description: 'Create your first impact entry',
       target: 1,
       type: 'entries',
       icon: Star,
@@ -35,7 +35,7 @@ export default function MilestoneTracker({ entryCount, currentStreak }: Mileston
     {
       id: 'five-entries',
       title: 'Getting Started',
-      description: 'Write 5 journal entries',
+      description: 'Write 5 impact entries',
       target: 5,
       type: 'entries',
       icon: Zap,
@@ -55,7 +55,7 @@ export default function MilestoneTracker({ entryCount, currentStreak }: Mileston
     {
       id: 'ten-entries',
       title: 'Active Journaler',
-      description: 'Write 10 journal entries',
+      description: 'Write 10 impact entries',
       target: 10,
       type: 'entries',
       icon: Trophy,
@@ -75,7 +75,7 @@ export default function MilestoneTracker({ entryCount, currentStreak }: Mileston
     {
       id: 'fifty-entries',
       title: 'Dedicated Writer',
-      description: 'Write 50 journal entries',
+      description: 'Write 50 impact entries',
       target: 50,
       type: 'entries',
       icon: Crown,
@@ -95,7 +95,7 @@ export default function MilestoneTracker({ entryCount, currentStreak }: Mileston
     {
       id: 'hundred-entries',
       title: 'Elite Journaler',
-      description: 'Write 100 journal entries',
+      description: 'Write 100 impact entries',
       target: 100,
       type: 'entries',
       icon: Star,
@@ -280,7 +280,7 @@ export default function MilestoneTracker({ entryCount, currentStreak }: Mileston
           <strong className="text-green-700 dark:text-green-400">🎯 Keep Going!</strong>{' '}
           {unlockedCount === 0 && "Start your journey by creating your first entry!"}
           {unlockedCount > 0 && unlockedCount < 3 && "You're building momentum! Every entry counts."}
-          {unlockedCount >= 3 && unlockedCount < 6 && "Impressive progress! You're becoming a consistent journaler."}
+          {unlockedCount >= 3 && unlockedCount < 6 && "Impressive progress! You're becoming a consistent Impact Loger."}
           {unlockedCount >= 6 && unlockedCount < milestones.length && "You're on fire! Only a few milestones left."}
           {unlockedCount === milestones.length && "🎉 Legendary! You've unlocked all milestones!"}
         </p>

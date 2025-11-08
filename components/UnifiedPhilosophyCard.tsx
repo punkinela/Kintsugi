@@ -8,7 +8,7 @@ export default function UnifiedPhilosophyCard() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative bg-gradient-to-br from-theme-primary-light via-amber-500-light to-yellow-50 dark:from-theme-primary/30 dark:via-amber-500/20 dark:to-yellow-900/30 rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50 overflow-hidden"
+      className="relative bg-gradient-to-br from-theme-primary-light  to-yellow-50 dark:from-theme-primary/30  dark:to-yellow-900/30 rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50 overflow-hidden"
     >
       {/* Decorative pattern */}
       <div className="absolute inset-0 opacity-5">

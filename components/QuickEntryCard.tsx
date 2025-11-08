@@ -167,7 +167,7 @@ export default function QuickEntryCard({ onSave }: QuickEntryCardProps) {
       {/* Encouraging Message */}
       <div className="mt-4 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800/30 rounded-lg">
         <p className="text-xs text-gray-700 dark:text-gray-300">
-          <strong className="text-purple-700 dark:text-purple-400">💡 Tiny Habits Research:</strong> Even 30-second entries help build consistent journaling habits. Short is better than skipping!
+          <strong className="text-purple-700 dark:text-purple-400">💡 Tiny Habits Research:</strong> Even 30-second entries help build consistent Impact Loging habits. Short is better than skipping!
         </p>
       </div>
     </motion.div>

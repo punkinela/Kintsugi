@@ -84,7 +84,7 @@ export default function AIInsightsDashboard() {
             AI Insights & Patterns
           </h2>
           <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
-            Personalized insights based on your journal entries
+            Personalized insights based on your Impact Log entries
           </p>
         </div>
 
@@ -247,7 +247,7 @@ export default function AIInsightsDashboard() {
             Analyzing Your Patterns...
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Processing {entries.length} journal entries
+            Processing {entries.length} impact entries
           </p>
         </div>
       )}

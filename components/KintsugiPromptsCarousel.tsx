@@ -61,7 +61,7 @@ export default function KintsugiPromptsCarousel({ onSelectPrompt }: KintsugiProm
                 Kintsugi Reflection Prompts
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Philosophy-guided journaling
+                Philosophy-guided Impact Loging
               </p>
             </div>
           </div>

@@ -72,7 +72,7 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
         color: 'text-orange-700 dark:text-orange-400',
         bgColor: 'bg-orange-50 dark:bg-orange-900/20',
         borderColor: 'border-orange-300 dark:border-orange-700',
-        milestone: hasWeekStreak ? 'Established a consistent practice' : 'Build your journaling habit',
+        milestone: hasWeekStreak ? 'Established a consistent practice' : 'Build your Impact Loging habit',
         completed: hasWeekStreak,
         date: hasWeekStreak ? entries[Math.max(0, entries.length - 7)].date : undefined
       },
@@ -162,7 +162,7 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
       <div className="p-6">
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-theme-secondary via-amber-400 to-theme-accent dark:from-theme-primary dark:via-amber-500 dark:to-theme-primary rounded-full"></div>
+          <div className="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-theme-secondary via-yellow-400 to-theme-accent dark:from-theme-primary dark:via-yellow-500 dark:to-theme-primary rounded-full"></div>
 
           <div className="space-y-8">
             {journeyPhases.map((phase, index) => {

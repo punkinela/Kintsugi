@@ -40,7 +40,7 @@ export default function GoldenRepairsPanel({ entries }: GoldenRepairsPanelProps)
           Like Kintsugi pottery, your challenges become golden seams of beauty and strength.
         </p>
         <p className="text-sm text-gray-500 dark:text-gray-500">
-          Start journaling about your experiences—both struggles and triumphs—to track your transformation.
+          Start Impact Loging about your experiences—both struggles and triumphs—to track your transformation.
         </p>
       </motion.div>
     );

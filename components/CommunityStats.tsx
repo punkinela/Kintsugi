@@ -183,7 +183,7 @@ export default function CommunityStats({ userEntryCount }: CommunityStatsProps) 
       {/* Research Note */}
       <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30 rounded-lg">
         <p className="text-xs text-gray-700 dark:text-gray-300">
-          <strong className="text-blue-700 dark:text-blue-400">📊 Research Shows:</strong> People who see community activity are 40% more likely to maintain their journaling habit. You're part of something bigger!
+          <strong className="text-blue-700 dark:text-blue-400">📊 Research Shows:</strong> People who see community activity are 40% more likely to maintain their Impact Loging habit. You're part of something bigger!
         </p>
       </div>
 
