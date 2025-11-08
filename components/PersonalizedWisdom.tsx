@@ -49,6 +49,16 @@ export default function PersonalizedWisdom({ user }: PersonalizedWisdomProps) {
     return null;
   }
 
+  // Map wisdom themes to different gradient styles - all use theme colors for variety
+  const themeGradients = {
+    resilience: 'theme-gradient-to-r',      // Primary → Secondary (growth, renewal)
+    strength: 'theme-gradient-to-br',       // Primary → Secondary → Accent (power, intensity)
+    wisdom: 'bg-gradient-to-r from-[var(--theme-secondary)] to-[var(--theme-accent)]',  // Secondary → Accent (knowledge)
+    transformation: 'bg-gradient-to-r from-[var(--theme-accent)] to-[var(--theme-primary)]', // Accent → Primary (change)
+    advocacy: 'bg-gradient-to-r from-[var(--theme-primary-dark)] to-[var(--theme-secondary)]', // Dark Primary → Secondary (voice)
+    community: 'theme-gradient-to-r',       // Primary → Secondary (together)
+  };
+
   const themeIcons = {
     resilience: '🌱',
     strength: '💪',
@@ -65,7 +75,9 @@ export default function PersonalizedWisdom({ user }: PersonalizedWisdomProps) {
       className="relative overflow-hidden bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-xl border-2 border-gray-200 dark:border-gray-700"
     >
       {/* Gradient Header */}
-      <div className="theme-gradient-to-r p-6">
+      <div className={`${themeGradients[currentQuote.theme]} p-6 text-white`}
+        style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}
+      >
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             <div className="text-3xl">{themeIcons[currentQuote.theme]}</div>
