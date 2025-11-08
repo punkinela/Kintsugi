@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare } from 'lucide-react';
 
@@ -134,6 +134,9 @@ export default function Home() {
   const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
   const [showInterviewPrep, setShowInterviewPrep] = useState(false);
   const [selectedEntryForInterview, setSelectedEntryForInterview] = useState<string>('');
+
+  // Weekly Digest ref for navigation
+  const weeklyDigestRef = useRef<HTMLDivElement>(null);
 
   // Phase 9: Interactive components
   const { toasts, addToast, removeToast } = useToast();
@@ -411,6 +414,18 @@ export default function Home() {
     setIsEditingProfile(false);
   };
 
+  // Navigate to Weekly Digest
+  const navigateToWeeklyDigest = () => {
+    setActiveTab('home');
+    setShowNotifications(false);
+    setTimeout(() => {
+      weeklyDigestRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }, 100);
+  };
+
   // Keyboard shortcuts configuration
   const shortcuts: KeyboardShortcut[] = [
     {
@@ -590,6 +605,27 @@ export default function Home() {
 
                       {/* Notifications List */}
                       <div className="max-h-96 overflow-y-auto">
+                        {/* Quick Access to Weekly Digest */}
+                        <button
+                          onClick={navigateToWeeklyDigest}
+                          className="w-full px-4 py-3 bg-gradient-to-r theme-bg-primary-light hover:opacity-90 transition-all border-b border-gray-200 dark:border-gray-700 text-left"
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-full theme-gradient-to-r flex items-center justify-center">
+                              <Calendar className="h-4 w-4 text-white" />
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-sm font-semibold theme-text-primary flex items-center gap-1">
+                                View Your Weekly Digest
+                                <ChevronRight className="h-3 w-3" />
+                              </p>
+                              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
+                                See your week in review, achievements, and insights
+                              </p>
+                            </div>
+                          </div>
+                        </button>
+
                         {currentStreak >= 7 && (
                           <div className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-kintsugi-dark-700 transition-colors border-b border-gray-100 dark:border-gray-700">
                             <div className="flex items-start gap-3">
@@ -868,7 +904,9 @@ export default function Home() {
               {user && <FreshStartWelcome userName={user.name} />}
 
               {/* Weekly Digest - AI-Powered Progress Summary */}
-              <InAppWeeklyDigest />
+              <div ref={weeklyDigestRef}>
+                <InAppWeeklyDigest />
+              </div>
 
               {/* Profile Completion Reminder */}
               {user && (
