@@ -118,7 +118,7 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
   return (
     <div className="space-y-6">
       {/* Stats Overview */}
-      <div className="bg-gradient-to-br from-kintsugi-gold-50 to-white dark:from-kintsugi-dark-800 dark:to-kintsugi-dark-900 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
+      <div className="bg-gradient-to-br from-theme-primary-light to-white dark:from-kintsugi-dark-800 dark:to-kintsugi-dark-900 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 theme-bg-primary rounded-lg">
             <Database className="h-5 w-5 text-white" />
@@ -267,7 +267,7 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
             {autoBackups.map((backup, index) => (
               <div
                 key={backup.version}
-                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-kintsugi-dark-900/50 rounded-lg border border-gray-200 dark:border-kintsugi-dark-700 hover:theme-border-accent dark:hover:border-kintsugi-gold-700 transition-all"
+                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-kintsugi-dark-900/50 rounded-lg border border-gray-200 dark:border-kintsugi-dark-700 hover:theme-border-accent dark:hover:border-theme-primary transition-all"
               >
                 <div className="flex items-center gap-3">
                   <Clock className="h-4 w-4 theme-text-primary dark:theme-text-secondary" />

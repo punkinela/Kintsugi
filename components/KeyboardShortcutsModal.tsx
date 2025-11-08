@@ -61,7 +61,7 @@ export default function KeyboardShortcutsModal({ onClose, shortcuts }: KeyboardS
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b theme-border-light dark:border-kintsugi-dark-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/30 rounded-lg">
+                <div className="p-2 theme-bg-primary-light dark:bg-theme-primary/30 rounded-lg">
                   <Keyboard className="h-6 w-6 theme-text-primary dark:theme-text-secondary" />
                 </div>
                 <div>

@@ -122,7 +122,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-kintsugi-gold-500 via-amber-500 to-yellow-600 dark:from-kintsugi-gold-700 dark:via-amber-700 dark:to-yellow-800 rounded-2xl shadow-2xl p-8 text-white relative overflow-hidden"
+        className="bg-gradient-to-r from-theme-primary via-amber-500 to-yellow-600 dark:from-theme-primary dark:via-amber-500 dark:to-yellow-800 rounded-2xl shadow-2xl p-8 text-white relative overflow-hidden"
       >
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -208,7 +208,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
           whileHover={{ scale: 1.03, y: -5 }}
-          className="bg-gradient-to-br from-kintsugi-gold-500 to-amber-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden"
+          className="bg-gradient-to-br from-theme-primary to-theme-primary rounded-xl p-6 text-white shadow-lg relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
           <Award className="h-8 w-8 mb-3 relative" />
@@ -299,7 +299,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           </h3>
           <div className="space-y-3">
             <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-              <strong className="text-kintsugi-gold-700 dark:theme-text-secondary">Kintsugi (金継ぎ)</strong> is the Japanese art of repairing broken pottery with gold, treating the breakage and repair as part of the object's history rather than something to disguise.
+              <strong className="text-theme-primary dark:theme-text-secondary">Kintsugi (金継ぎ)</strong> is the Japanese art of repairing broken pottery with gold, treating the breakage and repair as part of the object's history rather than something to disguise.
             </p>
             <div className="bg-white/50 dark:bg-black/20 rounded-lg p-4">
               <p className="text-sm text-gray-800 dark:text-gray-200 italic">

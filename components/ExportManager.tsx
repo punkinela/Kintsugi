@@ -111,7 +111,7 @@ export default function ExportManager() {
       </div>
 
       {/* Stats */}
-      <div className="theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded-xl p-4 border theme-border-light dark:theme-border-primary">
+      <div className="theme-bg-primary-light dark:bg-theme-primary/20 rounded-xl p-4 border theme-border-light dark:theme-border-primary">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">

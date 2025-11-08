@@ -105,8 +105,8 @@ export default function StreakCalendar({ entries }: StreakCalendarProps) {
 
   const getIntensityColor = (count: number) => {
     if (count === 0) return 'bg-gray-100 dark:bg-gray-800';
-    if (count === 1) return 'bg-kintsugi-gold-200 dark:bg-kintsugi-gold-900/40';
-    if (count === 2) return 'theme-bg-secondary dark:bg-kintsugi-gold-700';
+    if (count === 1) return 'bg-theme-accent dark:bg-theme-primary/40';
+    if (count === 2) return 'theme-bg-secondary dark:bg-theme-primary';
     if (count === 3) return 'theme-bg-primary dark:theme-bg-primary';
     return 'theme-bg-primary dark:theme-bg-primary';
   };
@@ -211,8 +211,8 @@ export default function StreakCalendar({ entries }: StreakCalendarProps) {
             <span>Less</span>
             <div className="flex gap-1">
               <div className="w-3 h-3 rounded-sm bg-gray-100 dark:bg-gray-800"></div>
-              <div className="w-3 h-3 rounded-sm bg-kintsugi-gold-200 dark:bg-kintsugi-gold-900/40"></div>
-              <div className="w-3 h-3 rounded-sm theme-bg-secondary dark:bg-kintsugi-gold-700"></div>
+              <div className="w-3 h-3 rounded-sm bg-theme-accent dark:bg-theme-primary/40"></div>
+              <div className="w-3 h-3 rounded-sm theme-bg-secondary dark:bg-theme-primary"></div>
               <div className="w-3 h-3 rounded-sm theme-bg-primary dark:theme-bg-primary"></div>
               <div className="w-3 h-3 rounded-sm theme-bg-primary dark:theme-bg-primary"></div>
             </div>
@@ -254,10 +254,10 @@ export default function StreakCalendar({ entries }: StreakCalendarProps) {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-6 bg-gradient-to-r from-amber-50 to-orange-50  border-2 theme-border-accent dark:theme-border-primary/50 rounded-xl p-4"
+          className="mt-6 bg-gradient-to-r from-theme-primary-light to-orange-50  border-2 theme-border-accent dark:theme-border-primary/50 rounded-xl p-4"
         >
           <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong className="text-amber-700 dark:theme-text-secondary">🔥 Don't break the chain!</strong> You've built a {currentStreak}-day streak. Journal today to keep it going!
+            <strong className="text-theme-primary dark:theme-text-secondary">🔥 Don't break the chain!</strong> You've built a {currentStreak}-day streak. Journal today to keep it going!
           </p>
         </motion.div>
       )}

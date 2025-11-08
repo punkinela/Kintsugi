@@ -144,7 +144,7 @@ export default function DataDiagnostic() {
         <button
           onClick={runDiagnostic}
           disabled={isScanning}
-          className="inline-flex items-center px-4 py-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/30 text-kintsugi-gold-700 dark:theme-text-secondary rounded-lg hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/50 transition-colors disabled:opacity-50"
+          className="inline-flex items-center px-4 py-2 theme-bg-primary-light dark:bg-theme-primary/30 text-theme-primary dark:theme-text-secondary rounded-lg hover:bg-theme-accent dark:hover:bg-theme-primary/50 transition-colors disabled:opacity-50"
         >
           <RefreshCw className={`h-4 w-4 mr-2 ${isScanning ? 'animate-spin' : ''}`} />
           {isScanning ? 'Scanning...' : 'Scan Again'}

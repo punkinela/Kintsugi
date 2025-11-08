@@ -81,7 +81,7 @@ export default function GoalsManager() {
 
         <button
           onClick={() => setShowNewGoal(true)}
-          className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+          className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-theme-primary text-white rounded-lg transition-colors font-medium"
         >
           <Plus className="h-4 w-4" />
           New Goal
@@ -202,7 +202,7 @@ function GoalCard({
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${goal.progress}%` }}
-                className="h-full bg-gradient-to-r from-kintsugi-gold-500 to-kintsugi-gold-600 rounded-full"
+                className="h-full bg-gradient-to-r from-theme-primary to-theme-primary rounded-full"
               />
             </div>
           </div>
@@ -456,7 +456,7 @@ function NewGoalModal({
             <button
               type="button"
               onClick={() => setMilestones([...milestones, ''])}
-              className="text-sm theme-text-primary hover:text-kintsugi-gold-700 flex items-center gap-1"
+              className="text-sm theme-text-primary hover:text-theme-primary flex items-center gap-1"
             >
               <Plus className="h-4 w-4" />
               Add Milestone
@@ -473,7 +473,7 @@ function NewGoalModal({
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+              className="flex-1 px-4 py-2 theme-bg-primary hover:bg-theme-primary text-white rounded-lg transition-colors font-medium"
             >
               Create Goal
             </button>

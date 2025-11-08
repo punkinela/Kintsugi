@@ -88,7 +88,7 @@ export default function ProfileCard({ user, onEdit }: ProfileCardProps) {
       <div className="p-6 space-y-6">
         {/* Avatar and Name */}
         <div className="flex items-center gap-4">
-          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-kintsugi-gold-400 to-kintsugi-gold-600 flex items-center justify-center text-4xl shadow-lg">
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-theme-secondary to-theme-primary flex items-center justify-center text-4xl shadow-lg">
             {user.avatar || '👤'}
           </div>
           <div>

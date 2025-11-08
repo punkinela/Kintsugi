@@ -182,7 +182,7 @@ export default function EngagingJournalPrompt({ onOpenJournal }: EngagingJournal
             </h4>
             <button
               onClick={onOpenJournal}
-              className="text-sm theme-text-primary hover:text-kintsugi-gold-700 font-medium"
+              className="text-sm theme-text-primary hover:text-theme-primary font-medium"
             >
               View All
             </button>

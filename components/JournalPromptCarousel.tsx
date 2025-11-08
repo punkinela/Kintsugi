@@ -101,7 +101,7 @@ export default function JournalPromptCarousel({ user, onSelectPrompt }: JournalP
         text: "Did you notice any bias today (your own or others')? What did you learn from it?",
         category: "Awareness",
         icon: Lightbulb,
-        color: "from-amber-500 to-orange-500"
+        color: "from-theme-primary to-orange-500"
       },
       {
         text: "What's one assumption you challenged today?",

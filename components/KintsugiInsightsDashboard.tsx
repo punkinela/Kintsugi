@@ -129,7 +129,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r theme-gradient-to-r dark:from-kintsugi-gold-700 dark:to-amber-700 rounded-2xl shadow-2xl p-8 text-white"
+        className="bg-gradient-to-r theme-gradient-to-r dark:from-theme-primary dark:to-theme-primary rounded-2xl shadow-2xl p-8 text-white"
       >
         <div className="flex items-start gap-4">
           <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
@@ -373,7 +373,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
                 'theme-bg-primary-light  theme-border-light dark:theme-border-primary/50',
                 'from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-800/50',
                 'from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 border-purple-200 dark:border-purple-800/50',
-                'from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border-orange-200 dark:border-orange-800/50'
+                'from-orange-50 to-theme-primary-light dark:from-orange-900/20 dark:to-theme-primary/20 border-orange-200 dark:border-orange-800/50'
               ];
 
               return (
@@ -411,7 +411,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
                     <span className="text-xs font-semibold text-gray-700 dark:text-gray-400">
                       {item.userProfile?.name || 'Anonymous'}
                     </span>
-                    <span className="text-xs text-kintsugi-gold-700 dark:theme-text-secondary font-medium">
+                    <span className="text-xs text-theme-primary dark:theme-text-secondary font-medium">
                       {item.sessionData?.currentStreak || 0} day streak
                     </span>
                   </div>

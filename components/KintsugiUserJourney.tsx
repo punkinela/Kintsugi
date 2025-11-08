@@ -81,8 +81,8 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
         title: '✨ Applying Gold',
         description: 'You began recognizing patterns, learning from challenges, and transforming pain into wisdom.',
         icon: Sparkles,
-        color: 'text-kintsugi-gold-700 dark:theme-text-secondary',
-        bgColor: 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20',
+        color: 'text-theme-primary dark:theme-text-secondary',
+        bgColor: 'theme-bg-primary-light dark:bg-theme-primary/20',
         borderColor: 'theme-border-accent dark:theme-border-primary',
         milestone: hasGrowthMoments ? 'Multiple transformations identified' : 'Identify growth opportunities',
         completed: hasGrowthMoments,
@@ -125,7 +125,7 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
       className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 theme-border-light dark:theme-border-primary/50 overflow-hidden"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r theme-gradient-to-r dark:from-kintsugi-gold-700 dark:to-amber-700 px-6 py-8 text-white">
+      <div className="bg-gradient-to-r theme-gradient-to-r dark:from-theme-primary dark:to-theme-primary px-6 py-8 text-white">
         <div className="flex items-start gap-4 mb-4">
           <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
             <BookOpen className="h-8 w-8" />
@@ -162,7 +162,7 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
       <div className="p-6">
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-kintsugi-gold-300 via-kintsugi-gold-400 to-kintsugi-gold-200 dark:from-kintsugi-gold-700 dark:via-kintsugi-gold-600 dark:to-kintsugi-gold-800 rounded-full"></div>
+          <div className="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-theme-secondary via-amber-400 to-theme-accent dark:from-theme-primary dark:via-amber-500 dark:to-theme-primary rounded-full"></div>
 
           <div className="space-y-8">
             {journeyPhases.map((phase, index) => {

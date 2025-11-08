@@ -160,7 +160,7 @@ export default function JourneyRichnessScore({ entries }: JourneyRichnessScorePr
             </div>
           </div>
 
-          <div className={`px-4 py-2 rounded-full bg-gradient-to-r ${config.color} text-white font-bold`}>
+          <div className={`px-4 py-2 rounded-full ${config.color} text-white font-bold`}>
             {metrics.level}
           </div>
         </div>

@@ -273,7 +273,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
           {activeFilterCount > 0 && (
             <button
               onClick={handleClearFilters}
-              className="ml-3 theme-text-primary hover:text-kintsugi-gold-700 dark:theme-text-secondary dark:hover:theme-text-secondary font-medium"
+              className="ml-3 theme-text-primary hover:text-theme-primary dark:theme-text-secondary dark:hover:theme-text-secondary font-medium"
             >
               Clear all filters
             </button>
@@ -283,7 +283,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
         {activeFilterCount > 0 && (
           <button
             onClick={() => setShowSaveDialog(true)}
-            className="flex items-center gap-1 theme-text-primary hover:text-kintsugi-gold-700 dark:theme-text-secondary dark:hover:theme-text-secondary font-medium"
+            className="flex items-center gap-1 theme-text-primary hover:text-theme-primary dark:theme-text-secondary dark:hover:theme-text-secondary font-medium"
           >
             <Bookmark className="h-4 w-4" />
             Save Search

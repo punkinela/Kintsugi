@@ -128,7 +128,7 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
 
         <button
           onClick={exportStats}
-          className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+          className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-theme-primary text-white rounded-lg transition-colors font-medium"
         >
           <Download className="h-4 w-4" />
           Export Report
@@ -219,7 +219,7 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${patterns.consistencyScore}%` }}
-                    className="h-full bg-gradient-to-r from-kintsugi-gold-500 to-kintsugi-gold-600"
+                    className="h-full bg-gradient-to-r from-theme-primary to-theme-primary"
                   />
                 </div>
               </div>

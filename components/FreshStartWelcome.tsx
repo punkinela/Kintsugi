@@ -140,11 +140,11 @@ export default function FreshStartWelcome({ userName, onDismiss }: FreshStartWel
       button: 'bg-purple-600 hover:bg-purple-700'
     },
     gold: {
-      bg: 'from-kintsugi-gold-500/10 to-kintsugi-gold-600/10 dark:from-kintsugi-gold-900/20 dark:to-kintsugi-gold-800/20',
+      bg: 'from-theme-primary/10 to-theme-primary/10 dark:from-theme-primary/20 dark:to-theme-primary/20',
       border: 'theme-border-light/50 dark:theme-border-primary/50',
       icon: 'theme-text-primary dark:theme-text-secondary',
-      text: 'text-kintsugi-gold-900 dark:text-kintsugi-gold-100',
-      button: 'theme-bg-primary hover:bg-kintsugi-gold-700'
+      text: 'text-theme-primary dark:text-theme-accent',
+      button: 'theme-bg-primary hover:bg-theme-primary'
     },
     green: {
       bg: 'from-green-500/10 to-green-600/10 dark:from-green-900/20 dark:to-green-800/20',

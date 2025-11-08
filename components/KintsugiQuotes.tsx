@@ -75,7 +75,7 @@ export default function KintsugiQuotes() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative overflow-hidden bg-gradient-to-br from-kintsugi-gold-100 via-amber-50 to-yellow-100 dark:from-kintsugi-gold-900/30 dark:via-amber-900/20 dark:to-yellow-900/30 rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50"
+      className="relative overflow-hidden bg-gradient-to-br theme-gradient-to-br  rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50"
     >
       {/* Decorative pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -125,7 +125,7 @@ export default function KintsugiQuotes() {
             </blockquote>
 
             <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-kintsugi-gold-700 dark:theme-text-secondary">
+              <p className="text-sm font-medium theme-text-primary dark:theme-text-secondary">
                 — {currentQuote.author}
               </p>
 
@@ -137,7 +137,7 @@ export default function KintsugiQuotes() {
                     className={`w-2 h-2 rounded-full transition-all ${
                       index === currentQuoteIndex
                         ? 'theme-bg-primary dark:theme-bg-secondary w-6'
-                        : 'bg-kintsugi-gold-300 dark:bg-kintsugi-gold-700 hover:theme-bg-secondary dark:hover:theme-bg-primary'
+                        : 'theme-bg-secondary dark:theme-bg-primary hover:theme-bg-secondary dark:hover:theme-bg-primary'
                     }`}
                     aria-label={`View quote ${index + 1}`}
                   />

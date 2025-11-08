@@ -55,7 +55,7 @@ export default function PersonalizedWisdom({ user }: PersonalizedWisdomProps) {
     wisdom: 'from-purple-500 to-indigo-600',
     transformation: 'from-pink-500 to-rose-600',
     advocacy: 'from-blue-500 to-cyan-600',
-    community: 'from-amber-500 to-yellow-600',
+    community: 'from-theme-primary to-yellow-600',
   };
 
   const themeIcons = {
@@ -134,7 +134,7 @@ export default function PersonalizedWisdom({ user }: PersonalizedWisdomProps) {
               <div className="flex items-start gap-2">
                 <Sparkles className="h-5 w-5 theme-text-primary dark:theme-text-secondary flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm font-semibold text-kintsugi-gold-800 dark:theme-text-secondary mb-1">
+                  <p className="text-sm font-semibold theme-text-primary dark:theme-text-secondary mb-1">
                     Kintsugi Connection
                   </p>
                   <p className="text-sm text-gray-700 dark:text-gray-300">

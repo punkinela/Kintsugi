@@ -82,7 +82,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
   return (
     <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-amber-50 to-orange-50 ">
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-theme-primary-light to-orange-50 ">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Sparkles className="h-6 w-6 theme-text-primary dark:theme-text-secondary" />
@@ -107,7 +107,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
 
             <button
               onClick={downloadVessel}
-              className="px-3 py-2 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white text-sm font-semibold rounded-lg transition-all flex items-center gap-2"
+              className="px-3 py-2 bg-gradient-to-r from-theme-primary to-orange-600 hover:from-theme-primary hover:to-orange-700 text-white text-sm font-semibold rounded-lg transition-all flex items-center gap-2"
             >
               <Download className="h-4 w-4" />
               Export
@@ -132,7 +132,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
             initial={{ width: 0 }}
             animate={{ width: `${repairPercentage}%` }}
             transition={{ duration: 1 }}
-            className="h-full bg-gradient-to-r from-amber-500 to-orange-500"
+            className="h-full bg-gradient-to-r from-theme-primary to-orange-500"
           />
         </div>
       </div>
@@ -269,7 +269,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       </div>
 
       {/* Philosophy Note */}
-      <div className="px-6 py-4 bg-gradient-to-r from-amber-50 to-orange-50  border-t border-gray-200 dark:border-gray-700">
+      <div className="px-6 py-4 bg-gradient-to-r from-theme-primary-light to-orange-50  border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-700 dark:text-gray-300">
           <span className="font-semibold">金継ぎ Kintsukuroi:</span> Each crack represents a
           challenge you've faced. The golden repairs show where you've grown stronger. Your vessel

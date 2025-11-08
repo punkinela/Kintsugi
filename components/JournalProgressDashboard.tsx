@@ -258,7 +258,7 @@ export default function JournalProgressDashboard({ entries }: JournalProgressDas
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={`w-full rounded-t-lg ${
                     isCurrentWeek
-                      ? 'bg-gradient-to-t from-kintsugi-gold-500 to-amber-400'
+                      ? 'bg-gradient-to-t from-theme-primary to-theme-secondary'
                       : 'bg-gradient-to-t from-indigo-500 to-purple-500'
                   } min-h-[20px] relative group cursor-pointer`}
                   title={`${count} ${count === 1 ? 'entry' : 'entries'}`}

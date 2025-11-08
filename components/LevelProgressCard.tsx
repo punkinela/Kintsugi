@@ -132,7 +132,7 @@ export default function LevelProgressCard() {
                 key={index}
                 className={`flex items-center justify-between p-2 rounded-lg transition-all ${
                   isCurrentTier
-                    ? 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20 border theme-border-accent dark:theme-border-primary'
+                    ? 'theme-bg-primary-light dark:bg-theme-primary/20 border theme-border-accent dark:theme-border-primary'
                     : isCompleted
                     ? 'bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-900/30'
                     : 'bg-gray-50 dark:bg-kintsugi-dark-900/50 border border-gray-200 dark:border-kintsugi-dark-600'
