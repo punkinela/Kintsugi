@@ -269,28 +269,24 @@ html {
   }
 
   .nav-tab:hover:not([data-active="true"]) {
-    color: #34d399 !important;  /* Bright green - hardcoded for testing */
+    color: #34d399 !important;
     border-color: #34d399 !important;
-    border-bottom-width: 3px !important;  /* Thicker border on hover */
-    background-color: #d1fae5 !important;  /* Light mint background - hardcoded */
-    border-radius: 4px 4px 0 0 !important;  /* Rounded top corners */
-    transform: translateY(-2px) !important;  /* Lift higher */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;  /* Add shadow */
-    transition: all 0.15s ease !important;
+    border-bottom-color: #34d399 !important;
+    opacity: 0.9 !important;
   }
 
-  /* Hover effect for active tabs */
+  /* Hover effect for active tabs too */
   .nav-tab[data-active="true"]:hover {
-    border-bottom-width: 3px !important;  /* Thicker border */
-    transform: translateY(-1px) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
-    transition: all 0.15s ease !important;
+    opacity: 0.8 !important;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
   }
 
-  /* CRITICAL: Catch-all hover that applies to ALL tabs */
+  /* SUPER FORCE hover - should override everything */
   .nav-tab:hover {
-    border-bottom-color: #34d399 !important;  /* Bright green - hardcoded */
-    cursor: pointer !important;
+    border-bottom-color: #34d399 !important;
+    border-color: #34d399 !important;
+    cursor: pointer;
   }
 
   /* Mobile navigation tabs */
