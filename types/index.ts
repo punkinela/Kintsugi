@@ -17,6 +17,13 @@ export interface UserProfile {
   ethnicity?: string;
   profession?: string;
   interests?: string[];
+  bio?: string;
+  skills?: string[];
+  education?: {
+    degree?: string;
+    institution?: string;
+    year?: string;
+  }[];
   // Internal flags
   skipped?: boolean; // Indicates if the user skipped profile setup
 }

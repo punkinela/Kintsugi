@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Zap, Clock, Send, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import confetti from 'canvas-confetti';
+import AISmartWritingCoach from '@/components/AISmartWritingCoach';
 
 interface QuickEntryCardProps {
   onSave: (text: string) => void;
@@ -123,6 +124,13 @@ export default function QuickEntryCard({ onSave }: QuickEntryCardProps) {
           {text.length}/280
         </div>
       </div>
+
+      {/* AI Writing Coach */}
+      {text.trim().length > 10 && (
+        <div className="mt-4">
+          <AISmartWritingCoach text={text} compact={false} />
+        </div>
+      )}
 
       {/* Action Buttons */}
       <div className="flex items-center gap-3 mt-4">
