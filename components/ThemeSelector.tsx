@@ -125,31 +125,25 @@ export default function ThemeSelector() {
       </div>
 
       {/* THEME PREVIEW BOX - Shows if themes are working */}
-      <div
-        className="theme-bg-primary p-8 rounded-xl shadow-lg border-4 border-white dark:border-gray-700"
-        style={{ backgroundColor: 'var(--theme-primary)' }}
-      >
+      <div className="theme-bg-primary p-8 rounded-xl shadow-lg border-4 border-white dark:border-gray-700">
         <div className="text-center">
           <h3 className="text-white text-3xl font-bold mb-3">
             Current Theme: {themes.find(t => t.id === selectedTheme)?.name}
           </h3>
           <p className="text-white text-lg mb-4">
-            ✨ If this box changes colors when you click themes below, it's working! ✨
+            ✨ This box changes colors instantly when you switch themes! ✨
           </p>
           <div className="flex justify-center gap-4 mt-4">
             <div
-              className="w-16 h-16 rounded-lg border-4 border-white shadow-md"
-              style={{ backgroundColor: 'var(--theme-primary)' }}
+              className="w-16 h-16 rounded-lg border-4 border-white shadow-md theme-bg-primary"
               title="Primary Color"
             />
             <div
-              className="w-16 h-16 rounded-lg border-4 border-white shadow-md"
-              style={{ backgroundColor: 'var(--theme-secondary)' }}
+              className="w-16 h-16 rounded-lg border-4 border-white shadow-md theme-bg-secondary"
               title="Secondary Color"
             />
             <div
-              className="w-16 h-16 rounded-lg border-4 border-white shadow-md"
-              style={{ backgroundColor: 'var(--theme-accent)' }}
+              className="w-16 h-16 rounded-lg border-4 border-white shadow-md theme-bg-accent"
               title="Accent Color"
             />
           </div>
