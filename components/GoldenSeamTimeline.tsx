@@ -104,10 +104,10 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
   return (
     <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20">
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 theme-gradient-to-br">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link2 className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+            <Link2 className="h-6 w-6 theme-text-primary" />
             <div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                 Golden Seam Timeline
@@ -119,7 +119,7 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
           </div>
 
           <div className="text-right">
-            <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+            <div className="text-2xl font-bold theme-text-primary">
               {connections.length}
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -136,14 +136,14 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="px-6 py-3 bg-amber-100 dark:bg-amber-900/30 border-b border-amber-200 dark:border-amber-800"
+            className="px-6 py-3 theme-bg-primary-light border-b theme-border-primary"
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-amber-900 dark:text-amber-200">
+                <p className="text-sm font-semibold text-gray-900 dark:text-white">
                   Linking from: {linkingFrom.accomplishment.substring(0, 60)}...
                 </p>
-                <p className="text-xs text-amber-700 dark:text-amber-300">
+                <p className="text-xs text-gray-700 dark:text-gray-300">
                   Click another entry to create a golden seam connection
                 </p>
               </div>
@@ -152,7 +152,7 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
                   setIsLinkingMode(false);
                   setLinkingFrom(null);
                 }}
-                className="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium rounded-lg transition-colors"
+                className="px-3 py-1 theme-btn-primary text-xs font-medium rounded-lg"
               >
                 Cancel
               </button>
@@ -183,7 +183,7 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
                 {/* Timeline Dot */}
                 <div className={`absolute left-9 top-2 w-6 h-6 rounded-full border-4 ${
                   hasConnections
-                    ? 'bg-amber-500 border-amber-300 dark:border-amber-700 shadow-lg shadow-amber-500/50'
+                    ? 'theme-bg-primary theme-border-primary shadow-lg'
                     : entryIsChallenge
                     ? 'bg-red-400 border-red-200 dark:border-red-700'
                     : 'bg-green-400 border-green-200 dark:border-green-700'
@@ -193,9 +193,9 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
                 <div
                   className={`bg-white dark:bg-gray-800 rounded-lg p-4 border-2 cursor-pointer transition-all ${
                     hasConnections
-                      ? 'border-amber-300 dark:border-amber-700 hover:shadow-xl'
+                      ? 'theme-border-primary hover:shadow-xl'
                       : 'border-gray-200 dark:border-gray-700 hover:shadow-lg'
-                  } ${isLinkingMode && linkingFrom?.id !== entry.id ? 'hover:border-amber-400' : ''}`}
+                  } ${isLinkingMode && linkingFrom?.id !== entry.id ? 'hover:theme-border-accent' : ''}`}
                   onClick={() => {
                     if (isLinkingMode && linkingFrom?.id !== entry.id) {
                       completeLink(entry);
@@ -216,7 +216,7 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
                           e.stopPropagation();
                           startLinking(entry);
                         }}
-                        className="px-2 py-1 bg-amber-100 hover:bg-amber-200 dark:bg-amber-900/30 dark:hover:bg-amber-900/50 text-amber-700 dark:text-amber-300 text-xs rounded transition-colors flex items-center gap-1"
+                        className="px-2 py-1 theme-bg-primary-light hover:theme-bg-primary theme-text-primary hover:text-white text-xs rounded transition-colors flex items-center gap-1"
                       >
                         <Link2 className="h-3 w-3" />
                         Link
@@ -244,11 +244,11 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
                         return (
                           <div
                             key={conn.id}
-                            className="flex items-start gap-2 p-2 bg-amber-50 dark:bg-amber-900/20 rounded border border-amber-200 dark:border-amber-800"
+                            className="flex items-start gap-2 p-2 theme-bg-primary-light rounded border theme-border-primary"
                           >
-                            <Sparkles className="h-4 w-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                            <Sparkles className="h-4 w-4 theme-text-primary flex-shrink-0 mt-0.5" />
                             <div className="flex-1">
-                              <p className="text-xs font-semibold text-amber-900 dark:text-amber-200">
+                              <p className="text-xs font-semibold theme-text-primary">
                                 {isFrom ? 'Led to →' : '← Grew from'}
                               </p>
                               <p className="text-xs text-gray-700 dark:text-gray-300 italic">
@@ -274,7 +274,7 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
                         initial={{ pathLength: 0, opacity: 0 }}
                         animate={{ pathLength: 1, opacity: 1 }}
                         transition={{ duration: 1, delay: 0.5 }}
-                        className="absolute left-12 top-8 w-1 h-20 bg-gradient-to-b from-amber-400 to-amber-600 opacity-50"
+                        className="absolute left-12 top-8 w-1 h-20 theme-gradient opacity-50"
                       />
                     );
                   }
@@ -287,7 +287,7 @@ export default function GoldenSeamTimeline({ entries }: GoldenSeamTimelineProps)
       </div>
 
       {/* Philosophy Note */}
-      <div className="px-6 py-4 bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 border-t border-gray-200 dark:border-gray-700">
+      <div className="px-6 py-4 theme-gradient-to-br border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-700 dark:text-gray-300">
           <span className="font-semibold">金継ぎ Kintsukuroi:</span> Create golden connections
           between your challenges and the strengths they revealed. These connections tell your

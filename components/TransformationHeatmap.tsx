@@ -92,7 +92,7 @@ export default function TransformationHeatmap({ entries, monthsToShow = 6 }: Tra
   // Get color for day
   const getDayColor = (day: DayData) => {
     if (day.hasTransformation) {
-      return 'bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-amber-500/50'; // Golden repair!
+      return 'theme-gradient-to-br shadow-lg'; // Golden repair!
     }
     if (day.hasGrowth) {
       return 'bg-green-400 dark:bg-green-600';
@@ -120,10 +120,10 @@ export default function TransformationHeatmap({ entries, monthsToShow = 6 }: Tra
   return (
     <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20">
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 theme-gradient-to-br">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Calendar className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+            <Calendar className="h-6 w-6 theme-text-primary" />
             <div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                 Transformation Heatmap
@@ -135,7 +135,7 @@ export default function TransformationHeatmap({ entries, monthsToShow = 6 }: Tra
           </div>
 
           <div className="text-right">
-            <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+            <div className="text-2xl font-bold theme-text-primary">
               {stats.transformations}
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -160,7 +160,7 @@ export default function TransformationHeatmap({ entries, monthsToShow = 6 }: Tra
           <div className="text-xs text-gray-600 dark:text-gray-400">Growth</div>
         </div>
         <div className="text-center">
-          <div className="text-lg font-bold text-amber-600 dark:text-amber-400">{stats.transformations}</div>
+          <div className="text-lg font-bold theme-text-primary">{stats.transformations}</div>
           <div className="text-xs text-gray-600 dark:text-gray-400">Repairs</div>
         </div>
       </div>
@@ -238,7 +238,7 @@ export default function TransformationHeatmap({ entries, monthsToShow = 6 }: Tra
             <span className="text-gray-600 dark:text-gray-400">Growth</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-gradient-to-br from-amber-400 to-orange-500"></div>
+            <div className="w-4 h-4 rounded theme-gradient-to-br"></div>
             <span className="text-gray-600 dark:text-gray-400 font-semibold">Golden Repair (Both!)</span>
           </div>
         </div>
@@ -248,10 +248,10 @@ export default function TransformationHeatmap({ entries, monthsToShow = 6 }: Tra
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl border-2 border-amber-200 dark:border-amber-800"
+            className="mt-6 p-4 theme-bg-primary-light rounded-xl border-2 theme-border-primary"
           >
             <div className="flex items-center gap-2 mb-3">
-              <Calendar className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+              <Calendar className="h-5 w-5 theme-text-primary" />
               <h4 className="font-bold text-gray-900 dark:text-white">
                 {new Date(selectedDay.date).toLocaleDateString('en', {
                   weekday: 'long',
@@ -279,7 +279,7 @@ export default function TransformationHeatmap({ entries, monthsToShow = 6 }: Tra
       </div>
 
       {/* Philosophy Note */}
-      <div className="px-6 py-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-t border-gray-200 dark:border-gray-700">
+      <div className="px-6 py-4 theme-gradient-to-br border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-700 dark:text-gray-300">
           <span className="font-semibold">金継ぎ Kintsukuroi:</span> Golden days represent moments
           when you both faced a challenge AND grew from it. These are your most valuable days of transformation.
