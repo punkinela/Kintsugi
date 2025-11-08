@@ -286,9 +286,9 @@ export default function AdminDashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-kintsugi-gold-50 via-white to-amber-50 dark:from-kintsugi-dark-900 dark:via-kintsugi-dark-900 dark:to-kintsugi-dark-800">
+      <div className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900">
         {/* Header Skeleton */}
-        <div className="bg-gradient-to-r from-kintsugi-gold-600 to-amber-600 dark:from-kintsugi-gold-700 dark:to-amber-700 shadow-xl">
+        <div className="theme-gradient-to-r shadow-xl">
           <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
             <div className="animate-pulse">
               <div className="h-8 bg-white/30 rounded w-64 mb-2"></div>
@@ -344,8 +344,8 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-kintsugi-gold-50 via-white to-amber-50 dark:from-kintsugi-dark-900 dark:via-kintsugi-dark-900 dark:to-kintsugi-dark-800">
-      <header className="bg-gradient-to-r from-kintsugi-gold-600 via-amber-600 to-orange-500 dark:from-kintsugi-gold-700 dark:via-amber-700 dark:to-orange-600 shadow-2xl relative overflow-hidden">
+    <div className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900">
+      <header className="theme-gradient-to-r shadow-2xl relative overflow-hidden">
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{

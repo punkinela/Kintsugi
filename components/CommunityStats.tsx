@@ -56,12 +56,12 @@ export default function CommunityStats({ userEntryCount }: CommunityStatsProps) 
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 rounded-2xl shadow-lg border-2 border-blue-200 dark:border-blue-800/30 p-6"
+      className="theme-bg-primary-light rounded-2xl shadow-lg border-2 theme-border-light p-6"
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl shadow-lg">
+          <div className="p-3 theme-gradient-to-r rounded-xl shadow-lg">
             <Users className="h-6 w-6 text-white" />
           </div>
           <div>
