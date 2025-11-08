@@ -85,6 +85,13 @@ import InteractiveKintsugiVessel from '@/components/InteractiveKintsugiVessel';
 import KintsugiPortfolioGenerator from '@/components/KintsugiPortfolioGenerator';
 import JourneyRichnessScore from '@/components/JourneyRichnessScore';
 
+// Phase 14: AI-Powered Enhancements
+import InAppWeeklyDigest from '@/components/InAppWeeklyDigest';
+import AICareerGapAnalyzer from '@/components/AICareerGapAnalyzer';
+import AIConfidenceScoreTracker from '@/components/AIConfidenceScoreTracker';
+import AISmartTaggingSearch from '@/components/AISmartTaggingSearch';
+import AIInterviewPrepGenerator from '@/components/AIInterviewPrepGenerator';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -125,6 +132,8 @@ export default function Home() {
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
   const [showAchievementsPanel, setShowAchievementsPanel] = useState(false);
   const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
+  const [showInterviewPrep, setShowInterviewPrep] = useState(false);
+  const [selectedEntryForInterview, setSelectedEntryForInterview] = useState<string>('');
 
   // Phase 9: Interactive components
   const { toasts, addToast, removeToast } = useToast();
@@ -858,6 +867,9 @@ export default function Home() {
               {/* Fresh Start Welcome - Research-Backed Return Messaging */}
               {user && <FreshStartWelcome userName={user.name} />}
 
+              {/* Weekly Digest - AI-Powered Progress Summary */}
+              <InAppWeeklyDigest />
+
               {/* Profile Completion Reminder */}
               {user && (
                 <div className="profile-reminder">
@@ -918,6 +930,21 @@ export default function Home() {
 
           {activeTab === 'journal' && (
             <div className="space-y-6">
+              {/* AI Smart Search - Tagging & Semantic Search */}
+              {journalEntries.length > 0 && (
+                <AISmartTaggingSearch
+                  entries={journalEntries.map(entry => ({
+                    id: entry.id,
+                    text: `${entry.accomplishment} ${entry.reflection || ''}`,
+                    date: new Date(entry.date),
+                    manualTags: entry.tags
+                  }))}
+                  onEntryClick={(entry) => {
+                    setShowAccomplishments(true);
+                  }}
+                />
+              )}
+
               {/* Phase 10: Research-Backed Engagement Components */}
 
               {/* Quick Entry Card - Friction Reduction (BJ Fogg) */}
@@ -1006,8 +1033,7 @@ export default function Home() {
                         key={entry.id}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl border border-purple-200 dark:border-purple-800 hover:shadow-lg transition-shadow cursor-pointer"
-                        onClick={() => setShowAccomplishments(true)}
+                        className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl border border-purple-200 dark:border-purple-800 hover:shadow-lg transition-shadow"
                       >
                         <div className="flex items-start justify-between mb-2">
                           <div className="flex items-center gap-2">
@@ -1046,6 +1072,25 @@ export default function Home() {
                             ))}
                           </div>
                         )}
+                        {/* Entry Actions */}
+                        <div className="flex gap-2 mt-4 pt-3 border-t border-purple-200 dark:border-purple-700">
+                          <button
+                            onClick={() => {
+                              setSelectedEntryForInterview(`${entry.accomplishment} ${entry.reflection || ''}`);
+                              setShowInterviewPrep(true);
+                            }}
+                            className="flex-1 px-3 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-medium rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors flex items-center justify-center gap-2"
+                          >
+                            <MessageSquare className="h-4 w-4" />
+                            Interview Prep
+                          </button>
+                          <button
+                            onClick={() => setShowAccomplishments(true)}
+                            className="flex-1 px-3 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                          >
+                            View Details
+                          </button>
+                        </div>
                       </motion.div>
                     ))}
                   </div>
@@ -1193,6 +1238,17 @@ export default function Home() {
                 </div>
               </motion.div>
 
+              {/* AI Confidence Score Tracker - Track Writing Confidence Over Time */}
+              {journalEntries.length > 0 && (
+                <AIConfidenceScoreTracker
+                  entries={journalEntries.map(entry => ({
+                    id: entry.id,
+                    text: `${entry.accomplishment} ${entry.reflection || ''}`,
+                    date: new Date(entry.date)
+                  }))}
+                />
+              )}
+
               {/* Phase 3: Advanced Analytics */}
               <MoodTracker />
               <WordCloudVisualization />
@@ -1297,6 +1353,14 @@ export default function Home() {
                   </div>
                 </div>
               </motion.div>
+
+              {/* AI Career Gap Analyzer - Identify Missing Skills & Experiences */}
+              {user && (
+                <AICareerGapAnalyzer
+                  user={user}
+                  targetRole={user.profession || 'Senior Professional'}
+                />
+              )}
 
               {/* Journey Richness Score - Profile Quality Overview */}
               <JourneyRichnessScore entries={journalEntries} />
@@ -1599,6 +1663,33 @@ export default function Home() {
 
       {/* FAQ Sidebar */}
       <FAQSidebar isOpen={showFAQ} onClose={() => setShowFAQ(false)} />
+
+      {/* AI Interview Prep Generator Modal */}
+      {showInterviewPrep && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowInterviewPrep(false);
+            }
+          }}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 z-10 bg-white dark:bg-kintsugi-dark-800 p-4 border-b border-gray-200 dark:border-gray-700 flex justify-end">
+              <button
+                onClick={() => setShowInterviewPrep(false)}
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              >
+                <X className="h-5 w-5 text-gray-500" />
+              </button>
+            </div>
+            <AIInterviewPrepGenerator achievementText={selectedEntryForInterview} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
