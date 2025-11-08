@@ -17,7 +17,7 @@ export default function StreakDisplay({ currentStreak, longestStreak }: StreakDi
         animate={{ scale: 1 }}
         className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-kintsugi-gold-600 to-kintsugi-gold-800 rounded-full text-kintsugi-gold-50 shadow-lg border border-kintsugi-gold-400/30"
       >
-        <Flame className="w-5 h-5 text-kintsugi-gold-200" />
+        <Flame className="w-5 h-5 theme-text-secondary" />
         <div className="flex flex-col">
           <span className="text-xs font-medium text-kintsugi-gold-100/90">Streak</span>
           <span className="text-lg font-bold leading-none text-kintsugi-gold-50">{currentStreak}</span>
@@ -32,7 +32,7 @@ export default function StreakDisplay({ currentStreak, longestStreak }: StreakDi
           transition={{ delay: 0.1 }}
           className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-kintsugi-gold-500 to-kintsugi-gold-700 rounded-full text-kintsugi-gold-50 shadow-lg border border-kintsugi-gold-400/20"
         >
-          <Trophy className="w-5 h-5 text-kintsugi-gold-200" />
+          <Trophy className="w-5 h-5 theme-text-secondary" />
           <div className="flex flex-col">
             <span className="text-xs font-medium text-kintsugi-gold-100/90">Best</span>
             <span className="text-lg font-bold leading-none text-kintsugi-gold-50">{longestStreak}</span>

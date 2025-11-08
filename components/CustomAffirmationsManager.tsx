@@ -90,10 +90,10 @@ export default function CustomAffirmationsManager() {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-kintsugi-gold-600" />
+              <Sparkles className="h-6 w-6 theme-text-primary" />
               My Affirmations
             </h2>
-            <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+            <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
               Create and manage your personal affirmations
             </p>
           </div>
@@ -101,21 +101,21 @@ export default function CustomAffirmationsManager() {
           <div className="flex gap-2">
             <button
               onClick={handleExport}
-              className="p-2 bg-white dark:bg-kintsugi-dark-800 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700 rounded-lg hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 transition-colors"
+              className="p-2 bg-white dark:bg-kintsugi-dark-800 border theme-border-light dark:border-kintsugi-dark-700 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 transition-colors"
               title="Export"
             >
-              <Download className="h-5 w-5 text-kintsugi-gold-600" />
+              <Download className="h-5 w-5 theme-text-primary" />
             </button>
             <button
               onClick={handleImport}
-              className="p-2 bg-white dark:bg-kintsugi-dark-800 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700 rounded-lg hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 transition-colors"
+              className="p-2 bg-white dark:bg-kintsugi-dark-800 border theme-border-light dark:border-kintsugi-dark-700 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 transition-colors"
               title="Import"
             >
-              <Upload className="h-5 w-5 text-kintsugi-gold-600" />
+              <Upload className="h-5 w-5 theme-text-primary" />
             </button>
             <button
               onClick={() => setShowNewForm(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+              className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
             >
               <Plus className="h-4 w-4" />
               New
@@ -156,8 +156,8 @@ export default function CustomAffirmationsManager() {
             onClick={() => setFilter(f)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${
               filter === f
-                ? 'bg-kintsugi-gold-600 text-white'
-                : 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-dark-600 dark:text-kintsugi-gold-400 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700'
+                ? 'theme-bg-primary text-white'
+                : 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-dark-600 dark:theme-text-secondary hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700'
             }`}
           >
             {f}
@@ -179,14 +179,14 @@ export default function CustomAffirmationsManager() {
         </AnimatePresence>
 
         {affirmations.length === 0 && (
-          <div className="text-center py-12 bg-white dark:bg-kintsugi-dark-800 rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
-            <Sparkles className="h-12 w-12 mx-auto text-kintsugi-gold-400 mb-3" />
-            <p className="text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mb-4">
+          <div className="text-center py-12 bg-white dark:bg-kintsugi-dark-800 rounded-xl border theme-border-light dark:border-kintsugi-dark-700">
+            <Sparkles className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
+            <p className="text-kintsugi-dark-600 dark:theme-text-secondary mb-4">
               {filter === 'favorites' ? 'No favorite affirmations yet.' : 'No custom affirmations yet.'}
             </p>
             <button
               onClick={() => setShowNewForm(true)}
-              className="text-kintsugi-gold-600 hover:text-kintsugi-gold-700 font-medium"
+              className="theme-text-primary hover:text-kintsugi-gold-700 font-medium"
             >
               Create your first affirmation
             </button>
@@ -227,7 +227,7 @@ function AffirmationCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700"
+      className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1">
@@ -235,7 +235,7 @@ function AffirmationCard({
             <span className={`px-2 py-1 rounded text-xs font-medium capitalize ${categoryColors[affirmation.category]}`}>
               {affirmation.category}
             </span>
-            <div className="flex items-center gap-1 text-xs text-kintsugi-dark-500 dark:text-kintsugi-gold-500">
+            <div className="flex items-center gap-1 text-xs text-kintsugi-dark-500 dark:theme-text-primary">
               <Eye className="h-3 w-3" />
               {affirmation.timesViewed}
             </div>
@@ -250,7 +250,7 @@ function AffirmationCard({
               {affirmation.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2 py-0.5 text-xs rounded bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:text-kintsugi-gold-400"
+                  className="px-2 py-0.5 text-xs rounded theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary"
                 >
                   #{tag}
                 </span>
@@ -265,7 +265,7 @@ function AffirmationCard({
             className={`p-2 rounded-lg transition-all ${
               affirmation.isFavorite
                 ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                : 'hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 text-kintsugi-dark-400'
+                : 'hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 text-kintsugi-dark-400'
             }`}
           >
             <Heart className={`h-4 w-4 ${affirmation.isFavorite ? 'fill-current' : ''}`} />
@@ -329,7 +329,7 @@ function NewAffirmationForm({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
               Affirmation Text
             </label>
             <textarea
@@ -338,22 +338,22 @@ function NewAffirmationForm({
               rows={3}
               required
               minLength={10}
-              className="w-full px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+              className="w-full px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
               placeholder="I am capable of achieving my goals..."
             />
-            <p className="text-xs text-kintsugi-dark-500 dark:text-kintsugi-gold-500 mt-1">
+            <p className="text-xs text-kintsugi-dark-500 dark:theme-text-primary mt-1">
               {text.length}/10 characters minimum
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
               Category
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as CustomAffirmation['category'])}
-              className="w-full px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+              className="w-full px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
             >
               <option value="accomplishment">Accomplishment</option>
               <option value="strength">Strength</option>
@@ -364,7 +364,7 @@ function NewAffirmationForm({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
               Tags {tags.length > 0 && <span className="text-xs">(suggested)</span>}
             </label>
             <div className="flex gap-2 mb-2">
@@ -373,13 +373,13 @@ function NewAffirmationForm({
                 value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
-                className="flex-1 px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+                className="flex-1 px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
                 placeholder="Add a tag..."
               />
               <button
                 type="button"
                 onClick={handleAddTag}
-                className="px-4 py-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:text-kintsugi-gold-400 rounded-lg hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40"
+                className="px-4 py-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary rounded-lg hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40"
               >
                 Add
               </button>
@@ -390,7 +390,7 @@ function NewAffirmationForm({
                   <span
                     key={tag}
                     onClick={() => setTags(tags.filter(t => t !== tag))}
-                    className="px-2 py-1 text-xs rounded bg-kintsugi-gold-600 text-white cursor-pointer hover:bg-kintsugi-gold-700"
+                    className="px-2 py-1 text-xs rounded theme-bg-primary text-white cursor-pointer hover:bg-kintsugi-gold-700"
                   >
                     #{tag} ×
                   </span>
@@ -403,14 +403,14 @@ function NewAffirmationForm({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 transition-colors"
+              className="flex-1 px-4 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={text.trim().length < 10}
-              className="flex-1 px-4 py-2 bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Create
             </button>

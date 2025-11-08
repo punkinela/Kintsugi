@@ -75,7 +75,7 @@ export default function KintsugiQuotes() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative overflow-hidden bg-gradient-to-br from-kintsugi-gold-100 via-amber-50 to-yellow-100 dark:from-kintsugi-gold-900/30 dark:via-amber-900/20 dark:to-yellow-900/30 rounded-2xl shadow-lg border-2 border-kintsugi-gold-300 dark:border-kintsugi-gold-700/50"
+      className="relative overflow-hidden bg-gradient-to-br from-kintsugi-gold-100 via-amber-50 to-yellow-100 dark:from-kintsugi-gold-900/30 dark:via-amber-900/20 dark:to-yellow-900/30 rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50"
     >
       {/* Decorative pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -89,7 +89,7 @@ export default function KintsugiQuotes() {
       <div className="relative p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-kintsugi-gold-500 rounded-lg">
+            <div className="p-2 theme-bg-primary rounded-lg">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <div>
@@ -103,10 +103,10 @@ export default function KintsugiQuotes() {
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.3 }}
             onClick={handleNext}
-            className="p-2 bg-white dark:bg-kintsugi-dark-700 rounded-lg hover:bg-kintsugi-gold-50 dark:hover:bg-kintsugi-dark-600 transition-colors"
+            className="p-2 bg-white dark:bg-kintsugi-dark-700 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-600 transition-colors"
             aria-label="Next quote"
           >
-            <RefreshCw className="h-4 w-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+            <RefreshCw className="h-4 w-4 theme-text-primary dark:theme-text-secondary" />
           </motion.button>
         </div>
 
@@ -125,7 +125,7 @@ export default function KintsugiQuotes() {
             </blockquote>
 
             <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-kintsugi-gold-700 dark:text-kintsugi-gold-400">
+              <p className="text-sm font-medium text-kintsugi-gold-700 dark:theme-text-secondary">
                 — {currentQuote.author}
               </p>
 
@@ -136,8 +136,8 @@ export default function KintsugiQuotes() {
                     onClick={() => setCurrentQuoteIndex(index)}
                     className={`w-2 h-2 rounded-full transition-all ${
                       index === currentQuoteIndex
-                        ? 'bg-kintsugi-gold-600 dark:bg-kintsugi-gold-400 w-6'
-                        : 'bg-kintsugi-gold-300 dark:bg-kintsugi-gold-700 hover:bg-kintsugi-gold-400 dark:hover:bg-kintsugi-gold-600'
+                        ? 'theme-bg-primary dark:theme-bg-secondary w-6'
+                        : 'bg-kintsugi-gold-300 dark:bg-kintsugi-gold-700 hover:theme-bg-secondary dark:hover:theme-bg-primary'
                     }`}
                     aria-label={`View quote ${index + 1}`}
                   />

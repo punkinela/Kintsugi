@@ -39,18 +39,18 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
       
       <div className="relative bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-kintsugi-gold-100/30 dark:border-kintsugi-gold-900/30">
         {/* Category Badge */}
-        <div className="flex items-center justify-between text-sm text-kintsugi-gold-800/70 dark:text-kintsugi-gold-300/70">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-kintsugi-gold-50/50 dark:bg-kintsugi-gold-900/20">
+        <div className="flex items-center justify-between text-sm text-kintsugi-gold-800/70 dark:theme-text-secondary/70">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full theme-bg-primary-light/50 dark:bg-kintsugi-gold-900/20">
             <span className="text-lg">{categoryIcons[affirmation.category]}</span>
             {affirmation.category.replace('-', ' ').toUpperCase()}
           </span>
           
           <button
             onClick={onRefresh}
-            className="w-5 h-5 text-kintsugi-gold-700/70 dark:text-kintsugi-gold-400/70 group-hover:text-kintsugi-gold-600 dark:group-hover:text-kintsugi-gold-300 transition-colors"
+            className="w-5 h-5 text-kintsugi-gold-700/70 dark:theme-text-secondary/70 group-hover:theme-text-primary dark:group-hover:theme-text-secondary transition-colors"
             aria-label="Get new affirmation"
           >
-            <RefreshCw className="w-5 h-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-300 group-hover:rotate-180 transition-transform duration-500" />
+            <RefreshCw className="w-5 h-5 theme-text-primary dark:theme-text-secondary group-hover:rotate-180 transition-transform duration-500" />
           </button>
         </div>
 
@@ -60,12 +60,12 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
             <div className="text-6xl flex-shrink-0">
               {getCategoryDisplayEmoji(affirmation.category)}
             </div>
-            <Sparkles className="absolute -top-4 -left-4 w-8 h-8 text-kintsugi-gold-400 opacity-50" />
+            <Sparkles className="absolute -top-4 -left-4 w-8 h-8 theme-text-secondary opacity-50" />
           </div>
           <p className="text-2xl md:text-3xl font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-6 leading-relaxed">
             {affirmation.text}
           </p>
-          <Sparkles className="absolute -bottom-4 -right-4 w-8 h-8 text-kintsugi-gold-400 opacity-50" />
+          <Sparkles className="absolute -bottom-4 -right-4 w-8 h-8 theme-text-secondary opacity-50" />
         </div>
 
         {/* Tags */}
@@ -73,7 +73,7 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
           {affirmation.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1.5 text-xs font-medium rounded-full bg-kintsugi-gold-100/50 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:text-kintsugi-gold-200"
+              className="px-3 py-1.5 text-xs font-medium rounded-full theme-bg-primary-light/50 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:theme-text-secondary"
             >
               #{tag}
             </span>
@@ -86,13 +86,13 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
             <div className="flex items-start gap-3">
               <span className="text-2xl flex-shrink-0">📚</span>
               <div className="flex-1">
-                <p className="text-xs font-semibold text-kintsugi-gold-700 dark:text-kintsugi-gold-400 mb-1">
+                <p className="text-xs font-semibold text-kintsugi-gold-700 dark:theme-text-secondary mb-1">
                   Research-Backed
                 </p>
-                <p className="text-sm text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-2">
+                <p className="text-sm text-kintsugi-dark-700 dark:theme-text-secondary mb-2">
                   {affirmation.research.finding}
                 </p>
-                <p className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-500">
+                <p className="text-xs text-kintsugi-dark-600 dark:theme-text-primary">
                   <span className="font-medium">{affirmation.research.citation} ({affirmation.research.year})</span>
                   {affirmation.research.link && (
                     <>
@@ -101,7 +101,7 @@ export default function AffirmationCard({ affirmation, onRefresh }: AffirmationC
                         href={affirmation.research.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="underline hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-300 transition-colors"
+                        className="underline hover:theme-text-primary dark:hover:theme-text-secondary transition-colors"
                       >
                         View Study
                       </a>

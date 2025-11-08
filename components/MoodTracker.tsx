@@ -59,10 +59,10 @@ export default function MoodTracker() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
-            <Smile className="h-6 w-6 text-kintsugi-gold-600" />
+            <Smile className="h-6 w-6 theme-text-primary" />
             Mood Tracking
           </h2>
-          <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+          <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
             Track your emotional journey over time
           </p>
         </div>
@@ -75,8 +75,8 @@ export default function MoodTracker() {
               onClick={() => setTimeRange(days)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 timeRange === days
-                  ? 'bg-kintsugi-gold-600 text-white'
-                  : 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-dark-600 dark:text-kintsugi-gold-400 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700'
+                  ? 'theme-bg-primary text-white'
+                  : 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-dark-600 dark:theme-text-secondary hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700'
               }`}
             >
               {days}d
@@ -151,7 +151,7 @@ export default function MoodTracker() {
 
       {/* Mood Chart */}
       {chartData.length > 0 ? (
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
           <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4">
             Mood Over Time
           </h3>
@@ -199,9 +199,9 @@ export default function MoodTracker() {
           </ResponsiveContainer>
         </div>
       ) : (
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-12 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700 text-center">
-          <Meh className="h-12 w-12 mx-auto text-kintsugi-gold-400 mb-3" />
-          <p className="text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-12 border theme-border-light dark:border-kintsugi-dark-700 text-center">
+          <Meh className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
+          <p className="text-kintsugi-dark-600 dark:theme-text-secondary">
             No mood data available yet. Start tracking your mood with journal entries!
           </p>
         </div>
@@ -209,7 +209,7 @@ export default function MoodTracker() {
 
       {/* Mood Distribution */}
       {totalMoods > 0 && (
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
           <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4">
             Mood Distribution
           </h3>
@@ -223,10 +223,10 @@ export default function MoodTracker() {
                   <span className="text-2xl">{emoji}</span>
                   <div className="flex-1">
                     <div className="flex items-center justify-between text-sm mb-1">
-                      <span className="font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 capitalize">
+                      <span className="font-medium text-kintsugi-dark-700 dark:theme-text-secondary capitalize">
                         {mood}
                       </span>
-                      <span className="text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+                      <span className="text-kintsugi-dark-600 dark:theme-text-secondary">
                         {count} ({percentage.toFixed(0)}%)
                       </span>
                     </div>

@@ -120,9 +120,9 @@ export default function ReturnMotivation() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 overflow-hidden"
+      className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 theme-border-light dark:theme-border-primary/50 overflow-hidden"
     >
-      <div className="bg-gradient-to-r from-kintsugi-gold-500 to-amber-500 px-6 py-4">
+      <div className="bg-gradient-to-r theme-gradient-to-r px-6 py-4">
         <div className="flex items-center gap-3">
           <TrendingUp className="h-6 w-6 text-white" />
           <h3 className="text-xl font-bold text-white">Your Next Goals</h3>
@@ -181,7 +181,7 @@ export default function ReturnMotivation() {
             className="mt-6 p-4 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl border-2 border-orange-200 dark:border-orange-800"
           >
             <div className="flex items-center gap-3">
-              <Flame className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+              <Flame className="h-5 w-5 theme-text-primary dark:text-orange-400" />
               <div className="flex-1">
                 <p className="text-sm font-semibold text-orange-900 dark:text-orange-200">
                   Don't break your {streakInfo.current}-day streak!
@@ -190,7 +190,7 @@ export default function ReturnMotivation() {
                   Come back tomorrow to keep the momentum going 🔥
                 </p>
               </div>
-              <ArrowRight className="h-4 w-4 text-orange-600 dark:text-orange-400 animate-pulse" />
+              <ArrowRight className="h-4 w-4 theme-text-primary dark:text-orange-400 animate-pulse" />
             </div>
           </motion.div>
         )}

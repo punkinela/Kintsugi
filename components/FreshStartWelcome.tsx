@@ -141,10 +141,10 @@ export default function FreshStartWelcome({ userName, onDismiss }: FreshStartWel
     },
     gold: {
       bg: 'from-kintsugi-gold-500/10 to-kintsugi-gold-600/10 dark:from-kintsugi-gold-900/20 dark:to-kintsugi-gold-800/20',
-      border: 'border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/50',
-      icon: 'text-kintsugi-gold-600 dark:text-kintsugi-gold-400',
+      border: 'theme-border-light/50 dark:theme-border-primary/50',
+      icon: 'theme-text-primary dark:theme-text-secondary',
       text: 'text-kintsugi-gold-900 dark:text-kintsugi-gold-100',
-      button: 'bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700'
+      button: 'theme-bg-primary hover:bg-kintsugi-gold-700'
     },
     green: {
       bg: 'from-green-500/10 to-green-600/10 dark:from-green-900/20 dark:to-green-800/20',
@@ -181,12 +181,12 @@ export default function FreshStartWelcome({ userName, onDismiss }: FreshStartWel
                 {message.title}
               </h3>
 
-              <p className="text-sm text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-4 leading-relaxed">
+              <p className="text-sm text-kintsugi-dark-700 dark:theme-text-secondary mb-4 leading-relaxed">
                 {message.body}
               </p>
 
               {/* Research Citation */}
-              <div className="flex items-center gap-2 text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-500 mb-4">
+              <div className="flex items-center gap-2 text-xs text-kintsugi-dark-600 dark:theme-text-primary mb-4">
                 <span>📚</span>
                 <span className="italic">{message.research}</span>
               </div>
@@ -203,7 +203,7 @@ export default function FreshStartWelcome({ userName, onDismiss }: FreshStartWel
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="flex-shrink-0 text-kintsugi-dark-400 hover:text-kintsugi-dark-600 dark:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-400 transition-colors"
+              className="flex-shrink-0 text-kintsugi-dark-400 hover:text-kintsugi-dark-600 dark:theme-text-primary dark:hover:theme-text-secondary transition-colors"
               aria-label="Dismiss"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

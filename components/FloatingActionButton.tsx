@@ -73,7 +73,7 @@ export default function FloatingActionButton({ onQuickCapture, onNewEntry }: Flo
         whileTap={{ scale: 0.9 }}
         animate={{ rotate: isOpen ? 45 : 0 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-16 h-16 bg-gradient-to-r from-kintsugi-gold-500 to-amber-500 text-white rounded-full shadow-2xl hover:shadow-3xl transition-shadow flex items-center justify-center"
+        className="w-16 h-16 bg-gradient-to-r theme-gradient-to-r text-white rounded-full shadow-2xl hover:shadow-3xl transition-shadow flex items-center justify-center"
       >
         {isOpen ? <X className="h-6 w-6" /> : <Plus className="h-6 w-6" />}
       </motion.button>
@@ -84,7 +84,7 @@ export default function FloatingActionButton({ onQuickCapture, onNewEntry }: Flo
           initial={{ scale: 1, opacity: 0.5 }}
           animate={{ scale: 2, opacity: 0 }}
           transition={{ duration: 0.6 }}
-          className="absolute inset-0 bg-kintsugi-gold-400 rounded-full"
+          className="absolute inset-0 theme-bg-secondary rounded-full"
         />
       )}
     </div>

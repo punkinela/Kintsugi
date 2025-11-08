@@ -95,7 +95,7 @@ export default function UserGrowthPanel() {
           </h3>
           
           <div className="grid grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+            <div className="text-center p-4 theme-bg-primary-light dark:bg-yellow-900/20 rounded-lg">
               <div className="text-3xl font-bold text-yellow-700 dark:text-yellow-300">
                 {metrics.conversionRate.totalSkeptics}
               </div>

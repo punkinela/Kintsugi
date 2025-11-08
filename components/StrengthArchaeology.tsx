@@ -173,7 +173,7 @@ export default function StrengthArchaeology({ entries }: StrengthArchaeologyProp
     resilience: {
       color: 'theme-gradient-to-r',
       bg: 'theme-bg-primary-light',
-      border: 'border-amber-200 dark:border-amber-800',
+      border: 'theme-border-light dark:theme-border-primary',
       text: 'theme-text-primary',
       icon: TrendingUp
     },

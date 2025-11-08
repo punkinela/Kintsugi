@@ -82,10 +82,10 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
   return (
     <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20">
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-amber-50 to-orange-50 ">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Sparkles className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+            <Sparkles className="h-6 w-6 theme-text-primary dark:theme-text-secondary" />
             <div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                 Your Kintsugi Vessel
@@ -122,7 +122,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
             Repair Progress
           </span>
-          <span className="text-sm font-bold text-amber-600 dark:text-amber-400">
+          <span className="text-sm font-bold theme-text-primary dark:theme-text-secondary">
             {repairedCount} / {cracks.length} cracks repaired
           </span>
         </div>
@@ -239,9 +239,9 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-xl border-2 border-amber-200 dark:border-amber-800"
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-xl border-2 theme-border-light dark:theme-border-primary"
             >
-              <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 mb-1">
+              <p className="text-xs font-semibold theme-text-primary dark:theme-text-secondary mb-1">
                 {selectedCrack.isRepaired ? '✨ Repaired with Gold' : '❌ Unrepaired Crack'}
               </p>
               <p className="text-xs text-gray-700 dark:text-gray-300">
@@ -259,7 +259,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
           <div className="text-xs text-gray-600 dark:text-gray-400">Total Cracks</div>
         </div>
         <div className="text-center">
-          <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">{repairedCount}</div>
+          <div className="text-2xl font-bold theme-text-primary dark:theme-text-secondary">{repairedCount}</div>
           <div className="text-xs text-gray-600 dark:text-gray-400">Golden Repairs</div>
         </div>
         <div className="text-center">
@@ -269,7 +269,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       </div>
 
       {/* Philosophy Note */}
-      <div className="px-6 py-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-t border-gray-200 dark:border-gray-700">
+      <div className="px-6 py-4 bg-gradient-to-r from-amber-50 to-orange-50  border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-700 dark:text-gray-300">
           <span className="font-semibold">金継ぎ Kintsukuroi:</span> Each crack represents a
           challenge you've faced. The golden repairs show where you've grown stronger. Your vessel

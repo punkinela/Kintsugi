@@ -177,12 +177,12 @@ export default function EngagingJournalPrompt({ onOpenJournal }: EngagingJournal
         <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <Clock className="h-5 w-5 text-kintsugi-gold-600" />
+              <Clock className="h-5 w-5 theme-text-primary" />
               Recent Entries
             </h4>
             <button
               onClick={onOpenJournal}
-              className="text-sm text-kintsugi-gold-600 hover:text-kintsugi-gold-700 font-medium"
+              className="text-sm theme-text-primary hover:text-kintsugi-gold-700 font-medium"
             >
               View All
             </button>
@@ -228,7 +228,7 @@ export default function EngagingJournalPrompt({ onOpenJournal }: EngagingJournal
           <p className="text-sm text-gray-600 dark:text-gray-400">Total Entries</p>
         </div>
         <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-5 border-2 border-orange-200 dark:border-orange-800 text-center">
-          <Flame className="h-8 w-8 mx-auto text-orange-600 mb-2" />
+          <Flame className="h-8 w-8 mx-auto theme-text-primary mb-2" />
           <p className="text-2xl font-bold text-gray-900 dark:text-white">{streak}</p>
           <p className="text-sm text-gray-600 dark:text-gray-400">Day Streak</p>
         </div>

@@ -184,7 +184,7 @@ export default function WeeklySummary({ isOpen, onClose }: WeeklySummaryProps) {
             {/* Key Metrics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               <div className="p-4 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl border border-orange-200 dark:border-orange-800">
-                <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">
+                <div className="text-3xl font-bold theme-text-primary dark:text-orange-400">
                   {summary.weekly.currentStreak}
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Day Streak 🔥</div>
@@ -289,7 +289,7 @@ export default function WeeklySummary({ isOpen, onClose }: WeeklySummaryProps) {
                       rec.priority === 'high' 
                         ? 'bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-800'
                         : rec.priority === 'medium'
-                        ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-300 dark:border-yellow-800'
+                        ? 'theme-bg-primary-light dark:bg-yellow-900/20 border-yellow-300 dark:theme-border-primary'
                         : 'bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-800'
                     }`}
                   >

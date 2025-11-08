@@ -97,7 +97,7 @@ const StatCard = ({ title, value, icon, trend, trendType = 'neutral', color = 'f
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow-lg rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 hover:shadow-2xl hover:border-kintsugi-gold-300 dark:hover:border-kintsugi-gold-700 transition-all cursor-pointer group"
+      className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow-lg rounded-xl border theme-border-light dark:theme-border-primary/50 hover:shadow-2xl hover:theme-border-accent dark:hover:border-kintsugi-gold-700 transition-all cursor-pointer group"
     >
       <div className="p-6">
         <div className="flex items-center">
@@ -284,14 +284,14 @@ export default function AdminDashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900">
+      <div className="min-h-screen flex items-center justify-center theme-bg-primary-light dark:bg-kintsugi-dark-900">
         <div className="text-center">
           <div className="text-red-500 text-4xl mb-4">⚠️</div>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Error Loading Dashboard</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-kintsugi-gold-600 text-white rounded-md hover:bg-kintsugi-gold-700 focus:outline-none focus:ring-2 focus:ring-kintsugi-gold-500 focus:ring-offset-2"
+            className="px-4 py-2 theme-bg-primary text-white rounded-md hover:bg-kintsugi-gold-700 focus:outline-none focus:ring-2 focus:ring-kintsugi-gold-500 focus:ring-offset-2"
           >
             Retry
           </button>
@@ -393,7 +393,7 @@ export default function AdminDashboard() {
             <select
               value={dateRange}
               onChange={(e) => setDateRange(e.target.value as any)}
-              className="px-4 py-2 bg-white dark:bg-kintsugi-dark-800 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 rounded-md text-gray-900 dark:text-white focus:ring-2 focus:ring-kintsugi-gold-500"
+              className="px-4 py-2 bg-white dark:bg-kintsugi-dark-800 border theme-border-light dark:theme-border-primary/50 rounded-md text-gray-900 dark:text-white focus:ring-2 focus:ring-kintsugi-gold-500"
             >
               <option value="7d">Last 7 Days</option>
               <option value="30d">Last 30 Days</option>
@@ -419,7 +419,7 @@ export default function AdminDashboard() {
             </button>
             <button
               onClick={handleExportCompleteCSV}
-              className="inline-flex items-center px-3 py-2 bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 text-white rounded-md shadow-sm transition-colors text-sm"
+              className="inline-flex items-center px-3 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-md shadow-sm transition-colors text-sm"
             >
               <Download className="h-4 w-4 mr-2" />
               Complete Data
@@ -473,10 +473,10 @@ export default function AdminDashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
-                  <Activity className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
+                  <Activity className="h-5 w-5 mr-2 theme-text-primary" />
                   Engagement Trend
                 </h3>
                 <ResponsiveContainer width="100%" height={250}>
@@ -519,10 +519,10 @@ export default function AdminDashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
-                  <BarChart3 className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
+                  <BarChart3 className="h-5 w-5 mr-2 theme-text-primary" />
                   Feature Usage
                 </h3>
                 <ResponsiveContainer width="100%" height={250}>
@@ -551,10 +551,10 @@ export default function AdminDashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
-                  <Brain className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
+                  <Brain className="h-5 w-5 mr-2 theme-text-primary" />
                   Sentiment Analysis
                 </h3>
                 {sentimentChartData.reduce((sum, item) => sum + item.value, 0) > 0 ? (
@@ -589,10 +589,10 @@ export default function AdminDashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
-                  <MessageCircle className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
+                  <MessageCircle className="h-5 w-5 mr-2 theme-text-primary" />
                   Top Keywords in Feedback
                 </h3>
                 {keywords.length > 0 ? (
@@ -630,10 +630,10 @@ export default function AdminDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+              className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
             >
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
-                <Layers className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
+                <Layers className="h-5 w-5 mr-2 theme-text-primary" />
                 User Funnel Analysis
               </h3>
               <div className="space-y-3">
@@ -669,10 +669,10 @@ export default function AdminDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+              className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
             >
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
-                <HelpCircle className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
+                <HelpCircle className="h-5 w-5 mr-2 theme-text-primary" />
                 User Questions ({userQuestions.length})
               </h3>
               {userQuestions.length > 0 ? (
@@ -758,10 +758,10 @@ export default function AdminDashboard() {
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 border-2 border-kintsugi-gold-300 dark:border-kintsugi-gold-700/50 rounded-lg p-6"
+                      className="bg-gradient-to-r theme-bg-primary-light  border-2 theme-border-accent dark:theme-border-primary/50 rounded-lg p-6"
                     >
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                        <User className="h-5 w-5 text-kintsugi-gold-600" />
+                        <User className="h-5 w-5 theme-text-primary" />
                         Your Profile
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -827,7 +827,7 @@ export default function AdminDashboard() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">By Gender</h3>
                 <div className="space-y-3">
@@ -840,7 +840,7 @@ export default function AdminDashboard() {
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                           <div
-                            className="bg-kintsugi-gold-600 h-2.5 rounded-full"
+                            className="theme-bg-primary h-2.5 rounded-full"
                             style={{ width: `${demographics.totalUsers > 0 ? (count / demographics.totalUsers) * 100 : 0}%` }}
                           />
                         </div>
@@ -857,7 +857,7 @@ export default function AdminDashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">By Profession</h3>
                 <div className="space-y-3">
@@ -887,7 +887,7 @@ export default function AdminDashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+                className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">By Ethnicity</h3>
                 <div className="space-y-3">
@@ -918,10 +918,10 @@ export default function AdminDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50"
+              className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
             >
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
-                <Calendar className="h-5 w-5 mr-2 text-kintsugi-gold-600" />
+                <Calendar className="h-5 w-5 mr-2 theme-text-primary" />
                 Cohort Retention Analysis
               </h3>
               <div className="overflow-x-auto">

@@ -184,7 +184,7 @@ export default function MushinReflectionMode({
                     </div>
 
                     <div className="flex items-start gap-2">
-                      <Lightbulb className="h-4 w-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                      <Lightbulb className="h-4 w-4 theme-text-primary dark:theme-text-secondary flex-shrink-0 mt-0.5" />
                       <p className="text-xs text-gray-600 dark:text-gray-400 italic">
                         {suggestion.reason}
                       </p>

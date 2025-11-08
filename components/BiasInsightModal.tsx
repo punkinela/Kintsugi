@@ -27,15 +27,15 @@ export default function BiasInsightModal({ insight, onClose, onTakeAction }: Bia
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-2xl bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl p-8 max-h-[90vh] overflow-y-auto border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30"
+            className="relative w-full max-w-2xl bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl p-8 max-h-[90vh] overflow-y-auto border theme-border-light/50 dark:theme-border-primary/30"
           >
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 p-2 rounded-full hover:bg-kintsugi-gold-100/50 dark:hover:bg-kintsugi-gold-900/30 transition-colors"
+            className="absolute top-6 right-6 p-2 rounded-full hover:theme-bg-primary-light/50 dark:hover:bg-kintsugi-gold-900/30 transition-colors"
             aria-label="Close"
           >
-            <X className="w-6 h-6 text-kintsugi-dark-700/80 dark:text-kintsugi-gold-200/80" />
+            <X className="w-6 h-6 text-kintsugi-dark-700/80 dark:theme-text-secondary/80" />
           </button>
 
           {/* Header */}
@@ -50,20 +50,20 @@ export default function BiasInsightModal({ insight, onClose, onTakeAction }: Bia
 
           {/* Description */}
           <div className="mb-6">
-            <p className="text-lg text-kintsugi-dark-800/90 dark:text-kintsugi-gold-200/90 leading-relaxed">
+            <p className="text-lg text-kintsugi-dark-800/90 dark:theme-text-secondary/90 leading-relaxed">
               {insight.description}
             </p>
           </div>
 
           {/* Reflection */}
-          <div className="bg-kintsugi-gold-50/50 dark:bg-kintsugi-gold-900/10 border-l-4 border-kintsugi-gold-400 rounded-r-xl p-6 mb-6">
+          <div className="theme-bg-primary-light/50 dark:bg-kintsugi-gold-900/10 border-l-4 border-kintsugi-gold-400 rounded-r-xl p-6 mb-6">
             <div className="flex items-start gap-3">
-              <MessageCircle className="w-6 h-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 flex-shrink-0 mt-1" />
+              <MessageCircle className="w-6 h-6 theme-text-primary dark:theme-text-secondary flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-semibold text-kintsugi-gold-800 dark:text-kintsugi-gold-200 mb-2">
+                <h3 className="font-semibold text-kintsugi-gold-800 dark:theme-text-secondary mb-2">
                   Reflection Question
                 </h3>
-                <p className="text-kintsugi-gold-700/90 dark:text-kintsugi-gold-300/90">
+                <p className="text-kintsugi-gold-700/90 dark:theme-text-secondary/90">
                   {insight.reflection}
                 </p>
               </div>
@@ -71,14 +71,14 @@ export default function BiasInsightModal({ insight, onClose, onTakeAction }: Bia
           </div>
 
           {/* Action Step */}
-          <div className="bg-kintsugi-gold-100/30 dark:bg-kintsugi-gold-900/20 border-l-4 border-kintsugi-gold-500 rounded-r-xl p-6">
+          <div className="theme-bg-primary-light/30 dark:bg-kintsugi-gold-900/20 border-l-4 theme-border-primary rounded-r-xl p-6">
             <div className="flex items-start gap-3">
-              <Target className="w-6 h-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-300 flex-shrink-0 mt-1" />
+              <Target className="w-6 h-6 theme-text-primary dark:theme-text-secondary flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-semibold text-kintsugi-gold-800 dark:text-kintsugi-gold-200 mb-2">
+                <h3 className="font-semibold text-kintsugi-gold-800 dark:theme-text-secondary mb-2">
                   Action Step
                 </h3>
-                <p className="text-kintsugi-gold-700/90 dark:text-kintsugi-gold-200/90">
+                <p className="text-kintsugi-gold-700/90 dark:theme-text-secondary/90">
                   {insight.actionStep}
                 </p>
               </div>
@@ -90,7 +90,7 @@ export default function BiasInsightModal({ insight, onClose, onTakeAction }: Bia
             {insight.actionType === 'journal' && onTakeAction && (
               <button
                 onClick={handleTakeAction}
-                className="flex-1 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 text-kintsugi-dark-800 dark:text-kintsugi-gold-200 font-medium py-4 rounded-xl hover:bg-kintsugi-gold-50/50 dark:hover:bg-kintsugi-gold-900/20 transition-colors"
+                className="flex-1 border theme-border-light dark:theme-border-primary/50 text-kintsugi-dark-800 dark:theme-text-secondary font-medium py-4 rounded-xl hover:theme-bg-primary-light/50 dark:hover:bg-kintsugi-gold-900/20 transition-colors"
               >
                 <BookOpen className="w-5 h-5" />
                 Document This

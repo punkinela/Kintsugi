@@ -8,7 +8,7 @@ export default function UnifiedPhilosophyCard() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative bg-gradient-to-br from-kintsugi-gold-50 via-amber-50 to-yellow-50 dark:from-kintsugi-gold-900/30 dark:via-amber-900/20 dark:to-yellow-900/30 rounded-2xl shadow-lg border-2 border-kintsugi-gold-300 dark:border-kintsugi-gold-700/50 overflow-hidden"
+      className="relative bg-gradient-to-br from-kintsugi-gold-50 via-amber-50 to-yellow-50 dark:from-kintsugi-gold-900/30 dark:via-amber-900/20 dark:to-yellow-900/30 rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50 overflow-hidden"
     >
       {/* Decorative pattern */}
       <div className="absolute inset-0 opacity-5">
@@ -22,7 +22,7 @@ export default function UnifiedPhilosophyCard() {
       <div className="relative p-6">
         {/* Header */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-3 bg-gradient-to-br from-kintsugi-gold-500 to-amber-500 rounded-xl shadow-lg">
+          <div className="p-3 bg-gradient-to-br theme-gradient-to-r rounded-xl shadow-lg">
             <Sparkles className="h-6 w-6 text-white" />
           </div>
           <div>
@@ -38,7 +38,7 @@ export default function UnifiedPhilosophyCard() {
         {/* Main Message */}
         <div className="bg-white/60 dark:bg-kintsugi-dark-800/60 backdrop-blur-sm rounded-xl p-5 mb-4">
           <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed mb-3">
-            <span className="font-bold text-kintsugi-gold-700 dark:text-kintsugi-gold-400">Your impact</span> isn't just your accomplishments.
+            <span className="font-bold text-kintsugi-gold-700 dark:theme-text-secondary">Your impact</span> isn't just your accomplishments.
             It's also how you've <span className="font-bold">grown through challenges</span>.
           </p>
           <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
@@ -60,12 +60,12 @@ export default function UnifiedPhilosophyCard() {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-xl p-4 border-2 border-kintsugi-gold-300 dark:border-kintsugi-gold-700/50">
+          <div className="bg-gradient-to-br theme-bg-primary-light  rounded-xl p-4 border-2 theme-border-accent dark:theme-border-primary/50">
             <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="h-5 w-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
-              <p className="font-bold text-kintsugi-gold-900 dark:text-kintsugi-gold-200 text-sm">Own Your Resilience</p>
+              <TrendingUp className="h-5 w-5 theme-text-primary dark:theme-text-secondary" />
+              <p className="font-bold text-kintsugi-gold-900 dark:theme-text-secondary text-sm">Own Your Resilience</p>
             </div>
-            <p className="text-xs text-kintsugi-gold-800 dark:text-kintsugi-gold-300">
+            <p className="text-xs text-kintsugi-gold-800 dark:theme-text-secondary">
               Honor how you've grown through challenges. Your "cracks" filled with gold ARE part of your impact.
             </p>
           </div>

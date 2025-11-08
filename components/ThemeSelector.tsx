@@ -89,7 +89,7 @@ export default function ThemeSelector() {
     return (
       <div className="space-y-8">
         <div className="flex items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-kintsugi-gold-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 theme-border-primary"></div>
           <span className="ml-3 text-gray-600 dark:text-gray-400">Loading appearance settings...</span>
         </div>
       </div>
@@ -106,7 +106,7 @@ export default function ThemeSelector() {
               <Palette className="h-6 w-6 theme-text-primary" />
               Appearance & Accessibility
             </h2>
-            <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+            <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
               Personalize with themes, color modes, and accessibility options
             </p>
           </div>

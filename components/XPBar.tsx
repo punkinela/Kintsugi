@@ -244,7 +244,7 @@ export default function XPBar({ compact = false }: XPBarProps) {
           {/* Stats */}
           <div className="flex gap-4 mt-2">
             <div className="flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400">
-              <Zap className="w-3 h-3 text-yellow-500" />
+              <Zap className="w-3 h-3 theme-text-primary" />
               <span>{levelInfo.totalXP.toLocaleString()} Total XP</span>
             </div>
             {levelInfo.level < 50 && (

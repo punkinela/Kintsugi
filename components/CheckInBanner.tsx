@@ -29,7 +29,7 @@ export default function CheckInBanner({ checkInMessage, onDismiss }: CheckInBann
     welcoming: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
     caring: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
     encouraging: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
-    celebrating: 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800'
+    celebrating: 'theme-bg-primary-light dark:bg-yellow-900/20 border-yellow-200 dark:theme-border-primary'
   };
 
   return (

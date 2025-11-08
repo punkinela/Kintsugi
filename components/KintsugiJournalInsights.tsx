@@ -97,9 +97,9 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-br from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-2xl shadow-lg border-2 border-kintsugi-gold-300 dark:border-kintsugi-gold-700/50 p-8 text-center"
+        className="bg-gradient-to-br theme-bg-primary-light  rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50 p-8 text-center"
       >
-        <Sparkles className="h-16 w-16 text-kintsugi-gold-500 mx-auto mb-4" />
+        <Sparkles className="h-16 w-16 theme-text-primary mx-auto mb-4" />
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
           Begin Your Kintsugi Journey
         </h3>
@@ -276,7 +276,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
 
             <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
               <p className="text-sm text-gray-700 dark:text-gray-300">
-                <strong className="text-kintsugi-gold-600">Most Active Period:</strong>
+                <strong className="theme-text-primary">Most Active Period:</strong>
                 <br />
                 {insights.mostActiveMonth}
               </p>
@@ -291,15 +291,15 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-gradient-to-br from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-xl shadow-lg border-2 border-kintsugi-gold-300 dark:border-kintsugi-gold-700/50 p-6"
+          className="bg-gradient-to-br theme-bg-primary-light  rounded-xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50 p-6"
         >
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-kintsugi-gold-600" />
+            <Sparkles className="h-5 w-5 theme-text-primary" />
             The Kintsugi Philosophy
           </h3>
           <div className="space-y-3">
             <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-              <strong className="text-kintsugi-gold-700 dark:text-kintsugi-gold-400">Kintsugi (金継ぎ)</strong> is the Japanese art of repairing broken pottery with gold, treating the breakage and repair as part of the object's history rather than something to disguise.
+              <strong className="text-kintsugi-gold-700 dark:theme-text-secondary">Kintsugi (金継ぎ)</strong> is the Japanese art of repairing broken pottery with gold, treating the breakage and repair as part of the object's history rather than something to disguise.
             </p>
             <div className="bg-white/50 dark:bg-black/20 rounded-lg p-4">
               <p className="text-sm text-gray-800 dark:text-gray-200 italic">

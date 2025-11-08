@@ -156,17 +156,17 @@ export default function OnboardingTour() {
                   transition={{ delay: 0.1 }}
                   className="min-h-[200px]"
                 >
-                  <p className="text-lg text-kintsugi-dark-700 dark:text-kintsugi-gold-200 whitespace-pre-line leading-relaxed">
+                  <p className="text-lg text-kintsugi-dark-700 dark:theme-text-secondary whitespace-pre-line leading-relaxed">
                     {step.description}
                   </p>
                 </motion.div>
               </div>
 
               {/* Footer */}
-              <div className="px-8 py-6 bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900/50 border-t border-kintsugi-gold-200 dark:border-kintsugi-dark-700 flex items-center justify-between">
+              <div className="px-8 py-6 theme-bg-primary-light dark:bg-kintsugi-dark-900/50 border-t theme-border-light dark:border-kintsugi-dark-700 flex items-center justify-between">
                 <button
                   onClick={handleSkip}
-                  className="text-kintsugi-dark-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-dark-900 dark:hover:text-kintsugi-gold-200 font-medium transition-colors"
+                  className="text-kintsugi-dark-600 dark:theme-text-secondary hover:text-kintsugi-dark-900 dark:hover:theme-text-secondary font-medium transition-colors"
                 >
                   Skip tour
                 </button>
@@ -175,7 +175,7 @@ export default function OnboardingTour() {
                   {currentStep > 0 && (
                     <button
                       onClick={handlePrevious}
-                      className="px-4 py-2 text-kintsugi-dark-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-dark-900 dark:hover:text-kintsugi-gold-200 font-medium transition-colors flex items-center gap-2"
+                      className="px-4 py-2 text-kintsugi-dark-600 dark:theme-text-secondary hover:text-kintsugi-dark-900 dark:hover:theme-text-secondary font-medium transition-colors flex items-center gap-2"
                     >
                       <ChevronLeft className="h-4 w-4" />
                       Previous

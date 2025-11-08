@@ -53,7 +53,7 @@ export default function AIInsightsDashboard() {
       case 'strength':
         return <TrendingUp className="h-5 w-5 text-green-600" />;
       case 'growth-area':
-        return <Lightbulb className="h-5 w-5 text-yellow-600" />;
+        return <Lightbulb className="h-5 w-5 theme-text-primary" />;
       case 'trend':
         return <Brain className="h-5 w-5 text-blue-600" />;
       case 'insight':
@@ -66,7 +66,7 @@ export default function AIInsightsDashboard() {
       case 'strength':
         return 'from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-800';
       case 'growth-area':
-        return 'from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border-yellow-200 dark:border-yellow-800';
+        return 'theme-bg-primary-light  border-yellow-200 dark:theme-border-primary';
       case 'trend':
         return 'from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200 dark:border-blue-800';
       case 'insight':
@@ -83,7 +83,7 @@ export default function AIInsightsDashboard() {
             <Brain className="h-6 w-6 text-purple-600" />
             AI Insights & Patterns
           </h2>
-          <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+          <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
             Personalized insights based on your journal entries
           </p>
         </div>
@@ -241,7 +241,7 @@ export default function AIInsightsDashboard() {
 
       {/* Loading State */}
       {isAnalyzing && (
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-8 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700 text-center">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-8 border theme-border-light dark:border-kintsugi-dark-700 text-center">
           <RefreshCw className="h-12 w-12 text-purple-600 mx-auto mb-4 animate-spin" />
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
             Analyzing Your Patterns...

@@ -51,25 +51,25 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          className="relative w-full max-w-3xl bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl max-h-[90vh] overflow-hidden flex flex-col border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30"
+          className="relative w-full max-w-3xl bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl max-h-[90vh] overflow-hidden flex flex-col border theme-border-light/50 dark:theme-border-primary/30"
         >
           {/* Header */}
-          <div className="p-6 border-b border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+          <div className="p-6 border-b theme-border-light/50 dark:theme-border-primary/30">
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 p-2 rounded-full hover:bg-kintsugi-gold-100/50 dark:hover:bg-kintsugi-gold-900/30 transition-colors"
+              className="absolute top-6 right-6 p-2 rounded-full hover:theme-bg-primary-light/50 dark:hover:bg-kintsugi-gold-900/30 transition-colors"
               aria-label="Close"
             >
-              <X className="w-6 h-6 text-kintsugi-dark-700/80 dark:text-kintsugi-gold-200/80" />
+              <X className="w-6 h-6 text-kintsugi-dark-700/80 dark:theme-text-secondary/80" />
             </button>
 
             <div className="flex items-center gap-3 mb-2">
-              <BookOpen className="w-8 h-8 text-kintsugi-gold-600" />
+              <BookOpen className="w-8 h-8 theme-text-primary" />
               <h2 className="text-3xl font-bold text-kintsugi-dark-900 dark:text-kintsugi-gold-100">
                 My Accomplishments
               </h2>
             </div>
-            <p className="text-kintsugi-dark-700/80 dark:text-kintsugi-gold-200/80">
+            <p className="text-kintsugi-dark-700/80 dark:theme-text-secondary/80">
               Document your achievements - they deserve to be remembered
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
-                className="mb-6 p-6 bg-kintsugi-gold-50/50 dark:bg-kintsugi-gold-900/10 rounded-2xl border border-kintsugi-gold-200/70 dark:border-kintsugi-gold-800/30"
+                className="mb-6 p-6 theme-bg-primary-light/50 dark:bg-kintsugi-gold-900/10 rounded-2xl border theme-border-light/70 dark:theme-border-primary/30"
               >
                 <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-4">
                   New Accomplishment
@@ -107,7 +107,7 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
                       value={newEntry.accomplishment}
                       onChange={(e) => setNewEntry({ ...newEntry, accomplishment: e.target.value })}
                       placeholder="e.g., Led a successful project presentation to 50+ stakeholders"
-                      className="w-full px-4 py-3 rounded-xl border border-kintsugi-gold-200/70 dark:border-kintsugi-gold-800/30 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl border theme-border-light/70 dark:theme-border-primary/30 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-all resize-none"
                       rows={3}
                     />
                   </div>
@@ -120,7 +120,7 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
                       value={newEntry.reflection}
                       onChange={(e) => setNewEntry({ ...newEntry, reflection: e.target.value })}
                       placeholder="How did this make you feel? What did you learn?"
-                      className="w-full px-4 py-3 rounded-xl border border-kintsugi-gold-200/70 dark:border-kintsugi-gold-800/30 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl border theme-border-light/70 dark:theme-border-primary/30 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-all resize-none"
                       rows={2}
                     />
                   </div>
@@ -134,7 +134,7 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
                       value={newEntry.category}
                       onChange={(e) => setNewEntry({ ...newEntry, category: e.target.value })}
                       placeholder="e.g., Leadership, Technical, Creative"
-                      className="w-full px-4 py-3 rounded-xl border border-kintsugi-gold-200/70 dark:border-kintsugi-gold-800/30 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-xl border theme-border-light/70 dark:theme-border-primary/30 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-all"
                     />
                   </div>
 
@@ -150,7 +150,7 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
                         setShowAddForm(false);
                         setNewEntry({ accomplishment: '', reflection: '', category: '' });
                       }}
-                      className="flex-1 bg-kintsugi-gold-100/50 dark:bg-kintsugi-gold-900/20 text-kintsugi-dark-800 dark:text-kintsugi-gold-200 font-semibold py-3 rounded-xl hover:bg-kintsugi-gold-200/70 dark:hover:bg-kintsugi-gold-800/30 transition-colors"
+                      className="flex-1 theme-bg-primary-light/50 dark:bg-kintsugi-gold-900/20 text-kintsugi-dark-800 dark:theme-text-secondary font-semibold py-3 rounded-xl hover:bg-kintsugi-gold-200/70 dark:hover:bg-kintsugi-gold-800/30 transition-colors"
                     >
                       Cancel
                     </button>
@@ -162,11 +162,11 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
             {/* Entries List */}
             {entries.length === 0 ? (
               <div className="text-center py-12">
-                <BookOpen className="w-16 h-16 text-kintsugi-gold-200 dark:text-kintsugi-gold-800/50 mx-auto mb-4" />
-                <p className="text-kintsugi-dark-700/80 dark:text-kintsugi-gold-200/80 text-lg">
+                <BookOpen className="w-16 h-16 theme-text-secondary dark:text-kintsugi-gold-800/50 mx-auto mb-4" />
+                <p className="text-kintsugi-dark-700/80 dark:theme-text-secondary/80 text-lg">
                   No accomplishments recorded yet
                 </p>
-                <p className="text-kintsugi-dark-700/60 dark:text-kintsugi-gold-200/60 text-sm mt-2">
+                <p className="text-kintsugi-dark-700/60 dark:theme-text-secondary/60 text-sm mt-2">
                   Start documenting your achievements!
                 </p>
               </div>
@@ -177,15 +177,15 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
                     key={entry.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-5 bg-kintsugi-gold-50/30 dark:bg-kintsugi-gold-900/10 rounded-xl border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30"
+                    className="p-5 theme-bg-primary-light/30 dark:bg-kintsugi-gold-900/10 rounded-xl border theme-border-light/50 dark:theme-border-primary/30"
                   >
                     <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center gap-2 text-sm text-kintsugi-dark-700/80 dark:text-kintsugi-gold-200/80">
+                      <div className="flex items-center gap-2 text-sm text-kintsugi-dark-700/80 dark:theme-text-secondary/80">
                         <Calendar className="w-4 h-4" />
                         {formatDate(entry.date)}
                       </div>
                       {entry.category && (
-                        <div className="flex items-center gap-1 px-3 py-1 bg-kintsugi-gold-100/70 dark:bg-kintsugi-gold-900/30 text-kintsugi-gold-800 dark:text-kintsugi-gold-200 rounded-full text-xs font-medium">
+                        <div className="flex items-center gap-1 px-3 py-1 theme-bg-primary-light/70 dark:bg-kintsugi-gold-900/30 text-kintsugi-gold-800 dark:theme-text-secondary rounded-full text-xs font-medium">
                           <Tag className="w-3 h-3" />
                           {entry.category}
                         </div>
@@ -197,7 +197,7 @@ export default function ProgressJournal({ isOpen, onClose }: ProgressJournalProp
                     </p>
                     
                     {entry.reflection && (
-                      <p className="text-kintsugi-dark-700/90 dark:text-kintsugi-gold-200/90 text-sm italic">
+                      <p className="text-kintsugi-dark-700/90 dark:theme-text-secondary/90 text-sm italic">
                         "{entry.reflection}"
                       </p>
                     )}

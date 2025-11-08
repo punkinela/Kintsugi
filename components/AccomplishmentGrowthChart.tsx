@@ -172,7 +172,7 @@ export default function AccomplishmentGrowthChart() {
               {growthData.thisWeek}
             </div>
             {growthData.trend === 'up' && <span className="text-green-600">📈</span>}
-            {growthData.trend === 'down' && <span className="text-orange-600">📉</span>}
+            {growthData.trend === 'down' && <span className="theme-text-primary">📉</span>}
             {growthData.trend === 'stable' && <span className="text-gray-600">➡️</span>}
           </div>
         </div>

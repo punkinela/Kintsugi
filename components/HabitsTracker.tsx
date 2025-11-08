@@ -19,7 +19,7 @@ const HABIT_COLORS = [
   'bg-blue-500',
   'bg-green-500',
   'bg-purple-500',
-  'bg-orange-500',
+  'theme-bg-secondary',
   'bg-pink-500',
   'bg-teal-500',
   'bg-indigo-500',
@@ -66,17 +66,17 @@ export default function HabitsTracker() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <CheckCircle2 className="h-6 w-6 text-kintsugi-gold-600" />
+            <CheckCircle2 className="h-6 w-6 theme-text-primary" />
             <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">Daily Habits</h2>
           </div>
-          <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+          <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
             {completedToday} of {todayHabits.length} completed today
           </p>
         </div>
 
         <button
           onClick={() => setShowNewHabit(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+          className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
         >
           <Plus className="h-4 w-4" />
           New Habit
@@ -85,12 +85,12 @@ export default function HabitsTracker() {
 
       {/* Today's Progress */}
       {todayHabits.length > 0 && (
-        <div className="bg-gradient-to-br from-kintsugi-gold-50 to-orange-50 dark:from-kintsugi-gold-900/20 dark:to-orange-900/20 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800">
+        <div className="bg-gradient-to-br from-kintsugi-gold-50 to-orange-50  rounded-xl p-4 border theme-border-light dark:theme-border-primary">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300">
+            <span className="text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary">
               Today's Progress
             </span>
-            <span className="text-sm font-bold text-kintsugi-gold-600">
+            <span className="text-sm font-bold theme-text-primary">
               {Math.round((completedToday / todayHabits.length) * 100)}%
             </span>
           </div>
@@ -98,7 +98,7 @@ export default function HabitsTracker() {
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${(completedToday / todayHabits.length) * 100}%` }}
-              className="h-full bg-kintsugi-gold-600 rounded-full"
+              className="h-full theme-bg-primary rounded-full"
             />
           </div>
         </div>
@@ -116,9 +116,9 @@ export default function HabitsTracker() {
         ))}
 
         {habits.length === 0 && (
-          <div className="text-center py-12 bg-white dark:bg-kintsugi-dark-800 rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
-            <CheckCircle2 className="h-12 w-12 mx-auto text-kintsugi-gold-400 mb-3" />
-            <p className="text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+          <div className="text-center py-12 bg-white dark:bg-kintsugi-dark-800 rounded-xl border theme-border-light dark:border-kintsugi-dark-700">
+            <CheckCircle2 className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
+            <p className="text-kintsugi-dark-600 dark:theme-text-secondary">
               No habits yet. Create one to start building consistency!
             </p>
           </div>
@@ -152,7 +152,7 @@ function HabitCard({
       className={`bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border-2 transition-all ${
         completed
           ? 'border-green-500 bg-green-50 dark:bg-green-900/10'
-          : 'border-kintsugi-gold-200 dark:border-kintsugi-dark-700'
+          : 'theme-border-light dark:border-kintsugi-dark-700'
       }`}
     >
       <div className="flex items-center gap-3">
@@ -182,9 +182,9 @@ function HabitCard({
           </div>
 
           {stats && (
-            <div className="flex items-center gap-4 text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+            <div className="flex items-center gap-4 text-xs text-kintsugi-dark-600 dark:theme-text-secondary">
               <div className="flex items-center gap-1">
-                <Flame className="h-3 w-3 text-orange-500" />
+                <Flame className="h-3 w-3 theme-text-secondary" />
                 <span>{stats.currentStreak} day streak</span>
               </div>
               <div className="flex items-center gap-1">
@@ -248,14 +248,14 @@ function NewHabitModal({
       >
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-bold text-kintsugi-dark-900 dark:text-white">New Habit</h3>
-          <button onClick={onClose} className="p-2 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 rounded-lg">
+          <button onClick={onClose} className="p-2 hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 rounded-lg">
             <X className="h-5 w-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
               Habit Name
             </label>
             <input
@@ -263,13 +263,13 @@ function NewHabitModal({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+              className="w-full px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
               placeholder="e.g., Morning exercise"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-2">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-2">
               Icon
             </label>
             <div className="flex gap-2 flex-wrap">
@@ -279,7 +279,7 @@ function NewHabitModal({
                   type="button"
                   onClick={() => setIcon(i)}
                   className={`text-2xl p-2 rounded-lg border-2 transition-all ${
-                    icon === i ? 'border-kintsugi-gold-500 scale-110' : 'border-transparent'
+                    icon === i ? 'theme-border-primary scale-110' : 'border-transparent'
                   }`}
                 >
                   {i}
@@ -289,7 +289,7 @@ function NewHabitModal({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-2">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-2">
               Color
             </label>
             <div className="flex gap-2">
@@ -307,13 +307,13 @@ function NewHabitModal({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
               Frequency
             </label>
             <select
               value={frequency}
               onChange={(e) => setFrequency(e.target.value as 'daily' | 'weekly')}
-              className="w-full px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+              className="w-full px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
             >
               <option value="daily">Every Day</option>
               <option value="weekly">Specific Days</option>
@@ -322,7 +322,7 @@ function NewHabitModal({
 
           {frequency === 'weekly' && (
             <div>
-              <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-2">
+              <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-2">
                 Days
               </label>
               <div className="flex gap-2">
@@ -339,8 +339,8 @@ function NewHabitModal({
                     }}
                     className={`flex-1 px-2 py-1 text-xs rounded-lg border-2 transition-all ${
                       targetDays.includes(index)
-                        ? 'bg-kintsugi-gold-600 text-white border-kintsugi-gold-600'
-                        : 'border-kintsugi-gold-300 dark:border-kintsugi-dark-600'
+                        ? 'theme-bg-primary text-white theme-border-primary'
+                        : 'theme-border-accent dark:border-kintsugi-dark-600'
                     }`}
                   >
                     {day}
@@ -354,13 +354,13 @@ function NewHabitModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 transition-colors"
+              className="flex-1 px-4 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+              className="flex-1 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
             >
               Create Habit
             </button>

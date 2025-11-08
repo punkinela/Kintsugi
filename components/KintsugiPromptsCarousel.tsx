@@ -44,7 +44,7 @@ export default function KintsugiPromptsCarousel({ onSelectPrompt }: KintsugiProm
   const bgColors = {
     mushin: 'from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20',
     'wabi-sabi': 'from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20',
-    kintsukuroi: 'from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20',
+    kintsukuroi: 'from-amber-50 to-orange-50 ',
     mottainai: 'from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20',
     'mono-no-aware': 'from-rose-50 to-red-50 dark:from-rose-900/20 dark:to-red-900/20'
   };
