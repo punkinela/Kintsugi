@@ -274,9 +274,17 @@ html {
     opacity: 0.9 !important;
   }
 
-  /* Force hover for testing - remove after verification */
+  /* Hover effect for active tabs too */
+  .nav-tab[data-active="true"]:hover {
+    opacity: 0.8 !important;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+
+  /* Force hover for testing - strong visual feedback */
   .nav-tab:hover {
     border-bottom-color: #f59e0b !important;
+    cursor: pointer;
   }
 
   /* Mobile navigation tabs */
