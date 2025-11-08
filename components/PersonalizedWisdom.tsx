@@ -49,15 +49,6 @@ export default function PersonalizedWisdom({ user }: PersonalizedWisdomProps) {
     return null;
   }
 
-  const themeColors = {
-    resilience: 'from-emerald-500 to-teal-600',
-    strength: 'from-orange-500 to-red-600',
-    wisdom: 'from-purple-500 to-indigo-600',
-    transformation: 'from-pink-500 to-rose-600',
-    advocacy: 'from-blue-500 to-cyan-600',
-    community: 'from-theme-primary to-yellow-600',
-  };
-
   const themeIcons = {
     resilience: '🌱',
     strength: '💪',
@@ -74,7 +65,7 @@ export default function PersonalizedWisdom({ user }: PersonalizedWisdomProps) {
       className="relative overflow-hidden bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-xl border-2 border-gray-200 dark:border-gray-700"
     >
       {/* Gradient Header */}
-      <div className={`bg-gradient-to-r ${themeColors[currentQuote.theme]} p-6`}>
+      <div className="theme-gradient-to-r p-6">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             <div className="text-3xl">{themeIcons[currentQuote.theme]}</div>
