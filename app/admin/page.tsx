@@ -6,7 +6,7 @@ import {
   Users, TrendingUp, Star, MessageCircle, Award, BookOpen,
   Download, Calendar, Target, BarChart3, Home, Filter,
   TrendingDown, Minus, Activity, Brain, Map, Layers, User,
-  HelpCircle, Settings, Sparkles
+  HelpCircle, Settings, Sparkles, Zap, Trophy
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import ThemeSelector from '@/components/ThemeSelector';
