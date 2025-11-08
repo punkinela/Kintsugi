@@ -269,10 +269,10 @@ html {
   }
 
   .nav-tab:hover:not([data-active="true"]) {
-    color: var(--theme-accent, #34d399) !important;  /* Fallback to bright green */
-    border-color: var(--theme-accent, #34d399) !important;
+    color: #34d399 !important;  /* Bright green - hardcoded for testing */
+    border-color: #34d399 !important;
     border-bottom-width: 3px !important;  /* Thicker border on hover */
-    background-color: var(--theme-primary-light, #d1fae5) !important;  /* Background highlight with fallback */
+    background-color: #d1fae5 !important;  /* Light mint background - hardcoded */
     border-radius: 4px 4px 0 0 !important;  /* Rounded top corners */
     transform: translateY(-2px) !important;  /* Lift higher */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;  /* Add shadow */
@@ -289,7 +289,7 @@ html {
 
   /* CRITICAL: Catch-all hover that applies to ALL tabs */
   .nav-tab:hover {
-    border-bottom-color: var(--theme-accent, #34d399) !important;  /* Fallback to green */
+    border-bottom-color: #34d399 !important;  /* Bright green - hardcoded */
     cursor: pointer !important;
   }
 
