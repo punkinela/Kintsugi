@@ -73,6 +73,18 @@ import UnifiedPhilosophyCard from '@/components/UnifiedPhilosophyCard';
 import JourneyAwareAffirmation from '@/components/JourneyAwareAffirmation';
 import FreshStartWelcome from '@/components/FreshStartWelcome';
 
+// Phase 13: Kintsugi Philosophy Features (10 Remarkable Features)
+import MushinReflectionMode from '@/components/MushinReflectionMode';
+import KintsugiPromptsCarousel from '@/components/KintsugiPromptsCarousel';
+import StrengthArchaeology from '@/components/StrengthArchaeology';
+import ImpermanenceReminder from '@/components/ImpermanenceReminder';
+import GoldenSeamTimeline from '@/components/GoldenSeamTimeline';
+import BeforeAfterReframing from '@/components/BeforeAfterReframing';
+import TransformationHeatmap from '@/components/TransformationHeatmap';
+import InteractiveKintsugiVessel from '@/components/InteractiveKintsugiVessel';
+import KintsugiPortfolioGenerator from '@/components/KintsugiPortfolioGenerator';
+import JourneyRichnessScore from '@/components/JourneyRichnessScore';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -85,7 +97,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('home');
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showBiasInsight, setShowBiasInsight] = useState(false);
-  const [themeVersion, setThemeVersion] = useState(0); // Force re-render when theme changes
+  const [themeVersion, setThemeVersion] = useState(0); // Used for data-theme-version attribute
   const [biasInsight, setBiasInsight] = useState<BiasInsight>({
     id: '1',
     title: 'Weekly Reflection',
@@ -133,14 +145,13 @@ export default function Home() {
     }
   }, []);
 
-  // CRITICAL FIX: Listen for theme changes and force IMMEDIATE re-render
-  // This replaces the unreliable 500ms polling mechanism with instant event-based updates
+  // Listen for theme changes and update data-theme-version attribute
+  // This forces browsers to recalculate CSS variables in stylesheets
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const handleThemeChange = () => {
-      console.log('🔄 Theme change detected - forcing navigation re-render');
-      // Increment to force re-render of ALL navigation tabs with updated CSS variables
+      // Increment data-theme-version to trigger browser style recalculation
       setThemeVersion(prev => prev + 1);
     };
 
@@ -155,32 +166,6 @@ export default function Home() {
       window.removeEventListener('storage', handleThemeChange);
     };
   }, []);
-
-  // Get actual theme colors (not CSS variables) to use in inline styles
-  // This recomputes whenever themeVersion changes, forcing React to see new color values
-  const themeColors = useMemo(() => {
-    if (typeof window === 'undefined') {
-      console.log('⚠️ SSR: Using default gold colors');
-      return { primary: '#d97706', primaryLight: '#fef3c7' };
-    }
-    const colors = getCurrentThemeColors();
-    console.log('🎨 useMemo recomputed themeColors:', {
-      primary: colors.primary,
-      primaryLight: colors.primaryLight,
-      themeVersion
-    });
-    return colors;
-  }, [themeVersion]);
-
-  // DEBUG: Log when navigation renders with color values
-  useEffect(() => {
-    console.log('🖼️ Navigation rendering with:', {
-      activeTab,
-      primaryColor: themeColors.primary,
-      primaryLightColor: themeColors.primaryLight,
-      themeVersion
-    });
-  }, [activeTab, themeColors, themeVersion]);
 
   // Load user data
   useEffect(() => {
@@ -518,48 +503,39 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 transition-colors duration-200">
-      {/* Header - key forces complete remount when theme changes */}
-      <header key={`header-${themeVersion}`} className="bg-white dark:bg-kintsugi-dark-800 shadow-sm">
+    <div
+      className="min-h-screen bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 transition-colors duration-200"
+      data-theme-version={themeVersion}
+    >
+      {/* Header - data-theme-version forces browser style recalculation */}
+      <header className="bg-white dark:bg-kintsugi-dark-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8" style={{ color: themeColors.primary }} />
+                <Zap className="h-8 w-8 theme-text-primary" />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
-                  key={`nav-home-${themeVersion}`}
                   onClick={() => setActiveTab('home')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  style={{
-                    borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'home' ? themeColors.primary : '#6b7280'
-                  }}
+                  data-active={activeTab === 'home'}
+                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
                   Home
                 </button>
                 <button
-                  key={`nav-journal-${themeVersion}`}
                   onClick={() => setActiveTab('journal')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  style={{
-                    borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
-                  }}
+                  data-active={activeTab === 'journal'}
+                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
                   Impact Log
                 </button>
                 <button
-                  key={`nav-insights-${themeVersion}`}
                   onClick={() => setActiveTab('insights')}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  style={{
-                    borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
-                  }}
+                  data-active={activeTab === 'insights'}
+                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
                   Insights
                 </button>
@@ -794,12 +770,8 @@ export default function Home() {
                     setActiveTab('home');
                     setShowMobileMenu(false);
                   }}
-                  className="block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  style={{
-                    backgroundColor: activeTab === 'home' ? themeColors.primaryLight : 'transparent',
-                    borderColor: activeTab === 'home' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'home' ? themeColors.primary : '#6b7280'
-                  }}
+                  data-active={activeTab === 'home'}
+                  className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                 >
                   Home
                 </button>
@@ -808,12 +780,8 @@ export default function Home() {
                     setActiveTab('journal');
                     setShowMobileMenu(false);
                   }}
-                  className="block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  style={{
-                    backgroundColor: activeTab === 'journal' ? themeColors.primaryLight : 'transparent',
-                    borderColor: activeTab === 'journal' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'journal' ? themeColors.primary : '#6b7280'
-                  }}
+                  data-active={activeTab === 'journal'}
+                  className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                 >
                   Impact Log
                 </button>
@@ -822,25 +790,15 @@ export default function Home() {
                     setActiveTab('insights');
                     setShowMobileMenu(false);
                   }}
-                  className="block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  style={{
-                    backgroundColor: activeTab === 'insights' ? themeColors.primaryLight : 'transparent',
-                    borderColor: activeTab === 'insights' ? themeColors.primary : 'transparent',
-                    color: activeTab === 'insights' ? themeColors.primary : '#6b7280'
-                  }}
+                  data-active={activeTab === 'insights'}
+                  className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                 >
                   Insights
                 </button>
                 <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
-                      <span
-                        className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg"
-                        style={{
-                          backgroundColor: themeColors.primaryLight,
-                          color: themeColors.primary
-                        }}
-                      >
+                      <span className="inline-flex items-center justify-center h-10 w-10 rounded-full text-lg theme-bg-primary-light theme-text-primary">
                         {user?.avatar || '👤'}
                       </span>
                     </div>
@@ -898,6 +856,12 @@ export default function Home() {
 
               {/* Personalized Cultural Wisdom - NEW FEATURE */}
               <PersonalizedWisdom user={user} />
+
+              {/* Phase 13: Journey Richness Score - Gamified Authenticity */}
+              <JourneyRichnessScore entries={journalEntries} />
+
+              {/* Phase 13: Impermanence Reminder - Past Challenges Overcome */}
+              <ImpermanenceReminder entries={journalEntries} />
 
               {/* Golden Repairs Panel */}
               <GoldenRepairsPanel entries={journalEntries} />
@@ -971,15 +935,18 @@ export default function Home() {
                 }}
               />
 
-              {/* Personalized Prompt Carousel */}
-              <JournalPromptCarousel
-                user={user}
+              {/* Phase 13: Kintsugi Philosophy Prompts - Daily Wisdom */}
+              <KintsugiPromptsCarousel
                 onSelectPrompt={(prompt) => {
-                  // Pre-fill the full journal with the prompt
                   setShowAccomplishments(true);
-                  // The prompt will be used in the EnhancedProgressJournal component
                 }}
               />
+
+              {/* Phase 13: Transformation Heatmap - Golden Repair Days */}
+              <TransformationHeatmap entries={journalEntries} monthsToShow={6} />
+
+              {/* Phase 13: Golden Seam Timeline - Connect Challenges to Growth */}
+              <GoldenSeamTimeline entries={journalEntries} />
 
               {/* Two-Column Layout for Stats */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -1214,9 +1181,25 @@ export default function Home() {
               <WordCloudVisualization />
               <PersonalStatsDashboard />
 
+              {/* Phase 13: Strength Archaeology - Hidden Strengths from Adversity */}
+              <StrengthArchaeology entries={journalEntries} />
+
+              {/* Phase 13: Before/After Reframing - Transformation Stories */}
+              <BeforeAfterReframing entries={journalEntries} />
+
+              {/* Phase 13: Interactive Kintsugi Vessel - 3D Visualization */}
+              <InteractiveKintsugiVessel entries={journalEntries} />
+
               {/* Phase 6: AI-Powered Features */}
               <AIInsightsDashboard />
               <AIPerformanceReviewGenerator />
+
+              {/* Phase 13: Kintsugi Portfolio Generator - Professional Export */}
+              <KintsugiPortfolioGenerator
+                entries={journalEntries}
+                userName={user?.name}
+                userProfession={user?.profession}
+              />
 
               {/* Phase 7: Professional Tools */}
               <ExportManager />

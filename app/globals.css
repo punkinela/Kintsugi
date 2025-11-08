@@ -241,6 +241,40 @@ html {
     outline: 2px solid var(--theme-primary) !important;
     outline-offset: 2px;
   }
+
+  /* Navigation tabs - INSTANT theme color updates */
+  /* Desktop navigation tabs */
+  .nav-tab {
+    border-color: transparent !important;
+    color: #6b7280 !important;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .nav-tab[data-active="true"] {
+    border-color: var(--theme-primary) !important;
+    color: var(--theme-primary) !important;
+  }
+
+  .nav-tab:hover:not([data-active="true"]) {
+    color: var(--theme-secondary) !important;
+  }
+
+  /* Mobile navigation tabs */
+  .nav-tab-mobile {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    color: #6b7280 !important;
+  }
+
+  .nav-tab-mobile[data-active="true"] {
+    background-color: var(--theme-primary-light) !important;
+    border-color: var(--theme-primary) !important;
+    color: var(--theme-primary) !important;
+  }
+
+  .nav-tab-mobile:hover:not([data-active="true"]) {
+    background-color: rgba(156, 163, 175, 0.1) !important;
+  }
 }
 
 /* Component styles */

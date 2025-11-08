@@ -8,6 +8,7 @@ import { getEngagementData, saveEngagementData, updateStreakFromEntries } from '
 import { analyzeAccomplishment, generateSummary, generateInsights, AnalysisResult } from '@/utils/accomplishmentAnalyzer';
 import { awardXP, incrementStat } from '@/utils/gamification';
 import AccomplishmentHelper from './AccomplishmentHelper';
+import MushinReflectionMode from './MushinReflectionMode';
 
 interface EnhancedProgressJournalProps {
   isOpen: boolean;
@@ -393,6 +394,16 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
                       placeholder="How did this make you feel? What did you learn?"
                       className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none"
                       rows={2}
+                    />
+
+                    {/* Mushin Reflection Mode - Non-judgmental observation */}
+                    <MushinReflectionMode
+                      text={`${newEntry.accomplishment} ${newEntry.reflection}`}
+                      onTextChange={(newText) => {
+                        // Update reflection with suggested text
+                        setNewEntry({ ...newEntry, reflection: newText.replace(newEntry.accomplishment, '').trim() });
+                      }}
+                      isActive={true}
                     />
                   </div>
 
