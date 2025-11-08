@@ -133,9 +133,9 @@ export default function JourneyRichnessScore({ entries }: JourneyRichnessScorePr
       icon: CheckCircle
     },
     Masterful: {
-      color: 'from-amber-400 to-orange-500',
-      bg: 'bg-amber-50 dark:bg-amber-900/20',
-      border: 'border-amber-300 dark:border-amber-700',
+      color: 'theme-gradient-to-r',
+      bg: 'theme-bg-primary-light',
+      border: 'theme-border-primary',
       icon: Award
     }
   };
@@ -149,7 +149,7 @@ export default function JourneyRichnessScore({ entries }: JourneyRichnessScorePr
       <div className={`px-6 py-4 border-b border-gray-200 dark:border-gray-700 ${config.bg}`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Icon className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+            <Icon className="h-6 w-6 theme-text-primary" />
             <div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                 Journey Richness Score
@@ -208,8 +208,8 @@ export default function JourneyRichnessScore({ entries }: JourneyRichnessScorePr
             {/* Gradient definition */}
             <defs>
               <linearGradient id="richnessGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" className={`text-amber-400`} stopColor="currentColor" />
-                <stop offset="100%" className={`text-orange-500`} stopColor="currentColor" />
+                <stop offset="0%" style={{ stopColor: 'var(--theme-primary)' }} />
+                <stop offset="100%" style={{ stopColor: 'var(--theme-secondary)' }} />
               </linearGradient>
             </defs>
           </svg>
@@ -275,7 +275,7 @@ export default function JourneyRichnessScore({ entries }: JourneyRichnessScorePr
           </div>
 
           <div className="text-center">
-            <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+            <div className="text-2xl font-bold theme-text-primary">
               {Math.round(metrics.depth)}%
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Depth</div>

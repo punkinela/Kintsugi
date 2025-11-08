@@ -171,10 +171,10 @@ export default function StrengthArchaeology({ entries }: StrengthArchaeologyProp
   // Category colors
   const categoryConfig = {
     resilience: {
-      color: 'from-amber-500 to-orange-500',
-      bg: 'bg-amber-50 dark:bg-amber-900/20',
+      color: 'theme-gradient-to-r',
+      bg: 'theme-bg-primary-light',
       border: 'border-amber-200 dark:border-amber-800',
-      text: 'text-amber-700 dark:text-amber-300',
+      text: 'theme-text-primary',
       icon: TrendingUp
     },
     emotional: {
@@ -222,10 +222,10 @@ export default function StrengthArchaeology({ entries }: StrengthArchaeologyProp
   return (
     <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20">
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r theme-gradient-to-br">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Gem className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+            <Gem className="h-6 w-6 theme-text-primary" />
             <div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                 Strength Archaeology
@@ -237,7 +237,7 @@ export default function StrengthArchaeology({ entries }: StrengthArchaeologyProp
           </div>
 
           <div className="text-right">
-            <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+            <div className="text-2xl font-bold theme-text-primary">
               {discoveredStrengths.length}
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -291,7 +291,7 @@ export default function StrengthArchaeology({ entries }: StrengthArchaeologyProp
               animate={{ opacity: 1 }}
               className="text-center py-12"
             >
-              <div className="inline-flex items-center gap-3 text-amber-600 dark:text-amber-400">
+              <div className="inline-flex items-center gap-3 theme-text-primary">
                 <div className="animate-spin rounded-full h-6 w-6 border-2 border-current border-t-transparent"></div>
                 <span className="text-sm font-medium">Analyzing your experiences...</span>
               </div>
@@ -368,7 +368,7 @@ export default function StrengthArchaeology({ entries }: StrengthArchaeologyProp
       </div>
 
       {/* Philosophy Note */}
-      <div className="px-6 py-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-t border-gray-200 dark:border-gray-700">
+      <div className="px-6 py-4 bg-gradient-to-r theme-gradient-to-br border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-700 dark:text-gray-300">
           <span className="font-semibold">もったいない Mottainai:</span> "Nothing is wasted" -
           Every challenge you've faced has revealed capabilities you might not have recognized.

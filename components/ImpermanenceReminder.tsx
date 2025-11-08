@@ -86,10 +86,10 @@ export default function ImpermanenceReminder({ entries, currentChallenge }: Impe
   return (
     <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20">
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 theme-bg-primary-light">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Clock className="h-6 w-6 text-rose-600 dark:text-rose-400" />
+            <Clock className="h-6 w-6 theme-text-primary" />
             <div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                 Impermanence Reminder
@@ -108,7 +108,7 @@ export default function ImpermanenceReminder({ entries, currentChallenge }: Impe
                 onClick={() => setSelectedTimeframe(timeframe)}
                 className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
                   selectedTimeframe === timeframe
-                    ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white'
+                    ? 'theme-btn-primary'
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
@@ -121,7 +121,7 @@ export default function ImpermanenceReminder({ entries, currentChallenge }: Impe
 
       {/* Current Challenge Context */}
       {currentChallenge && (
-        <div className="px-6 py-4 bg-amber-50 dark:bg-amber-900/20 border-b border-amber-200 dark:border-amber-800">
+        <div className="px-6 py-4 theme-bg-primary-light border-b theme-border-light">
           <p className="text-sm text-gray-700 dark:text-gray-300">
             <span className="font-semibold">Current challenge:</span> {currentChallenge}
           </p>
@@ -142,21 +142,21 @@ export default function ImpermanenceReminder({ entries, currentChallenge }: Impe
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-gradient-to-r from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 border border-rose-200 dark:border-rose-800 rounded-xl p-4"
+              className="theme-bg-primary-light border theme-border-primary rounded-xl p-4"
             >
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 mt-1">
                   {challenge.status === 'resolved' ? (
                     <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
                   ) : (
-                    <TrendingUp className="h-5 w-5 text-rose-600 dark:text-rose-400" />
+                    <TrendingUp className="h-5 w-5 theme-text-primary" />
                   )}
                 </div>
 
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
                     <Calendar className="h-4 w-4 text-gray-500 dark:text-gray-400" />
-                    <span className="text-sm font-semibold text-rose-700 dark:text-rose-300">
+                    <span className="text-sm font-semibold theme-text-primary">
                       {getRelativeTime(challenge.daysAgo)}
                     </span>
                   </div>
@@ -194,7 +194,7 @@ export default function ImpermanenceReminder({ entries, currentChallenge }: Impe
       </div>
 
       {/* Philosophy Note */}
-      <div className="px-6 py-4 bg-gradient-to-r from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 border-t border-gray-200 dark:border-gray-700">
+      <div className="px-6 py-4 theme-bg-primary-light border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-700 dark:text-gray-300">
           <span className="font-semibold">物の哀れ Mono no Aware:</span> "Awareness of
           impermanence" - Both struggles and successes are temporary. The challenges that felt
