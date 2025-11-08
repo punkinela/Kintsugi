@@ -54,12 +54,12 @@ export default function QuickEntryCard({ onSave }: QuickEntryCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl shadow-lg border-2 border-purple-200 dark:border-purple-800/30 p-6"
+      className="theme-bg-primary-light rounded-2xl shadow-lg border-2 theme-border-primary p-6"
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg">
+          <div className="p-3 theme-gradient-to-r rounded-xl shadow-lg">
             <Zap className="h-6 w-6 text-white" />
           </div>
           <div>
@@ -131,7 +131,7 @@ export default function QuickEntryCard({ onSave }: QuickEntryCardProps) {
           whileTap={{ scale: 0.98 }}
           onClick={handleQuickSave}
           disabled={!text.trim() || isSaving}
-          className={`flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${
+          className={`flex-1 px-6 py-3 theme-btn-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${
             isSaving ? 'animate-pulse' : ''
           }`}
         >

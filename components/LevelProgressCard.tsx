@@ -14,10 +14,10 @@ export default function LevelProgressCard() {
 
   // Calculate level tier for visual styling
   const getTier = (level: number) => {
-    if (level >= 45) return { name: 'Legendary', color: 'from-purple-500 to-pink-500', icon: '👑' };
-    if (level >= 35) return { name: 'Epic', color: 'from-blue-500 to-purple-500', icon: '🌟' };
-    if (level >= 25) return { name: 'Rare', color: 'from-green-500 to-teal-500', icon: '💎' };
-    if (level >= 15) return { name: 'Uncommon', color: 'from-yellow-500 to-orange-500', icon: '🏆' };
+    if (level >= 45) return { name: 'Legendary', color: 'theme-gradient-to-r', icon: '👑' };
+    if (level >= 35) return { name: 'Epic', color: 'theme-gradient-to-r', icon: '🌟' };
+    if (level >= 25) return { name: 'Rare', color: 'theme-gradient-to-r', icon: '💎' };
+    if (level >= 15) return { name: 'Uncommon', color: 'theme-gradient-to-r', icon: '🏆' };
     return { name: 'Common', color: 'from-gray-400 to-gray-600', icon: '⭐' };
   };
 
@@ -97,8 +97,8 @@ export default function LevelProgressCard() {
           icon={<Star className="h-5 w-5 theme-text-primary" />}
           label="Total XP"
           value={levelInfo.totalXP.toLocaleString()}
-          bgColor="theme-bg-primary-light dark:bg-yellow-900/10"
-          borderColor="border-yellow-200 dark:border-yellow-900/30"
+          bgColor="theme-bg-primary-light"
+          borderColor="theme-border-light"
         />
         <StatCard
           icon={<Zap className="h-5 w-5 text-blue-500" />}
