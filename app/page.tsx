@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -93,6 +93,10 @@ import AISmartTaggingSearch from '@/components/AISmartTaggingSearch';
 import AIInterviewPrepGenerator from '@/components/AIInterviewPrepGenerator';
 import AutoProfileBuilder from '@/components/AutoProfileBuilder';
 
+// Backup & Data Protection
+import AutoBackupReminder from '@/components/AutoBackupReminder';
+import BackupRestorePanel from '@/components/BackupRestorePanel';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -135,6 +139,7 @@ export default function Home() {
   const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
   const [showInterviewPrep, setShowInterviewPrep] = useState(false);
   const [selectedEntryForInterview, setSelectedEntryForInterview] = useState<string>('');
+  const [showBackupPanel, setShowBackupPanel] = useState(false);
 
   // Weekly Digest ref for navigation
   const weeklyDigestRef = useRef<HTMLDivElement>(null);
@@ -1666,14 +1671,44 @@ export default function Home() {
                 )}
 
                 {settingsTab === 'data' && (
-                  <DataManagement
-                    onDataImported={() => {
-                      setShowSettings(false);
-                    }}
-                    onDataCleared={() => {
-                      setShowSettings(false);
-                    }}
-                  />
+                  <div className="space-y-6">
+                    {/* Backup & Restore Button */}
+                    <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border-2 border-blue-200 dark:border-blue-700">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 bg-blue-500 rounded-lg">
+                          <Shield className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                            Protect Your Data
+                          </h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                            Never lose your journal entries, achievements, or progress. Create backups and restore from previous saves.
+                          </p>
+                          <button
+                            onClick={() => {
+                              setShowBackupPanel(true);
+                              setShowSettings(false);
+                            }}
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+                          >
+                            <Shield className="h-4 w-4" />
+                            Open Backup & Restore
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Existing Data Management */}
+                    <DataManagement
+                      onDataImported={() => {
+                        setShowSettings(false);
+                      }}
+                      onDataCleared={() => {
+                        setShowSettings(false);
+                      }}
+                    />
+                  </div>
                 )}
 
                 {settingsTab === 'appearance' && (
@@ -1752,6 +1787,14 @@ export default function Home() {
             <AIInterviewPrepGenerator achievementText={selectedEntryForInterview} />
           </div>
         </div>
+      )}
+
+      {/* Auto Backup Reminder */}
+      <AutoBackupReminder />
+
+      {/* Backup & Restore Panel */}
+      {showBackupPanel && (
+        <BackupRestorePanel onClose={() => setShowBackupPanel(false)} />
       )}
     </div>
   );

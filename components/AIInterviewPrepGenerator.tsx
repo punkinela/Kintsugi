@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Sparkles, Copy, CheckCircle2, Lightbulb, AlertCircle, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -33,6 +33,25 @@ export default function AIInterviewPrepGenerator({ achievementText = '', compact
   const [inputText, setInputText] = useState(achievementText);
   const [copiedSection, setCopiedSection] = useState<string | null>(null);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['star']));
+
+  // Track feature usage
+  useEffect(() => {
+    const usageData = JSON.parse(localStorage.getItem('ai_feature_usage') || '{}');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!usageData.interviewPrepGenerator) {
+      usageData.interviewPrepGenerator = { views: 0, lastUsed: null, dates: [] };
+    }
+
+    usageData.interviewPrepGenerator.views += 1;
+    usageData.interviewPrepGenerator.lastUsed = today;
+
+    if (!usageData.interviewPrepGenerator.dates.includes(today)) {
+      usageData.interviewPrepGenerator.dates.push(today);
+    }
+
+    localStorage.setItem('ai_feature_usage', JSON.stringify(usageData));
+  }, []);
 
   const interviewResponse = useMemo(() => {
     if (!inputText.trim()) return null;

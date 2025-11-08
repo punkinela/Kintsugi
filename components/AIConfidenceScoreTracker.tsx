@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, Minus, Sparkles, BarChart3, Calendar, Award, Target, AlertCircle, CheckCircle2, ChevronRight } from 'lucide-react';
 
@@ -59,6 +59,25 @@ interface EntryAnalysis {
 export default function AIConfidenceScoreTracker({ entries = [], compact = false }: AIConfidenceScoreTrackerProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'all'>('month');
   const [showDetails, setShowDetails] = useState(false);
+
+  // Track feature usage
+  useEffect(() => {
+    const usageData = JSON.parse(localStorage.getItem('ai_feature_usage') || '{}');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!usageData.confidenceScoreTracker) {
+      usageData.confidenceScoreTracker = { views: 0, lastUsed: null, dates: [] };
+    }
+
+    usageData.confidenceScoreTracker.views += 1;
+    usageData.confidenceScoreTracker.lastUsed = today;
+
+    if (!usageData.confidenceScoreTracker.dates.includes(today)) {
+      usageData.confidenceScoreTracker.dates.push(today);
+    }
+
+    localStorage.setItem('ai_feature_usage', JSON.stringify(usageData));
+  }, []);
 
   const analysis = useMemo(() => {
     if (entries.length === 0) return null;

@@ -34,6 +34,25 @@ export default function AICareerGapAnalyzer({ user, targetRole = 'Senior Profess
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showAnalyzer, setShowAnalyzer] = useState(true);
 
+  // Track feature usage
+  useEffect(() => {
+    const usageData = JSON.parse(localStorage.getItem('ai_feature_usage') || '{}');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!usageData.careerGapAnalyzer) {
+      usageData.careerGapAnalyzer = { views: 0, lastUsed: null, dates: [] };
+    }
+
+    usageData.careerGapAnalyzer.views += 1;
+    usageData.careerGapAnalyzer.lastUsed = today;
+
+    if (!usageData.careerGapAnalyzer.dates.includes(today)) {
+      usageData.careerGapAnalyzer.dates.push(today);
+    }
+
+    localStorage.setItem('ai_feature_usage', JSON.stringify(usageData));
+  }, []);
+
   const analysis = useMemo(() => {
     if (!user) return null;
     return analyzeCareerProfile(user, targetRole);

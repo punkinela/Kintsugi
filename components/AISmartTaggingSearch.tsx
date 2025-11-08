@@ -48,6 +48,25 @@ export default function AISmartTaggingSearch({ entries = [], onEntryClick, compa
     dateRange: 'all'
   });
 
+  // Track feature usage
+  useEffect(() => {
+    const usageData = JSON.parse(localStorage.getItem('ai_feature_usage') || '{}');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!usageData.smartTaggingSearch) {
+      usageData.smartTaggingSearch = { views: 0, lastUsed: null, dates: [] };
+    }
+
+    usageData.smartTaggingSearch.views += 1;
+    usageData.smartTaggingSearch.lastUsed = today;
+
+    if (!usageData.smartTaggingSearch.dates.includes(today)) {
+      usageData.smartTaggingSearch.dates.push(today);
+    }
+
+    localStorage.setItem('ai_feature_usage', JSON.stringify(usageData));
+  }, []);
+
   // Tag and categorize all entries
   const taggedEntries = useMemo(() => {
     return entries.map(entry => tagEntry(entry));
