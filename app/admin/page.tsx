@@ -6,9 +6,10 @@ import {
   Users, TrendingUp, Star, MessageCircle, Award, BookOpen,
   Download, Calendar, Target, BarChart3, Home, Filter,
   TrendingDown, Minus, Activity, Brain, Map, Layers, User,
-  HelpCircle
+  HelpCircle, Settings
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
+import ThemeSelector from '@/components/ThemeSelector';
 import DashboardCard from '@/components/DashboardCard';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import EmptyState from '@/components/EmptyState';
@@ -49,6 +50,7 @@ import {
 import { AnalyticsData, UserFeedback } from '@/types/analytics';
 import { JournalEntry } from '@/types/engagement';
 import { getEngagementData } from '@/utils/engagement';
+import { initializeTheme } from '@/utils/themes';
 import Link from 'next/link';
 import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
@@ -82,7 +84,7 @@ type StatCardProps = {
   color?: string;
 };
 
-const StatCard = ({ title, value, icon, trend, trendType = 'neutral', color = 'from-kintsugi-gold-500 to-kintsugi-gold-600' }: StatCardProps) => {
+const StatCard = ({ title, value, icon, trend, trendType = 'neutral', color = 'theme-gradient-to-r' }: StatCardProps) => {
   const trendColors = {
     up: 'text-green-600 dark:text-green-400',
     down: 'text-red-600 dark:text-red-400',
@@ -142,7 +144,7 @@ export default function AdminDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d' | 'all'>('30d');
-  const [activeTab, setActiveTab] = useState<'overview' | 'journal' | 'demographics' | 'journey' | 'insights'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'journal' | 'demographics' | 'journey' | 'insights' | 'settings'>('overview');
   const [demographicsRefresh, setDemographicsRefresh] = useState(0);
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [currentStreak, setCurrentStreak] = useState(0);
@@ -184,6 +186,31 @@ export default function AdminDashboard() {
     };
 
     loadData();
+  }, []);
+
+  // Initialize theme system
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      initializeTheme();
+    }
+  }, []);
+
+  // Listen for theme changes
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleThemeChange = () => {
+      // Force re-render when theme changes
+      setDemographicsRefresh(prev => prev + 1);
+    };
+
+    window.addEventListener('theme-changed', handleThemeChange);
+    window.addEventListener('storage', handleThemeChange);
+
+    return () => {
+      window.removeEventListener('theme-changed', handleThemeChange);
+      window.removeEventListener('storage', handleThemeChange);
+    };
   }, []);
 
   // Refresh demographics when tab is opened
@@ -363,7 +390,8 @@ export default function AdminDashboard() {
               { id: 'journal', label: 'Impact Log', icon: BookOpen },
               { id: 'demographics', label: 'Demographics', icon: Users },
               { id: 'journey', label: 'User Journey', icon: Map },
-              { id: 'insights', label: 'Insights', icon: Brain }
+              { id: 'insights', label: 'Insights', icon: Brain },
+              { id: 'settings', label: 'Settings', icon: Settings }
             ].map((tab, index) => (
               <motion.button
                 key={tab.id}
@@ -1006,6 +1034,18 @@ export default function AdminDashboard() {
               userName={user?.name || 'User'}
               userProfession={user?.profession || 'Professional'}
             />
+          </div>
+        )}
+
+        {/* SETTINGS TAB - Theme & Appearance */}
+        {activeTab === 'settings' && (
+          <div className="space-y-6">
+            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Admin Settings
+              </h2>
+              <ThemeSelector />
+            </div>
           </div>
         )}
       </main>
