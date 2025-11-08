@@ -73,6 +73,18 @@ import UnifiedPhilosophyCard from '@/components/UnifiedPhilosophyCard';
 import JourneyAwareAffirmation from '@/components/JourneyAwareAffirmation';
 import FreshStartWelcome from '@/components/FreshStartWelcome';
 
+// Phase 13: Kintsugi Philosophy Features (10 Remarkable Features)
+import MushinReflectionMode from '@/components/MushinReflectionMode';
+import KintsugiPromptsCarousel from '@/components/KintsugiPromptsCarousel';
+import StrengthArchaeology from '@/components/StrengthArchaeology';
+import ImpermanenceReminder from '@/components/ImpermanenceReminder';
+import GoldenSeamTimeline from '@/components/GoldenSeamTimeline';
+import BeforeAfterReframing from '@/components/BeforeAfterReframing';
+import TransformationHeatmap from '@/components/TransformationHeatmap';
+import InteractiveKintsugiVessel from '@/components/InteractiveKintsugiVessel';
+import KintsugiPortfolioGenerator from '@/components/KintsugiPortfolioGenerator';
+import JourneyRichnessScore from '@/components/JourneyRichnessScore';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -845,6 +857,12 @@ export default function Home() {
               {/* Personalized Cultural Wisdom - NEW FEATURE */}
               <PersonalizedWisdom user={user} />
 
+              {/* Phase 13: Journey Richness Score - Gamified Authenticity */}
+              <JourneyRichnessScore entries={journalEntries} />
+
+              {/* Phase 13: Impermanence Reminder - Past Challenges Overcome */}
+              <ImpermanenceReminder entries={journalEntries} />
+
               {/* Golden Repairs Panel */}
               <GoldenRepairsPanel entries={journalEntries} />
 
@@ -917,15 +935,18 @@ export default function Home() {
                 }}
               />
 
-              {/* Personalized Prompt Carousel */}
-              <JournalPromptCarousel
-                user={user}
+              {/* Phase 13: Kintsugi Philosophy Prompts - Daily Wisdom */}
+              <KintsugiPromptsCarousel
                 onSelectPrompt={(prompt) => {
-                  // Pre-fill the full journal with the prompt
                   setShowAccomplishments(true);
-                  // The prompt will be used in the EnhancedProgressJournal component
                 }}
               />
+
+              {/* Phase 13: Transformation Heatmap - Golden Repair Days */}
+              <TransformationHeatmap entries={journalEntries} monthsToShow={6} />
+
+              {/* Phase 13: Golden Seam Timeline - Connect Challenges to Growth */}
+              <GoldenSeamTimeline entries={journalEntries} />
 
               {/* Two-Column Layout for Stats */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -1160,9 +1181,25 @@ export default function Home() {
               <WordCloudVisualization />
               <PersonalStatsDashboard />
 
+              {/* Phase 13: Strength Archaeology - Hidden Strengths from Adversity */}
+              <StrengthArchaeology entries={journalEntries} />
+
+              {/* Phase 13: Before/After Reframing - Transformation Stories */}
+              <BeforeAfterReframing entries={journalEntries} />
+
+              {/* Phase 13: Interactive Kintsugi Vessel - 3D Visualization */}
+              <InteractiveKintsugiVessel entries={journalEntries} />
+
               {/* Phase 6: AI-Powered Features */}
               <AIInsightsDashboard />
               <AIPerformanceReviewGenerator />
+
+              {/* Phase 13: Kintsugi Portfolio Generator - Professional Export */}
+              <KintsugiPortfolioGenerator
+                entries={journalEntries}
+                userName={user?.name}
+                userProfession={user?.profession}
+              />
 
               {/* Phase 7: Professional Tools */}
               <ExportManager />

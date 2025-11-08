@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Calendar } from 'lucide-react';
 import type { JournalEntry } from '@/types/engagement';
 
-interface ReframeP air {
+interface ReframePair {
   id: string;
   beforeEntry: JournalEntry;
   afterEntry: JournalEntry;
