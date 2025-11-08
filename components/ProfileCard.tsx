@@ -35,12 +35,12 @@ export default function ProfileCard({ user, onEdit }: ProfileCardProps) {
   };
 
   return (
-    <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 overflow-hidden">
+    <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border theme-border-light dark:theme-border-primary/50 overflow-hidden">
       {/* Header with completion status */}
-      <div className={`p-6 ${isComplete ? 'bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20' : 'bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20'}`}>
+      <div className={`p-6 ${isComplete ? 'bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20' : 'bg-gradient-to-r theme-bg-primary-light '}`}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-            <User className="h-5 w-5 text-kintsugi-gold-600" />
+            <User className="h-5 w-5 theme-text-primary" />
             Your Profile
           </h3>
           <button
@@ -106,7 +106,7 @@ export default function ProfileCard({ user, onEdit }: ProfileCardProps) {
           {/* Profession */}
           <div className="bg-gray-50 dark:bg-kintsugi-dark-700 rounded-lg p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Briefcase className="h-4 w-4 text-kintsugi-gold-600" />
+              <Briefcase className="h-4 w-4 theme-text-primary" />
               <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Profession
               </span>
@@ -119,7 +119,7 @@ export default function ProfileCard({ user, onEdit }: ProfileCardProps) {
           {/* Gender Identity */}
           <div className="bg-gray-50 dark:bg-kintsugi-dark-700 rounded-lg p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Users className="h-4 w-4 text-kintsugi-gold-600" />
+              <Users className="h-4 w-4 theme-text-primary" />
               <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Gender Identity
               </span>
@@ -132,7 +132,7 @@ export default function ProfileCard({ user, onEdit }: ProfileCardProps) {
           {/* Ethnicity */}
           <div className="bg-gray-50 dark:bg-kintsugi-dark-700 rounded-lg p-4 md:col-span-2">
             <div className="flex items-center gap-2 mb-2">
-              <MapPin className="h-4 w-4 text-kintsugi-gold-600" />
+              <MapPin className="h-4 w-4 theme-text-primary" />
               <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Ethnicity/Cultural Background
               </span>

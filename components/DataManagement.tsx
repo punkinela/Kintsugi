@@ -118,16 +118,16 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
   return (
     <div className="space-y-6">
       {/* Stats Overview */}
-      <div className="bg-gradient-to-br from-kintsugi-gold-50 to-white dark:from-kintsugi-dark-800 dark:to-kintsugi-dark-900 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+      <div className="bg-gradient-to-br from-kintsugi-gold-50 to-white dark:from-kintsugi-dark-800 dark:to-kintsugi-dark-900 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-kintsugi-gold-600 rounded-lg">
+          <div className="p-2 theme-bg-primary rounded-lg">
             <Database className="h-5 w-5 text-white" />
           </div>
           <div>
             <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white">
               Your Data
             </h3>
-            <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-300">
+            <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
               Backup and manage your information
             </p>
           </div>
@@ -140,8 +140,8 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
           <StatCard label="Member Since" value={stats.memberSince} small />
         </div>
 
-        <div className="mt-4 pt-4 border-t border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
-          <div className="flex items-center gap-2 text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+        <div className="mt-4 pt-4 border-t theme-border-light dark:border-kintsugi-dark-700">
+          <div className="flex items-center gap-2 text-xs text-kintsugi-dark-600 dark:theme-text-secondary">
             <Info className="h-4 w-4" />
             <span>Last backup: {stats.lastBackup}</span>
           </div>
@@ -149,7 +149,7 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
       </div>
 
       {/* Export Section */}
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
         <h4 className="text-sm font-semibold text-kintsugi-dark-900 dark:text-white mb-4 uppercase tracking-wide">
           Export Data
         </h4>
@@ -167,7 +167,7 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
                 <div className="font-medium text-kintsugi-dark-900 dark:text-white">
                   Export Complete Backup (JSON)
                 </div>
-                <div className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+                <div className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary">
                   All data including profile, journal, achievements
                 </div>
               </div>
@@ -187,7 +187,7 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
                 <div className="font-medium text-kintsugi-dark-900 dark:text-white">
                   Export Journal Entries (CSV)
                 </div>
-                <div className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+                <div className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary">
                   Spreadsheet format for analysis
                 </div>
               </div>
@@ -198,7 +198,7 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
       </div>
 
       {/* Import Section */}
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
         <h4 className="text-sm font-semibold text-kintsugi-dark-900 dark:text-white mb-4 uppercase tracking-wide">
           Import Data
         </h4>
@@ -224,7 +224,7 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
               <div className="font-medium text-kintsugi-dark-900 dark:text-white">
                 {importing ? 'Importing...' : 'Restore from Backup'}
               </div>
-              <div className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+              <div className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary">
                 Import previously exported JSON file
               </div>
             </div>
@@ -253,12 +253,12 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
 
       {/* Auto-Backup History */}
       {autoBackups.length > 0 && (
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-sm font-semibold text-kintsugi-dark-900 dark:text-white uppercase tracking-wide">
               Auto-Backup History
             </h4>
-            <span className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+            <span className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary">
               {autoBackups.length} backup{autoBackups.length !== 1 ? 's' : ''} available
             </span>
           </div>
@@ -267,15 +267,15 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
             {autoBackups.map((backup, index) => (
               <div
                 key={backup.version}
-                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-kintsugi-dark-900/50 rounded-lg border border-gray-200 dark:border-kintsugi-dark-700 hover:border-kintsugi-gold-300 dark:hover:border-kintsugi-gold-700 transition-all"
+                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-kintsugi-dark-900/50 rounded-lg border border-gray-200 dark:border-kintsugi-dark-700 hover:theme-border-accent dark:hover:border-kintsugi-gold-700 transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <Clock className="h-4 w-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                  <Clock className="h-4 w-4 theme-text-primary dark:theme-text-secondary" />
                   <div>
                     <div className="text-sm font-medium text-kintsugi-dark-900 dark:text-white">
                       {new Date(backup.timestamp).toLocaleString()}
                     </div>
-                    <div className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+                    <div className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary">
                       {index === 0 ? 'Most recent' : `${index + 1} backup${index === 1 ? '' : 's'} ago`}
                     </div>
                   </div>
@@ -348,10 +348,10 @@ export default function DataManagement({ onDataImported, onDataCleared }: DataMa
 function StatCard({ label, value, small = false }: { label: string; value: string | number; small?: boolean }) {
   return (
     <div className="bg-white dark:bg-kintsugi-dark-900/50 rounded-lg p-3">
-      <div className={`font-bold text-kintsugi-gold-600 dark:text-kintsugi-gold-400 ${small ? 'text-sm' : 'text-2xl'}`}>
+      <div className={`font-bold theme-text-primary dark:theme-text-secondary ${small ? 'text-sm' : 'text-2xl'}`}>
         {value}
       </div>
-      <div className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+      <div className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
         {label}
       </div>
     </div>

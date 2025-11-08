@@ -115,7 +115,7 @@ export default function DailyChallengesPanel() {
                 <Zap className="w-3 h-3" />
                 {challenge.xpReward} XP
               </div>
-              <div className="flex items-center gap-1 text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-2 py-1 rounded-full">
+              <div className="flex items-center gap-1 text-xs theme-bg-primary-light dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-2 py-1 rounded-full">
                 <Trophy className="w-3 h-3" />
                 {challenge.pointsReward} pts
               </div>

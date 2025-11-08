@@ -40,9 +40,9 @@ const colors = {
     text: 'text-red-900 dark:text-red-100'
   },
   warning: {
-    bg: 'bg-amber-50 dark:bg-amber-900/20',
-    border: 'border-amber-200 dark:border-amber-800',
-    icon: 'text-amber-600 dark:text-amber-400',
+    bg: 'theme-bg-primary-light dark:bg-amber-900/20',
+    border: 'theme-border-light dark:theme-border-primary',
+    icon: 'theme-text-primary dark:theme-text-secondary',
     text: 'text-amber-900 dark:text-amber-100'
   },
   info: {

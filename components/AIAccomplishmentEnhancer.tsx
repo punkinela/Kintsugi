@@ -88,13 +88,13 @@ export default function AIAccomplishmentEnhancer({ text, onApply, mode = 'inline
               biasScore >= 80
                 ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800'
                 : biasScore >= 60
-                ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800'
+                ? 'theme-bg-primary-light dark:bg-yellow-900/20 border-yellow-200 dark:theme-border-primary'
                 : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'
             }`}>
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <TrendingUp className={`h-5 w-5 ${
-                    biasScore >= 80 ? 'text-green-600' : biasScore >= 60 ? 'text-yellow-600' : 'text-red-600'
+                    biasScore >= 80 ? 'text-green-600' : biasScore >= 60 ? 'theme-text-primary' : 'text-red-600'
                   }`} />
                   <h3 className="font-semibold text-gray-900 dark:text-white">
                     Confidence Score: {biasScore}/100
@@ -118,9 +118,9 @@ export default function AIAccomplishmentEnhancer({ text, onApply, mode = 'inline
 
             {/* Detected Patterns */}
             {patterns.length > 0 && (
-              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5 text-orange-500" />
+                  <AlertCircle className="h-5 w-5 theme-text-secondary" />
                   Detected Patterns ({patterns.length})
                 </h3>
                 <div className="space-y-2">
@@ -131,7 +131,7 @@ export default function AIAccomplishmentEnhancer({ text, onApply, mode = 'inline
                         pattern.severity === 'high'
                           ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'
                           : pattern.severity === 'medium'
-                          ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800'
+                          ? 'theme-bg-primary-light dark:bg-yellow-900/20 border-yellow-200 dark:theme-border-primary'
                           : 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800'
                       }`}
                     >
@@ -156,7 +156,7 @@ export default function AIAccomplishmentEnhancer({ text, onApply, mode = 'inline
 
             {/* Enhancement Suggestions */}
             {suggestions.length > 0 && (
-              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-purple-500" />
                   Enhancement Suggestions

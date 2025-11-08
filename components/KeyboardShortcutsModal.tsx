@@ -59,25 +59,25 @@ export default function KeyboardShortcutsModal({ onClose, shortcuts }: KeyboardS
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+            <div className="flex items-center justify-between p-6 border-b theme-border-light dark:border-kintsugi-dark-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 rounded-lg">
-                  <Keyboard className="h-6 w-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                <div className="p-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/30 rounded-lg">
+                  <Keyboard className="h-6 w-6 theme-text-primary dark:theme-text-secondary" />
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">
                     Keyboard Shortcuts
                   </h2>
-                  <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-300">
+                  <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
                     Navigate faster with these shortcuts
                   </p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
+                className="p-2 hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
               >
-                <X className="h-5 w-5 text-kintsugi-dark-600 dark:text-kintsugi-gold-300" />
+                <X className="h-5 w-5 text-kintsugi-dark-600 dark:theme-text-secondary" />
               </button>
             </div>
 
@@ -86,7 +86,7 @@ export default function KeyboardShortcutsModal({ onClose, shortcuts }: KeyboardS
               {/* Navigation */}
               {navigation.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-3 uppercase tracking-wide">
+                  <h3 className="text-sm font-semibold text-kintsugi-dark-700 dark:theme-text-secondary mb-3 uppercase tracking-wide">
                     Navigation
                   </h3>
                   <div className="space-y-2">
@@ -100,7 +100,7 @@ export default function KeyboardShortcutsModal({ onClose, shortcuts }: KeyboardS
               {/* Actions */}
               {actions.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-3 uppercase tracking-wide">
+                  <h3 className="text-sm font-semibold text-kintsugi-dark-700 dark:theme-text-secondary mb-3 uppercase tracking-wide">
                     Actions
                   </h3>
                   <div className="space-y-2">
@@ -114,7 +114,7 @@ export default function KeyboardShortcutsModal({ onClose, shortcuts }: KeyboardS
               {/* UI Controls */}
               {ui.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-3 uppercase tracking-wide">
+                  <h3 className="text-sm font-semibold text-kintsugi-dark-700 dark:theme-text-secondary mb-3 uppercase tracking-wide">
                     UI Controls
                   </h3>
                   <div className="space-y-2">
@@ -127,8 +127,8 @@ export default function KeyboardShortcutsModal({ onClose, shortcuts }: KeyboardS
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900/50 rounded-b-2xl border-t border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
-              <p className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400 text-center">
+            <div className="px-6 py-4 theme-bg-primary-light dark:bg-kintsugi-dark-900/50 rounded-b-2xl border-t theme-border-light dark:border-kintsugi-dark-700">
+              <p className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary text-center">
                 Press <kbd className="px-2 py-1 bg-white dark:bg-kintsugi-dark-700 rounded text-kintsugi-dark-900 dark:text-white text-xs font-mono">Shift+?</kbd> anytime to view this menu
               </p>
             </div>
@@ -143,18 +143,18 @@ function ShortcutRow({ shortcut, description }: { shortcut: string; description:
   const keys = shortcut.split('+');
 
   return (
-    <div className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-kintsugi-gold-50 dark:hover:bg-kintsugi-dark-700/50 transition-colors">
-      <span className="text-sm text-kintsugi-dark-700 dark:text-kintsugi-gold-200">
+    <div className="flex items-center justify-between py-2 px-3 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700/50 transition-colors">
+      <span className="text-sm text-kintsugi-dark-700 dark:theme-text-secondary">
         {description}
       </span>
       <div className="flex items-center gap-1">
         {keys.map((key, index) => (
           <span key={index} className="flex items-center gap-1">
-            <kbd className="px-2 py-1 bg-white dark:bg-kintsugi-dark-800 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded text-kintsugi-dark-900 dark:text-white text-xs font-mono shadow-sm">
+            <kbd className="px-2 py-1 bg-white dark:bg-kintsugi-dark-800 border theme-border-accent dark:border-kintsugi-dark-600 rounded text-kintsugi-dark-900 dark:text-white text-xs font-mono shadow-sm">
               {key}
             </kbd>
             {index < keys.length - 1 && (
-              <span className="text-kintsugi-dark-400 dark:text-kintsugi-gold-500 text-xs">+</span>
+              <span className="text-kintsugi-dark-400 dark:theme-text-primary text-xs">+</span>
             )}
           </span>
         ))}

@@ -241,21 +241,21 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
             value={filters.query}
             onChange={(e) => setFilters(prev => ({ ...prev, query: e.target.value }))}
             placeholder="Search accomplishments and reflections..."
-            className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-kintsugi-dark-800 text-gray-900 dark:text-white focus:border-kintsugi-gold-500 focus:outline-none"
+            className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-kintsugi-dark-800 text-gray-900 dark:text-white focus:theme-border-primary focus:outline-none"
           />
         </div>
         <button
           onClick={() => setShowFilters(!showFilters)}
           className={`px-4 py-3 rounded-xl flex items-center gap-2 font-medium transition-all ${
             showFilters || activeFilterCount > 0
-              ? 'bg-kintsugi-gold-500 text-white'
+              ? 'theme-bg-primary text-white'
               : 'bg-gray-100 dark:bg-kintsugi-dark-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-kintsugi-dark-700'
           }`}
         >
           <Filter className="h-5 w-5" />
           Filters
           {activeFilterCount > 0 && (
-            <span className="bg-white text-kintsugi-gold-600 rounded-full px-2 py-0.5 text-sm font-bold">
+            <span className="bg-white theme-text-primary rounded-full px-2 py-0.5 text-sm font-bold">
               {activeFilterCount}
             </span>
           )}
@@ -266,14 +266,14 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
       {/* Results Count */}
       <div className="flex items-center justify-between text-sm">
         <p className="text-gray-600 dark:text-gray-400">
-          <span className="font-semibold text-kintsugi-gold-600 dark:text-kintsugi-gold-400">
+          <span className="font-semibold theme-text-primary dark:theme-text-secondary">
             {filteredResults.length}
           </span>{' '}
           {filteredResults.length === 1 ? 'result' : 'results'} found
           {activeFilterCount > 0 && (
             <button
               onClick={handleClearFilters}
-              className="ml-3 text-kintsugi-gold-600 hover:text-kintsugi-gold-700 dark:text-kintsugi-gold-400 dark:hover:text-kintsugi-gold-300 font-medium"
+              className="ml-3 theme-text-primary hover:text-kintsugi-gold-700 dark:theme-text-secondary dark:hover:theme-text-secondary font-medium"
             >
               Clear all filters
             </button>
@@ -283,7 +283,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
         {activeFilterCount > 0 && (
           <button
             onClick={() => setShowSaveDialog(true)}
-            className="flex items-center gap-1 text-kintsugi-gold-600 hover:text-kintsugi-gold-700 dark:text-kintsugi-gold-400 dark:hover:text-kintsugi-gold-300 font-medium"
+            className="flex items-center gap-1 theme-text-primary hover:text-kintsugi-gold-700 dark:theme-text-secondary dark:hover:theme-text-secondary font-medium"
           >
             <Bookmark className="h-4 w-4" />
             Save Search
@@ -304,7 +304,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
               {/* Date Range */}
               <div>
                 <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                  <Calendar className="h-4 w-4 text-kintsugi-gold-600" />
+                  <Calendar className="h-4 w-4 theme-text-primary" />
                   Date Range
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
@@ -320,7 +320,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
                       onClick={() => setFilters(prev => ({ ...prev, dateRange: option.value as any }))}
                       className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                         filters.dateRange === option.value
-                          ? 'bg-kintsugi-gold-500 text-white'
+                          ? 'theme-bg-primary text-white'
                           : 'bg-gray-100 dark:bg-kintsugi-dark-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-kintsugi-dark-600'
                       }`}
                     >
@@ -357,7 +357,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
               {availableFilters.categories.length > 0 && (
                 <div>
                   <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                    <Tag className="h-4 w-4 text-kintsugi-gold-600" />
+                    <Tag className="h-4 w-4 theme-text-primary" />
                     Categories
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -367,7 +367,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
                         onClick={() => toggleCategory(category)}
                         className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                           filters.categories.includes(category)
-                            ? 'bg-kintsugi-gold-500 text-white'
+                            ? 'theme-bg-primary text-white'
                             : 'bg-gray-100 dark:bg-kintsugi-dark-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-kintsugi-dark-600'
                         }`}
                       >
@@ -382,7 +382,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
               {availableFilters.moods.length > 0 && (
                 <div>
                   <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                    <Smile className="h-4 w-4 text-kintsugi-gold-600" />
+                    <Smile className="h-4 w-4 theme-text-primary" />
                     Moods
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -392,7 +392,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
                         onClick={() => toggleMood(mood)}
                         className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                           filters.moods.includes(mood)
-                            ? 'bg-kintsugi-gold-500 text-white'
+                            ? 'theme-bg-primary text-white'
                             : 'bg-gray-100 dark:bg-kintsugi-dark-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-kintsugi-dark-600'
                         }`}
                       >
@@ -407,7 +407,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
               {availableFilters.tags.length > 0 && (
                 <div>
                   <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                    <Tag className="h-4 w-4 text-kintsugi-gold-600" />
+                    <Tag className="h-4 w-4 theme-text-primary" />
                     Tags
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -417,7 +417,7 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
                         onClick={() => toggleTag(tag)}
                         className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                           filters.tags.includes(tag)
-                            ? 'bg-kintsugi-gold-500 text-white'
+                            ? 'theme-bg-primary text-white'
                             : 'bg-gray-100 dark:bg-kintsugi-dark-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-kintsugi-dark-600'
                         }`}
                       >
@@ -488,14 +488,14 @@ export default function AdvancedSearch({ entries, onResultsChange }: AdvancedSea
                 value={searchName}
                 onChange={(e) => setSearchName(e.target.value)}
                 placeholder="Enter search name..."
-                className="w-full px-4 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-kintsugi-dark-700 text-gray-900 dark:text-white focus:border-kintsugi-gold-500 focus:outline-none mb-4"
+                className="w-full px-4 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-kintsugi-dark-700 text-gray-900 dark:text-white focus:theme-border-primary focus:outline-none mb-4"
                 autoFocus
               />
               <div className="flex gap-2">
                 <button
                   onClick={handleSaveSearch}
                   disabled={!searchName.trim()}
-                  className="flex-1 bg-kintsugi-gold-500 hover:bg-kintsugi-gold-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-xl font-medium"
+                  className="flex-1 theme-bg-primary hover:theme-bg-primary disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-xl font-medium"
                 >
                   Save
                 </button>

@@ -30,9 +30,9 @@ export default function GoldenRepairsPanel({ entries }: GoldenRepairsPanelProps)
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-br from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-2xl shadow-lg border-2 border-kintsugi-gold-300 dark:border-kintsugi-gold-700/50 p-8 text-center"
+        className="bg-gradient-to-br theme-bg-primary-light  rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50 p-8 text-center"
       >
-        <Sparkles className="h-16 w-16 text-kintsugi-gold-500 mx-auto mb-4" />
+        <Sparkles className="h-16 w-16 theme-text-primary mx-auto mb-4" />
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
           Your Golden Repairs Await
         </h3>
@@ -50,11 +50,11 @@ export default function GoldenRepairsPanel({ entries }: GoldenRepairsPanelProps)
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 p-6"
+      className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 theme-border-light dark:theme-border-primary/50 p-6"
     >
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-gradient-to-br from-kintsugi-gold-500 to-amber-500 rounded-xl">
+          <div className="p-3 bg-gradient-to-br theme-gradient-to-r rounded-xl">
             <Sparkles className="h-6 w-6 text-white" />
           </div>
           <div>
@@ -64,15 +64,15 @@ export default function GoldenRepairsPanel({ entries }: GoldenRepairsPanelProps)
             </p>
           </div>
         </div>
-        <div className="hidden sm:block px-4 py-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 rounded-full">
-          <p className="text-kintsugi-gold-700 dark:text-kintsugi-gold-300 font-semibold text-sm">
+        <div className="hidden sm:block px-4 py-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/30 rounded-full">
+          <p className="text-kintsugi-gold-700 dark:theme-text-secondary font-semibold text-sm">
             {goldenMoments.length} impact moments
           </p>
         </div>
       </div>
 
       {/* Unified Philosophy Message */}
-      <div className="bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-xl p-4 mb-6 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50">
+      <div className="bg-gradient-to-r theme-bg-primary-light  rounded-xl p-4 mb-6 border theme-border-light dark:theme-border-primary/50">
         <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
           Own Your Impact = Accomplishments + Resilience
         </p>
@@ -96,15 +96,15 @@ export default function GoldenRepairsPanel({ entries }: GoldenRepairsPanelProps)
             'from-amber-500 to-orange-500',
             'from-purple-500 to-violet-500',
             'from-green-500 to-emerald-500',
-            'from-kintsugi-gold-500 to-yellow-500'
+            'theme-gradient-to-r'
           ];
           const bgColors = [
             'bg-rose-50 dark:bg-rose-900/20',
             'bg-blue-50 dark:bg-blue-900/20',
-            'bg-amber-50 dark:bg-amber-900/20',
+            'theme-bg-primary-light dark:bg-amber-900/20',
             'bg-purple-50 dark:bg-purple-900/20',
             'bg-green-50 dark:bg-green-900/20',
-            'bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20'
+            'theme-bg-primary-light dark:bg-kintsugi-gold-900/20'
           ];
 
           return (
@@ -114,7 +114,7 @@ export default function GoldenRepairsPanel({ entries }: GoldenRepairsPanelProps)
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
-              className={`${bgColors[index % bgColors.length]} rounded-xl p-4 border-2 border-gray-200 dark:border-gray-700 hover:border-kintsugi-gold-300 dark:hover:border-kintsugi-gold-700 transition-all cursor-pointer`}
+              className={`${bgColors[index % bgColors.length]} rounded-xl p-4 border-2 border-gray-200 dark:border-gray-700 hover:theme-border-accent dark:hover:border-kintsugi-gold-700 transition-all cursor-pointer`}
             >
               <div className="flex items-start gap-3 mb-3">
                 <div className={`p-2 bg-gradient-to-br ${colors[index % colors.length]} rounded-lg`}>
@@ -136,7 +136,7 @@ export default function GoldenRepairsPanel({ entries }: GoldenRepairsPanelProps)
               </p>
 
               <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-                <p className="text-xs text-kintsugi-gold-700 dark:text-kintsugi-gold-400 font-medium">
+                <p className="text-xs text-kintsugi-gold-700 dark:theme-text-secondary font-medium">
                   ✨ Golden Repair #{index + 1}
                 </p>
               </div>

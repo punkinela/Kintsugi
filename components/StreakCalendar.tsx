@@ -106,9 +106,9 @@ export default function StreakCalendar({ entries }: StreakCalendarProps) {
   const getIntensityColor = (count: number) => {
     if (count === 0) return 'bg-gray-100 dark:bg-gray-800';
     if (count === 1) return 'bg-kintsugi-gold-200 dark:bg-kintsugi-gold-900/40';
-    if (count === 2) return 'bg-kintsugi-gold-400 dark:bg-kintsugi-gold-700';
-    if (count === 3) return 'bg-kintsugi-gold-500 dark:bg-kintsugi-gold-600';
-    return 'bg-kintsugi-gold-600 dark:bg-kintsugi-gold-500';
+    if (count === 2) return 'theme-bg-secondary dark:bg-kintsugi-gold-700';
+    if (count === 3) return 'theme-bg-primary dark:theme-bg-primary';
+    return 'theme-bg-primary dark:theme-bg-primary';
   };
 
   const getStreakMessage = () => {
@@ -153,12 +153,12 @@ export default function StreakCalendar({ entries }: StreakCalendarProps) {
           className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl p-4 border-2 border-orange-200 dark:border-orange-800/30"
         >
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-500 rounded-lg">
+            <div className="p-2 theme-bg-secondary rounded-lg">
               <Flame className="h-5 w-5 text-white" />
             </div>
             <div>
               <p className="text-sm text-gray-600 dark:text-gray-400">Current Streak</p>
-              <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+              <p className="text-2xl font-bold theme-text-primary dark:text-orange-400">
                 {currentStreak} days
               </p>
             </div>
@@ -204,7 +204,7 @@ export default function StreakCalendar({ entries }: StreakCalendarProps) {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h4 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-kintsugi-gold-600" />
+            <Calendar className="h-5 w-5 theme-text-primary" />
             Last 90 Days
           </h4>
           <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
@@ -212,9 +212,9 @@ export default function StreakCalendar({ entries }: StreakCalendarProps) {
             <div className="flex gap-1">
               <div className="w-3 h-3 rounded-sm bg-gray-100 dark:bg-gray-800"></div>
               <div className="w-3 h-3 rounded-sm bg-kintsugi-gold-200 dark:bg-kintsugi-gold-900/40"></div>
-              <div className="w-3 h-3 rounded-sm bg-kintsugi-gold-400 dark:bg-kintsugi-gold-700"></div>
-              <div className="w-3 h-3 rounded-sm bg-kintsugi-gold-500 dark:bg-kintsugi-gold-600"></div>
-              <div className="w-3 h-3 rounded-sm bg-kintsugi-gold-600 dark:bg-kintsugi-gold-500"></div>
+              <div className="w-3 h-3 rounded-sm theme-bg-secondary dark:bg-kintsugi-gold-700"></div>
+              <div className="w-3 h-3 rounded-sm theme-bg-primary dark:theme-bg-primary"></div>
+              <div className="w-3 h-3 rounded-sm theme-bg-primary dark:theme-bg-primary"></div>
             </div>
             <span>More</span>
           </div>
@@ -254,10 +254,10 @@ export default function StreakCalendar({ entries }: StreakCalendarProps) {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-6 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-2 border-amber-300 dark:border-amber-700/50 rounded-xl p-4"
+          className="mt-6 bg-gradient-to-r from-amber-50 to-orange-50  border-2 theme-border-accent dark:theme-border-primary/50 rounded-xl p-4"
         >
           <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong className="text-amber-700 dark:text-amber-400">🔥 Don't break the chain!</strong> You've built a {currentStreak}-day streak. Journal today to keep it going!
+            <strong className="text-amber-700 dark:theme-text-secondary">🔥 Don't break the chain!</strong> You've built a {currentStreak}-day streak. Journal today to keep it going!
           </p>
         </motion.div>
       )}
@@ -271,7 +271,7 @@ export default function StreakCalendar({ entries }: StreakCalendarProps) {
                 key={milestone}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="px-3 py-1 bg-gradient-to-r from-kintsugi-gold-500 to-amber-500 text-white text-xs font-semibold rounded-full shadow-md"
+                className="px-3 py-1 bg-gradient-to-r theme-gradient-to-r text-white text-xs font-semibold rounded-full shadow-md"
               >
                 {milestone} Day Club 🏆
               </motion.div>

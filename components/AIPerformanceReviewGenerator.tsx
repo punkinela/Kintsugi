@@ -122,15 +122,15 @@ export default function AIPerformanceReviewGenerator() {
           <FileText className="h-6 w-6 text-blue-600" />
           AI Performance Review Generator
         </h2>
-        <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+        <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
           Transform your journal entries into professional performance review content
         </p>
       </div>
 
       {/* Timeframe Selection */}
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
         <div className="flex items-center gap-2 mb-3">
-          <Calendar className="h-4 w-4 text-kintsugi-gold-600" />
+          <Calendar className="h-4 w-4 theme-text-primary" />
           <h3 className="font-semibold text-gray-900 dark:text-white">Select Timeframe</h3>
         </div>
 
@@ -221,7 +221,7 @@ export default function AIPerformanceReviewGenerator() {
           {review.sections.map((section, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700"
+              className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700"
             >
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                 {section.title}
@@ -260,8 +260,8 @@ export default function AIPerformanceReviewGenerator() {
 
       {/* No Entries Warning */}
       {filteredEntries.length === 0 && !isGenerating && (
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-xl p-6 border border-yellow-200 dark:border-yellow-800 text-center">
-          <Calendar className="h-12 w-12 text-yellow-600 mx-auto mb-2" />
+        <div className="theme-bg-primary-light dark:bg-yellow-900/20 rounded-xl p-6 border border-yellow-200 dark:theme-border-primary text-center">
+          <Calendar className="h-12 w-12 theme-text-primary mx-auto mb-2" />
           <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
             No Entries Found
           </h3>

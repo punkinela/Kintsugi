@@ -95,7 +95,7 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                 value={profile.name || ''}
                 onChange={(e) => setProfile({ ...profile, name: e.target.value })}
                 placeholder="Your name"
-                className="w-full px-4 py-3 rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 rounded-xl border theme-border-light dark:theme-border-primary/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-colors"
               />
             </div>
 
@@ -114,8 +114,8 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                     }}
                     className={`px-4 py-3 rounded-xl border-2 transition-all ${
                       profile.gender === gender
-                        ? 'border-kintsugi-gold-600 bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:text-kintsugi-gold-200'
-                        : 'border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 hover:border-kintsugi-gold-300 dark:hover:border-kintsugi-gold-700'
+                        ? 'theme-border-primary theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:theme-text-secondary'
+                        : 'theme-border-light dark:theme-border-primary/50 hover:theme-border-accent dark:hover:border-kintsugi-gold-700'
                     }`}
                   >
                     {gender.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
@@ -136,7 +136,7 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                   setProfile({ ...profile, profession: e.target.value });
                 }}
                 placeholder="e.g., Software Engineer, Teacher, Entrepreneur"
-                className="w-full px-4 py-3 rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 rounded-xl border theme-border-light dark:theme-border-primary/50 bg-kintsugi-surface dark:bg-kintsugi-dark-700 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent transition-colors"
               />
             </div>
 
@@ -155,8 +155,8 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                     }}
                     className={`px-4 py-3 rounded-xl border-2 transition-all text-sm ${
                       profile.ethnicity === ethnicity
-                        ? 'border-kintsugi-gold-600 bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:text-kintsugi-gold-200'
-                        : 'border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 hover:border-kintsugi-gold-300 dark:hover:border-kintsugi-gold-700'
+                        ? 'theme-border-primary theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-800 dark:theme-text-secondary'
+                        : 'theme-border-light dark:theme-border-primary/50 hover:theme-border-accent dark:hover:border-kintsugi-gold-700'
                     }`}
                   >
                     {ethnicity.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
@@ -207,7 +207,7 @@ export default function ProfileSetup({ onComplete, initialProfile, isEditing = f
                   notifications: false,
                   skipped: true,
                 })}
-                className="w-full text-kintsugi-gold-700/70 dark:text-kintsugi-gold-400/70 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-200 font-medium py-2 transition-colors"
+                className="w-full text-kintsugi-gold-700/70 dark:theme-text-secondary/70 hover:text-kintsugi-gold-900 dark:hover:theme-text-secondary font-medium py-2 transition-colors"
               >
                 Skip for now
               </button>

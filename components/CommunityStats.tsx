@@ -148,7 +148,7 @@ export default function CommunityStats({ userEntryCount }: CommunityStatsProps) 
           className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md"
         >
           <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="h-4 w-4 text-yellow-500" />
+            <Sparkles className="h-4 w-4 theme-text-primary" />
             <p className="text-xs text-gray-600 dark:text-gray-400">Record</p>
           </div>
           <p className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -165,10 +165,10 @@ export default function CommunityStats({ userEntryCount }: CommunityStatsProps) 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 border-2 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/30 rounded-xl p-4"
+        className="bg-gradient-to-r theme-bg-primary-light  border-2 theme-border-light dark:theme-border-primary/30 rounded-xl p-4"
       >
         <div className="flex items-center gap-3">
-          <Award className="h-6 w-6 text-kintsugi-gold-600" />
+          <Award className="h-6 w-6 theme-text-primary" />
           <div>
             <p className="text-sm font-semibold text-gray-900 dark:text-white">
               <AnimatedCounter value={stats.milestoneCount} className="inline" /> people reached the 30-day milestone this month

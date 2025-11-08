@@ -75,13 +75,13 @@ export default function GoalsManager() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Target className="h-6 w-6 text-kintsugi-gold-600" />
+          <Target className="h-6 w-6 theme-text-primary" />
           <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">Goals</h2>
         </div>
 
         <button
           onClick={() => setShowNewGoal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+          className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
         >
           <Plus className="h-4 w-4" />
           New Goal
@@ -96,8 +96,8 @@ export default function GoalsManager() {
             onClick={() => setFilter(tab)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               filter === tab
-                ? 'bg-kintsugi-gold-600 text-white'
-                : 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-dark-600 dark:text-kintsugi-gold-400 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700'
+                ? 'theme-bg-primary text-white'
+                : 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-dark-600 dark:theme-text-secondary hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700'
             }`}
           >
             {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -120,9 +120,9 @@ export default function GoalsManager() {
         </AnimatePresence>
 
         {filteredGoals.length === 0 && (
-          <div className="text-center py-12 bg-white dark:bg-kintsugi-dark-800 rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
-            <Target className="h-12 w-12 mx-auto text-kintsugi-gold-400 mb-3" />
-            <p className="text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+          <div className="text-center py-12 bg-white dark:bg-kintsugi-dark-800 rounded-xl border theme-border-light dark:border-kintsugi-dark-700">
+            <Target className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
+            <p className="text-kintsugi-dark-600 dark:theme-text-secondary">
               {filter === 'active' ? 'No active goals. Create one to get started!' : 'No goals found.'}
             </p>
           </div>
@@ -154,14 +154,14 @@ function GoalCard({
     personal: 'bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300',
     professional: 'bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300',
     health: 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300',
-    learning: 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300',
+    learning: 'theme-bg-primary-light dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300',
     relationships: 'bg-pink-100 dark:bg-pink-900/20 text-pink-700 dark:text-pink-300',
     other: 'bg-gray-100 dark:bg-gray-900/20 text-gray-700 dark:text-gray-300',
   };
 
   const priorityColors = {
     low: 'text-gray-500',
-    medium: 'text-yellow-500',
+    medium: 'theme-text-primary',
     high: 'text-red-500',
   };
 
@@ -170,7 +170,7 @@ function GoalCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700"
+      className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700"
     >
       {/* Goal Header */}
       <div className="flex items-start justify-between gap-3">
@@ -188,13 +188,13 @@ function GoalCard({
           <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-1">
             {goal.title}
           </h3>
-          <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+          <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
             {goal.description}
           </p>
 
           {/* Progress Bar */}
           <div className="mt-3">
-            <div className="flex items-center justify-between text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mb-1">
+            <div className="flex items-center justify-between text-xs text-kintsugi-dark-600 dark:theme-text-secondary mb-1">
               <span>Progress</span>
               <span className="font-semibold">{goal.progress}%</span>
             </div>
@@ -208,7 +208,7 @@ function GoalCard({
           </div>
 
           {/* Target Date */}
-          <div className="flex items-center gap-4 mt-3 text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+          <div className="flex items-center gap-4 mt-3 text-xs text-kintsugi-dark-600 dark:theme-text-secondary">
             <div className="flex items-center gap-1">
               <Calendar className="h-3 w-3" />
               <span>Due: {new Date(goal.targetDate).toLocaleDateString()}</span>
@@ -226,20 +226,20 @@ function GoalCard({
         <div className="flex gap-1">
           <button
             onClick={() => onToggleStatus(goal)}
-            className="p-2 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
+            className="p-2 hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
             title={goal.status === 'active' ? 'Pause' : 'Resume'}
           >
             {goal.status === 'active' ? (
-              <Pause className="h-4 w-4 text-kintsugi-dark-600 dark:text-kintsugi-gold-400" />
+              <Pause className="h-4 w-4 text-kintsugi-dark-600 dark:theme-text-secondary" />
             ) : (
-              <Play className="h-4 w-4 text-kintsugi-dark-600 dark:text-kintsugi-gold-400" />
+              <Play className="h-4 w-4 text-kintsugi-dark-600 dark:theme-text-secondary" />
             )}
           </button>
           <button
             onClick={() => setExpanded(!expanded)}
-            className="p-2 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
+            className="p-2 hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 rounded-lg transition-colors"
           >
-            <TrendingUp className="h-4 w-4 text-kintsugi-dark-600 dark:text-kintsugi-gold-400" />
+            <TrendingUp className="h-4 w-4 text-kintsugi-dark-600 dark:theme-text-secondary" />
           </button>
           <button
             onClick={() => onDelete(goal.id)}
@@ -257,7 +257,7 @@ function GoalCard({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="mt-4 pt-4 border-t border-kintsugi-gold-200 dark:border-kintsugi-dark-700"
+            className="mt-4 pt-4 border-t theme-border-light dark:border-kintsugi-dark-700"
           >
             <h4 className="text-sm font-semibold text-kintsugi-dark-900 dark:text-white mb-2">
               Milestones
@@ -266,7 +266,7 @@ function GoalCard({
               {goal.milestones.map((milestone) => (
                 <div
                   key={milestone.id}
-                  className="flex items-center gap-2 p-2 rounded-lg hover:bg-kintsugi-gold-50 dark:hover:bg-kintsugi-dark-700 transition-colors cursor-pointer"
+                  className="flex items-center gap-2 p-2 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 transition-colors cursor-pointer"
                   onClick={() => onToggleMilestone(goal.id, milestone.id)}
                 >
                   <div
@@ -281,8 +281,8 @@ function GoalCard({
                   <span
                     className={`text-sm ${
                       milestone.completed
-                        ? 'line-through text-kintsugi-dark-500 dark:text-kintsugi-gold-500'
-                        : 'text-kintsugi-dark-700 dark:text-kintsugi-gold-300'
+                        ? 'line-through text-kintsugi-dark-500 dark:theme-text-primary'
+                        : 'text-kintsugi-dark-700 dark:theme-text-secondary'
                     }`}
                   >
                     {milestone.title}
@@ -343,7 +343,7 @@ function NewGoalModal({
           <h3 className="text-xl font-bold text-kintsugi-dark-900 dark:text-white">Create New Goal</h3>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 rounded-lg"
+            className="p-2 hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 rounded-lg"
           >
             <X className="h-5 w-5" />
           </button>
@@ -351,7 +351,7 @@ function NewGoalModal({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
               Goal Title
             </label>
             <input
@@ -359,33 +359,33 @@ function NewGoalModal({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+              className="w-full px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
               placeholder="e.g., Learn Spanish"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
               Description
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+              className="w-full px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
               placeholder="What do you want to achieve?"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+              <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
                 Category
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as Goal['category'])}
-                className="w-full px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+                className="w-full px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
               >
                 <option value="personal">Personal</option>
                 <option value="professional">Professional</option>
@@ -397,13 +397,13 @@ function NewGoalModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+              <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
                 Priority
               </label>
               <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value as Goal['priority'])}
-                className="w-full px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+                className="w-full px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
               >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -413,7 +413,7 @@ function NewGoalModal({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
               Target Date
             </label>
             <input
@@ -421,12 +421,12 @@ function NewGoalModal({
               value={targetDate}
               onChange={(e) => setTargetDate(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+              className="w-full px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+            <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
               Milestones (Optional)
             </label>
             {milestones.map((milestone, index) => (
@@ -439,7 +439,7 @@ function NewGoalModal({
                     newMilestones[index] = e.target.value;
                     setMilestones(newMilestones);
                   }}
-                  className="flex-1 px-3 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
+                  className="flex-1 px-3 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white"
                   placeholder={`Milestone ${index + 1}`}
                 />
                 {milestones.length > 1 && (
@@ -456,7 +456,7 @@ function NewGoalModal({
             <button
               type="button"
               onClick={() => setMilestones([...milestones, ''])}
-              className="text-sm text-kintsugi-gold-600 hover:text-kintsugi-gold-700 flex items-center gap-1"
+              className="text-sm theme-text-primary hover:text-kintsugi-gold-700 flex items-center gap-1"
             >
               <Plus className="h-4 w-4" />
               Add Milestone
@@ -467,13 +467,13 @@ function NewGoalModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-kintsugi-gold-300 dark:border-kintsugi-dark-600 rounded-lg hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 transition-colors"
+              className="flex-1 px-4 py-2 border theme-border-accent dark:border-kintsugi-dark-600 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+              className="flex-1 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
             >
               Create Goal
             </button>

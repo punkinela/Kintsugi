@@ -56,7 +56,7 @@ export default function WritingPromptsPanel() {
       case 'easy':
         return 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300';
       case 'medium':
-        return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300';
+        return 'theme-bg-primary-light dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300';
       case 'deep':
         return 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300';
       default:
@@ -73,7 +73,7 @@ export default function WritingPromptsPanel() {
       case 'growth':
         return 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300';
       case 'achievement':
-        return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300';
+        return 'theme-bg-primary-light dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300';
       case 'challenge':
         return 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300';
       case 'future':
@@ -90,10 +90,10 @@ export default function WritingPromptsPanel() {
       {/* Header */}
       <div>
         <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
-          <Lightbulb className="h-6 w-6 text-kintsugi-gold-600" />
+          <Lightbulb className="h-6 w-6 theme-text-primary" />
           Writing Prompts
         </h2>
-        <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+        <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
           Guided questions to inspire deeper reflection
         </p>
       </div>
@@ -101,10 +101,10 @@ export default function WritingPromptsPanel() {
       {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Category Filter */}
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
           <div className="flex items-center gap-2 mb-3">
-            <Filter className="h-4 w-4 text-kintsugi-gold-600" />
-            <span className="text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300">
+            <Filter className="h-4 w-4 theme-text-primary" />
+            <span className="text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary">
               Category
             </span>
           </div>
@@ -118,8 +118,8 @@ export default function WritingPromptsPanel() {
                 }}
                 className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors capitalize ${
                   selectedCategory === cat
-                    ? 'bg-kintsugi-gold-600 text-white'
-                    : 'bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:text-kintsugi-gold-400 hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40'
+                    ? 'theme-bg-primary text-white'
+                    : 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40'
                 }`}
               >
                 {cat}
@@ -129,10 +129,10 @@ export default function WritingPromptsPanel() {
         </div>
 
         {/* Difficulty Filter */}
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
           <div className="flex items-center gap-2 mb-3">
-            <Filter className="h-4 w-4 text-kintsugi-gold-600" />
-            <span className="text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300">
+            <Filter className="h-4 w-4 theme-text-primary" />
+            <span className="text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary">
               Difficulty
             </span>
           </div>
@@ -146,8 +146,8 @@ export default function WritingPromptsPanel() {
                 }}
                 className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors capitalize ${
                   selectedDifficulty === diff
-                    ? 'bg-kintsugi-gold-600 text-white'
-                    : 'bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:text-kintsugi-gold-400 hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40'
+                    ? 'theme-bg-primary text-white'
+                    : 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40'
                 }`}
               >
                 {diff}
@@ -192,7 +192,7 @@ export default function WritingPromptsPanel() {
             {currentPrompt.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-1 text-xs rounded-md bg-white/50 dark:bg-black/20 text-kintsugi-dark-600 dark:text-kintsugi-gold-400"
+                className="px-2 py-1 text-xs rounded-md bg-white/50 dark:bg-black/20 text-kintsugi-dark-600 dark:theme-text-secondary"
               >
                 #{tag}
               </span>
@@ -207,7 +207,7 @@ export default function WritingPromptsPanel() {
             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all ${
               wasUsed
                 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 cursor-default'
-                : 'bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 text-white'
+                : 'theme-bg-primary hover:bg-kintsugi-gold-700 text-white'
             }`}
           >
             <Check className="h-5 w-5" />
@@ -216,7 +216,7 @@ export default function WritingPromptsPanel() {
 
           <button
             onClick={handleCopy}
-            className="flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-kintsugi-dark-800 hover:bg-gray-50 dark:hover:bg-kintsugi-dark-700 text-kintsugi-dark-700 dark:text-kintsugi-gold-300 rounded-lg font-medium transition-all border border-kintsugi-gold-200 dark:border-kintsugi-dark-700"
+            className="flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-kintsugi-dark-800 hover:bg-gray-50 dark:hover:bg-kintsugi-dark-700 text-kintsugi-dark-700 dark:theme-text-secondary rounded-lg font-medium transition-all border theme-border-light dark:border-kintsugi-dark-700"
           >
             <Copy className="h-5 w-5" />
             {copied ? 'Copied!' : 'Copy'}
@@ -225,11 +225,11 @@ export default function WritingPromptsPanel() {
       </motion.div>
 
       {/* Tips */}
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
         <h4 className="text-sm font-semibold text-kintsugi-dark-900 dark:text-white mb-2">
           💡 Writing Tips
         </h4>
-        <ul className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 space-y-1">
+        <ul className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary space-y-1">
           <li>• Take your time - there's no rush to answer</li>
           <li>• Be honest and authentic in your reflection</li>
           <li>• There are no wrong answers, only your truth</li>

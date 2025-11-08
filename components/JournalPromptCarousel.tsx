@@ -67,7 +67,7 @@ export default function JournalPromptCarousel({ user, onSelectPrompt }: JournalP
         text: `As a ${user.profession}, what's one way you made an impact today?`,
         category: "Professional",
         icon: Sparkles,
-        color: "from-kintsugi-gold-500 to-amber-500"
+        color: "theme-gradient-to-r"
       });
       personalizedPrompts.push({
         text: `What's one skill you used as a ${user.profession} that you want to celebrate?`,
@@ -208,7 +208,7 @@ export default function JournalPromptCarousel({ user, onSelectPrompt }: JournalP
                 onClick={() => setCurrentIndex(index)}
                 className={`h-2 rounded-full transition-all ${
                   index === currentIndex
-                    ? 'w-8 bg-kintsugi-gold-500'
+                    ? 'w-8 theme-bg-primary'
                     : 'w-2 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
                 }`}
                 aria-label={`Go to prompt ${index + 1}`}

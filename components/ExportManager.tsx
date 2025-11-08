@@ -102,19 +102,19 @@ export default function ExportManager() {
       {/* Header */}
       <div>
         <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
-          <Download className="h-6 w-6 text-kintsugi-gold-600" />
+          <Download className="h-6 w-6 theme-text-primary" />
           Export Your Accomplishments
         </h2>
-        <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+        <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
           Download your journal entries in your preferred format
         </p>
       </div>
 
       {/* Stats */}
-      <div className="bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800">
+      <div className="theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded-xl p-4 border theme-border-light dark:theme-border-primary">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+            <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
               Ready to export
             </p>
             <p className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">
@@ -123,7 +123,7 @@ export default function ExportManager() {
           </div>
           {entries.length > 0 && (
             <div className="text-right">
-              <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+              <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
                 Date range
               </p>
               <p className="text-sm font-medium text-kintsugi-dark-900 dark:text-white">
@@ -185,7 +185,7 @@ export default function ExportManager() {
       </div>
 
       {/* Quick Print Button */}
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
         <div className="flex items-start gap-4">
           <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
             <Printer className="h-8 w-8 text-gray-600 dark:text-gray-400" />
@@ -226,8 +226,8 @@ export default function ExportManager() {
 
       {/* No Entries State */}
       {entries.length === 0 && (
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-xl p-8 border border-yellow-200 dark:border-yellow-800 text-center">
-          <FileText className="h-16 w-16 text-yellow-600 mx-auto mb-4" />
+        <div className="theme-bg-primary-light dark:bg-yellow-900/20 rounded-xl p-8 border border-yellow-200 dark:theme-border-primary text-center">
+          <FileText className="h-16 w-16 theme-text-primary mx-auto mb-4" />
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-lg">
             No Entries to Export
           </h3>

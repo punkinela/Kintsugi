@@ -65,9 +65,9 @@ export default function PersonalStatsDashboard() {
 
   if (!stats) {
     return (
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-12 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700 text-center">
-        <BarChart3 className="h-12 w-12 mx-auto text-kintsugi-gold-400 mb-3" />
-        <p className="text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-12 border theme-border-light dark:border-kintsugi-dark-700 text-center">
+        <BarChart3 className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
+        <p className="text-kintsugi-dark-600 dark:theme-text-secondary">
           Start journaling to see your personal statistics!
         </p>
       </div>
@@ -118,17 +118,17 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
-            <BarChart3 className="h-6 w-6 text-kintsugi-gold-600" />
+            <BarChart3 className="h-6 w-6 theme-text-primary" />
             Personal Statistics
           </h2>
-          <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+          <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
             Comprehensive overview of your journaling journey
           </p>
         </div>
 
         <button
           onClick={exportStats}
-          className="flex items-center gap-2 px-4 py-2 bg-kintsugi-gold-600 hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
+          className="flex items-center gap-2 px-4 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-lg transition-colors font-medium"
         >
           <Download className="h-4 w-4" />
           Export Report
@@ -165,26 +165,26 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
 
       {/* Writing Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
           <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4 flex items-center gap-2">
-            <FileText className="h-5 w-5 text-kintsugi-gold-600" />
+            <FileText className="h-5 w-5 theme-text-primary" />
             Writing Statistics
           </h3>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">Average words per entry</span>
+              <span className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">Average words per entry</span>
               <span className="text-lg font-bold text-kintsugi-dark-900 dark:text-white">{stats.averageWordsPerEntry}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">Longest entry</span>
+              <span className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">Longest entry</span>
               <span className="text-lg font-bold text-kintsugi-dark-900 dark:text-white">{stats.longestEntry} words</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">Shortest entry</span>
+              <span className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">Shortest entry</span>
               <span className="text-lg font-bold text-kintsugi-dark-900 dark:text-white">{stats.shortestEntry} words</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">Most productive month</span>
+              <span className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">Most productive month</span>
               <span className="text-sm font-bold text-kintsugi-dark-900 dark:text-white">{stats.mostProductiveMonth}</span>
             </div>
           </div>
@@ -192,27 +192,27 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
 
         {/* Journaling Patterns */}
         {patterns && (
-          <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+          <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
             <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4 flex items-center gap-2">
-              <Clock className="h-5 w-5 text-kintsugi-gold-600" />
+              <Clock className="h-5 w-5 theme-text-primary" />
               Journaling Patterns
             </h3>
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">Preferred time</span>
+                <span className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">Preferred time</span>
                 <span className="text-lg font-bold text-kintsugi-dark-900 dark:text-white capitalize">{patterns.preferredTime}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">Most productive day</span>
+                <span className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">Most productive day</span>
                 <span className="text-lg font-bold text-kintsugi-dark-900 dark:text-white">{patterns.mostProductiveDay}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">Frequency</span>
+                <span className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">Frequency</span>
                 <span className="text-lg font-bold text-kintsugi-dark-900 dark:text-white">{patterns.journalingFrequency}/week</span>
               </div>
               <div>
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">Consistency score</span>
+                  <span className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">Consistency score</span>
                   <span className="text-lg font-bold text-kintsugi-dark-900 dark:text-white">{patterns.consistencyScore}/100</span>
                 </div>
                 <div className="h-2 bg-gray-200 dark:bg-kintsugi-dark-700 rounded-full overflow-hidden">
@@ -230,9 +230,9 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
 
       {/* Entries Over Time */}
       {timeSeriesData.length > 0 && (
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
           <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4 flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-kintsugi-gold-600" />
+            <TrendingUp className="h-5 w-5 theme-text-primary" />
             Entries Over Time
           </h3>
           <ResponsiveContainer width="100%" height={250} key={refreshKey}>
@@ -274,9 +274,9 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Favorite Categories */}
         {stats.favoriteCategories.length > 0 && (
-          <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+          <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
             <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4 flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-kintsugi-gold-600" />
+              <Calendar className="h-5 w-5 theme-text-primary" />
               Top Categories
             </h3>
             <div className="space-y-3">
@@ -285,10 +285,10 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
                 return (
                   <div key={cat.category}>
                     <div className="flex justify-between items-center mb-1">
-                      <span className="text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 capitalize">
+                      <span className="text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary capitalize">
                         {cat.category}
                       </span>
-                      <span className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+                      <span className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
                         {cat.count} ({percentage.toFixed(0)}%)
                       </span>
                     </div>
@@ -309,9 +309,9 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
 
         {/* Top Tags */}
         {stats.topTags.length > 0 && (
-          <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+          <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
             <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4 flex items-center gap-2">
-              <Tag className="h-5 w-5 text-kintsugi-gold-600" />
+              <Tag className="h-5 w-5 theme-text-primary" />
               Top Tags
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -338,9 +338,9 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
 
       {/* Mood Distribution */}
       {stats.moodDistribution.length > 0 && (
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 border theme-border-light dark:border-kintsugi-dark-700">
           <h3 className="text-lg font-semibold text-kintsugi-dark-900 dark:text-white mb-4 flex items-center gap-2">
-            <Smile className="h-5 w-5 text-kintsugi-gold-600" />
+            <Smile className="h-5 w-5 theme-text-primary" />
             Mood Overview
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -356,7 +356,7 @@ ${stats.moodDistribution.map((m: any) => `${m.mood}: ${m.count} (${m.percentage}
                 <div className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">
                   {mood.percentage}%
                 </div>
-                <div className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400 capitalize">
+                <div className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary capitalize">
                   {mood.mood}
                 </div>
               </div>
@@ -400,7 +400,7 @@ function StatCard({ icon, label, value, color }: {
   const colorClasses = {
     blue: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400',
     purple: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800 text-purple-600 dark:text-purple-400',
-    orange: 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800 text-orange-600 dark:text-orange-400',
+    orange: 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800 theme-text-primary dark:text-orange-400',
     green: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-600 dark:text-green-400',
   };
 
@@ -410,7 +410,7 @@ function StatCard({ icon, label, value, color }: {
         {icon}
       </div>
       <div className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">{value}</div>
-      <div className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">{label}</div>
+      <div className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary">{label}</div>
     </div>
   );
 }

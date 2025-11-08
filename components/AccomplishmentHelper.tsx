@@ -81,7 +81,7 @@ export default function AccomplishmentHelper({ text, onTextChange, showHelper = 
     micro: 'from-green-400 to-emerald-500',
     small: 'from-blue-400 to-indigo-500',
     medium: 'from-purple-400 to-pink-500',
-    major: 'from-yellow-400 to-orange-500',
+    major: 'theme-gradient-to-r',
   };
 
   return (
@@ -99,7 +99,7 @@ export default function AccomplishmentHelper({ text, onTextChange, showHelper = 
               <div className="text-3xl">{validationWarning.emoji}</div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <AlertCircle className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                  <AlertCircle className="w-5 h-5 theme-text-primary dark:text-orange-400" />
                   <h4 className="font-bold text-orange-800 dark:text-orange-300">
                     Focus on Actions, Not Attributes
                   </h4>
@@ -108,7 +108,7 @@ export default function AccomplishmentHelper({ text, onTextChange, showHelper = 
                   {validationWarning.message}
                 </p>
                 {validationWarning.suggestion && (
-                  <p className="text-orange-600 dark:text-orange-300 text-sm font-medium">
+                  <p className="theme-text-primary dark:text-orange-300 text-sm font-medium">
                     💡 {validationWarning.suggestion}
                   </p>
                 )}

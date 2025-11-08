@@ -93,8 +93,8 @@ export default function JourneyAwareAffirmation({ profile }: JourneyAwareAffirma
     return (
       <div className="flex items-center justify-center p-12 bg-kintsugi-surface dark:bg-kintsugi-dark-800 rounded-3xl border border-kintsugi-gold-100/30 dark:border-kintsugi-gold-900/30">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-4 border-kintsugi-gold-600 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+          <div className="w-8 h-8 border-4 theme-border-primary border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
             Loading your personalized affirmation...
           </p>
         </div>

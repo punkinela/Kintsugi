@@ -81,9 +81,9 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
         title: '✨ Applying Gold',
         description: 'You began recognizing patterns, learning from challenges, and transforming pain into wisdom.',
         icon: Sparkles,
-        color: 'text-kintsugi-gold-700 dark:text-kintsugi-gold-400',
-        bgColor: 'bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20',
-        borderColor: 'border-kintsugi-gold-300 dark:border-kintsugi-gold-700',
+        color: 'text-kintsugi-gold-700 dark:theme-text-secondary',
+        bgColor: 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20',
+        borderColor: 'theme-border-accent dark:theme-border-primary',
         milestone: hasGrowthMoments ? 'Multiple transformations identified' : 'Identify growth opportunities',
         completed: hasGrowthMoments,
         date: hasGrowthMoments ? entries[Math.max(0, entries.length - 15)].date : undefined
@@ -122,10 +122,10 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 overflow-hidden"
+      className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 theme-border-light dark:theme-border-primary/50 overflow-hidden"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-kintsugi-gold-500 to-amber-500 dark:from-kintsugi-gold-700 dark:to-amber-700 px-6 py-8 text-white">
+      <div className="bg-gradient-to-r theme-gradient-to-r dark:from-kintsugi-gold-700 dark:to-amber-700 px-6 py-8 text-white">
         <div className="flex items-start gap-4 mb-4">
           <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
             <BookOpen className="h-8 w-8" />
@@ -183,7 +183,7 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
                     transition={{ delay: index * 0.1 + 0.2, type: "spring" }}
                     className={`absolute left-0 w-12 h-12 rounded-full flex items-center justify-center ${
                       phase.completed
-                        ? 'bg-gradient-to-br from-kintsugi-gold-500 to-amber-500 shadow-lg'
+                        ? 'bg-gradient-to-br theme-gradient-to-r shadow-lg'
                         : 'bg-gray-200 dark:bg-gray-700'
                     }`}
                   >
@@ -204,7 +204,7 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
                           animate={{ scale: 1, rotate: 0 }}
                           transition={{ delay: index * 0.1 + 0.3, type: "spring" }}
                         >
-                          <Award className="h-5 w-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                          <Award className="h-5 w-5 theme-text-primary dark:theme-text-secondary" />
                         </motion.div>
                       )}
                     </div>
@@ -248,7 +248,7 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
         </div>
 
         {/* Bottom message */}
-        <div className="mt-8 p-4 bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50">
+        <div className="mt-8 p-4 bg-gradient-to-r theme-bg-primary-light  rounded-xl border theme-border-light dark:theme-border-primary/50">
           <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center mb-2">
             Own Your Impact = Your Wins + Your Resilience
           </p>

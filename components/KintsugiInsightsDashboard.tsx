@@ -107,9 +107,9 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-br from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-2xl shadow-lg border-2 border-kintsugi-gold-300 dark:border-kintsugi-gold-700/50 p-12 text-center"
+        className="bg-gradient-to-br theme-bg-primary-light  rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50 p-12 text-center"
       >
-        <MessageCircle className="h-16 w-16 text-kintsugi-gold-500 mx-auto mb-4" />
+        <MessageCircle className="h-16 w-16 theme-text-primary mx-auto mb-4" />
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
           Awaiting Community Voices
         </h3>
@@ -129,7 +129,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-kintsugi-gold-500 to-amber-500 dark:from-kintsugi-gold-700 dark:to-amber-700 rounded-2xl shadow-2xl p-8 text-white"
+        className="bg-gradient-to-r theme-gradient-to-r dark:from-kintsugi-gold-700 dark:to-amber-700 rounded-2xl shadow-2xl p-8 text-white"
       >
         <div className="flex items-start gap-4">
           <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
@@ -153,7 +153,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 p-6"
+          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 theme-border-light dark:theme-border-primary/50 p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl">
@@ -169,10 +169,10 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 p-6"
+          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 theme-border-light dark:theme-border-primary/50 p-6"
         >
           <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-gradient-to-br from-kintsugi-gold-500 to-amber-500 rounded-xl">
+            <div className="p-3 bg-gradient-to-br theme-gradient-to-r rounded-xl">
               <Star className="h-6 w-6 text-white" />
             </div>
           </div>
@@ -196,7 +196,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 p-6"
+          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 theme-border-light dark:theme-border-primary/50 p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl">
@@ -212,7 +212,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 p-6"
+          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 theme-border-light dark:theme-border-primary/50 p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-gradient-to-br from-purple-500 to-violet-500 rounded-xl">
@@ -235,7 +235,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
           className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6"
         >
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-            <Heart className="h-5 w-5 text-kintsugi-gold-600" />
+            <Heart className="h-5 w-5 theme-text-primary" />
             Sentiment Analysis
           </h3>
 
@@ -310,7 +310,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
           className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6"
         >
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-            <BarChart3 className="h-5 w-5 text-kintsugi-gold-600" />
+            <BarChart3 className="h-5 w-5 theme-text-primary" />
             Rating Distribution
           </h3>
 
@@ -338,7 +338,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
                       transition={{ duration: 1, ease: "easeOut", delay: 0.1 * index }}
                       className={`h-full ${
                         rating >= 4
-                          ? 'bg-gradient-to-r from-kintsugi-gold-500 to-amber-500'
+                          ? 'bg-gradient-to-r theme-gradient-to-r'
                           : rating === 3
                           ? 'bg-gradient-to-r from-yellow-400 to-yellow-500'
                           : 'bg-gradient-to-r from-orange-400 to-red-500'
@@ -358,10 +358,10 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 p-6"
+          className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border-2 theme-border-light dark:theme-border-primary/50 p-6"
         >
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-            <Award className="h-6 w-6 text-kintsugi-gold-600" />
+            <Award className="h-6 w-6 theme-text-primary" />
             Featured Community Voices
           </h3>
 
@@ -370,7 +370,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
               const colors = [
                 'from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 border-rose-200 dark:border-rose-800/50',
                 'from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200 dark:border-blue-800/50',
-                'from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50',
+                'theme-bg-primary-light  theme-border-light dark:theme-border-primary/50',
                 'from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-800/50',
                 'from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 border-purple-200 dark:border-purple-800/50',
                 'from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border-orange-200 dark:border-orange-800/50'
@@ -411,7 +411,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
                     <span className="text-xs font-semibold text-gray-700 dark:text-gray-400">
                       {item.userProfile?.name || 'Anonymous'}
                     </span>
-                    <span className="text-xs text-kintsugi-gold-700 dark:text-kintsugi-gold-400 font-medium">
+                    <span className="text-xs text-kintsugi-gold-700 dark:theme-text-secondary font-medium">
                       {item.sessionData?.currentStreak || 0} day streak
                     </span>
                   </div>
@@ -427,7 +427,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9 }}
-        className="bg-gradient-to-r from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-xl p-6 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 text-center"
+        className="bg-gradient-to-r theme-bg-primary-light  rounded-xl p-6 border theme-border-light dark:theme-border-primary/50 text-center"
       >
         <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
           Your Community Is Learning to Own Their Impact

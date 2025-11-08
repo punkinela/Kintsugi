@@ -123,7 +123,7 @@ export default function DataDiagnostic() {
   if (!diagnosticResults) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-kintsugi-gold-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 theme-border-primary"></div>
       </div>
     );
   }
@@ -134,7 +134,7 @@ export default function DataDiagnostic() {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-            <Database className="h-5 w-5 text-kintsugi-gold-600" />
+            <Database className="h-5 w-5 theme-text-primary" />
             Data Diagnostic
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -144,7 +144,7 @@ export default function DataDiagnostic() {
         <button
           onClick={runDiagnostic}
           disabled={isScanning}
-          className="inline-flex items-center px-4 py-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 text-kintsugi-gold-700 dark:text-kintsugi-gold-300 rounded-lg hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/50 transition-colors disabled:opacity-50"
+          className="inline-flex items-center px-4 py-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/30 text-kintsugi-gold-700 dark:theme-text-secondary rounded-lg hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/50 transition-colors disabled:opacity-50"
         >
           <RefreshCw className={`h-4 w-4 mr-2 ${isScanning ? 'animate-spin' : ''}`} />
           {isScanning ? 'Scanning...' : 'Scan Again'}
@@ -153,7 +153,7 @@ export default function DataDiagnostic() {
 
       {/* Issues */}
       {diagnosticResults.issues.length > 0 && (
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+        <div className="theme-bg-primary-light dark:bg-yellow-900/20 border border-yellow-200 dark:theme-border-primary rounded-lg p-4">
           <h4 className="font-semibold text-yellow-900 dark:text-yellow-200 flex items-center gap-2 mb-2">
             <AlertCircle className="h-4 w-4" />
             Issues Found ({diagnosticResults.issues.length})
@@ -220,7 +220,7 @@ export default function DataDiagnostic() {
         <div className="mt-3 space-y-3">
           {Object.entries(diagnosticResults.data).map(([key, value]: [string, any]) => (
             <div key={key} className="bg-white dark:bg-kintsugi-dark-800 rounded p-3 border border-gray-200 dark:border-gray-600">
-              <div className="font-mono text-xs text-kintsugi-gold-600 dark:text-kintsugi-gold-400 mb-2">
+              <div className="font-mono text-xs theme-text-primary dark:theme-text-secondary mb-2">
                 {key}
               </div>
               <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">

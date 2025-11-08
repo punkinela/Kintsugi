@@ -17,7 +17,7 @@ interface DashboardCardProps {
 export default function DashboardCard({
   title,
   icon: Icon,
-  iconColor = 'text-kintsugi-gold-600',
+  iconColor = 'theme-text-primary',
   children,
   action,
   delay = 0,
@@ -28,14 +28,14 @@ export default function DashboardCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.3 }}
-      className={`bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 overflow-hidden hover:shadow-xl transition-shadow ${className}`}
+      className={`bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border theme-border-light dark:theme-border-primary/50 overflow-hidden hover:shadow-xl transition-shadow ${className}`}
     >
       <div className="p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             {Icon && (
-              <div className="p-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 rounded-lg">
+              <div className="p-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/30 rounded-lg">
                 <Icon className={`h-5 w-5 ${iconColor}`} />
               </div>
             )}

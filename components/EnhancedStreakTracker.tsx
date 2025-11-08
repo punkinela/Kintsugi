@@ -16,7 +16,7 @@ const STREAK_MILESTONES: StreakMilestone[] = [
   { days: 3, title: 'Getting Started', icon: '🔥', reward: '+100 XP', color: 'from-orange-400 to-red-500' },
   { days: 7, title: 'Week Warrior', icon: '💪', reward: '+250 XP', color: 'from-blue-400 to-purple-500' },
   { days: 14, title: 'Two Week Champion', icon: '🏆', reward: '+500 XP', color: 'from-purple-400 to-pink-500' },
-  { days: 30, title: 'Monthly Master', icon: '👑', reward: '+1000 XP', color: 'from-yellow-400 to-orange-500' },
+  { days: 30, title: 'Monthly Master', icon: '👑', reward: '+1000 XP', color: 'theme-gradient-to-r' },
   { days: 60, title: 'Consistency King', icon: '🌟', reward: '+2000 XP', color: 'from-green-400 to-teal-500' },
   { days: 100, title: 'Century Club', icon: '💎', reward: '+5000 XP', color: 'from-cyan-400 to-blue-600' },
 ];
@@ -95,9 +95,9 @@ export default function EnhancedStreakTracker() {
       </div>
 
       {/* Milestones Grid */}
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
         <h4 className="text-sm font-semibold text-kintsugi-dark-900 dark:text-white mb-3 flex items-center gap-2">
-          <TrendingUp className="h-4 w-4 text-kintsugi-gold-600" />
+          <TrendingUp className="h-4 w-4 theme-text-primary" />
           Streak Milestones
         </h4>
 
@@ -116,8 +116,8 @@ export default function EnhancedStreakTracker() {
                   achieved
                     ? 'bg-gradient-to-br ' + milestone.color + ' border-transparent text-white'
                     : isNext
-                    ? 'border-kintsugi-gold-400 bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/20'
-                    : 'border-kintsugi-gold-200 dark:border-kintsugi-dark-600 bg-gray-50 dark:bg-kintsugi-dark-900/50'
+                    ? 'border-kintsugi-gold-400 theme-bg-primary-light dark:bg-kintsugi-gold-900/20'
+                    : 'theme-border-light dark:border-kintsugi-dark-600 bg-gray-50 dark:bg-kintsugi-dark-900/50'
                 }`}
               >
                 {achieved && (
@@ -132,10 +132,10 @@ export default function EnhancedStreakTracker() {
 
                 <div className="text-2xl mb-1">{milestone.icon}</div>
                 <div className="text-xs font-semibold mb-1">{milestone.days} Days</div>
-                <div className={`text-xs ${achieved ? 'text-white/90' : 'text-kintsugi-dark-600 dark:text-kintsugi-gold-400'}`}>
+                <div className={`text-xs ${achieved ? 'text-white/90' : 'text-kintsugi-dark-600 dark:theme-text-secondary'}`}>
                   {milestone.title}
                 </div>
-                <div className={`text-xs mt-1 flex items-center gap-1 ${achieved ? 'text-white/75' : 'text-kintsugi-gold-600 dark:text-kintsugi-gold-500'}`}>
+                <div className={`text-xs mt-1 flex items-center gap-1 ${achieved ? 'text-white/75' : 'theme-text-primary dark:theme-text-primary'}`}>
                   <Zap className="h-3 w-3" />
                   {milestone.reward}
                 </div>
@@ -173,17 +173,17 @@ export default function EnhancedStreakTracker() {
 function StatCard({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: string | number; color: string }) {
   const colorClasses = {
     blue: 'bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400',
-    orange: 'bg-orange-100 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400',
+    orange: 'bg-orange-100 dark:bg-orange-900/20 theme-text-primary dark:text-orange-400',
     purple: 'bg-purple-100 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400',
   };
 
   return (
-    <div className="bg-white dark:bg-kintsugi-dark-800 rounded-lg p-3 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+    <div className="bg-white dark:bg-kintsugi-dark-800 rounded-lg p-3 border theme-border-light dark:border-kintsugi-dark-700">
       <div className={`inline-flex p-2 rounded-lg mb-2 ${colorClasses[color as keyof typeof colorClasses]}`}>
         {icon}
       </div>
       <div className="text-xl font-bold text-kintsugi-dark-900 dark:text-white">{value}</div>
-      <div className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400">{label}</div>
+      <div className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary">{label}</div>
     </div>
   );
 }

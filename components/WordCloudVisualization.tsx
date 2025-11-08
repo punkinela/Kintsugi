@@ -29,7 +29,7 @@ export default function WordCloudVisualization() {
       case 'negative':
         return 'text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300';
       default:
-        return 'text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-700 dark:hover:text-kintsugi-gold-300';
+        return 'theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-700 dark:hover:theme-text-secondary';
     }
   };
 
@@ -40,7 +40,7 @@ export default function WordCloudVisualization() {
       case 'negative':
         return 'bg-red-100 dark:bg-red-900/20';
       default:
-        return 'bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20';
+        return 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20';
     }
   };
 
@@ -74,10 +74,10 @@ export default function WordCloudVisualization() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
-            <Cloud className="h-6 w-6 text-kintsugi-gold-600" />
+            <Cloud className="h-6 w-6 theme-text-primary" />
             Word Cloud
           </h2>
-          <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+          <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
             Most frequently used words in your journal
           </p>
         </div>
@@ -85,24 +85,24 @@ export default function WordCloudVisualization() {
         <div className="flex gap-2">
           <button
             onClick={loadWords}
-            className="p-2 bg-white dark:bg-kintsugi-dark-800 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700 rounded-lg hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 transition-colors"
+            className="p-2 bg-white dark:bg-kintsugi-dark-800 border theme-border-light dark:border-kintsugi-dark-700 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 transition-colors"
             title="Refresh"
           >
-            <RefreshCw className="h-5 w-5 text-kintsugi-gold-600" />
+            <RefreshCw className="h-5 w-5 theme-text-primary" />
           </button>
           <button
             onClick={exportWordList}
-            className="p-2 bg-white dark:bg-kintsugi-dark-800 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700 rounded-lg hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700 transition-colors"
+            className="p-2 bg-white dark:bg-kintsugi-dark-800 border theme-border-light dark:border-kintsugi-dark-700 rounded-lg hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700 transition-colors"
             title="Export as CSV"
           >
-            <Download className="h-5 w-5 text-kintsugi-gold-600" />
+            <Download className="h-5 w-5 theme-text-primary" />
           </button>
         </div>
       </div>
 
       {/* Filter */}
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
-        <label className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-2">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
+        <label className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-2">
           Minimum word frequency: {minCount}
         </label>
         <input
@@ -113,7 +113,7 @@ export default function WordCloudVisualization() {
           onChange={(e) => setMinCount(Number(e.target.value))}
           className="w-full"
         />
-        <div className="flex justify-between text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+        <div className="flex justify-between text-xs text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
           <span>1</span>
           <span>10</span>
         </div>
@@ -121,7 +121,7 @@ export default function WordCloudVisualization() {
 
       {/* Word Cloud */}
       {words.length > 0 ? (
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-8 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700 min-h-[400px] flex flex-wrap items-center justify-center gap-3 content-center">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-8 border theme-border-light dark:border-kintsugi-dark-700 min-h-[400px] flex flex-wrap items-center justify-center gap-3 content-center">
           {words.map((word, index) => (
             <motion.div
               key={word.word}
@@ -144,16 +144,16 @@ export default function WordCloudVisualization() {
           ))}
         </div>
       ) : (
-        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-12 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700 text-center">
-          <Cloud className="h-12 w-12 mx-auto text-kintsugi-gold-400 mb-3" />
-          <p className="text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+        <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-12 border theme-border-light dark:border-kintsugi-dark-700 text-center">
+          <Cloud className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
+          <p className="text-kintsugi-dark-600 dark:theme-text-secondary">
             Not enough data to generate word cloud. Keep journaling!
           </p>
         </div>
       )}
 
       {/* Legend */}
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
         <h3 className="text-sm font-semibold text-kintsugi-dark-900 dark:text-white mb-3">
           Sentiment Legend
         </h3>
@@ -163,21 +163,21 @@ export default function WordCloudVisualization() {
             <span className="text-sm text-green-600 dark:text-green-400 font-medium">Positive</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 rounded"></div>
-            <span className="text-sm text-kintsugi-gold-600 dark:text-kintsugi-gold-400 font-medium">Neutral</span>
+            <div className="w-4 h-4 theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded"></div>
+            <span className="text-sm theme-text-primary dark:theme-text-secondary font-medium">Neutral</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 bg-red-100 dark:bg-red-900/20 rounded"></div>
             <span className="text-sm text-red-600 dark:text-red-400 font-medium">Negative</span>
           </div>
         </div>
-        <p className="text-xs text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-3">
+        <p className="text-xs text-kintsugi-dark-600 dark:theme-text-secondary mt-3">
           Word size indicates frequency. Hover over words to see details.
         </p>
       </div>
 
       {/* Top Words Table */}
-      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
         <h3 className="text-sm font-semibold text-kintsugi-dark-900 dark:text-white mb-3">
           Top 10 Words
         </h3>
@@ -185,7 +185,7 @@ export default function WordCloudVisualization() {
           {words.slice(0, 10).map((word, index) => (
             <div key={word.word} className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-mono text-kintsugi-dark-500 dark:text-kintsugi-gold-500 w-6">
+                <span className="text-sm font-mono text-kintsugi-dark-500 dark:theme-text-primary w-6">
                   #{index + 1}
                 </span>
                 <span className={`font-medium ${getSentimentColor(word.sentiment)}`}>

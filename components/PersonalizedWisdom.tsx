@@ -130,11 +130,11 @@ export default function PersonalizedWisdom({ user }: PersonalizedWisdomProps) {
             </p>
 
             {/* Kintsugi Connection */}
-            <div className="bg-gradient-to-br from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-gold-900/20 dark:to-amber-900/20 rounded-xl p-4 border-l-4 border-kintsugi-gold-500">
+            <div className="bg-gradient-to-br theme-bg-primary-light  rounded-xl p-4 border-l-4 theme-border-primary">
               <div className="flex items-start gap-2">
-                <Sparkles className="h-5 w-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 flex-shrink-0 mt-0.5" />
+                <Sparkles className="h-5 w-5 theme-text-primary dark:theme-text-secondary flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm font-semibold text-kintsugi-gold-800 dark:text-kintsugi-gold-300 mb-1">
+                  <p className="text-sm font-semibold text-kintsugi-gold-800 dark:theme-text-secondary mb-1">
                     Kintsugi Connection
                   </p>
                   <p className="text-sm text-gray-700 dark:text-gray-300">
@@ -171,7 +171,7 @@ export default function PersonalizedWisdom({ user }: PersonalizedWisdomProps) {
               onClick={() => setCurrentQuote(quote)}
               className={`h-2 rounded-full transition-all ${
                 quote.id === currentQuote.id
-                  ? 'bg-kintsugi-gold-600 dark:bg-kintsugi-gold-400 w-6'
+                  ? 'theme-bg-primary dark:theme-bg-secondary w-6'
                   : 'bg-gray-300 dark:bg-gray-600 w-2 hover:bg-gray-400 dark:hover:bg-gray-500'
               }`}
               aria-label={`View wisdom ${index + 1}`}

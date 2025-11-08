@@ -89,7 +89,7 @@ export default function MilestoneTracker({ entryCount, currentStreak }: Mileston
       target: 30,
       type: 'streak',
       icon: Trophy,
-      color: 'from-kintsugi-gold-500 to-amber-500',
+      color: 'theme-gradient-to-r',
       reward: '+500 XP'
     },
     {
@@ -134,7 +134,7 @@ export default function MilestoneTracker({ entryCount, currentStreak }: Mileston
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-gradient-to-r from-kintsugi-gold-500 to-amber-500 rounded-xl shadow-lg">
+          <div className="p-3 bg-gradient-to-r theme-gradient-to-r rounded-xl shadow-lg">
             <Trophy className="h-6 w-6 text-white" />
           </div>
           <div>
@@ -208,7 +208,7 @@ export default function MilestoneTracker({ entryCount, currentStreak }: Mileston
                 isUnlocked
                   ? `bg-gradient-to-br ${milestone.color} border-transparent text-white shadow-lg`
                   : isNext
-                  ? 'bg-white dark:bg-gray-800 border-kintsugi-gold-300 dark:border-kintsugi-gold-700'
+                  ? 'bg-white dark:bg-gray-800 theme-border-accent dark:theme-border-primary'
                   : 'bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 opacity-60'
               }`}
             >

@@ -81,7 +81,7 @@ export default function QuickCapture({ isOpen, onClose, onSaved }: QuickCaptureP
             </button>
 
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br theme-gradient-to-r rounded-full flex items-center justify-center">
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -126,7 +126,7 @@ export default function QuickCapture({ isOpen, onClose, onSaved }: QuickCaptureP
                   <button
                     onClick={handleQuickSave}
                     disabled={!text.trim()}
-                    className="flex-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold py-3 rounded-xl hover:from-yellow-500 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+                    className="flex-1 bg-gradient-to-r theme-gradient-to-r text-white font-semibold py-3 rounded-xl hover:from-yellow-500 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
                   >
                     <Zap className="w-5 h-5" />
                     Quick Save

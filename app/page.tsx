@@ -484,14 +484,14 @@ export default function Home() {
   if (!isClient || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-kintsugi-gold-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 theme-border-primary"></div>
       </div>
     );
   }
 
   if (showSetup) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900 p-4">
+      <div className="min-h-screen flex items-center justify-center theme-bg-primary-light dark:bg-kintsugi-dark-900 p-4">
         <ProfileSetup
           onComplete={handleProfileSave}
           initialProfile={user || undefined}
@@ -504,7 +504,7 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 transition-colors duration-200"
+      className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white transition-colors duration-200"
       data-theme-version={themeVersion}
     >
       {/* Header - data-theme-version forces browser style recalculation */}
@@ -548,7 +548,7 @@ export default function Home() {
               <div className="ml-4 relative notifications-container">
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
-                  className="p-1 rounded-full text-kintsugi-dark-400 hover:theme-text-primary dark:text-kintsugi-gold-400 dark:hover:theme-text-accent transition-colors"
+                  className="p-1 rounded-full text-kintsugi-dark-400 hover:theme-text-primary dark:theme-text-secondary dark:hover:theme-text-accent transition-colors"
                   aria-label="Notifications"
                 >
                   <Bell className="h-6 w-6" />
@@ -651,7 +651,7 @@ export default function Home() {
               <div className="ml-4">
                 <button
                   onClick={() => setShowFAQ(true)}
-                  className="p-1 rounded-full text-kintsugi-dark-400 hover:text-kintsugi-gold-600 dark:text-kintsugi-gold-400 dark:hover:text-kintsugi-gold-200 transition-colors"
+                  className="p-1 rounded-full text-kintsugi-dark-400 hover:theme-text-primary dark:theme-text-secondary dark:hover:theme-text-secondary transition-colors"
                   aria-label="Help & FAQ"
                   title="Help & FAQ"
                 >
@@ -661,13 +661,13 @@ export default function Home() {
 
               <div className="ml-4 flex items-center relative user-dropdown-container">
                 <div className="flex-shrink-0">
-                  <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/30 text-kintsugi-gold-700 dark:text-kintsugi-gold-300 text-sm font-medium">
+                  <span className="inline-flex items-center justify-center h-8 w-8 rounded-full theme-bg-primary-light dark:theme-bg-primary theme-text-primary dark:theme-text-secondary text-sm font-medium">
                     {user?.avatar || '👤'}
                   </span>
                 </div>
                 <button
                   onClick={() => setShowUserDropdown(!showUserDropdown)}
-                  className="ml-2 text-kintsugi-dark-700 dark:text-kintsugi-gold-200 text-sm font-medium hover:text-kintsugi-gold-600 dark:hover:text-kintsugi-gold-100 transition-colors"
+                  className="ml-2 text-kintsugi-dark-700 dark:theme-text-secondary text-sm font-medium hover:theme-text-primary dark:hover:text-white transition-colors"
                 >
                   {user?.name || 'User'}
                   <ChevronDown className={`inline-block ml-1 h-4 w-4 transition-transform ${showUserDropdown ? 'rotate-180' : ''}`} />
@@ -746,7 +746,7 @@ export default function Home() {
             <div className="-mr-2 flex items-center md:hidden">
               <button
                 onClick={() => setShowMobileMenu(!showMobileMenu)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-kintsugi-dark-500 hover:text-kintsugi-gold-500 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 focus:outline-none"
+                className="inline-flex items-center justify-center p-2 rounded-md text-kintsugi-dark-500 hover:theme-text-primary hover:theme-bg-primary-light dark:hover:theme-bg-primary focus:outline-none"
               >
                 <Menu className="block h-6 w-6" />
               </button>
@@ -803,10 +803,10 @@ export default function Home() {
                       </span>
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-200">
+                      <div className="text-base font-medium text-kintsugi-dark-700 dark:theme-text-secondary">
                         {user?.name || 'User'}
                       </div>
-                      <div className="text-sm font-medium text-kintsugi-dark-500 dark:text-kintsugi-gold-400">
+                      <div className="text-sm font-medium text-kintsugi-dark-500 dark:theme-text-secondary">
                         {user?.email || 'View profile'}
                       </div>
                     </div>
@@ -1253,7 +1253,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white">
                       Settings & Data Management
                     </h2>
-                    <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-300">
+                    <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary">
                       Manage your data, backups, and preferences
                     </p>
                   </div>
@@ -1262,7 +1262,7 @@ export default function Home() {
                   onClick={() => setShowSettings(false)}
                   className="p-2 hover:theme-bg-primary-light rounded-lg transition-colors"
                 >
-                  <X className="h-5 w-5 text-kintsugi-dark-600 dark:text-kintsugi-gold-300" />
+                  <X className="h-5 w-5 text-kintsugi-dark-600 dark:theme-text-secondary" />
                 </button>
               </div>
 

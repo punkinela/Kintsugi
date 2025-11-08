@@ -61,10 +61,10 @@ export default function QuoteOfTheDay() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-kintsugi-gold-600" />
+            <Sparkles className="h-6 w-6 theme-text-primary" />
             Daily Inspiration
           </h2>
-          <p className="text-sm text-kintsugi-dark-600 dark:text-kintsugi-gold-400 mt-1">
+          <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
             Words of wisdom to inspire your journey
           </p>
         </div>
@@ -77,8 +77,8 @@ export default function QuoteOfTheDay() {
               onClick={() => setView(v)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${
                 view === v
-                  ? 'bg-kintsugi-gold-600 text-white'
-                  : 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-dark-600 dark:text-kintsugi-gold-400 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-dark-700'
+                  ? 'theme-bg-primary text-white'
+                  : 'bg-white dark:bg-kintsugi-dark-800 text-kintsugi-dark-600 dark:theme-text-secondary hover:theme-bg-primary-light dark:hover:bg-kintsugi-dark-700'
               }`}
             >
               {v}
@@ -94,12 +94,12 @@ export default function QuoteOfTheDay() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="relative bg-gradient-to-br from-kintsugi-gold-50 to-orange-50 dark:from-kintsugi-gold-900/20 dark:to-orange-900/20 rounded-2xl p-8 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800 overflow-hidden"
+          className="relative bg-gradient-to-br from-kintsugi-gold-50 to-orange-50  rounded-2xl p-8 border theme-border-light dark:theme-border-primary overflow-hidden"
         >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
-            <QuoteIcon className="absolute top-4 left-4 h-32 w-32 text-kintsugi-gold-600" />
-            <QuoteIcon className="absolute bottom-4 right-4 h-32 w-32 text-kintsugi-gold-600 rotate-180" />
+            <QuoteIcon className="absolute top-4 left-4 h-32 w-32 theme-text-primary" />
+            <QuoteIcon className="absolute bottom-4 right-4 h-32 w-32 theme-text-primary rotate-180" />
           </div>
 
           <div className="relative z-10">
@@ -121,7 +121,7 @@ export default function QuoteOfTheDay() {
                   className={`p-2 rounded-lg transition-all ${
                     isFavorite
                       ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 scale-110'
-                      : 'bg-white/50 dark:bg-black/20 text-kintsugi-gold-600 hover:bg-white dark:hover:bg-black/40'
+                      : 'bg-white/50 dark:bg-black/20 theme-text-primary hover:bg-white dark:hover:bg-black/40'
                   }`}
                 >
                   <Heart className={`h-5 w-5 ${isFavorite ? 'fill-current' : ''}`} />
@@ -129,7 +129,7 @@ export default function QuoteOfTheDay() {
 
                 <button
                   onClick={handleRefresh}
-                  className="p-2 bg-white/50 dark:bg-black/20 hover:bg-white dark:hover:bg-black/40 rounded-lg transition-all text-kintsugi-gold-600"
+                  className="p-2 bg-white/50 dark:bg-black/20 hover:bg-white dark:hover:bg-black/40 rounded-lg transition-all theme-text-primary"
                 >
                   <RefreshCw className="h-5 w-5" />
                 </button>
@@ -141,7 +141,7 @@ export default function QuoteOfTheDay() {
             </blockquote>
 
             <div className="flex items-center justify-between">
-              <cite className="text-lg font-medium text-kintsugi-gold-700 dark:text-kintsugi-gold-400 not-italic">
+              <cite className="text-lg font-medium text-kintsugi-gold-700 dark:theme-text-secondary not-italic">
                 — {currentQuote.author}
               </cite>
 
@@ -149,7 +149,7 @@ export default function QuoteOfTheDay() {
                 {currentQuote.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-1 text-xs rounded-md bg-white/50 dark:bg-black/20 text-kintsugi-dark-600 dark:text-kintsugi-gold-400"
+                    className="px-2 py-1 text-xs rounded-md bg-white/50 dark:bg-black/20 text-kintsugi-dark-600 dark:theme-text-secondary"
                   >
                     #{tag}
                   </span>
@@ -165,10 +165,10 @@ export default function QuoteOfTheDay() {
         <div className="space-y-4">
           {/* Category Filter for Browse */}
           {view === 'browse' && (
-            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
+            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border theme-border-light dark:border-kintsugi-dark-700">
               <div className="flex items-center gap-2 mb-3">
-                <Filter className="h-4 w-4 text-kintsugi-gold-600" />
-                <span className="text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300">
+                <Filter className="h-4 w-4 theme-text-primary" />
+                <span className="text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary">
                   Filter by Category
                 </span>
               </div>
@@ -179,8 +179,8 @@ export default function QuoteOfTheDay() {
                     onClick={() => setSelectedCategory(cat)}
                     className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors capitalize ${
                       selectedCategory === cat
-                        ? 'bg-kintsugi-gold-600 text-white'
-                        : 'bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:text-kintsugi-gold-400 hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40'
+                        ? 'theme-bg-primary text-white'
+                        : 'theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-900/40'
                     }`}
                   >
                     {cat}
@@ -202,9 +202,9 @@ export default function QuoteOfTheDay() {
                 />
               ))
             ) : (
-              <div className="col-span-2 text-center py-12 bg-white dark:bg-kintsugi-dark-800 rounded-xl border border-kintsugi-gold-200 dark:border-kintsugi-dark-700">
-                <Heart className="h-12 w-12 mx-auto text-kintsugi-gold-400 mb-3" />
-                <p className="text-kintsugi-dark-600 dark:text-kintsugi-gold-400">
+              <div className="col-span-2 text-center py-12 bg-white dark:bg-kintsugi-dark-800 rounded-xl border theme-border-light dark:border-kintsugi-dark-700">
+                <Heart className="h-12 w-12 mx-auto theme-text-secondary mb-3" />
+                <p className="text-kintsugi-dark-600 dark:theme-text-secondary">
                   No favorite quotes yet. Start adding some!
                 </p>
               </div>
@@ -243,8 +243,8 @@ function QuoteCard({
       animate={{ opacity: 1, scale: 1 }}
       className={`bg-white dark:bg-kintsugi-dark-800 rounded-xl p-4 border-2 cursor-pointer transition-all ${
         isSelected
-          ? 'border-kintsugi-gold-500 shadow-lg'
-          : 'border-kintsugi-gold-200 dark:border-kintsugi-dark-700 hover:border-kintsugi-gold-400'
+          ? 'theme-border-primary shadow-lg'
+          : 'theme-border-light dark:border-kintsugi-dark-700 hover:border-kintsugi-gold-400'
       }`}
       onClick={onSelect}
     >
@@ -274,7 +274,7 @@ function QuoteCard({
         "{quote.text}"
       </p>
 
-      <p className="text-xs text-kintsugi-gold-600 dark:text-kintsugi-gold-400">
+      <p className="text-xs theme-text-primary dark:theme-text-secondary">
         — {quote.author}
       </p>
     </motion.div>

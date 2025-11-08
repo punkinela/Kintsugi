@@ -177,12 +177,12 @@ export default function Home() {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900">
+      <div className="min-h-screen flex items-center justify-center theme-bg-primary-light dark:bg-kintsugi-dark-900">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
         >
-          <Sparkles className="w-12 h-12 text-kintsugi-gold-500" />
+          <Sparkles className="w-12 h-12 theme-text-primary" />
         </motion.div>
       </div>
     );
@@ -191,7 +191,7 @@ export default function Home() {
   // Profile setup
   if (showSetup) {
     return (
-      <div className="min-h-screen bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900 p-4 flex items-center justify-center">
+      <div className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900 p-4 flex items-center justify-center">
         <ProfileSetup 
           onComplete={handleProfileComplete} 
           initialProfile={profile}
@@ -202,12 +202,12 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-kintsugi-gold-50 dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 transition-colors duration-200">
+    <div className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 transition-colors duration-200">
       {/* Header */}
-      <header className="border-b border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+      <header className="border-b theme-border-light/50 dark:theme-border-primary/30">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-full bg-kintsugi-gold-500 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full theme-bg-primary flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-kintsugi-gold-600 to-kintsugi-gold-800 bg-clip-text text-transparent">
@@ -218,16 +218,16 @@ export default function Home() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <nav className="flex space-x-6">
-              <a href="#" className="text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">
+              <a href="#" className="text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">
                 Home
               </a>
-              <a href="#" className="text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">
+              <a href="#" className="text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">
                 Journal
               </a>
-              <a href="#" className="text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">
+              <a href="#" className="text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">
                 Achievements
               </a>
-              <a href="#" className="text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">
+              <a href="#" className="text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">
                 Challenges
               </a>
             </nav>
@@ -236,8 +236,8 @@ export default function Home() {
             
             <div className="flex items-center space-x-4">
               <ThemeToggle />
-              <button className="p-2 rounded-full hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 transition-colors">
-                <Bell className="w-5 h-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+              <button className="p-2 rounded-full hover:theme-bg-primary-light dark:hover:bg-kintsugi-gold-900/20 transition-colors">
+                <Bell className="w-5 h-5 theme-text-primary dark:theme-text-secondary" />
               </button>
             </div>
           </div>
@@ -246,13 +246,13 @@ export default function Home() {
           <div className="md:hidden">
             <button 
               onClick={toggleMenu}
-              className="p-2 rounded-md hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 transition-colors"
+              className="p-2 rounded-md hover:theme-bg-primary-light dark:hover:bg-kintsugi-gold-900/20 transition-colors"
               aria-label="Menu"
             >
               {isMenuOpen ? (
-                <X className="w-6 h-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                <X className="w-6 h-6 theme-text-primary dark:theme-text-secondary" />
               ) : (
-                <Menu className="w-6 h-6 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                <Menu className="w-6 h-6 theme-text-primary dark:theme-text-secondary" />
               )}
             </button>
           </div>
@@ -268,24 +268,24 @@ export default function Home() {
               transition={{ duration: 0.2 }}
               className="md:hidden overflow-hidden"
             >
-              <div className="px-4 py-3 space-y-4 bg-white dark:bg-kintsugi-dark-800 border-t border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+              <div className="px-4 py-3 space-y-4 bg-white dark:bg-kintsugi-dark-800 border-t theme-border-light/50 dark:theme-border-primary/30">
                 <nav className="flex flex-col space-y-3">
-                  <a href="#" className="px-3 py-2 rounded-lg text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 transition-colors">
+                  <a href="#" className="px-3 py-2 rounded-lg text-kintsugi-gold-700 dark:theme-text-secondary hover:theme-bg-primary-light dark:hover:bg-kintsugi-gold-900/20 transition-colors">
                     Home
                   </a>
-                  <a href="#" className="px-3 py-2 rounded-lg text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 transition-colors">
+                  <a href="#" className="px-3 py-2 rounded-lg text-kintsugi-gold-700 dark:theme-text-secondary hover:theme-bg-primary-light dark:hover:bg-kintsugi-gold-900/20 transition-colors">
                     Journal
                   </a>
-                  <a href="#" className="px-3 py-2 rounded-lg text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 transition-colors">
+                  <a href="#" className="px-3 py-2 rounded-lg text-kintsugi-gold-700 dark:theme-text-secondary hover:theme-bg-primary-light dark:hover:bg-kintsugi-gold-900/20 transition-colors">
                     Achievements
                   </a>
-                  <a href="#" className="px-3 py-2 rounded-lg text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 transition-colors">
+                  <a href="#" className="px-3 py-2 rounded-lg text-kintsugi-gold-700 dark:theme-text-secondary hover:theme-bg-primary-light dark:hover:bg-kintsugi-gold-900/20 transition-colors">
                     Challenges
                   </a>
                 </nav>
-                <div className="pt-4 border-t border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+                <div className="pt-4 border-t theme-border-light/50 dark:theme-border-primary/30">
                   <div className="flex items-center justify-between px-3 py-2">
-                    <span className="text-sm font-medium text-kintsugi-gold-700 dark:text-kintsugi-gold-300">
+                    <span className="text-sm font-medium text-kintsugi-gold-700 dark:theme-text-secondary">
                       Theme
                     </span>
                     <ThemeToggle />
@@ -307,27 +307,27 @@ export default function Home() {
           {/* Main Content Area */}
           <div className="lg:col-span-3 space-y-6">
             {/* Welcome Card */}
-            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 shadow-sm border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 shadow-sm border theme-border-light/50 dark:theme-border-primary/30">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-kintsugi-gold-100">
                     Welcome back{profile?.name ? `, ${profile.name}` : ''}!
                   </h2>
-                  <p className="text-kintsugi-gold-600 dark:text-kintsugi-gold-400">
+                  <p className="theme-text-primary dark:theme-text-secondary">
                     {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                   </p>
                 </div>
                 <div className="flex items-center space-x-3">
                   <button
                     onClick={() => setShowQuickCapture(true)}
-                    className="px-4 py-2 bg-kintsugi-gold-500 hover:bg-kintsugi-gold-600 text-white rounded-lg flex items-center space-x-2 transition-colors"
+                    className="px-4 py-2 theme-bg-primary hover:theme-bg-primary text-white rounded-lg flex items-center space-x-2 transition-colors"
                   >
                     <Zap className="w-4 h-4" />
                     <span>Quick Capture</span>
                   </button>
                   <button
                     onClick={() => setShowProfileView(true)}
-                    className="w-12 h-12 rounded-full bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 flex items-center justify-center hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-800/30 transition-colors"
+                    className="w-12 h-12 rounded-full theme-bg-primary-light dark:bg-kintsugi-gold-900/20 flex items-center justify-center hover:bg-kintsugi-gold-200 dark:hover:bg-kintsugi-gold-800/30 transition-colors"
                     aria-label="View Profile"
                   >
                     {profile?.avatarType === 'emoji' ? (
@@ -344,21 +344,21 @@ export default function Home() {
               </div>
 
               {/* Daily Affirmation */}
-              <div className="bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/10 rounded-lg p-4 border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30 mb-6">
+              <div className="theme-bg-primary-light dark:bg-kintsugi-gold-900/10 rounded-lg p-4 border theme-border-light/50 dark:theme-border-primary/30 mb-6">
                 <div className="flex items-start">
-                  <div className="p-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 rounded-lg mr-4">
-                    <Sparkles className="w-5 h-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                  <div className="p-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded-lg mr-4">
+                    <Sparkles className="w-5 h-5 theme-text-primary dark:theme-text-secondary" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-1">
                       Today's Affirmation
                     </h3>
-                    <p className="text-kintsugi-dark-700 dark:text-kintsugi-gold-300">
+                    <p className="text-kintsugi-dark-700 dark:theme-text-secondary">
                       {currentAffirmation?.text || 'You are doing great!'}
                     </p>
                     <button 
                       onClick={fetchAffirmation}
-                      className="mt-2 text-sm text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200 flex items-center"
+                      className="mt-2 text-sm theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary flex items-center"
                     >
                       <RefreshCw className="w-3.5 h-3.5 mr-1" />
                       New Affirmation
@@ -369,68 +369,68 @@ export default function Home() {
 
               {/* Progress and Insights */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="bg-white dark:bg-kintsugi-dark-800 p-4 rounded-lg border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+                <div className="bg-white dark:bg-kintsugi-dark-800 p-4 rounded-lg border theme-border-light/50 dark:theme-border-primary/30">
                   <h3 className="font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-2">
                     Weekly Progress
                   </h3>
-                  <div className="h-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 rounded-full overflow-hidden">
+                  <div className="h-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-gradient-to-r from-kintsugi-gold-400 to-kintsugi-gold-600 rounded-full"
                       style={{ width: '65%' }}
                     ></div>
                   </div>
-                  <p className="text-sm text-kintsugi-gold-600 dark:text-kintsugi-gold-400 mt-2">
+                  <p className="text-sm theme-text-primary dark:theme-text-secondary mt-2">
                     5 of 7 days completed
                   </p>
                 </div>
                 
-                <div className="bg-white dark:bg-kintsugi-dark-800 p-4 rounded-lg border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+                <div className="bg-white dark:bg-kintsugi-dark-800 p-4 rounded-lg border theme-border-light/50 dark:theme-border-primary/30">
                   <h3 className="font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-2">
                     Current Streak
                   </h3>
                   <div className="flex items-center">
-                    <Flame className="w-5 h-5 text-kintsugi-gold-500 mr-2" />
+                    <Flame className="w-5 h-5 theme-text-primary mr-2" />
                     <span className="text-2xl font-bold text-kintsugi-dark-900 dark:text-kintsugi-gold-100">
                       {streakInfo.current} days
                     </span>
                   </div>
-                  <p className="text-sm text-kintsugi-gold-600 dark:text-kintsugi-gold-400 mt-1">
+                  <p className="text-sm theme-text-primary dark:theme-text-secondary mt-1">
                     Best: {streakInfo.longest} days
                   </p>
                 </div>
               </div>
 
               {/* Recent Activity */}
-              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-lg border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30 overflow-hidden">
-                <div className="px-6 py-4 border-b border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-lg border theme-border-light/50 dark:theme-border-primary/30 overflow-hidden">
+                <div className="px-6 py-4 border-b theme-border-light/50 dark:theme-border-primary/30">
                   <h3 className="text-lg font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100">
                     Recent Activity
                   </h3>
                 </div>
                 <div className="divide-y divide-kintsugi-gold-200/50 dark:divide-kintsugi-gold-800/30">
                   {[1, 2, 3].map((i) => (
-                    <div key={i} className="p-4 hover:bg-kintsugi-gold-50/50 dark:hover:bg-kintsugi-gold-900/5 transition-colors">
+                    <div key={i} className="p-4 hover:theme-bg-primary-light/50 dark:hover:bg-kintsugi-gold-900/5 transition-colors">
                       <div className="flex items-start">
-                        <div className="p-2 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 rounded-lg mr-3">
-                          <Activity className="w-4 h-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                        <div className="p-2 theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded-lg mr-3">
+                          <Activity className="w-4 h-4 theme-text-primary dark:theme-text-secondary" />
                         </div>
                         <div className="flex-1">
                           <p className="text-sm text-kintsugi-dark-900 dark:text-kintsugi-gold-100">
                             Completed daily reflection
                           </p>
-                          <p className="text-xs text-kintsugi-gold-600 dark:text-kintsugi-gold-400 mt-1">
+                          <p className="text-xs theme-text-primary dark:theme-text-secondary mt-1">
                             {i} hour{i !== 1 ? 's' : ''} ago
                           </p>
                         </div>
-                        <span className="text-xs px-2 py-1 bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:text-kintsugi-gold-300 rounded-full">
+                        <span className="text-xs px-2 py-1 theme-bg-primary-light dark:bg-kintsugi-gold-900/20 text-kintsugi-gold-700 dark:theme-text-secondary rounded-full">
                           +10 XP
                         </span>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="px-6 py-3 border-t border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30 text-center">
-                  <button className="text-sm font-medium text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200">
+                <div className="px-6 py-3 border-t theme-border-light/50 dark:theme-border-primary/30 text-center">
+                  <button className="text-sm font-medium theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary">
                     View All Activity
                   </button>
                 </div>
@@ -441,32 +441,32 @@ export default function Home() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Quick Actions */}
-            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-5 border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-5 border theme-border-light/50 dark:theme-border-primary/30">
               <h3 className="font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-4">
                 Quick Actions
               </h3>
               <div className="space-y-2">
                 <button 
                   onClick={() => setShowJournal(true)}
-                  className="w-full flex items-center px-4 py-3 rounded-lg bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/10 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 transition-colors text-left"
+                  className="w-full flex items-center px-4 py-3 rounded-lg theme-bg-primary-light dark:bg-kintsugi-gold-900/10 hover:theme-bg-primary-light dark:hover:bg-kintsugi-gold-900/20 transition-colors text-left"
                 >
-                  <BookOpen className="w-5 h-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 mr-3" />
+                  <BookOpen className="w-5 h-5 theme-text-primary dark:theme-text-secondary mr-3" />
                   <span>New Journal Entry</span>
                 </button>
                 
                 <button 
                   onClick={() => setShowChallenges(true)}
-                  className="w-full flex items-center px-4 py-3 rounded-lg bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/10 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 transition-colors text-left"
+                  className="w-full flex items-center px-4 py-3 rounded-lg theme-bg-primary-light dark:bg-kintsugi-gold-900/10 hover:theme-bg-primary-light dark:hover:bg-kintsugi-gold-900/20 transition-colors text-left"
                 >
-                  <Target className="w-5 h-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 mr-3" />
+                  <Target className="w-5 h-5 theme-text-primary dark:theme-text-secondary mr-3" />
                   <span>View Challenges</span>
                 </button>
                 
                 <button 
                   onClick={() => setShowAchievements(true)}
-                  className="w-full flex items-center px-4 py-3 rounded-lg bg-kintsugi-gold-50 dark:bg-kintsugi-gold-900/10 hover:bg-kintsugi-gold-100 dark:hover:bg-kintsugi-gold-900/20 transition-colors text-left"
+                  className="w-full flex items-center px-4 py-3 rounded-lg theme-bg-primary-light dark:bg-kintsugi-gold-900/10 hover:theme-bg-primary-light dark:hover:bg-kintsugi-gold-900/20 transition-colors text-left"
                 >
-                  <Award className="w-5 h-5 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 mr-3" />
+                  <Award className="w-5 h-5 theme-text-primary dark:theme-text-secondary mr-3" />
                   <span>My Achievements</span>
                 </button>
               </div>
@@ -487,34 +487,34 @@ export default function Home() {
             </div>
 
             {/* Upcoming Events */}
-            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-5 border border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-5 border theme-border-light/50 dark:theme-border-primary/30">
               <h3 className="font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-3">
                 Upcoming
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <div className="bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 rounded-lg p-2 mr-3">
-                    <Calendar className="w-4 h-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                  <div className="theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded-lg p-2 mr-3">
+                    <Calendar className="w-4 h-4 theme-text-primary dark:theme-text-secondary" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100">
                       Weekly Reflection
                     </p>
-                    <p className="text-xs text-kintsugi-gold-600 dark:text-kintsugi-gold-400">
+                    <p className="text-xs theme-text-primary dark:theme-text-secondary">
                       Tomorrow • 6:00 PM
                     </p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 rounded-lg p-2 mr-3">
-                    <Calendar className="w-4 h-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400" />
+                  <div className="theme-bg-primary-light dark:bg-kintsugi-gold-900/20 rounded-lg p-2 mr-3">
+                    <Calendar className="w-4 h-4 theme-text-primary dark:theme-text-secondary" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100">
                       Monthly Review
                     </p>
-                    <p className="text-xs text-kintsugi-gold-600 dark:text-kintsugi-gold-400">
+                    <p className="text-xs theme-text-primary dark:theme-text-secondary">
                       In 5 days • 7:00 PM
                     </p>
                   </div>
@@ -525,18 +525,18 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-12 pt-8 border-t border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30">
+        <footer className="mt-12 pt-8 border-t theme-border-light/50 dark:theme-border-primary/30">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 rounded-full bg-kintsugi-gold-500 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full theme-bg-primary flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-kintsugi-gold-600 to-kintsugi-gold-800 bg-clip-text text-transparent">
                   Kintsugi
                 </span>
               </div>
-              <p className="text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300">
+              <p className="text-sm text-kintsugi-gold-700 dark:theme-text-secondary">
                 Embrace your journey and celebrate your growth with Kintsugi - finding beauty in every step.
               </p>
             </div>
@@ -544,35 +544,35 @@ export default function Home() {
             <div>
               <h4 className="font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-4">Navigation</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Home</a></li>
-                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Journal</a></li>
-                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Achievements</a></li>
-                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Challenges</a></li>
+                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Home</a></li>
+                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Journal</a></li>
+                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Achievements</a></li>
+                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Challenges</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-4">Resources</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">About Kintsugi</a></li>
-                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Help Center</a></li>
-                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:text-kintsugi-gold-300 hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">About Kintsugi</a></li>
+                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Help Center</a></li>
+                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="text-sm text-kintsugi-gold-700 dark:theme-text-secondary hover:text-kintsugi-gold-900 dark:hover:text-kintsugi-gold-100 transition-colors">Terms of Service</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-medium text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-4">Connect</h4>
               <div className="flex space-x-4">
-                <a href="#" className="text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200 transition-colors">
+                <a href="#" className="theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary transition-colors">
                   <span className="sr-only">Twitter</span>
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="#" className="text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200 transition-colors">
+                <a href="#" className="theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary transition-colors">
                   <span className="sr-only">Instagram</span>
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="#" className="text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200 transition-colors">
+                <a href="#" className="theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary transition-colors">
                   <span className="sr-only">GitHub</span>
                   <Github className="w-5 h-5" />
                 </a>
@@ -580,7 +580,7 @@ export default function Home() {
               <div className="mt-6">
                 <button 
                   onClick={() => setShowFeedback(true)}
-                  className="text-sm font-medium text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200 transition-colors flex items-center"
+                  className="text-sm font-medium theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary transition-colors flex items-center"
                 >
                   <MessageCircle className="w-4 h-4 mr-1" />
                   Send Feedback
@@ -589,8 +589,8 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="mt-12 pt-6 border-t border-kintsugi-gold-200/50 dark:border-kintsugi-gold-800/30 text-center">
-            <p className="text-xs text-kintsugi-gold-600 dark:text-kintsugi-gold-400">
+          <div className="mt-12 pt-6 border-t theme-border-light/50 dark:theme-border-primary/30 text-center">
+            <p className="text-xs theme-text-primary dark:theme-text-secondary">
               &copy; {new Date().getFullYear()} Kintsugi. All rights reserved.
             </p>
           </div>
@@ -610,13 +610,13 @@ export default function Home() {
             >
               <button 
                 onClick={() => setShowProfileView(false)}
-                className="absolute top-4 right-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200"
+                className="absolute top-4 right-4 theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary"
               >
                 <X className="w-5 h-5" />
               </button>
               
               <div className="text-center">
-                <div className="w-20 h-20 mx-auto rounded-full bg-kintsugi-gold-100 dark:bg-kintsugi-gold-900/20 flex items-center justify-center text-3xl mb-4">
+                <div className="w-20 h-20 mx-auto rounded-full theme-bg-primary-light dark:bg-kintsugi-gold-900/20 flex items-center justify-center text-3xl mb-4">
                   {profile.avatarType === 'emoji' ? (
                     profile.avatar
                   ) : (
@@ -631,7 +631,7 @@ export default function Home() {
                 <h3 className="text-xl font-bold text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-1">
                   {profile.name}
                 </h3>
-                <p className="text-kintsugi-gold-600 dark:text-kintsugi-gold-400 mb-6">
+                <p className="theme-text-primary dark:theme-text-secondary mb-6">
                   {profile.email}
                 </p>
                 
@@ -641,14 +641,14 @@ export default function Home() {
                       setShowProfileView(false);
                       setShowSetup(true);
                     }}
-                    className="w-full bg-kintsugi-gold-500 hover:bg-kintsugi-gold-600 text-white py-2 px-4 rounded-lg transition-colors"
+                    className="w-full theme-bg-primary hover:theme-bg-primary text-white py-2 px-4 rounded-lg transition-colors"
                   >
                     Edit Profile
                   </button>
                   
                   <button 
                     onClick={() => setShowProfileView(false)}
-                    className="w-full text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200 py-2 transition-colors"
+                    className="w-full theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary py-2 transition-colors"
                   >
                     Close
                   </button>
@@ -669,7 +669,7 @@ export default function Home() {
             >
               <button 
                 onClick={() => setShowFeedback(false)}
-                className="absolute top-4 right-4 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200"
+                className="absolute top-4 right-4 theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -677,19 +677,19 @@ export default function Home() {
               <h3 className="text-xl font-bold text-kintsugi-dark-900 dark:text-kintsugi-gold-100 mb-2">
                 Send Feedback
               </h3>
-              <p className="text-kintsugi-gold-600 dark:text-kintsugi-gold-400 mb-6">
+              <p className="theme-text-primary dark:theme-text-secondary mb-6">
                 We'd love to hear your thoughts!
               </p>
               
               <form className="space-y-4">
                 <div>
-                  <label htmlFor="feedback" className="block text-sm font-medium text-kintsugi-dark-700 dark:text-kintsugi-gold-300 mb-1">
+                  <label htmlFor="feedback" className="block text-sm font-medium text-kintsugi-dark-700 dark:theme-text-secondary mb-1">
                     Your Feedback
                   </label>
                   <textarea
                     id="feedback"
                     rows={4}
-                    className="w-full px-3 py-2 border border-kintsugi-gold-200 dark:border-kintsugi-gold-800/50 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border theme-border-light dark:theme-border-primary/50 rounded-lg bg-white dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-kintsugi-gold-100 focus:ring-2 focus:ring-kintsugi-gold-500 focus:border-transparent"
                     placeholder="Share your thoughts..."
                   ></textarea>
                 </div>
@@ -698,14 +698,14 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => setShowFeedback(false)}
-                    className="flex-1 text-kintsugi-gold-600 dark:text-kintsugi-gold-400 hover:text-kintsugi-gold-800 dark:hover:text-kintsugi-gold-200 py-2 transition-colors"
+                    className="flex-1 theme-text-primary dark:theme-text-secondary hover:text-kintsugi-gold-800 dark:hover:theme-text-secondary py-2 transition-colors"
                   >
                     Cancel
                   </button>
                   
                   <button
                     type="submit"
-                    className="flex-1 bg-kintsugi-gold-500 hover:bg-kintsugi-gold-600 text-white py-2 px-4 rounded-lg transition-colors"
+                    className="flex-1 theme-bg-primary hover:theme-bg-primary text-white py-2 px-4 rounded-lg transition-colors"
                   >
                     Send
                   </button>

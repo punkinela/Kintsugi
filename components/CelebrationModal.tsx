@@ -84,7 +84,7 @@ export default function CelebrationModal({
               animate={{ scale: 1, rotate: 0, opacity: 1 }}
               exit={{ scale: 0, rotate: 180, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-              className="bg-gradient-to-br from-kintsugi-gold-50 to-amber-50 dark:from-kintsugi-dark-800 dark:to-kintsugi-dark-700 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border-4 border-kintsugi-gold-300 dark:border-kintsugi-gold-700"
+              className="bg-gradient-to-br theme-bg-primary-light dark:from-kintsugi-dark-800 dark:to-kintsugi-dark-700 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border-4 theme-border-accent dark:theme-border-primary"
             >
               {/* Animated stars background */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -126,7 +126,7 @@ export default function CelebrationModal({
                   transition={{ delay: 0.2, type: 'spring' }}
                   className="flex justify-center mb-6"
                 >
-                  <div className="p-4 bg-gradient-to-br from-kintsugi-gold-400 to-amber-500 text-white rounded-full shadow-lg">
+                  <div className="p-4 bg-gradient-to-br theme-gradient-to-r text-white rounded-full shadow-lg">
                     {icon || iconMap[type]}
                   </div>
                 </motion.div>
@@ -159,7 +159,7 @@ export default function CelebrationModal({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={onClose}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-kintsugi-gold-500 to-amber-500 text-white font-semibold rounded-xl hover:from-kintsugi-gold-600 hover:to-amber-600 transition-all shadow-lg"
+                  className="w-full px-6 py-3 bg-gradient-to-r theme-gradient-to-r text-white font-semibold rounded-xl hover:from-kintsugi-gold-600 hover:to-amber-600 transition-all shadow-lg"
                 >
                   Awesome!
                 </motion.button>

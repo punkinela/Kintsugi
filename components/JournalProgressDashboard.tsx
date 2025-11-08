@@ -297,7 +297,7 @@ export default function JournalProgressDashboard({ entries }: JournalProgressDas
               </>
             ) : (
               <>
-                <strong className="text-amber-600 dark:text-amber-400">💪 Keep Going!</strong> Every entry counts. You've got this!
+                <strong className="theme-text-primary dark:theme-text-secondary">💪 Keep Going!</strong> Every entry counts. You've got this!
               </>
             )}
           </p>
