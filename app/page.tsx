@@ -573,8 +573,6 @@ export default function Home() {
                   onClick={() => setActiveTab('your-edge')}
                   data-active={activeTab === 'your-edge'}
                   className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  id="YOUR-EDGE-NAV-BUTTON-TEST"
-                  style={{ outline: '2px solid red' }}
                 >
                   Your Edge
                 </button>
