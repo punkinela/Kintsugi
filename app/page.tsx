@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -94,7 +94,7 @@ import { checkAndUnlockAchievements, getAchievementProgress, getEngagementData, 
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'journal' | 'insights' | 'your-edge'>('home');
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showBiasInsight, setShowBiasInsight] = useState(false);
   const [themeVersion, setThemeVersion] = useState(0); // Used for data-theme-version attribute
@@ -539,6 +539,13 @@ export default function Home() {
                 >
                   Insights
                 </button>
+                <button
+                  onClick={() => setActiveTab('your-edge')}
+                  data-active={activeTab === 'your-edge'}
+                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
+                  Your Edge
+                </button>
               </nav>
             </div>
             <div className="hidden md:ml-6 md:flex md:items-center">
@@ -794,6 +801,16 @@ export default function Home() {
                   className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                 >
                   Insights
+                </button>
+                <button
+                  onClick={() => {
+                    setActiveTab('your-edge');
+                    setShowMobileMenu(false);
+                  }}
+                  data-active={activeTab === 'your-edge'}
+                  className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
+                >
+                  Your Edge
                 </button>
                 <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center px-4">
@@ -1203,6 +1220,203 @@ export default function Home() {
 
               {/* Phase 7: Professional Tools */}
               <ExportManager />
+            </div>
+          )}
+
+          {activeTab === 'your-edge' && (
+            <div className="space-y-6">
+              {/* Your Edge Header */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="theme-gradient-to-br rounded-2xl shadow-2xl overflow-hidden"
+                style={{
+                  background: 'linear-gradient(to bottom right, var(--theme-primary), var(--theme-secondary), var(--theme-accent))'
+                }}
+              >
+                <div className="relative px-6 py-8 sm:px-8 sm:py-10">
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-56 h-56 bg-white/10 rounded-full blur-3xl"></div>
+
+                  <div className="relative flex flex-col gap-4">
+                    <div>
+                      <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                        <Target className="h-8 w-8" />
+                        Your Edge
+                      </h2>
+                      <p className="text-white/90 text-lg">
+                        Transform your documented journey into powerful career assets
+                      </p>
+                    </div>
+
+                    {/* Your Edge Philosophy */}
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/30">
+                      <p className="text-white/90 text-sm leading-relaxed">
+                        <span className="font-semibold">金継ぎ Kintsugi:</span> Your cracks—your challenges,
+                        setbacks, and struggles—aren't weaknesses to hide. When filled with gold, they become
+                        your <span className="font-bold">edge</span>. This is where others see obstacles, you
+                        demonstrate resilience. Where others show perfection, you prove authenticity. Your complete
+                        story, with all its texture, is what makes you remarkable.
+                      </p>
+                    </div>
+
+                    {/* Stats Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/30">
+                        <p className="text-white/70 text-xs font-medium">Impact Entries</p>
+                        <p className="text-white text-2xl font-bold mt-1">
+                          <AnimatedCounter value={totalEntries} className="inline" />
+                        </p>
+                      </div>
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/30">
+                        <p className="text-white/70 text-xs font-medium">Current Streak</p>
+                        <p className="text-white text-2xl font-bold mt-1">
+                          <AnimatedCounter value={currentStreak} className="inline" />
+                        </p>
+                      </div>
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/30">
+                        <p className="text-white/70 text-xs font-medium">Achievements</p>
+                        <p className="text-white text-2xl font-bold mt-1">
+                          <AnimatedCounter value={totalAchievements} className="inline" />
+                        </p>
+                      </div>
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/30">
+                        <p className="text-white/70 text-xs font-medium">Journey Level</p>
+                        <p className="text-white text-2xl font-bold mt-1">
+                          <AnimatedCounter
+                            value={(() => {
+                              const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+                              return engagement.level || 1;
+                            })()}
+                            className="inline"
+                          />
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Journey Richness Score - Profile Quality Overview */}
+              <JourneyRichnessScore entries={journalEntries} />
+
+              {/* Professional Export Tools Section */}
+              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
+                    <Award className="h-6 w-6 theme-text-primary" />
+                    Professional Export Tools
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Transform your documented journey into professional assets for your career
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {/* AI Performance Review Generator */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <AIPerformanceReviewGenerator />
+                  </div>
+
+                  {/* Kintsugi Portfolio Generator */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <KintsugiPortfolioGenerator
+                      entries={journalEntries}
+                      userName={user?.name}
+                      userProfession={user?.profession}
+                    />
+                  </div>
+
+                  {/* Export Manager */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <ExportManager />
+                  </div>
+                </div>
+              </div>
+
+              {/* Growth & Strength Visualizations */}
+              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
+                    <TrendingUp className="h-6 w-6 theme-text-primary" />
+                    Growth Visualizations
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    See your patterns, strengths, and transformation over time
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {/* Personal Stats Dashboard */}
+                  <PersonalStatsDashboard />
+
+                  {/* Strength Archaeology */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <StrengthArchaeology entries={journalEntries} />
+                  </div>
+
+                  {/* Transformation Heatmap */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <TransformationHeatmap entries={journalEntries} monthsToShow={6} />
+                  </div>
+
+                  {/* Golden Seam Timeline */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <GoldenSeamTimeline entries={journalEntries} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Empty State for New Users */}
+              {journalEntries.length === 0 && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 theme-border-light p-12 text-center"
+                >
+                  <div className="max-w-md mx-auto">
+                    <div className="w-20 h-20 mx-auto mb-6 theme-bg-primary-light rounded-full flex items-center justify-center">
+                      <Target className="h-10 w-10 theme-text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                      Start Building Your Edge
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                      Your Edge is built from your documented journey. Start by adding impact entries
+                      to unlock powerful career tools, insights, and professional exports.
+                    </p>
+                    <button
+                      onClick={() => setActiveTab('journal')}
+                      className="theme-btn-primary px-8 py-3 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
+                    >
+                      <Plus className="h-5 w-5" />
+                      Add Your First Entry
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Engagement Tip */}
+              {journalEntries.length > 0 && journalEntries.length < 10 && (
+                <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <Lightbulb className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-2">
+                        Keep Building Your Edge
+                      </h4>
+                      <p className="text-sm text-blue-800 dark:text-blue-300 leading-relaxed">
+                        You're off to a great start! The more you document, the more powerful your
+                        professional exports become. Aim for at least 10-20 entries to unlock the full
+                        potential of performance reviews and portfolio generation.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
