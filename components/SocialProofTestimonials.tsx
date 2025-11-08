@@ -65,7 +65,7 @@ export default function SocialProofTestimonials() {
   return (
     <div className="space-y-8">
       {/* Stats Bar */}
-      <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl p-8 shadow-2xl">
+      <div className="theme-gradient-to-r rounded-2xl p-8 shadow-2xl">
         <h3 className="text-2xl font-bold text-white mb-6 text-center">
           Join Thousands Building Confidence
         </h3>
@@ -134,7 +134,7 @@ export default function SocialProofTestimonials() {
       </div>
 
       {/* Before & After Examples */}
-      <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-8 border-2 border-purple-200 dark:border-purple-800">
+      <div className="theme-bg-primary-light rounded-2xl p-8 border-2 theme-border-light">
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
           How AI Helps You Write Better
         </h3>
@@ -202,7 +202,7 @@ export default function SocialProofTestimonials() {
       </div>
 
       {/* Guarantee */}
-      <div className="bg-gradient-to-r from-green-500 to-teal-600 rounded-2xl p-8 shadow-2xl text-center">
+      <div className="theme-gradient-to-r rounded-2xl p-8 shadow-2xl text-center">
         <h3 className="text-2xl font-bold text-white mb-3">
           100% Free. 100% Private. Your Data Stays Local.
         </h3>

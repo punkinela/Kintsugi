@@ -209,12 +209,13 @@ html {
     background: var(--theme-gradient) !important;
   }
 
+  /* Use darker colors for gradients with white text - better contrast */
   .theme-gradient-to-r {
-    background: linear-gradient(to right, var(--theme-primary), var(--theme-secondary)) !important;
+    background: linear-gradient(to right, var(--theme-primary-dark), var(--theme-primary)) !important;
   }
 
   .theme-gradient-to-br {
-    background: linear-gradient(to bottom right, var(--theme-primary-light), var(--theme-accent)) !important;
+    background: linear-gradient(to bottom right, var(--theme-primary), var(--theme-secondary), var(--theme-accent)) !important;
   }
 
   /* Ensure white text on gradient backgrounds has good contrast */
@@ -226,7 +227,7 @@ html {
   /* Add text shadow for better readability on gradient backgrounds */
   .theme-gradient-to-r *:not(svg):not(path),
   .theme-gradient-to-br *:not(svg):not(path) {
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   }
 
   /* Buttons using theme colors */
