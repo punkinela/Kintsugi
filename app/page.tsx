@@ -91,6 +91,7 @@ import AICareerGapAnalyzer from '@/components/AICareerGapAnalyzer';
 import AIConfidenceScoreTracker from '@/components/AIConfidenceScoreTracker';
 import AISmartTaggingSearch from '@/components/AISmartTaggingSearch';
 import AIInterviewPrepGenerator from '@/components/AIInterviewPrepGenerator';
+import AutoProfileBuilder from '@/components/AutoProfileBuilder';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
@@ -1391,6 +1392,30 @@ export default function Home() {
                   </div>
                 </div>
               </motion.div>
+
+              {/* Auto-Profile Builder & Growth Mindset Tracker */}
+              {user && journalEntries.length > 0 && (
+                <AutoProfileBuilder
+                  entries={journalEntries.map(entry => ({
+                    id: entry.id,
+                    text: `${entry.accomplishment} ${entry.reflection || ''}`,
+                    date: new Date(entry.date)
+                  }))}
+                  currentProfile={user}
+                  onUpdateProfile={(updates) => {
+                    const updatedUser = { ...user, ...updates };
+                    localStorage.setItem('kintsugiUser', JSON.stringify(updatedUser));
+                    setUser(updatedUser);
+                    addToast({
+                      type: 'success',
+                      title: 'Profile Updated',
+                      message: 'Your profile has been enhanced with AI suggestions!',
+                      duration: 3000
+                    });
+                    window.dispatchEvent(new Event('kintsugi-data-updated'));
+                  }}
+                />
+              )}
 
               {/* AI Career Gap Analyzer - Identify Missing Skills & Experiences */}
               {user && (
