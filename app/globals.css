@@ -269,14 +269,19 @@ html {
   }
 
   .nav-tab:hover:not([data-active="true"]) {
-    color: var(--theme-secondary) !important;
-    border-color: var(--theme-secondary) !important;
-    opacity: 0.9 !important;
+    color: var(--theme-accent) !important;  /* Use brightest theme color for visibility */
+    border-color: var(--theme-accent) !important;
+    border-bottom-color: var(--theme-accent) !important;
+    opacity: 1 !important;
+    transform: translateY(-1px);
+    transition: all 0.15s ease;
   }
 
-  /* Force hover for testing - remove after verification */
-  .nav-tab:hover {
-    border-bottom-color: #f59e0b !important;
+  /* Hover effect for active tabs */
+  .nav-tab[data-active="true"]:hover {
+    opacity: 0.85 !important;
+    transform: translateY(-1px);
+    transition: all 0.15s ease;
   }
 
   /* Mobile navigation tabs */
