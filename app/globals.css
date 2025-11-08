@@ -217,6 +217,18 @@ html {
     background: linear-gradient(to bottom right, var(--theme-primary-light), var(--theme-accent)) !important;
   }
 
+  /* Ensure white text on gradient backgrounds has good contrast */
+  .theme-gradient-to-r,
+  .theme-gradient-to-br {
+    color: white !important;
+  }
+
+  /* Add text shadow for better readability on gradient backgrounds */
+  .theme-gradient-to-r *:not(svg):not(path),
+  .theme-gradient-to-br *:not(svg):not(path) {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
   /* Buttons using theme colors */
   .theme-btn-primary {
     background: linear-gradient(to right, var(--theme-primary), var(--theme-secondary)) !important;

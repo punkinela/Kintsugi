@@ -37,7 +37,7 @@ export default function ProfileCard({ user, onEdit }: ProfileCardProps) {
   return (
     <div className="bg-white dark:bg-kintsugi-dark-800 rounded-xl shadow-lg border theme-border-light dark:theme-border-primary/50 overflow-hidden">
       {/* Header with completion status */}
-      <div className={`p-6 ${isComplete ? 'bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20' : 'bg-gradient-to-r theme-bg-primary-light '}`}>
+      <div className={`p-6 ${isComplete ? 'bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20' : 'theme-gradient-to-r'}`}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
             <User className="h-5 w-5 theme-text-primary" />
