@@ -287,6 +287,12 @@ html {
     transition: all 0.15s ease !important;
   }
 
+  /* CRITICAL: Catch-all hover that applies to ALL tabs */
+  .nav-tab:hover {
+    border-bottom-color: var(--theme-accent) !important;
+    cursor: pointer !important;
+  }
+
   /* Mobile navigation tabs */
   .nav-tab-mobile {
     background-color: transparent !important;
