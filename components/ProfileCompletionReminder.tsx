@@ -58,7 +58,7 @@ export default function ProfileCompletionReminder({ user, onCompleteProfile }: P
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-2 border-blue-200 dark:border-blue-800/50 rounded-xl p-6 shadow-lg"
+      className="theme-bg-primary-light border-2 theme-border-light rounded-xl p-6 shadow-lg"
     >
       <div className="flex items-start gap-4">
         {/* Progress Ring */}
@@ -110,7 +110,7 @@ export default function ProfileCompletionReminder({ user, onCompleteProfile }: P
           {/* Action Button */}
           <button
             onClick={onCompleteProfile}
-            className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg transform hover:scale-105"
+            className="inline-flex items-center px-4 py-2 theme-btn-primary text-white font-medium rounded-lg transition-all shadow-md hover:shadow-lg transform hover:scale-105"
           >
             <User className="h-4 w-4 mr-2" />
             Complete Profile

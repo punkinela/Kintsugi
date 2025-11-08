@@ -27,7 +27,7 @@ export default function LevelProgressCard() {
   return (
     <div className="space-y-4">
       {/* Main Level Card */}
-      <div className={`relative overflow-hidden bg-gradient-to-br ${currentTier.color} rounded-2xl p-6 text-white`}>
+      <div className={`relative overflow-hidden ${currentTier.color} rounded-2xl p-6 text-white`}>
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
