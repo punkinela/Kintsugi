@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, TrendingUp, TrendingDown, Minus, Star, Zap, Award, Target, MessageSquare, Sparkles, ChevronRight, Trophy, CheckCircle2, ArrowRight } from 'lucide-react';
 
@@ -145,6 +145,25 @@ function generateMockWeeklyData(): WeeklyData {
 
 export default function InAppWeeklyDigest({ weeklyData, onSetGoals, onViewEntry }: InAppWeeklyDigestProps) {
   const [expandedSection, setExpandedSection] = useState<string | null>('highlights');
+
+  // Track feature usage
+  useEffect(() => {
+    const usageData = JSON.parse(localStorage.getItem('ai_feature_usage') || '{}');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!usageData.weeklyDigest) {
+      usageData.weeklyDigest = { views: 0, lastUsed: null, dates: [] };
+    }
+
+    usageData.weeklyDigest.views += 1;
+    usageData.weeklyDigest.lastUsed = today;
+
+    if (!usageData.weeklyDigest.dates.includes(today)) {
+      usageData.weeklyDigest.dates.push(today);
+    }
+
+    localStorage.setItem('ai_feature_usage', JSON.stringify(usageData));
+  }, []);
 
   // Use provided data or generate mock data
   const data = weeklyData || generateMockWeeklyData();

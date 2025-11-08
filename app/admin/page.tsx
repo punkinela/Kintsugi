@@ -6,7 +6,7 @@ import {
   Users, TrendingUp, Star, MessageCircle, Award, BookOpen,
   Download, Calendar, Target, BarChart3, Home, Filter,
   TrendingDown, Minus, Activity, Brain, Map, Layers, User,
-  HelpCircle, Settings
+  HelpCircle, Settings, Sparkles
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import ThemeSelector from '@/components/ThemeSelector';
@@ -343,6 +343,54 @@ export default function AdminDashboard() {
     { name: 'Achievements', value: analytics.featureUsage.achievementsUnlocked }
   ];
 
+  // AI Feature Adoption Data
+  const aiFeatureUsage = JSON.parse(localStorage.getItem('ai_feature_usage') || '{}');
+  const aiFeatureAdoptionData = [
+    {
+      name: 'Profile Builder',
+      value: aiFeatureUsage.autoProfileBuilder?.views || 0,
+      uniqueDays: aiFeatureUsage.autoProfileBuilder?.dates?.length || 0,
+      lastUsed: aiFeatureUsage.autoProfileBuilder?.lastUsed || 'Never'
+    },
+    {
+      name: 'Weekly Digest',
+      value: aiFeatureUsage.weeklyDigest?.views || 0,
+      uniqueDays: aiFeatureUsage.weeklyDigest?.dates?.length || 0,
+      lastUsed: aiFeatureUsage.weeklyDigest?.lastUsed || 'Never'
+    },
+    {
+      name: 'Career Gap',
+      value: aiFeatureUsage.careerGapAnalyzer?.views || 0,
+      uniqueDays: aiFeatureUsage.careerGapAnalyzer?.dates?.length || 0,
+      lastUsed: aiFeatureUsage.careerGapAnalyzer?.lastUsed || 'Never'
+    },
+    {
+      name: 'Confidence',
+      value: aiFeatureUsage.confidenceScoreTracker?.views || 0,
+      uniqueDays: aiFeatureUsage.confidenceScoreTracker?.dates?.length || 0,
+      lastUsed: aiFeatureUsage.confidenceScoreTracker?.lastUsed || 'Never'
+    },
+    {
+      name: 'Smart Search',
+      value: aiFeatureUsage.smartTaggingSearch?.views || 0,
+      uniqueDays: aiFeatureUsage.smartTaggingSearch?.dates?.length || 0,
+      lastUsed: aiFeatureUsage.smartTaggingSearch?.lastUsed || 'Never'
+    },
+    {
+      name: 'Interview Prep',
+      value: aiFeatureUsage.interviewPrepGenerator?.views || 0,
+      uniqueDays: aiFeatureUsage.interviewPrepGenerator?.dates?.length || 0,
+      lastUsed: aiFeatureUsage.interviewPrepGenerator?.lastUsed || 'Never'
+    }
+  ];
+
+  const totalAIFeatureViews = aiFeatureAdoptionData.reduce((sum, feature) => sum + feature.value, 0);
+
+  // Gamification Metrics
+  const gamificationData = JSON.parse(localStorage.getItem('gamificationData') || '{}');
+  const gamificationStats = gamificationData.stats || {};
+  const hasGamificationData = gamificationData.xp !== undefined;
+
   return (
     <div className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900">
       <header className="theme-gradient-to-r shadow-2xl relative overflow-hidden">
@@ -652,6 +700,184 @@ export default function AdminDashboard() {
                 )}
               </motion.div>
             </div>
+
+            {/* AI Feature Adoption (Phase 14) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45 }}
+              className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white flex items-center">
+                  <Sparkles className="h-5 w-5 mr-2 theme-text-primary" />
+                  AI Feature Adoption (Phase 14)
+                </h3>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  Total Views: <span className="font-bold theme-text-primary">{totalAIFeatureViews}</span>
+                </div>
+              </div>
+              {totalAIFeatureViews > 0 ? (
+                <>
+                  <ResponsiveContainer width="100%" height={250}>
+                    <BarChart data={aiFeatureAdoptionData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.1} />
+                      <XAxis
+                        dataKey="name"
+                        stroke="#6B7280"
+                        tick={{ fontSize: 12 }}
+                        angle={-45}
+                        textAnchor="end"
+                        height={80}
+                      />
+                      <YAxis stroke="#6B7280" tick={{ fontSize: 12 }} />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: '#1F2937',
+                          border: '1px solid #D4AF37',
+                          borderRadius: '8px',
+                          color: '#fff'
+                        }}
+                        content={({ active, payload }) => {
+                          if (active && payload && payload.length) {
+                            const data = payload[0].payload;
+                            return (
+                              <div className="bg-gray-800 p-3 rounded-lg border border-kintsugi-gold-600">
+                                <p className="font-bold text-white">{data.name}</p>
+                                <p className="text-sm text-gray-300">Views: {data.value}</p>
+                                <p className="text-sm text-gray-300">Unique Days: {data.uniqueDays}</p>
+                                <p className="text-sm text-gray-400">Last Used: {data.lastUsed}</p>
+                              </div>
+                            );
+                          }
+                          return null;
+                        }}
+                      />
+                      <Bar dataKey="value" fill={COLORS.purple} radius={[8, 8, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                  <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {aiFeatureAdoptionData.map((feature, index) => (
+                      <div
+                        key={index}
+                        className="bg-gray-50 dark:bg-kintsugi-dark-700 p-3 rounded-lg border theme-border-light"
+                      >
+                        <div className="text-xs font-medium text-gray-500 dark:text-gray-400">{feature.name}</div>
+                        <div className="text-lg font-bold theme-text-primary">{feature.value}</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          {feature.uniqueDays} days • {feature.lastUsed !== 'Never' ? new Date(feature.lastUsed).toLocaleDateString() : 'Never'}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-64 text-gray-500 dark:text-gray-400">
+                  <Sparkles className="h-12 w-12 mb-4 opacity-50" />
+                  <p className="text-center">No AI feature usage data yet.<br/>Start using the new AI features to see adoption metrics!</p>
+                </div>
+              )}
+            </motion.div>
+
+            {/* Gamification Metrics */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.475 }}
+              className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white flex items-center">
+                  <Trophy className="h-5 w-5 mr-2 theme-text-primary" />
+                  Gamification & Engagement
+                </h3>
+                {hasGamificationData && (
+                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                    Level: <span className="font-bold theme-text-primary">{gamificationData.level || 1}</span>
+                  </div>
+                )}
+              </div>
+              {hasGamificationData ? (
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-4 rounded-lg border border-blue-200 dark:border-blue-700">
+                    <div className="flex items-center justify-between mb-2">
+                      <Zap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                      <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">XP</span>
+                    </div>
+                    <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">
+                      {gamificationData.totalXpEarned?.toLocaleString() || 0}
+                    </div>
+                    <div className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                      Current: {gamificationData.xp || 0} / {gamificationData.xpToNextLevel || 100}
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-4 rounded-lg border border-purple-200 dark:border-purple-700">
+                    <div className="flex items-center justify-between mb-2">
+                      <Award className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                      <span className="text-xs text-purple-600 dark:text-purple-400 font-medium">Level</span>
+                    </div>
+                    <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">
+                      {gamificationData.level || 1}
+                    </div>
+                    <div className="text-xs text-purple-600 dark:text-purple-400 mt-1">
+                      Points: {gamificationData.points?.toLocaleString() || 0}
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-4 rounded-lg border border-green-200 dark:border-green-700">
+                    <div className="flex items-center justify-between mb-2">
+                      <Target className="h-5 w-5 text-green-600 dark:text-green-400" />
+                      <span className="text-xs text-green-600 dark:text-green-400 font-medium">Streak</span>
+                    </div>
+                    <div className="text-2xl font-bold text-green-900 dark:text-green-100">
+                      {gamificationStats.currentStreak || 0}
+                    </div>
+                    <div className="text-xs text-green-600 dark:text-green-400 mt-1">
+                      Longest: {gamificationStats.longestStreak || 0} days
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 p-4 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                    <div className="flex items-center justify-between mb-2">
+                      <Trophy className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
+                      <span className="text-xs text-yellow-600 dark:text-yellow-400 font-medium">Achievements</span>
+                    </div>
+                    <div className="text-2xl font-bold text-yellow-900 dark:text-yellow-100">
+                      {gamificationStats.achievementsUnlocked || 0}
+                    </div>
+                    <div className="text-xs text-yellow-600 dark:text-yellow-400 mt-1">
+                      Challenges: {gamificationStats.challengesCompleted || 0}
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-50 dark:bg-kintsugi-dark-700 p-3 rounded-lg border theme-border-light">
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400">Total Accomplishments</div>
+                    <div className="text-lg font-bold theme-text-primary">{gamificationStats.totalAccomplishments || 0}</div>
+                  </div>
+
+                  <div className="bg-gray-50 dark:bg-kintsugi-dark-700 p-3 rounded-lg border theme-border-light">
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400">Journal Entries</div>
+                    <div className="text-lg font-bold theme-text-primary">{gamificationStats.totalJournalEntries || 0}</div>
+                  </div>
+
+                  <div className="bg-gray-50 dark:bg-kintsugi-dark-700 p-3 rounded-lg border theme-border-light">
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400">Total Visits</div>
+                    <div className="text-lg font-bold theme-text-primary">{gamificationStats.totalVisits || 0}</div>
+                  </div>
+
+                  <div className="bg-gray-50 dark:bg-kintsugi-dark-700 p-3 rounded-lg border theme-border-light">
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400">Days Active</div>
+                    <div className="text-lg font-bold theme-text-primary">{gamificationStats.daysActive || 0}</div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-48 text-gray-500 dark:text-gray-400">
+                  <Trophy className="h-12 w-12 mb-4 opacity-50" />
+                  <p className="text-center">No gamification data available.<br/>Start engaging with the app to earn XP and unlock achievements!</p>
+                </div>
+              )}
+            </motion.div>
 
             {/* Funnel Analysis */}
             <motion.div

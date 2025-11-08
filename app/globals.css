@@ -270,6 +270,8 @@ html {
 
   .nav-tab:hover:not([data-active="true"]) {
     color: var(--theme-secondary) !important;
+    border-color: var(--theme-secondary) !important;
+    opacity: 0.9;
   }
 
   /* Mobile navigation tabs */

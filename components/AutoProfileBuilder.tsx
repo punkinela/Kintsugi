@@ -54,6 +54,25 @@ export default function AutoProfileBuilder({ entries, currentProfile, onUpdatePr
     }
   }, [entries, currentProfile]);
 
+  // Track feature usage
+  useEffect(() => {
+    const usageData = JSON.parse(localStorage.getItem('ai_feature_usage') || '{}');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!usageData.autoProfileBuilder) {
+      usageData.autoProfileBuilder = { views: 0, lastUsed: null, dates: [] };
+    }
+
+    usageData.autoProfileBuilder.views += 1;
+    usageData.autoProfileBuilder.lastUsed = today;
+
+    if (!usageData.autoProfileBuilder.dates.includes(today)) {
+      usageData.autoProfileBuilder.dates.push(today);
+    }
+
+    localStorage.setItem('ai_feature_usage', JSON.stringify(usageData));
+  }, []);
+
   const applySuggestion = (suggestion: ProfileSuggestion) => {
     const updates: Partial<UserProfile> = {};
 
