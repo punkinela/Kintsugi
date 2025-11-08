@@ -269,19 +269,22 @@ html {
   }
 
   .nav-tab:hover:not([data-active="true"]) {
-    color: var(--theme-accent) !important;  /* Use brightest theme color for visibility */
+    color: var(--theme-accent) !important;
     border-color: var(--theme-accent) !important;
-    border-bottom-color: var(--theme-accent) !important;
-    opacity: 1 !important;
-    transform: translateY(-1px);
-    transition: all 0.15s ease;
+    border-bottom-width: 3px !important;  /* Thicker border on hover */
+    background-color: var(--theme-primary-light) !important;  /* Background highlight */
+    border-radius: 4px 4px 0 0 !important;  /* Rounded top corners */
+    transform: translateY(-2px) !important;  /* Lift higher */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;  /* Add shadow */
+    transition: all 0.15s ease !important;
   }
 
   /* Hover effect for active tabs */
   .nav-tab[data-active="true"]:hover {
-    opacity: 0.85 !important;
-    transform: translateY(-1px);
-    transition: all 0.15s ease;
+    border-bottom-width: 3px !important;  /* Thicker border */
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+    transition: all 0.15s ease !important;
   }
 
   /* Mobile navigation tabs */
