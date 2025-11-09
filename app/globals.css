@@ -269,9 +269,9 @@ html {
   }
 
   .nav-tab:hover:not([data-active="true"]) {
-    color: #f59e0b !important;
-    border-color: #f59e0b !important;
-    border-bottom-color: #f59e0b !important;
+    color: var(--theme-secondary) !important;
+    border-color: var(--theme-secondary) !important;
+    border-bottom-color: var(--theme-secondary) !important;
     opacity: 0.9 !important;
   }
 
@@ -284,8 +284,8 @@ html {
 
   /* SUPER FORCE hover - should override everything */
   .nav-tab:hover {
-    border-bottom-color: #f59e0b !important;
-    border-color: #f59e0b !important;
+    border-bottom-color: var(--theme-secondary) !important;
+    border-color: var(--theme-secondary) !important;
     cursor: pointer;
   }
 
