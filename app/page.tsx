@@ -98,6 +98,12 @@ import AutoProfileBuilder from '@/components/AutoProfileBuilder';
 import AutoBackupReminder from '@/components/AutoBackupReminder';
 import BackupRestorePanel from '@/components/BackupRestorePanel';
 
+// Premium Features
+import { PremiumProvider } from '@/contexts/PremiumContext';
+import PremiumBadge from '@/components/PremiumBadge';
+import PremiumUpgradeModal from '@/components/PremiumUpgradeModal';
+import DevModeToggle from '@/components/DevModeToggle';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -144,6 +150,8 @@ export default function Home() {
   const [showBackupPanel, setShowBackupPanel] = useState(false);
   const [showYourEdgeDropdown, setShowYourEdgeDropdown] = useState(false);
   const [showInsightsDropdown, setShowInsightsDropdown] = useState(false);
+  const [showPremiumUpgrade, setShowPremiumUpgrade] = useState(false);
+  const [premiumFeatureName, setPremiumFeatureName] = useState<string>('');
 
   // Weekly Digest ref for navigation
   const weeklyDigestRef = useRef<HTMLDivElement>(null);
@@ -553,10 +561,11 @@ export default function Home() {
   }
 
   return (
-    <div
-      className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white transition-colors duration-200"
-      data-theme-version={themeVersion}
-    >
+    <PremiumProvider>
+      <div
+        className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white transition-colors duration-200"
+        data-theme-version={themeVersion}
+      >
       {/* Header - data-theme-version forces browser style recalculation */}
       <header className="bg-white dark:bg-kintsugi-dark-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -692,30 +701,39 @@ export default function Home() {
                               navigateToSection('your-edge', performanceReviewRef);
                               setShowYourEdgeDropdown(false);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
                           >
-                            <Award className="h-4 w-4 theme-text-primary" />
-                            <span>Performance Reviews</span>
+                            <div className="flex items-center gap-2">
+                              <Award className="h-4 w-4 theme-text-primary" />
+                              <span>Performance Reviews</span>
+                            </div>
+                            <PremiumBadge size="sm" />
                           </button>
                           <button
                             onClick={() => {
                               navigateToSection('your-edge', portfolioGeneratorRef);
                               setShowYourEdgeDropdown(false);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
                           >
-                            <BookOpen className="h-4 w-4 theme-text-primary" />
-                            <span>Portfolio Generator</span>
+                            <div className="flex items-center gap-2">
+                              <BookOpen className="h-4 w-4 theme-text-primary" />
+                              <span>Portfolio Generator</span>
+                            </div>
+                            <PremiumBadge size="sm" />
                           </button>
                           <button
                             onClick={() => {
                               navigateToSection('your-edge', skillsRoadmapRef);
                               setShowYourEdgeDropdown(false);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
                           >
-                            <Target className="h-4 w-4 theme-text-primary" />
-                            <span>Skills Growth Roadmap</span>
+                            <div className="flex items-center gap-2">
+                              <Target className="h-4 w-4 theme-text-primary" />
+                              <span>Skills Growth Roadmap</span>
+                            </div>
+                            <PremiumBadge size="sm" />
                           </button>
                           <button
                             onClick={() => {
@@ -1907,7 +1925,10 @@ export default function Home() {
                 )}
 
                 {settingsTab === 'diagnostic' && (
-                  <DataDiagnostic />
+                  <div className="space-y-6">
+                    <DevModeToggle />
+                    <DataDiagnostic />
+                  </div>
                 )}
               </div>
             </div>
@@ -1990,6 +2011,14 @@ export default function Home() {
       {showBackupPanel && (
         <BackupRestorePanel onClose={() => setShowBackupPanel(false)} />
       )}
+
+      {/* Premium Upgrade Modal */}
+      <PremiumUpgradeModal
+        isOpen={showPremiumUpgrade}
+        onClose={() => setShowPremiumUpgrade(false)}
+        featureName={premiumFeatureName}
+      />
     </div>
+    </PremiumProvider>
   );
 }
