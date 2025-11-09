@@ -136,6 +136,10 @@ export default function Home() {
   const [showInterviewPrep, setShowInterviewPrep] = useState(false);
   const [selectedEntryForInterview, setSelectedEntryForInterview] = useState<string>('');
 
+  // Edge tab collapsible sections
+  const [expandedExportTools, setExpandedExportTools] = useState(true);
+  const [expandedGrowthViz, setExpandedGrowthViz] = useState(true);
+
   // Weekly Digest ref for navigation
   const weeklyDigestRef = useRef<HTMLDivElement>(null);
 
@@ -1429,70 +1433,120 @@ export default function Home() {
               <JourneyRichnessScore entries={journalEntries} />
 
               {/* Professional Export Tools Section */}
-              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
-                    <Award className="h-6 w-6 theme-text-primary" />
-                    Professional Export Tools
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Transform your documented journey into professional assets for your career
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  {/* AI Performance Review Generator */}
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                    <AIPerformanceReviewGenerator />
-                  </div>
-
-                  {/* Kintsugi Portfolio Generator */}
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                    <KintsugiPortfolioGenerator
-                      entries={journalEntries}
-                      userName={user?.name}
-                      userProfession={user?.profession}
-                    />
-                  </div>
-
-                  {/* Export Manager */}
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                    <ExportManager />
+              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div
+                  className="p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors"
+                  onClick={() => setExpandedExportTools(!expandedExportTools)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
+                        <Award className="h-6 w-6 theme-text-primary" />
+                        Professional Export Tools
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Transform your documented journey into professional assets for your career
+                      </p>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: expandedExportTools ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="h-6 w-6 text-gray-400" />
+                    </motion.div>
                   </div>
                 </div>
+
+                <AnimatePresence>
+                  {expandedExportTools && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-6 space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6">
+                        {/* AI Performance Review Generator */}
+                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                          <AIPerformanceReviewGenerator />
+                        </div>
+
+                        {/* Kintsugi Portfolio Generator */}
+                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                          <KintsugiPortfolioGenerator
+                            entries={journalEntries}
+                            userName={user?.name}
+                            userProfession={user?.profession}
+                          />
+                        </div>
+
+                        {/* Export Manager */}
+                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                          <ExportManager />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Growth & Strength Visualizations */}
-              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
-                    <TrendingUp className="h-6 w-6 theme-text-primary" />
-                    Growth Visualizations
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    See your patterns, strengths, and transformation over time
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  {/* Personal Stats Dashboard */}
-                  <PersonalStatsDashboard />
-
-                  {/* Strength Archaeology */}
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                    <StrengthArchaeology entries={journalEntries} />
-                  </div>
-
-                  {/* Transformation Heatmap */}
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                    <TransformationHeatmap entries={journalEntries} monthsToShow={6} />
-                  </div>
-
-                  {/* Golden Seam Timeline */}
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                    <GoldenSeamTimeline entries={journalEntries} />
+              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div
+                  className="p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors"
+                  onClick={() => setExpandedGrowthViz(!expandedGrowthViz)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
+                        <TrendingUp className="h-6 w-6 theme-text-primary" />
+                        Growth Visualizations
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        See your patterns, strengths, and transformation over time
+                      </p>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: expandedGrowthViz ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="h-6 w-6 text-gray-400" />
+                    </motion.div>
                   </div>
                 </div>
+
+                <AnimatePresence>
+                  {expandedGrowthViz && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-6 space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6">
+                        {/* Personal Stats Dashboard */}
+                        <PersonalStatsDashboard />
+
+                        {/* Strength Archaeology */}
+                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                          <StrengthArchaeology entries={journalEntries} />
+                        </div>
+
+                        {/* Transformation Heatmap */}
+                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                          <TransformationHeatmap entries={journalEntries} monthsToShow={6} />
+                        </div>
+
+                        {/* Golden Seam Timeline */}
+                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                          <GoldenSeamTimeline entries={journalEntries} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Empty State for New Users */}
