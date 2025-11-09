@@ -270,8 +270,7 @@ html {
 
   .nav-tab:hover:not([data-active="true"]) {
     color: #34d399 !important;
-    border-color: #34d399 !important;
-    border-bottom-color: #34d399 !important;
+    border-bottom-color: #34d399 !important;  /* ONLY border-bottom, not border-color */
     opacity: 0.9 !important;
   }
 
@@ -284,8 +283,7 @@ html {
 
   /* SUPER FORCE hover - should override everything */
   .nav-tab:hover {
-    border-bottom-color: #34d399 !important;
-    border-color: #34d399 !important;
+    border-bottom-color: #34d399 !important;  /* ONLY border-bottom */
     cursor: pointer;
   }
 
