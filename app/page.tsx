@@ -148,6 +148,22 @@ export default function Home() {
   // Weekly Digest ref for navigation
   const weeklyDigestRef = useRef<HTMLDivElement>(null);
 
+  // Your Edge section refs for dropdown navigation
+  const performanceReviewRef = useRef<HTMLDivElement>(null);
+  const portfolioGeneratorRef = useRef<HTMLDivElement>(null);
+  const skillsRoadmapRef = useRef<HTMLDivElement>(null);
+  const interviewPrepRef = useRef<HTMLDivElement>(null);
+  const confidenceTrackerRef = useRef<HTMLDivElement>(null);
+  const strengthVizRef = useRef<HTMLDivElement>(null);
+
+  // Navigation helper to scroll to specific sections
+  const navigateToSection = (tab: 'home' | 'journal' | 'insights' | 'your-edge', ref: React.RefObject<HTMLDivElement>) => {
+    setActiveTab(tab);
+    setTimeout(() => {
+      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100); // Small delay to ensure tab content is rendered
+  };
+
   // Phase 9: Interactive components
   const { toasts, addToast, removeToast } = useToast();
   const [showCelebration, setShowCelebration] = useState(false);
@@ -673,7 +689,7 @@ export default function Home() {
                         <div className="py-2">
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', performanceReviewRef);
                               setShowYourEdgeDropdown(false);
                             }}
                             className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
@@ -683,7 +699,7 @@ export default function Home() {
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', portfolioGeneratorRef);
                               setShowYourEdgeDropdown(false);
                             }}
                             className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
@@ -693,7 +709,7 @@ export default function Home() {
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', skillsRoadmapRef);
                               setShowYourEdgeDropdown(false);
                             }}
                             className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
@@ -703,7 +719,7 @@ export default function Home() {
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', interviewPrepRef);
                               setShowYourEdgeDropdown(false);
                             }}
                             className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
@@ -713,7 +729,7 @@ export default function Home() {
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', confidenceTrackerRef);
                               setShowYourEdgeDropdown(false);
                             }}
                             className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
@@ -723,7 +739,7 @@ export default function Home() {
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', strengthVizRef);
                               setShowYourEdgeDropdown(false);
                             }}
                             className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
@@ -1596,12 +1612,14 @@ export default function Home() {
               )}
 
               {/* Skills Growth Roadmap - Identify Missing Skills & Experiences */}
-              {user && (
-                <AICareerGapAnalyzer
-                  user={user}
-                  targetRole={user.profession || 'Senior Professional'}
-                />
-              )}
+              <div ref={skillsRoadmapRef}>
+                {user && (
+                  <AICareerGapAnalyzer
+                    user={user}
+                    targetRole={user.profession || 'Senior Professional'}
+                  />
+                )}
+              </div>
 
               {/* Journey Richness Score - Profile Quality Overview */}
               <JourneyRichnessScore entries={journalEntries} />
@@ -1620,12 +1638,12 @@ export default function Home() {
 
                 <div className="space-y-6">
                   {/* AI Performance Review Generator */}
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                  <div ref={performanceReviewRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
                     <AIPerformanceReviewGenerator />
                   </div>
 
                   {/* Kintsugi Portfolio Generator */}
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                  <div ref={portfolioGeneratorRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
                     <KintsugiPortfolioGenerator
                       entries={journalEntries}
                       userName={user?.name}
@@ -1657,7 +1675,7 @@ export default function Home() {
                   <PersonalStatsDashboard />
 
                   {/* Strength Archaeology */}
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                  <div ref={strengthVizRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
                     <StrengthArchaeology entries={journalEntries} />
                   </div>
 
