@@ -563,9 +563,9 @@ export default function Home() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8 theme-text-primary" />
-                <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
-                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
+                <Sparkles className="h-8 w-8 theme-text-primary" />
+                <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Kintsugi</span>
+                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Turn setbacks into your career's golden seams</span>
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
