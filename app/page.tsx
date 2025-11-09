@@ -47,6 +47,7 @@ import DataDiagnostic from '@/components/DataDiagnostic';
 import ProfileCard from '@/components/ProfileCard';
 import ProfileCompletionReminder from '@/components/ProfileCompletionReminder';
 import FAQSidebar from '@/components/FAQSidebar';
+import AboutPhilosophyModal from '@/components/AboutPhilosophyModal';
 
 // Phase 9: Interactivity & Polish
 import ToastNotification, { useToast } from '@/components/ToastNotification';
@@ -132,6 +133,7 @@ export default function Home() {
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
+  const [showAboutPhilosophy, setShowAboutPhilosophy] = useState(false);
   const [settingsTab, setSettingsTab] = useState<'profile' | 'data' | 'appearance' | 'diagnostic'>('profile');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
@@ -865,6 +867,18 @@ export default function Home() {
                     </motion.div>
                   )}
                 </AnimatePresence>
+              </div>
+
+              {/* About Philosophy Button */}
+              <div className="ml-4">
+                <button
+                  onClick={() => setShowAboutPhilosophy(true)}
+                  className="p-1 rounded-full text-kintsugi-dark-400 hover:theme-text-primary dark:theme-text-secondary dark:hover:theme-text-secondary transition-colors"
+                  aria-label="About Kintsugi Philosophy"
+                  title="About Kintsugi Philosophy"
+                >
+                  <Sparkles className="h-6 w-6" />
+                </button>
               </div>
 
               {/* FAQ Help Button */}
@@ -1974,6 +1988,9 @@ export default function Home() {
 
       {/* FAQ Sidebar */}
       <FAQSidebar isOpen={showFAQ} onClose={() => setShowFAQ(false)} />
+
+      {/* About Philosophy Modal */}
+      <AboutPhilosophyModal isOpen={showAboutPhilosophy} onClose={() => setShowAboutPhilosophy(false)} />
 
       {/* AI Interview Prep Generator Modal */}
       {showInterviewPrep && (
