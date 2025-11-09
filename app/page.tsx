@@ -140,6 +140,8 @@ export default function Home() {
   const [showInterviewPrep, setShowInterviewPrep] = useState(false);
   const [selectedEntryForInterview, setSelectedEntryForInterview] = useState<string>('');
   const [showBackupPanel, setShowBackupPanel] = useState(false);
+  const [showYourEdgeDropdown, setShowYourEdgeDropdown] = useState(false);
+  const [showInsightsDropdown, setShowInsightsDropdown] = useState(false);
 
   // Edge tab collapsible sections
   const [expandedExportTools, setExpandedExportTools] = useState(true);
@@ -566,21 +568,176 @@ export default function Home() {
                 >
                   Impact Log
                 </button>
-                <button
-                  onClick={() => setActiveTab('insights')}
-                  data-active={activeTab === 'insights'}
-                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                >
-                  Insights
-                </button>
-                <button
-                  onClick={() => setActiveTab('your-edge')}
-                  data-active={activeTab === 'your-edge'}
-                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  title="Transform your journey into career assets"
-                >
-                  Your Edge
-                </button>
+                {/* Insights Tab with Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() => {
+                      setActiveTab('insights');
+                      setShowInsightsDropdown(!showInsightsDropdown);
+                    }}
+                    onMouseEnter={() => setShowInsightsDropdown(true)}
+                    onMouseLeave={() => setShowInsightsDropdown(false)}
+                    data-active={activeTab === 'insights'}
+                    className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium gap-1"
+                  >
+                    Insights
+                    <ChevronDown className="h-3 w-3" />
+                  </button>
+
+                  {/* Insights Dropdown */}
+                  <AnimatePresence>
+                    {showInsightsDropdown && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        onMouseEnter={() => setShowInsightsDropdown(true)}
+                        onMouseLeave={() => setShowInsightsDropdown(false)}
+                        className="absolute left-0 top-full mt-2 w-64 rounded-xl shadow-lg bg-white dark:bg-kintsugi-dark-800 ring-1 ring-black ring-opacity-5 z-50 overflow-hidden"
+                      >
+                        <div className="py-2">
+                          <button
+                            onClick={() => {
+                              setActiveTab('insights');
+                              setShowInsightsDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <TrendingUp className="h-4 w-4 theme-text-primary" />
+                            <span>Personal Stats Dashboard</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setActiveTab('insights');
+                              setShowInsightsDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <Brain className="h-4 w-4 theme-text-primary" />
+                            <span>Strength Archaeology</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setActiveTab('insights');
+                              setShowInsightsDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <Calendar className="h-4 w-4 theme-text-primary" />
+                            <span>Transformation Heatmap</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setActiveTab('insights');
+                              setShowInsightsDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <Sparkles className="h-4 w-4 theme-text-primary" />
+                            <span>Golden Seam Timeline</span>
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Your Edge Tab with Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() => {
+                      setActiveTab('your-edge');
+                      setShowYourEdgeDropdown(!showYourEdgeDropdown);
+                    }}
+                    onMouseEnter={() => setShowYourEdgeDropdown(true)}
+                    onMouseLeave={() => setShowYourEdgeDropdown(false)}
+                    data-active={activeTab === 'your-edge'}
+                    className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium gap-1"
+                    title="Document setbacks today. Sell them as strengths tomorrow."
+                  >
+                    Your Edge
+                    <ChevronDown className="h-3 w-3" />
+                  </button>
+
+                  {/* Your Edge Dropdown */}
+                  <AnimatePresence>
+                    {showYourEdgeDropdown && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        onMouseEnter={() => setShowYourEdgeDropdown(true)}
+                        onMouseLeave={() => setShowYourEdgeDropdown(false)}
+                        className="absolute left-0 top-full mt-2 w-64 rounded-xl shadow-lg bg-white dark:bg-kintsugi-dark-800 ring-1 ring-black ring-opacity-5 z-50 overflow-hidden"
+                      >
+                        <div className="py-2">
+                          <button
+                            onClick={() => {
+                              setActiveTab('your-edge');
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <Award className="h-4 w-4 theme-text-primary" />
+                            <span>Performance Reviews</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setActiveTab('your-edge');
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <BookOpen className="h-4 w-4 theme-text-primary" />
+                            <span>Portfolio Generator</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setActiveTab('your-edge');
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <Target className="h-4 w-4 theme-text-primary" />
+                            <span>Skills Growth Roadmap</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setActiveTab('your-edge');
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <MessageSquare className="h-4 w-4 theme-text-primary" />
+                            <span>Interview Prep</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setActiveTab('your-edge');
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <TrendingUp className="h-4 w-4 theme-text-primary" />
+                            <span>Confidence Tracker</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setActiveTab('your-edge');
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <Brain className="h-4 w-4 theme-text-primary" />
+                            <span>Strength Visualizations</span>
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </nav>
             </div>
             <div className="hidden md:ml-6 md:flex md:items-center">
@@ -865,7 +1022,7 @@ export default function Home() {
                   }}
                   data-active={activeTab === 'your-edge'}
                   className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  title="Transform your journey into career assets"
+                  title="Document setbacks today. Sell them as strengths tomorrow."
                 >
                   Your Edge
                 </button>
@@ -1428,7 +1585,7 @@ export default function Home() {
                 />
               )}
 
-              {/* AI Career Gap Analyzer - Identify Missing Skills & Experiences */}
+              {/* Skills Growth Roadmap - Identify Missing Skills & Experiences */}
               {user && (
                 <AICareerGapAnalyzer
                   user={user}
