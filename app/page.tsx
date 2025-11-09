@@ -103,6 +103,7 @@ import { PremiumProvider } from '@/contexts/PremiumContext';
 import PremiumBadge from '@/components/PremiumBadge';
 import PremiumUpgradeModal from '@/components/PremiumUpgradeModal';
 import DevModeToggle from '@/components/DevModeToggle';
+import StrengthDiscovery from '@/components/StrengthDiscovery';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
@@ -160,6 +161,7 @@ export default function Home() {
   const performanceReviewRef = useRef<HTMLDivElement>(null);
   const portfolioGeneratorRef = useRef<HTMLDivElement>(null);
   const skillsRoadmapRef = useRef<HTMLDivElement>(null);
+  const strengthDiscoveryRef = useRef<HTMLDivElement>(null);
   const interviewPrepRef = useRef<HTMLDivElement>(null);
   const confidenceTrackerRef = useRef<HTMLDivElement>(null);
   const strengthVizRef = useRef<HTMLDivElement>(null);
@@ -732,6 +734,19 @@ export default function Home() {
                             <div className="flex items-center gap-2">
                               <Target className="h-4 w-4 theme-text-primary" />
                               <span>Skills Growth Roadmap</span>
+                            </div>
+                            <PremiumBadge size="sm" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigateToSection('your-edge', strengthDiscoveryRef);
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
+                          >
+                            <div className="flex items-center gap-2">
+                              <Sparkles className="h-4 w-4 theme-text-primary" />
+                              <span>Strength Discovery</span>
                             </div>
                             <PremiumBadge size="sm" />
                           </button>
@@ -1637,6 +1652,11 @@ export default function Home() {
                     targetRole={user.profession || 'Senior Professional'}
                   />
                 )}
+              </div>
+
+              {/* Strength Discovery - Skills Revealed Through Experiences */}
+              <div ref={strengthDiscoveryRef}>
+                <StrengthDiscovery entries={journalEntries} />
               </div>
 
               {/* Journey Richness Score - Profile Quality Overview */}
