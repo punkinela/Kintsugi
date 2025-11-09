@@ -138,20 +138,75 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                 answer={
                   <>
                     <p className="mb-2">
-                      Kintsugi (金継ぎ) is the Japanese art of repairing broken pottery with gold. Instead of hiding cracks,
-                      they become beautiful golden seams that make the piece MORE valuable.
+                      Kintsugi (金継ぎ), meaning "golden joinery," is the centuries-old Japanese art of repairing broken pottery
+                      with lacquer mixed with powdered gold. But it's far more than a repair technique—it's a philosophy that
+                      treats breakage as part of an object's history, rather than something to disguise.
                     </p>
                     <p className="mb-2">
-                      In this app, <strong>your impact = your wins + your resilience</strong>. We help you document both your
-                      accomplishments AND the challenges you've overcome, because navigating barriers makes your story more
-                      remarkable, not less.
+                      Rooted in wabi-sabi (embracing imperfection), kintsugi celebrates the break as integral to the object's story.
+                      The golden seams don't just mend—they transform, creating something more valuable than the original.
+                    </p>
+                    <p className="mb-2">
+                      <strong>For your career:</strong> Your setbacks—layoffs, failures, rejections—aren't flaws to conceal.
+                      When properly processed, they become your golden seams: the experiences that make you more valuable, not less.
                     </p>
                     <p>
-                      This is especially powerful for those facing bias—the extra resilience you've demonstrated is part of your impact.
+                      This aligns with post-traumatic growth theory: adversity doesn't just leave us intact—it can leave us enhanced,
+                      with our "cracks" becoming our most valuable features.
                     </p>
                   </>
                 }
-                research="Tedeschi & Calhoun (2004): 70% of people report positive psychological growth after facing adversity"
+                research="Dating to 15th century Japan. Modern parallel: Tedeschi & Calhoun's Post-Traumatic Growth Theory (1996-2018)"
+              />
+
+              <FAQItem
+                question="Isn't this just toxic positivity?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      <strong>Absolutely not.</strong> Toxic positivity forces a positive spin on everything and denies legitimate pain.
+                      Genuine post-traumatic growth acknowledges that adversity is genuinely difficult and painful—and that growth can
+                      emerge from that struggle without erasing the hardship.
+                    </p>
+                    <p className="mb-2">
+                      You don't have to be grateful for the layoff itself, but you can recognize skills, perspectives, or opportunities
+                      that emerged from navigating it. Growth and pain coexist; one doesn't negate the other.
+                    </p>
+                    <p>
+                      As research shows, this isn't about "looking on the bright side"—it's about recognizing transformation that comes
+                      from working through adversity.
+                    </p>
+                  </>
+                }
+                research="Growth and pain can coexist—post-traumatic growth doesn't require denying difficulty"
+              />
+
+              <FAQItem
+                question="What's the difference between resilience and post-traumatic growth?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      <strong>Resilience</strong> is about bouncing <em>back</em>—returning to your baseline after adversity.
+                      It's the ability to endure and recover.
+                    </p>
+                    <p className="mb-2">
+                      <strong>Post-traumatic growth</strong> is about bouncing <em>forward</em>—growing beyond your baseline in
+                      five specific ways:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2">
+                      <li>Deeper, more meaningful relationships</li>
+                      <li>Recognition of new life possibilities</li>
+                      <li>Greater personal strength</li>
+                      <li>Spiritual or philosophical development</li>
+                      <li>Heightened appreciation of life</li>
+                    </ul>
+                    <p>
+                      Interestingly, people who are already highly resilient may not experience PTG, because they aren't rocked to their
+                      core—they just bounce back. PTG requires significant cognitive restructuring.
+                    </p>
+                  </>
+                }
+                research="Tedeschi & Calhoun (2004): PTG goes beyond baseline resilience in 5 key domains"
               />
 
               <FAQItem
@@ -218,6 +273,31 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                   Career Impact
                 </h3>
               </div>
+
+              <FAQItem
+                question="Won't talking about my struggles make me look weak to employers?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Research suggests the opposite. Employers actively ask behavioral interview questions about overcoming adversity because
+                      they want to assess resilience, problem-solving, and self-awareness—qualities only visible through challenge.
+                    </p>
+                    <p className="mb-2">
+                      Studies on workplace vulnerability show that appropriate disclosure builds trust and authenticity.
+                      Employees perform <strong>4.6x better</strong> when they feel their voices are heard.
+                    </p>
+                    <p className="mb-2">
+                      The key is boundaries: share your struggles in the context of growth, learning, and strength. Use the STAR method
+                      to structure adversity narratives with emphasis on actions taken and results achieved.
+                    </p>
+                    <p>
+                      Hiding struggles entirely can make you seem inauthentic or lacking in self-awareness. Your resilience story is
+                      part of what makes you valuable.
+                    </p>
+                  </>
+                }
+                research="143 creativity researchers identified resilience as #1 trait for creative achievement. Vulnerability builds trust when properly bounded."
+              />
 
               <FAQItem
                 question="How does this help my career?"
