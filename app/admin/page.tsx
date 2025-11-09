@@ -26,6 +26,12 @@ import JourneyRichnessScore from '@/components/JourneyRichnessScore';
 import InteractiveKintsugiVessel from '@/components/InteractiveKintsugiVessel';
 import GoldenSeamTimeline from '@/components/GoldenSeamTimeline';
 import KintsugiPortfolioGenerator from '@/components/KintsugiPortfolioGenerator';
+// New AI-Powered Features
+import AIInsightsDashboard from '@/components/AIInsightsDashboard';
+import AIPerformanceReviewGenerator from '@/components/AIPerformanceReviewGenerator';
+import ExportManager from '@/components/ExportManager';
+import InAppWeeklyDigest from '@/components/InAppWeeklyDigest';
+import AutoProfileBuilder from '@/components/AutoProfileBuilder';
 import {
   getAnalyticsData,
   getAllFeedback,
@@ -1246,7 +1252,30 @@ export default function AdminDashboard() {
         {/* INSIGHTS TAB - Kintsugi Community Analytics */}
         {activeTab === 'insights' && (
           <div className="space-y-6">
+            {/* Weekly Digest Summary */}
+            <InAppWeeklyDigest />
+
+            {/* Community Insights Dashboard */}
             <KintsugiInsightsDashboard feedback={feedback} />
+
+            {/* AI Pattern Analysis */}
+            <AIInsightsDashboard />
+
+            {/* User Profile Auto-Builder */}
+            {user && journalEntries.length > 0 && (
+              <AutoProfileBuilder
+                entries={journalEntries.map(entry => ({
+                  id: entry.id,
+                  text: `${entry.accomplishment} ${entry.reflection || ''}`,
+                  date: new Date(entry.date)
+                }))}
+                currentProfile={user}
+                onUpdateProfile={(updates) => {
+                  // Admin view only - updates not applied
+                  console.log('Profile updates (admin view):', updates);
+                }}
+              />
+            )}
 
             {/* Phase 13: Strength Archaeology - AI Strength Discovery */}
             <StrengthArchaeology entries={journalEntries} />
@@ -1254,12 +1283,31 @@ export default function AdminDashboard() {
             {/* Phase 13: Interactive Kintsugi Vessel - 3D Visualization */}
             <InteractiveKintsugiVessel entries={journalEntries} />
 
-            {/* Phase 13: Kintsugi Portfolio Generator - Professional Export */}
-            <KintsugiPortfolioGenerator
-              entries={journalEntries}
-              userName={user?.name || 'User'}
-              userProfession={user?.profession || 'Professional'}
-            />
+            {/* Professional Export Tools */}
+            <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Professional Export Tools
+              </h3>
+
+              {/* AI Performance Review Generator */}
+              <div className="mb-6">
+                <AIPerformanceReviewGenerator />
+              </div>
+
+              {/* Kintsugi Portfolio Generator */}
+              <div className="mb-6 border-t border-gray-200 dark:border-gray-700 pt-6">
+                <KintsugiPortfolioGenerator
+                  entries={journalEntries}
+                  userName={user?.name || 'User'}
+                  userProfession={user?.profession || 'Professional'}
+                />
+              </div>
+
+              {/* Export Manager */}
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                <ExportManager />
+              </div>
+            </div>
           </div>
         )}
 
