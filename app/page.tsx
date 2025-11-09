@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield, FileText } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -104,6 +104,7 @@ import PremiumBadge from '@/components/PremiumBadge';
 import PremiumUpgradeModal from '@/components/PremiumUpgradeModal';
 import DevModeToggle from '@/components/DevModeToggle';
 import StrengthDiscovery from '@/components/StrengthDiscovery';
+import ResumeGenerator from '@/components/ResumeGenerator';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
@@ -162,6 +163,7 @@ export default function Home() {
   const portfolioGeneratorRef = useRef<HTMLDivElement>(null);
   const skillsRoadmapRef = useRef<HTMLDivElement>(null);
   const strengthDiscoveryRef = useRef<HTMLDivElement>(null);
+  const resumeGeneratorRef = useRef<HTMLDivElement>(null);
   const interviewPrepRef = useRef<HTMLDivElement>(null);
   const confidenceTrackerRef = useRef<HTMLDivElement>(null);
   const strengthVizRef = useRef<HTMLDivElement>(null);
@@ -747,6 +749,19 @@ export default function Home() {
                             <div className="flex items-center gap-2">
                               <Sparkles className="h-4 w-4 theme-text-primary" />
                               <span>Strength Discovery</span>
+                            </div>
+                            <PremiumBadge size="sm" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigateToSection('your-edge', resumeGeneratorRef);
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
+                          >
+                            <div className="flex items-center gap-2">
+                              <FileText className="h-4 w-4 theme-text-primary" />
+                              <span>Resume Generator</span>
                             </div>
                             <PremiumBadge size="sm" />
                           </button>
@@ -1657,6 +1672,11 @@ export default function Home() {
               {/* Strength Discovery - Skills Revealed Through Experiences */}
               <div ref={strengthDiscoveryRef}>
                 <StrengthDiscovery entries={journalEntries} />
+              </div>
+
+              {/* Resume Generator - Career-Ready Resume Bullets */}
+              <div ref={resumeGeneratorRef}>
+                <ResumeGenerator entries={journalEntries} />
               </div>
 
               {/* Journey Richness Score - Profile Quality Overview */}
