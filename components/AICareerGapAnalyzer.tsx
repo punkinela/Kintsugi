@@ -118,7 +118,7 @@ export default function AICareerGapAnalyzer({ user, targetRole = 'Senior Profess
                 <Target className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">AI Career Gap Analysis</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Skills Growth Roadmap</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Target: {targetRole}</p>
               </div>
             </div>
