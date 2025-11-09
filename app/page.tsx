@@ -573,6 +573,7 @@ export default function Home() {
                   onClick={() => setActiveTab('your-edge')}
                   data-active={activeTab === 'your-edge'}
                   className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  title="Transform your journey into career assets"
                 >
                   Your Edge
                 </button>
@@ -860,6 +861,7 @@ export default function Home() {
                   }}
                   data-active={activeTab === 'your-edge'}
                   className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
+                  title="Transform your journey into career assets"
                 >
                   Your Edge
                 </button>
