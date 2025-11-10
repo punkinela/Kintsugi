@@ -151,6 +151,8 @@ export default function Home() {
 
   // Weekly Digest ref for navigation
   const weeklyDigestRef = useRef<HTMLDivElement>(null);
+  const performanceReviewRef = useRef<HTMLDivElement>(null);
+  const portfolioGeneratorRef = useRef<HTMLDivElement>(null);
 
   // Phase 9: Interactive components
   const { toasts, addToast, removeToast } = useToast();
@@ -1646,12 +1648,12 @@ export default function Home() {
                     >
                       <div className="px-6 pb-6 space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6">
                         {/* AI Performance Review Generator */}
-                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                        <div ref={performanceReviewRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
                           <AIPerformanceReviewGenerator />
                         </div>
 
                         {/* Kintsugi Portfolio Generator */}
-                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                        <div ref={portfolioGeneratorRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
                           <KintsugiPortfolioGenerator
                             entries={journalEntries}
                             userName={user?.name}
