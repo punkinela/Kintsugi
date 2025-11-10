@@ -98,6 +98,9 @@ import AutoProfileBuilder from '@/components/AutoProfileBuilder';
 import AutoBackupReminder from '@/components/AutoBackupReminder';
 import BackupRestorePanel from '@/components/BackupRestorePanel';
 
+// Voice Learning System
+import VoiceProfileManager from '@/components/VoiceProfileManager';
+
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { shouldPromptFeedback } from '@/utils/analytics';
@@ -134,7 +137,7 @@ export default function Home() {
   const [showSettings, setShowSettings] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
   const [showAboutPhilosophy, setShowAboutPhilosophy] = useState(false);
-  const [settingsTab, setSettingsTab] = useState<'profile' | 'data' | 'appearance' | 'diagnostic'>('profile');
+  const [settingsTab, setSettingsTab] = useState<'profile' | 'data' | 'appearance' | 'voice' | 'diagnostic'>('profile');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
   const [showAchievementsPanel, setShowAchievementsPanel] = useState(false);
@@ -1878,6 +1881,16 @@ export default function Home() {
                     Appearance
                   </button>
                   <button
+                    onClick={() => setSettingsTab('voice')}
+                    className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
+                      settingsTab === 'voice'
+                        ? 'theme-border-primary theme-text-primary'
+                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}
+                  >
+                    Voice Profile
+                  </button>
+                  <button
                     onClick={() => setSettingsTab('diagnostic')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'diagnostic'
@@ -1945,6 +1958,10 @@ export default function Home() {
 
                 {settingsTab === 'appearance' && (
                   <ThemeSelector />
+                )}
+
+                {settingsTab === 'voice' && user && (
+                  <VoiceProfileManager userId={user.id} />
                 )}
 
                 {settingsTab === 'diagnostic' && (
