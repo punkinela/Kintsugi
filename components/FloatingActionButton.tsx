@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, PenTool, Zap } from 'lucide-react';
+import { Plus, X, PenTool, Zap, Volume2 } from 'lucide-react';
 import { useState } from 'react';
 
 interface FloatingActionButtonProps {
@@ -11,6 +11,7 @@ interface FloatingActionButtonProps {
 
 export default function FloatingActionButton({ onQuickCapture, onNewEntry }: FloatingActionButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [showPronunciation, setShowPronunciation] = useState(false);
 
   const actions = [
     {
@@ -30,11 +31,39 @@ export default function FloatingActionButton({ onQuickCapture, onNewEntry }: Flo
         setIsOpen(false);
       },
       color: 'from-blue-500 to-indigo-500'
+    },
+    {
+      icon: Volume2,
+      label: '金継ぎ (kin-TSU-gi)',
+      onClick: () => {
+        setShowPronunciation(true);
+        setTimeout(() => setShowPronunciation(false), 3000);
+        setIsOpen(false);
+      },
+      color: 'from-amber-500 to-orange-500'
     }
   ];
 
   return (
     <div className="fixed bottom-6 left-6 z-40">
+      {/* Pronunciation Tooltip */}
+      <AnimatePresence>
+        {showPronunciation && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="absolute bottom-20 left-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-4 rounded-2xl shadow-2xl max-w-xs"
+          >
+            <div className="text-center">
+              <p className="text-lg font-bold mb-1">金継ぎ Kintsugi</p>
+              <p className="text-sm opacity-90">Pronounced: kin-TSU-gi</p>
+              <p className="text-xs opacity-75 mt-2">The art of repairing broken pottery with gold</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
