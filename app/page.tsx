@@ -556,6 +556,9 @@ export default function Home() {
                 <Zap className="h-8 w-8 theme-text-primary" />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
+                <span className="ml-3 px-2 py-1 text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-kintsugi-dark-700 rounded hidden lg:inline" title="How to pronounce Kintsugi">
+                  金継ぎ Kintsugi (kin-TSU-gi)
+                </span>
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
