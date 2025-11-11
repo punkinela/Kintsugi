@@ -6,6 +6,7 @@
 
 import { PotteryData, Crack, PotteryStyle, CrackTrigger, generateCrackPath, calculateGoldFill } from '@/types/pottery';
 import { JournalEntry } from '@/types/engagement';
+import { playCrackSound, playGoldFillSound, playGoldenSeamCompleteSound, areSoundsEnabled } from './potterySounds';
 
 const STORAGE_KEY = 'kintsugi_pottery_data';
 
@@ -101,6 +102,12 @@ export function addCrack(
   };
 
   savePotteryData(updatedData);
+
+  // Play crack sound effect
+  if (areSoundsEnabled()) {
+    setTimeout(() => playCrackSound(), 100);
+  }
+
   return updatedData;
 }
 
@@ -121,6 +128,7 @@ export function updateCrackGoldFill(
 
   const newFillPercentage = calculateGoldFill(crack, reflectionCount, daysSince);
 
+  const wasAlreadyFilled = crack.isFilled;
   const updatedCracks = potteryData.cracks.map(c =>
     c.id === crackId
       ? { ...c, fillPercentage: newFillPercentage, isFilled: newFillPercentage === 100 }
@@ -137,6 +145,18 @@ export function updateCrackGoldFill(
   };
 
   savePotteryData(updatedData);
+
+  // Play sound effects
+  if (areSoundsEnabled()) {
+    if (newFillPercentage === 100 && !wasAlreadyFilled) {
+      // Completed golden seam - celebratory sound
+      setTimeout(() => playGoldenSeamCompleteSound(), 100);
+    } else if (newFillPercentage > crack.fillPercentage) {
+      // Gold increased - gentle fill sound
+      setTimeout(() => playGoldFillSound(), 100);
+    }
+  }
+
   return updatedData;
 }
 

@@ -107,9 +107,23 @@ export default function KintsugiWelcomeBanner({
               <Sparkles className="h-10 w-10 text-white" />
             </motion.div>
             <div className="flex-1">
-              <h2 className="text-3xl font-bold text-white mb-2">
-                Welcome back, {user?.name || 'Friend'}! 👋
-              </h2>
+              <div className="flex items-center gap-3 mb-2">
+                <h2 className="text-3xl font-bold text-white">
+                  Welcome back, {user?.name || 'Friend'}! 👋
+                </h2>
+                {/* Pronunciation Badge */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-amber-400/30 to-yellow-300/30 backdrop-blur-sm rounded-full border border-amber-300/50 shadow-lg"
+                  title="Kintsugi pronunciation guide"
+                >
+                  <span className="text-white font-bold text-sm">金継ぎ</span>
+                  <span className="text-white/90 text-xs">Kintsugi</span>
+                  <span className="text-white/70 text-xs italic">(kin-TSU-gi)</span>
+                </motion.div>
+              </div>
               <p className="text-white/90 text-lg mb-3">
                 {user?.profession ? (
                   <>Own your impact as a {user.profession}—wins, challenges, and all</>

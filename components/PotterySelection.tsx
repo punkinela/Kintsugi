@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Lock } from 'lucide-react';
 import { PotteryStyle, POTTERY_STYLES } from '@/types/pottery';
 import { useState } from 'react';
+import { playPotterySelectSound, areSoundsEnabled } from '@/utils/potterySounds';
 
 interface PotterySelectionProps {
   currentEntryCount: number;
@@ -19,6 +20,9 @@ export default function PotterySelection({
   const [selectedStyle, setSelectedStyle] = useState<PotteryStyle>('bowl');
 
   const handleConfirm = () => {
+    if (areSoundsEnabled()) {
+      playPotterySelectSound();
+    }
     onSelect(selectedStyle);
     onClose();
   };
@@ -52,15 +56,24 @@ export default function PotterySelection({
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
               Choose Your Vessel 🏺
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-3">
               Select the pottery that resonates with your journey. As you document challenges,
               cracks will appear. As you reflect and grow, gold will fill them.
             </p>
+            {/* Vessel Count Indicator */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 dark:bg-amber-900/30 rounded-full">
+              <span className="text-amber-800 dark:text-amber-200 text-sm font-semibold">
+                4 Unique Vessels Available
+              </span>
+              <span className="text-amber-600 dark:text-amber-400 text-xs">
+                (Unlock more as you journal)
+              </span>
+            </div>
           </div>
 
           {/* Pottery Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            {(Object.keys(POTTERY_STYLES) as PotteryStyle[]).map((styleId) => {
+            {(Object.keys(POTTERY_STYLES) as PotteryStyle[]).map((styleId, index) => {
               const style = POTTERY_STYLES[styleId];
               const isUnlocked = currentEntryCount >= style.unlockAt;
               const isSelected = selectedStyle === styleId;
@@ -82,6 +95,11 @@ export default function PotterySelection({
                     }
                   `}
                 >
+                  {/* Number badge in top-left */}
+                  <div className="absolute top-3 left-3 bg-gray-800 dark:bg-gray-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
+                    {index + 1}
+                  </div>
+
                   {/* Lock badge for locked styles */}
                   {!isUnlocked && (
                     <div className="absolute top-3 right-3 bg-gray-400 text-white rounded-full p-2">
