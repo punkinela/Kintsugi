@@ -98,6 +98,9 @@ import AutoProfileBuilder from '@/components/AutoProfileBuilder';
 import AutoBackupReminder from '@/components/AutoBackupReminder';
 import BackupRestorePanel from '@/components/BackupRestorePanel';
 
+// Voice Learning System
+import VoiceProfileManager from '@/components/VoiceProfileManager';
+
 // Premium Features
 import { PremiumProvider } from '@/contexts/PremiumContext';
 import PremiumBadge from '@/components/PremiumBadge';
@@ -143,7 +146,7 @@ export default function Home() {
   const [showSettings, setShowSettings] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
   const [showAboutPhilosophy, setShowAboutPhilosophy] = useState(false);
-  const [settingsTab, setSettingsTab] = useState<'profile' | 'data' | 'appearance' | 'diagnostic'>('profile');
+  const [settingsTab, setSettingsTab] = useState<'profile' | 'data' | 'appearance' | 'voice' | 'diagnostic'>('profile');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
   const [showAchievementsPanel, setShowAchievementsPanel] = useState(false);
@@ -616,7 +619,7 @@ export default function Home() {
                   data-active={activeTab === 'journal'}
                   className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
-                  Impact Log
+                  Your Golden Journal
                 </button>
                 {/* Insights Tab with Dropdown */}
                 <div className="relative">
@@ -771,7 +774,7 @@ export default function Home() {
                           >
                             <div className="flex items-center gap-2">
                               <Sparkles className="h-4 w-4 theme-text-primary" />
-                              <span>Strength Discovery</span>
+                              <span>Find Your Gold</span>
                             </div>
                             <PremiumBadge size="sm" />
                           </button>
@@ -784,7 +787,7 @@ export default function Home() {
                           >
                             <div className="flex items-center gap-2">
                               <FileText className="h-4 w-4 theme-text-primary" />
-                              <span>Resume Generator</span>
+                              <span>Golden Story Builder</span>
                             </div>
                             <PremiumBadge size="sm" />
                           </button>
@@ -797,7 +800,7 @@ export default function Home() {
                           >
                             <div className="flex items-center gap-2">
                               <TrendingUp className="h-4 w-4 theme-text-primary" />
-                              <span>Resilience Map</span>
+                              <span>Your Kintsugi Vessel</span>
                             </div>
                             <PremiumBadge size="sm" />
                           </button>
@@ -1705,12 +1708,12 @@ export default function Home() {
                 )}
               </div>
 
-              {/* Strength Discovery - Skills Revealed Through Experiences */}
+              {/* Find Your Gold - Skills Revealed Through Struggles */}
               <div ref={strengthDiscoveryRef}>
                 <StrengthDiscovery entries={journalEntries} />
               </div>
 
-              {/* Resume Generator - Career-Ready Resume Bullets */}
+              {/* Golden Story Builder - Transform Your Journey */}
               <div ref={resumeGeneratorRef}>
                 <ResumeGenerator entries={journalEntries} />
               </div>
@@ -1936,6 +1939,16 @@ export default function Home() {
                     Appearance
                   </button>
                   <button
+                    onClick={() => setSettingsTab('voice')}
+                    className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
+                      settingsTab === 'voice'
+                        ? 'theme-border-primary theme-text-primary'
+                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}
+                  >
+                    Voice Profile
+                  </button>
+                  <button
                     onClick={() => setSettingsTab('diagnostic')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'diagnostic'
@@ -2003,6 +2016,13 @@ export default function Home() {
 
                 {settingsTab === 'appearance' && (
                   <ThemeSelector />
+                )}
+
+                {settingsTab === 'voice' && user && (
+                  <VoiceProfileManager
+                    userId={user.id}
+                    onClose={() => setShowSettings(false)}
+                  />
                 )}
 
                 {settingsTab === 'diagnostic' && (
