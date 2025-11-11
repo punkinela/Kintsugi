@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield, FileText } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -98,8 +98,14 @@ import AutoProfileBuilder from '@/components/AutoProfileBuilder';
 import AutoBackupReminder from '@/components/AutoBackupReminder';
 import BackupRestorePanel from '@/components/BackupRestorePanel';
 
-// Voice Learning System
-import VoiceProfileManager from '@/components/VoiceProfileManager';
+// Premium Features
+import { PremiumProvider } from '@/contexts/PremiumContext';
+import PremiumBadge from '@/components/PremiumBadge';
+import PremiumUpgradeModal from '@/components/PremiumUpgradeModal';
+import DevModeToggle from '@/components/DevModeToggle';
+import StrengthDiscovery from '@/components/StrengthDiscovery';
+import ResumeGenerator from '@/components/ResumeGenerator';
+import ResilienceMap from '@/components/ResilienceMap';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
@@ -137,7 +143,7 @@ export default function Home() {
   const [showSettings, setShowSettings] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
   const [showAboutPhilosophy, setShowAboutPhilosophy] = useState(false);
-  const [settingsTab, setSettingsTab] = useState<'profile' | 'data' | 'appearance' | 'voice' | 'diagnostic'>('profile');
+  const [settingsTab, setSettingsTab] = useState<'profile' | 'data' | 'appearance' | 'diagnostic'>('profile');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
   const [showAchievementsPanel, setShowAchievementsPanel] = useState(false);
@@ -147,15 +153,30 @@ export default function Home() {
   const [showBackupPanel, setShowBackupPanel] = useState(false);
   const [showYourEdgeDropdown, setShowYourEdgeDropdown] = useState(false);
   const [showInsightsDropdown, setShowInsightsDropdown] = useState(false);
-
-  // Edge tab collapsible sections
-  const [expandedExportTools, setExpandedExportTools] = useState(true);
-  const [expandedGrowthViz, setExpandedGrowthViz] = useState(true);
+  const [showPremiumUpgrade, setShowPremiumUpgrade] = useState(false);
+  const [premiumFeatureName, setPremiumFeatureName] = useState<string>('');
 
   // Weekly Digest ref for navigation
   const weeklyDigestRef = useRef<HTMLDivElement>(null);
+
+  // Your Edge section refs for dropdown navigation
   const performanceReviewRef = useRef<HTMLDivElement>(null);
   const portfolioGeneratorRef = useRef<HTMLDivElement>(null);
+  const skillsRoadmapRef = useRef<HTMLDivElement>(null);
+  const strengthDiscoveryRef = useRef<HTMLDivElement>(null);
+  const resumeGeneratorRef = useRef<HTMLDivElement>(null);
+  const resilienceMapRef = useRef<HTMLDivElement>(null);
+  const interviewPrepRef = useRef<HTMLDivElement>(null);
+  const confidenceTrackerRef = useRef<HTMLDivElement>(null);
+  const strengthVizRef = useRef<HTMLDivElement>(null);
+
+  // Navigation helper to scroll to specific sections
+  const navigateToSection = (tab: 'home' | 'journal' | 'insights' | 'your-edge', ref: React.RefObject<HTMLDivElement>) => {
+    setActiveTab(tab);
+    setTimeout(() => {
+      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100); // Small delay to ensure tab content is rendered
+  };
 
   // Phase 9: Interactive components
   const { toasts, addToast, removeToast } = useToast();
@@ -546,22 +567,20 @@ export default function Home() {
   }
 
   return (
-    <div
-      className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white transition-colors duration-200"
-      data-theme-version={themeVersion}
-    >
+    <PremiumProvider>
+      <div
+        className="min-h-screen theme-bg-primary-light dark:bg-kintsugi-dark-900 text-kintsugi-dark-900 dark:text-white transition-colors duration-200"
+        data-theme-version={themeVersion}
+      >
       {/* Header - data-theme-version forces browser style recalculation */}
       <header className="bg-white dark:bg-kintsugi-dark-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <Zap className="h-8 w-8 theme-text-primary" />
-                <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Own Your Impact</span>
-                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Track wins • Recognize bias • Advocate for yourself</span>
-                <span className="ml-3 px-2 py-1 text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-kintsugi-dark-700 rounded hidden lg:inline" title="How to pronounce Kintsugi">
-                  金継ぎ Kintsugi (kin-TSU-gi)
-                </span>
+                <Sparkles className="h-8 w-8 theme-text-primary" />
+                <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Kintsugi</span>
+                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Turn setbacks into your career's golden seams</span>
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
@@ -685,37 +704,85 @@ export default function Home() {
                         <div className="py-2">
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', performanceReviewRef);
                               setShowYourEdgeDropdown(false);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
                           >
-                            <Award className="h-4 w-4 theme-text-primary" />
-                            <span>Performance Reviews</span>
+                            <div className="flex items-center gap-2">
+                              <Award className="h-4 w-4 theme-text-primary" />
+                              <span>Performance Reviews</span>
+                            </div>
+                            <PremiumBadge size="sm" />
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', portfolioGeneratorRef);
                               setShowYourEdgeDropdown(false);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
                           >
-                            <BookOpen className="h-4 w-4 theme-text-primary" />
-                            <span>Portfolio Generator</span>
+                            <div className="flex items-center gap-2">
+                              <BookOpen className="h-4 w-4 theme-text-primary" />
+                              <span>Portfolio Generator</span>
+                            </div>
+                            <PremiumBadge size="sm" />
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', skillsRoadmapRef);
                               setShowYourEdgeDropdown(false);
                             }}
-                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
                           >
-                            <Target className="h-4 w-4 theme-text-primary" />
-                            <span>Skills Growth Roadmap</span>
+                            <div className="flex items-center gap-2">
+                              <Target className="h-4 w-4 theme-text-primary" />
+                              <span>Skills Growth Roadmap</span>
+                            </div>
+                            <PremiumBadge size="sm" />
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', strengthDiscoveryRef);
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
+                          >
+                            <div className="flex items-center gap-2">
+                              <Sparkles className="h-4 w-4 theme-text-primary" />
+                              <span>Strength Discovery</span>
+                            </div>
+                            <PremiumBadge size="sm" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigateToSection('your-edge', resumeGeneratorRef);
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
+                          >
+                            <div className="flex items-center gap-2">
+                              <FileText className="h-4 w-4 theme-text-primary" />
+                              <span>Resume Generator</span>
+                            </div>
+                            <PremiumBadge size="sm" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigateToSection('your-edge', resilienceMapRef);
+                              setShowYourEdgeDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center justify-between gap-2"
+                          >
+                            <div className="flex items-center gap-2">
+                              <TrendingUp className="h-4 w-4 theme-text-primary" />
+                              <span>Resilience Map</span>
+                            </div>
+                            <PremiumBadge size="sm" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigateToSection('your-edge', interviewPrepRef);
                               setShowYourEdgeDropdown(false);
                             }}
                             className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
@@ -725,7 +792,7 @@ export default function Home() {
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', confidenceTrackerRef);
                               setShowYourEdgeDropdown(false);
                             }}
                             className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
@@ -735,7 +802,7 @@ export default function Home() {
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-edge');
+                              navigateToSection('your-edge', strengthVizRef);
                               setShowYourEdgeDropdown(false);
                             }}
                             className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
@@ -1608,131 +1675,98 @@ export default function Home() {
               )}
 
               {/* Skills Growth Roadmap - Identify Missing Skills & Experiences */}
-              {user && (
-                <AICareerGapAnalyzer
-                  user={user}
-                  targetRole={user.profession || 'Senior Professional'}
-                />
-              )}
+              <div ref={skillsRoadmapRef}>
+                {user && (
+                  <AICareerGapAnalyzer
+                    user={user}
+                    targetRole={user.profession || 'Senior Professional'}
+                  />
+                )}
+              </div>
+
+              {/* Strength Discovery - Skills Revealed Through Experiences */}
+              <div ref={strengthDiscoveryRef}>
+                <StrengthDiscovery entries={journalEntries} />
+              </div>
+
+              {/* Resume Generator - Career-Ready Resume Bullets */}
+              <div ref={resumeGeneratorRef}>
+                <ResumeGenerator entries={journalEntries} />
+              </div>
+
+              {/* Resilience Map - Pattern Recognition & Golden Seams */}
+              <div ref={resilienceMapRef}>
+                <ResilienceMap entries={journalEntries} />
+              </div>
 
               {/* Journey Richness Score - Profile Quality Overview */}
               <JourneyRichnessScore entries={journalEntries} />
 
               {/* Professional Export Tools Section */}
-              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
-                <div
-                  className="p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors"
-                  onClick={() => setExpandedExportTools(!expandedExportTools)}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
-                        <Award className="h-6 w-6 theme-text-primary" />
-                        Professional Export Tools
-                      </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Transform your documented journey into professional assets for your career
-                      </p>
-                    </div>
-                    <motion.div
-                      animate={{ rotate: expandedExportTools ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ChevronDown className="h-6 w-6 text-gray-400" />
-                    </motion.div>
-                  </div>
+              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
+                    <Award className="h-6 w-6 theme-text-primary" />
+                    Professional Export Tools
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Transform your documented journey into professional assets for your career
+                  </p>
                 </div>
 
-                <AnimatePresence>
-                  {expandedExportTools && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-6 space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6">
-                        {/* AI Performance Review Generator */}
-                        <div ref={performanceReviewRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                          <AIPerformanceReviewGenerator />
-                        </div>
+                <div className="space-y-6">
+                  {/* AI Performance Review Generator */}
+                  <div ref={performanceReviewRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <AIPerformanceReviewGenerator />
+                  </div>
 
-                        {/* Kintsugi Portfolio Generator */}
-                        <div ref={portfolioGeneratorRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                          <KintsugiPortfolioGenerator
-                            entries={journalEntries}
-                            userName={user?.name}
-                            userProfession={user?.profession}
-                          />
-                        </div>
+                  {/* Kintsugi Portfolio Generator */}
+                  <div ref={portfolioGeneratorRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <KintsugiPortfolioGenerator
+                      entries={journalEntries}
+                      userName={user?.name}
+                      userProfession={user?.profession}
+                    />
+                  </div>
 
-                        {/* Export Manager */}
-                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                          <ExportManager />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  {/* Export Manager */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <ExportManager />
+                  </div>
+                </div>
               </div>
 
               {/* Growth & Strength Visualizations */}
-              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
-                <div
-                  className="p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors"
-                  onClick={() => setExpandedGrowthViz(!expandedGrowthViz)}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
-                        <TrendingUp className="h-6 w-6 theme-text-primary" />
-                        Growth Visualizations
-                      </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        See your patterns, strengths, and transformation over time
-                      </p>
-                    </div>
-                    <motion.div
-                      animate={{ rotate: expandedGrowthViz ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ChevronDown className="h-6 w-6 text-gray-400" />
-                    </motion.div>
-                  </div>
+              <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2">
+                    <TrendingUp className="h-6 w-6 theme-text-primary" />
+                    Growth Visualizations
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    See your patterns, strengths, and transformation over time
+                  </p>
                 </div>
 
-                <AnimatePresence>
-                  {expandedGrowthViz && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-6 space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6">
-                        {/* Personal Stats Dashboard */}
-                        <PersonalStatsDashboard />
+                <div className="space-y-6">
+                  {/* Personal Stats Dashboard */}
+                  <PersonalStatsDashboard />
 
-                        {/* Strength Archaeology */}
-                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                          <StrengthArchaeology entries={journalEntries} />
-                        </div>
+                  {/* Strength Archaeology */}
+                  <div ref={strengthVizRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <StrengthArchaeology entries={journalEntries} />
+                  </div>
 
-                        {/* Transformation Heatmap */}
-                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                          <TransformationHeatmap entries={journalEntries} monthsToShow={6} />
-                        </div>
+                  {/* Transformation Heatmap */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <TransformationHeatmap entries={journalEntries} monthsToShow={6} />
+                  </div>
 
-                        {/* Golden Seam Timeline */}
-                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                          <GoldenSeamTimeline entries={journalEntries} />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  {/* Golden Seam Timeline */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <GoldenSeamTimeline entries={journalEntries} />
+                  </div>
+                </div>
               </div>
 
               {/* Empty State for New Users */}
@@ -1881,16 +1915,6 @@ export default function Home() {
                     Appearance
                   </button>
                   <button
-                    onClick={() => setSettingsTab('voice')}
-                    className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
-                      settingsTab === 'voice'
-                        ? 'theme-border-primary theme-text-primary'
-                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
-                    }`}
-                  >
-                    Voice Profile
-                  </button>
-                  <button
                     onClick={() => setSettingsTab('diagnostic')}
                     className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
                       settingsTab === 'diagnostic'
@@ -1960,12 +1984,11 @@ export default function Home() {
                   <ThemeSelector />
                 )}
 
-                {settingsTab === 'voice' && user && (
-                  <VoiceProfileManager userId={user.id} />
-                )}
-
                 {settingsTab === 'diagnostic' && (
-                  <DataDiagnostic />
+                  <div className="space-y-6">
+                    <DevModeToggle />
+                    <DataDiagnostic />
+                  </div>
                 )}
               </div>
             </div>
@@ -2048,6 +2071,14 @@ export default function Home() {
       {showBackupPanel && (
         <BackupRestorePanel onClose={() => setShowBackupPanel(false)} />
       )}
+
+      {/* Premium Upgrade Modal */}
+      <PremiumUpgradeModal
+        isOpen={showPremiumUpgrade}
+        onClose={() => setShowPremiumUpgrade(false)}
+        featureName={premiumFeatureName}
+      />
     </div>
+    </PremiumProvider>
   );
 }
