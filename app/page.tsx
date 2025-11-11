@@ -619,7 +619,7 @@ export default function Home() {
                   data-active={activeTab === 'journal'}
                   className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
-                  Your Golden Journal
+                  Golden Seams
                 </button>
                 {/* Insights Tab with Dropdown */}
                 <div className="relative">
