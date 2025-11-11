@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Download, Copy, Check, Calendar, Filter, Sparkles } from 'lucide-react';
+import { FileText, Download, Copy, Check, Calendar, Filter, Sparkles, Volume2, Info } from 'lucide-react';
 import { getEngagementData } from '@/utils/engagement';
 import { generatePerformanceReview, type PerformanceReviewSection } from '@/utils/aiHelpers';
+import { generateVoiceMatchedPerformanceReview, getVoiceMatchingStatus } from '@/utils/voiceMatchedAI';
 import { JournalEntry } from '@/types/engagement';
 
 export default function AIPerformanceReviewGenerator() {
@@ -12,16 +13,32 @@ export default function AIPerformanceReviewGenerator() {
   const [timeframe, setTimeframe] = useState<'week' | 'month' | 'quarter' | 'year' | 'custom'>('quarter');
   const [customDays, setCustomDays] = useState(90);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [review, setReview] = useState<{ summary: string; sections: PerformanceReviewSection[] } | null>(null);
+  const [review, setReview] = useState<{ summary: string; sections: PerformanceReviewSection[]; voiceApplied?: boolean } | null>(null);
   const [copied, setCopied] = useState(false);
+  const [voiceStatus, setVoiceStatus] = useState<{
+    enabled: boolean;
+    confidence: number;
+    message: string;
+  } | null>(null);
 
   useEffect(() => {
     loadEntries();
+    loadVoiceStatus();
   }, []);
 
   const loadEntries = () => {
     const data = getEngagementData();
     setEntries(data.journalEntries || []);
+  };
+
+  const loadVoiceStatus = async () => {
+    // Get user ID from local storage (assuming it's stored there)
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+      const status = await getVoiceMatchingStatus(user.id);
+      setVoiceStatus(status);
+    }
   };
 
   const getFilteredEntries = (): JournalEntry[] => {
@@ -49,17 +66,33 @@ export default function AIPerformanceReviewGenerator() {
     return entries.filter(entry => new Date(entry.date) >= cutoffDate);
   };
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     setIsGenerating(true);
 
-    setTimeout(() => {
+    try {
       const filteredEntries = getFilteredEntries();
       const timeframeText = timeframe === 'custom' ? `the past ${customDays} days` : `this ${timeframe}`;
-      const generated = generatePerformanceReview(filteredEntries, timeframeText);
+
+      // Get user ID
+      const userData = localStorage.getItem('user');
+      const userId = userData ? JSON.parse(userData).id : null;
+
+      let generated;
+      if (userId && voiceStatus?.enabled) {
+        // Use voice-matched generation
+        generated = await generateVoiceMatchedPerformanceReview(userId, filteredEntries, timeframeText);
+      } else {
+        // Fallback to standard generation
+        generated = {
+          ...generatePerformanceReview(filteredEntries, timeframeText),
+          voiceApplied: false,
+        };
+      }
 
       setReview(generated);
+    } finally {
       setIsGenerating(false);
-    }, 1000);
+    }
   };
 
   const handleCopy = () => {
@@ -170,6 +203,50 @@ export default function AIPerformanceReviewGenerator() {
         </div>
       </div>
 
+      {/* Voice Matching Status */}
+      {voiceStatus && (
+        <div className={`rounded-xl p-4 border-2 ${
+          voiceStatus.enabled
+            ? 'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border-purple-300 dark:border-purple-700'
+            : 'bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-amber-300 dark:border-amber-700'
+        }`}>
+          <div className="flex items-start gap-3">
+            <div className={`p-2 rounded-lg ${
+              voiceStatus.enabled
+                ? 'bg-purple-500'
+                : 'bg-amber-500'
+            }`}>
+              {voiceStatus.enabled ? (
+                <Volume2 className="h-5 w-5 text-white" />
+              ) : (
+                <Info className="h-5 w-5 text-white" />
+              )}
+            </div>
+            <div className="flex-1">
+              <h3 className={`text-sm font-semibold ${
+                voiceStatus.enabled
+                  ? 'text-purple-900 dark:text-purple-100'
+                  : 'text-amber-900 dark:text-amber-100'
+              }`}>
+                {voiceStatus.enabled ? 'Voice Matching Active' : 'Voice Matching Not Active'}
+              </h3>
+              <p className={`text-xs mt-1 ${
+                voiceStatus.enabled
+                  ? 'text-purple-700 dark:text-purple-300'
+                  : 'text-amber-700 dark:text-amber-300'
+              }`}>
+                {voiceStatus.message}
+              </p>
+              {!voiceStatus.enabled && (
+                <p className="text-xs mt-2 text-gray-600 dark:text-gray-400">
+                  Add writing samples in <strong>Settings → Voice Profile</strong> to generate reviews that sound like you.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Generate Button */}
       {!review && (
         <motion.button
@@ -191,6 +268,16 @@ export default function AIPerformanceReviewGenerator() {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
+          {/* Voice Matching Badge */}
+          {review.voiceApplied && (
+            <div className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 border border-purple-300 dark:border-purple-700 rounded-lg p-3 flex items-center gap-2">
+              <Volume2 className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              <span className="text-sm font-medium text-purple-900 dark:text-purple-100">
+                This review matches your authentic writing style
+              </span>
+            </div>
+          )}
+
           {/* Actions */}
           <div className="flex gap-2">
             <button
