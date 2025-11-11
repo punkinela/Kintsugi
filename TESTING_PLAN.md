@@ -1,4 +1,4 @@
-# Comprehensive Testing Plan - Phase 1 & 2
+# Comprehensive Testing Plan - Phases 1, 2, & 3
 
 ## Prerequisites
 - [ ] Localhost running: `npm run dev`
