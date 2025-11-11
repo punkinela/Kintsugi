@@ -53,12 +53,38 @@ export default function FloatingActionButton({ onQuickCapture, onNewEntry }: Flo
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="absolute bottom-20 left-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-4 rounded-2xl shadow-2xl max-w-xs"
+            className="absolute bottom-20 left-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-5 rounded-2xl shadow-2xl max-w-sm"
           >
-            <div className="text-center">
-              <p className="text-lg font-bold mb-1">金継ぎ Kintsugi</p>
-              <p className="text-sm opacity-90">Pronounced: kin-TSU-gi</p>
-              <p className="text-xs opacity-75 mt-2">The art of repairing broken pottery with gold</p>
+            <div className="text-center space-y-3">
+              <p className="text-xl font-bold mb-2">金継ぎ Kintsugi</p>
+
+              {/* Phonetic Pronunciation with Emphasis */}
+              <div className="flex items-center justify-center gap-1 text-lg">
+                <span className="font-light">kin</span>
+                <span className="mx-1 text-white/60">•</span>
+                <span className="font-black text-2xl text-amber-100 drop-shadow-lg">TSU</span>
+                <span className="mx-1 text-white/60">•</span>
+                <span className="font-light">gi</span>
+              </div>
+
+              {/* Audio Playback Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const utterance = new SpeechSynthesisUtterance('kintsugi');
+                  utterance.lang = 'ja-JP';
+                  utterance.rate = 0.8;
+                  window.speechSynthesis.speak(utterance);
+                }}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors text-sm font-medium"
+              >
+                <Volume2 className="h-4 w-4" />
+                <span>Listen</span>
+              </button>
+
+              <p className="text-xs opacity-90 mt-2 border-t border-white/20 pt-2">
+                The art of repairing broken pottery with gold
+              </p>
             </div>
           </motion.div>
         )}
