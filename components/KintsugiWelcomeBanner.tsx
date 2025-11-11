@@ -3,6 +3,11 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Heart, TrendingUp } from 'lucide-react';
 import { UserProfile } from '@/types';
+import { useState, useEffect } from 'react';
+import PotteryVisual from './PotteryVisual';
+import PotterySelection from './PotterySelection';
+import { getPotteryData, initializePotteryData, updateAllCracksGoldFill, updateUnlockedStyles } from '@/utils/potteryStorage';
+import { PotteryData } from '@/types/pottery';
 
 interface KintsugiWelcomeBannerProps {
   user: UserProfile | null;
@@ -10,6 +15,7 @@ interface KintsugiWelcomeBannerProps {
   totalEntries: number;
   onGetInsight: () => void;
   isLoading: boolean;
+  journalEntries?: any[]; // For pottery crack updates
 }
 
 export default function KintsugiWelcomeBanner({
@@ -17,10 +23,34 @@ export default function KintsugiWelcomeBanner({
   currentStreak,
   totalEntries,
   onGetInsight,
-  isLoading
+  isLoading,
+  journalEntries = []
 }: KintsugiWelcomeBannerProps) {
+  const [potteryData, setPotteryData] = useState<PotteryData | null>(null);
+  const [showPotterySelection, setShowPotterySelection] = useState(false);
+
   // Calculate user's golden moments (entries where they showed growth)
   const goldenMoments = Math.floor(totalEntries * 0.3); // Simplified calculation
+
+  // Load pottery data
+  useEffect(() => {
+    const data = getPotteryData();
+    if (data) {
+      // Update pottery with latest entries
+      const updated = updateAllCracksGoldFill(data, journalEntries);
+      const withUnlocks = updateUnlockedStyles(updated, totalEntries);
+      setPotteryData(withUnlocks);
+    } else if (user) {
+      // Show pottery selection for new users
+      setShowPotterySelection(true);
+    }
+  }, [totalEntries, journalEntries?.length]);
+
+  const handlePotterySelect = (styleId: any) => {
+    const newData = initializePotteryData(styleId);
+    setPotteryData(newData);
+    setShowPotterySelection(false);
+  };
 
   return (
     <motion.div
@@ -29,6 +59,15 @@ export default function KintsugiWelcomeBanner({
       transition={{ duration: 0.5 }}
       className="relative overflow-hidden bg-gradient-to-br theme-gradient-to-r  rounded-2xl shadow-2xl"
     >
+      {/* Pottery Selection Modal */}
+      {showPotterySelection && (
+        <PotterySelection
+          currentEntryCount={totalEntries}
+          onSelect={handlePotterySelect}
+          onClose={() => setShowPotterySelection(false)}
+        />
+      )}
+
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 -mt-4 -mr-4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-64 h-64 bg-yellow-300/10 rounded-full blur-3xl"></div>
@@ -45,6 +84,20 @@ export default function KintsugiWelcomeBanner({
         {/* Header with Kintsugi Philosophy */}
         <div className="flex flex-col gap-6">
           <div className="flex items-start gap-4">
+            {/* Pottery Visual (if available) */}
+            {potteryData && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="hidden md:block flex-shrink-0"
+              >
+                <PotteryVisual
+                  potteryData={potteryData}
+                  size="small"
+                  interactive={false}
+                />
+              </motion.div>
+            )}
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
