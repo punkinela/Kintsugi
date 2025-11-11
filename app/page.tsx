@@ -583,9 +583,10 @@ export default function Home() {
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Turn setbacks into your career's golden seams</span>
                 <button
                   onClick={() => {
-                    const utterance = new SpeechSynthesisUtterance('kintsugi');
-                    utterance.lang = 'ja-JP';
-                    utterance.rate = 0.8;
+                    const utterance = new SpeechSynthesisUtterance('keen tsoo gee');
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.7;
+                    utterance.pitch = 1.0;
                     window.speechSynthesis.speak(utterance);
                   }}
                   className="ml-3 px-3 py-1.5 text-xs bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200 dark:border-amber-700 rounded-lg hidden lg:flex items-center gap-2 hover:from-amber-100 hover:to-orange-100 dark:hover:from-amber-900/30 dark:hover:to-orange-900/30 transition-all group"
