@@ -6,7 +6,7 @@ import {
   Users, TrendingUp, Star, MessageCircle, Award, BookOpen,
   Download, Calendar, Target, BarChart3, Home, Filter,
   TrendingDown, Minus, Activity, Brain, Map, Layers, User,
-  HelpCircle, Settings, Sparkles, Zap, Trophy
+  HelpCircle, Settings, Sparkles, Zap, Trophy, Shield, Heart
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import ThemeSelector from '@/components/ThemeSelector';
@@ -420,8 +420,8 @@ export default function AdminDashboard() {
                   <BarChart3 className="h-8 w-8 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-4xl font-bold text-white drop-shadow-lg">Admin Dashboard</h1>
-                  <p className="text-white/90 text-base mt-1">Advanced Analytics & Insights</p>
+                  <h1 className="text-4xl font-bold text-white drop-shadow-lg">Personal Insights</h1>
+                  <p className="text-white/90 text-base mt-1">Your Transformation Journey, Visualized</p>
                 </div>
               </div>
             </motion.div>
@@ -440,12 +440,12 @@ export default function AdminDashboard() {
           {/* Tabs */}
           <div className="flex gap-2 flex-wrap">
             {[
-              { id: 'overview', label: 'Overview', icon: BarChart3 },
-              { id: 'journal', label: 'Impact Log', icon: BookOpen },
-              { id: 'demographics', label: 'Demographics', icon: Users },
-              { id: 'journey', label: 'User Journey', icon: Map },
-              { id: 'insights', label: 'Insights', icon: Brain },
-              { id: 'settings', label: 'Settings', icon: Settings }
+              { id: 'overview', label: 'Golden Gallery', icon: Sparkles },
+              { id: 'journal', label: 'Your Golden Seams', icon: BookOpen },
+              { id: 'demographics', label: 'Your Profile', icon: User },
+              { id: 'journey', label: 'Transformation Path', icon: Map },
+              { id: 'insights', label: 'Patterns of Repair', icon: Brain },
+              { id: 'settings', label: 'Workshop Tools', icon: Settings }
             ].map((tab, index) => (
               <motion.button
                 key={tab.id}
@@ -509,42 +509,78 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* OVERVIEW TAB */}
+        {/* Privacy Notice */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 flex items-start gap-3"
+        >
+          <div className="flex-shrink-0 bg-blue-500 rounded-lg p-2">
+            <Shield className="h-5 w-5 text-white" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-1">
+              🔒 Your Data, Your Eyes Only
+            </h3>
+            <p className="text-xs text-blue-700 dark:text-blue-300">
+              All insights shown here are from <strong>YOUR browser's local storage</strong>.
+              No data is sent to servers. No one else can see this—not even us.
+              This is your personal reflection mirror. 🪞
+            </p>
+          </div>
+        </motion.div>
+
+        {/* OVERVIEW TAB → GOLDEN GALLERY */}
         {activeTab === 'overview' && (
           <div className="space-y-6">
-            {/* Stats Cards */}
+            {/* Opening Philosophy */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center py-6"
+            >
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+                Your Golden Gallery 🏺
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Welcome to your personal transformation archive. Every number here represents
+                a moment you chose to honor your cracks and fill them with gold.
+              </p>
+            </motion.div>
+
+            {/* Stats Cards - Kintsugi Language */}
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               <StatCard
-                title="Active Users"
-                value={analytics.activeUsers}
-                icon={<Users className="h-6 w-6" />}
-                trend={weeklyComparison ? `${Math.abs(weeklyComparison.changePercent).toFixed(1)}%` : undefined}
+                title="Your Journey"
+                value={analytics.activeUsers === 1 ? "Active" : analytics.activeUsers}
+                icon={<Sparkles className="h-6 w-6" />}
+                trend={weeklyComparison ? `${Math.abs(weeklyComparison.changePercent).toFixed(1)}% this week` : undefined}
                 trendType={weeklyComparison?.trend}
-                color="from-blue-500 to-blue-600"
+                color="from-amber-500 to-orange-500"
               />
               <StatCard
-                title="Total Accomplishments"
+                title="Golden Moments"
                 value={analytics.totalAccomplishments.toLocaleString()}
                 icon={<Award className="h-6 w-6" />}
-                trend={`${analytics.averageStreak} day streak`}
+                trend={`${analytics.averageStreak} day healing streak`}
                 trendType="up"
-                color="from-purple-500 to-purple-600"
+                color="from-purple-500 to-pink-500"
               />
               <StatCard
-                title="Avg. Rating"
-                value={analytics.averageRating ? analytics.averageRating.toFixed(1) : 'N/A'}
-                icon={<Star className="h-6 w-6" />}
-                trend={analytics.feedbackCount > 0 ? `${analytics.feedbackCount} reviews` : 'No feedback yet'}
+                title="Healing Resonance"
+                value={analytics.averageRating ? `${analytics.averageRating.toFixed(1)} ❤️` : 'N/A'}
+                icon={<Heart className="h-6 w-6" />}
+                trend={analytics.feedbackCount > 0 ? `${analytics.feedbackCount} reflections` : 'No feedback yet'}
                 trendType={analytics.averageRating >= 4 ? 'up' : 'neutral'}
-                color="from-yellow-500 to-yellow-600"
+                color="from-pink-500 to-rose-500"
               />
               <StatCard
-                title="User Sentiment"
-                value={`${sentimentData.positive}/${feedback.length}`}
-                icon={<MessageCircle className="h-6 w-6" />}
-                trend="Positive"
+                title="Transformation Energy"
+                value={`${sentimentData.positive}/${feedback.length || 1}`}
+                icon={<Sparkles className="h-6 w-6" />}
+                trend="Glowing with hope"
                 trendType="up"
-                color="from-green-500 to-green-600"
+                color="from-green-500 to-teal-500"
               />
             </div>
 
@@ -558,9 +594,12 @@ export default function AdminDashboard() {
                 className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
-                  <Activity className="h-5 w-5 mr-2 theme-text-primary" />
-                  Engagement Trend
+                  <TrendingUp className="h-5 w-5 mr-2 theme-text-primary" />
+                  The Golden Wave
                 </h3>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
+                  Watch how healing spreads through time ✨
+                </p>
                 <ResponsiveContainer width="100%" height={250}>
                   <AreaChart data={engagementTrend}>
                     <defs>
@@ -604,9 +643,12 @@ export default function AdminDashboard() {
                 className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
-                  <BarChart3 className="h-5 w-5 mr-2 theme-text-primary" />
-                  Feature Usage
+                  <Target className="h-5 w-5 mr-2 theme-text-primary" />
+                  Tools for Repair
                 </h3>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
+                  Which golden practices resonate most? 🛠️
+                </p>
                 <ResponsiveContainer width="100%" height={250}>
                   <BarChart data={featureUsageData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.1} />
