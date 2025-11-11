@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield, FileText } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield, FileText, Volume2 } from 'lucide-react';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -581,9 +581,26 @@ export default function Home() {
                 <Sparkles className="h-8 w-8 theme-text-primary" />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Kintsugi</span>
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Turn setbacks into your career's golden seams</span>
-                <span className="ml-3 px-2 py-1 text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-kintsugi-dark-700 rounded hidden lg:inline" title="How to pronounce Kintsugi">
-                  金継ぎ (kin-TSU-gi)
-                </span>
+                <button
+                  onClick={() => {
+                    const utterance = new SpeechSynthesisUtterance('kintsugi');
+                    utterance.lang = 'ja-JP';
+                    utterance.rate = 0.8;
+                    window.speechSynthesis.speak(utterance);
+                  }}
+                  className="ml-3 px-3 py-1.5 text-xs bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200 dark:border-amber-700 rounded-lg hidden lg:flex items-center gap-2 hover:from-amber-100 hover:to-orange-100 dark:hover:from-amber-900/30 dark:hover:to-orange-900/30 transition-all group"
+                  title="Click to hear pronunciation"
+                >
+                  <span className="text-gray-700 dark:text-gray-300">
+                    金継ぎ
+                    <span className="mx-1">kin</span>
+                    <span className="mx-1">•</span>
+                    <span className="font-bold text-amber-600 dark:text-amber-400 text-sm">TSU</span>
+                    <span className="mx-1">•</span>
+                    <span className="mx-1">gi</span>
+                  </span>
+                  <Volume2 className="h-3 w-3 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
+                </button>
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
