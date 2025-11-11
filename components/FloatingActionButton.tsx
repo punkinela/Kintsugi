@@ -71,9 +71,10 @@ export default function FloatingActionButton({ onQuickCapture, onNewEntry }: Flo
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  const utterance = new SpeechSynthesisUtterance('kintsugi');
-                  utterance.lang = 'ja-JP';
-                  utterance.rate = 0.8;
+                  const utterance = new SpeechSynthesisUtterance('keen tsoo gee');
+                  utterance.lang = 'en-US';
+                  utterance.rate = 0.7;
+                  utterance.pitch = 1.0;
                   window.speechSynthesis.speak(utterance);
                 }}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors text-sm font-medium"
