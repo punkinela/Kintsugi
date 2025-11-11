@@ -251,19 +251,59 @@ I developed a comprehensive testing strategy that caught 15 critical bugs before
 
 ---
 
+## Phase 3: Kintsugi Philosophy Testing
+
+### Test 17: Navigation Labels
+**Location**: Top navigation bar
+
+1. [ ] Open localhost:3000
+2. [ ] Verify navigation tabs show:
+   - "Home" ✅
+   - "Golden Seams" (NOT "Impact Log" or "Journal") ✅
+   - "Insights" ✅
+   - "Your Edge" ✅
+3. [ ] Click "Golden Seams" tab
+4. [ ] Verify it navigates to the accomplishments/entries page
+
+**Pass Criteria**: ✅ "Golden Seams" appears in navigation
+
+### Test 18: Premium Feature Names
+**Location**: Your Edge dropdown or premium feature cards
+
+1. [ ] Click "Your Edge" in navigation
+2. [ ] Verify dropdown shows:
+   - **"Find Your Gold"** (not "Strength Discovery") ✅
+   - **"Golden Story Builder"** (not "Resume Generator") ✅
+   - **"Your Kintsugi Vessel"** (not "Resilience Map") ✅
+3. [ ] Verify Premium badges appear next to each
+
+**Pass Criteria**: ✅ All three features use Kintsugi naming
+
+### Test 19: Visual Consistency
+**Location**: Throughout app
+
+1. [ ] Navigate through all sections
+2. [ ] Verify Kintsugi philosophy language feels cohesive
+3. [ ] Check for any remaining "Journal" references (should be none)
+4. [ ] Verify tagline: "Turn setbacks into your career's golden seams"
+
+**Pass Criteria**: ✅ No "Journal" references, cohesive Kintsugi messaging
+
+---
+
 ## Cross-Browser Testing
 
-### Test 17: Chrome
+### Test 20: Chrome
 1. [ ] All Phase 1 tests pass
 2. [ ] All Phase 2 tests pass
 3. [ ] Audio works (SpeechSynthesis API)
 
-### Test 18: Firefox
+### Test 21: Firefox
 1. [ ] All Phase 1 tests pass
 2. [ ] All Phase 2 tests pass
 3. [ ] Audio works
 
-### Test 19: Safari
+### Test 22: Safari
 1. [ ] All Phase 1 tests pass
 2. [ ] All Phase 2 tests pass
 3. [ ] Audio works (may have different voice)
@@ -272,17 +312,17 @@ I developed a comprehensive testing strategy that caught 15 critical bugs before
 
 ## Edge Cases & Error Handling
 
-### Test 20: Minimum Word Count Validation
+### Test 23: Minimum Word Count Validation
 1. [ ] Try adding sample with < 50 words
 2. [ ] **Expected**: Alert: "Please paste at least 50 words"
 3. [ ] Button should be disabled when word count < 50
 
-### Test 21: Audio Browser Support
+### Test 24: Audio Browser Support
 1. [ ] Test in browser without SpeechSynthesis
 2. [ ] **Expected**: Audio button still present
 3. [ ] Click should fail gracefully (no crash)
 
-### Test 22: Empty State Handling
+### Test 25: Empty State Handling
 1. [ ] Voice Insights tab with 0 samples
 2. [ ] **Expected**: Should show empty state or prompt
 
@@ -290,11 +330,11 @@ I developed a comprehensive testing strategy that caught 15 critical bugs before
 
 ## Performance Testing
 
-### Test 23: Voice Profile Load Time
+### Test 26: Voice Profile Load Time
 1. [ ] Time how long Voice Profile Manager takes to load
 2. [ ] **Expected**: < 500ms
 
-### Test 24: Sample Analysis Speed
+### Test 27: Sample Analysis Speed
 1. [ ] Time how long it takes to analyze a sample
 2. [ ] **Expected**: < 2 seconds (mostly UI delay)
 
@@ -332,6 +372,12 @@ After completing all tests:
 - [ ] Preferred phrases work
 - [ ] Voice matching applies to reviews
 - [ ] Data persists
+
+**Phase 3 - Kintsugi Philosophy**:
+- [ ] Navigation shows "Golden Seams" (not "Journal")
+- [ ] Premium features use Kintsugi names
+- [ ] No "Journal" references anywhere
+- [ ] Cohesive Kintsugi messaging throughout
 
 **Overall**:
 - [ ] No console errors
