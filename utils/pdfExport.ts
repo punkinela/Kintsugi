@@ -5,7 +5,7 @@
  * with charts, visualizations, and clean formatting.
  */
 
-import jsPDF from 'jspdf';
+import { jsPDF } from 'jspdf';
 
 export interface PortfolioData {
   name: string;

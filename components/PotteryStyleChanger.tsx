@@ -85,8 +85,8 @@ export default function PotteryStyleChanger() {
             >
               <path
                 d={currentStyle.basePath}
-                fill="#8B7355"
-                stroke="#5D4E37"
+                fill="#E07856"
+                stroke="#B85635"
                 strokeWidth="2"
               />
               {/* Sample gold crack */}
