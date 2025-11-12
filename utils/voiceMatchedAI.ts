@@ -211,6 +211,7 @@ export async function learnFromJournalEntry(
     source: 'journal' as const,
     date: entry.date,
     wordCount: entry.accomplishment.split(' ').length,
+    createdAt: entry.date, // Use journal entry date as creation timestamp
   };
 
   // Update voice profile with this sample

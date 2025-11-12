@@ -65,6 +65,7 @@ export default function VoiceProfileManager({ userId, onClose }: VoiceProfileMan
       sourceType: sampleType,
       date: new Date().toISOString(),
       wordCount: pastedText.split(' ').length,
+      createdAt: new Date().toISOString(),
     };
 
     try {
