@@ -8,6 +8,8 @@ import { generatePerformanceReview, type PerformanceReviewSection } from '@/util
 import { generateVoiceMatchedPerformanceReview, getVoiceMatchingStatus } from '@/utils/voiceMatchedAI';
 import { JournalEntry } from '@/types/engagement';
 import AIBadge from '@/components/AIBadge';
+import PDFExportButton from '@/components/PDFExportButton';
+import { PortfolioData } from '@/utils/pdfExport';
 
 export default function AIPerformanceReviewGenerator() {
   const [entries, setEntries] = useState<JournalEntry[]>([]);
@@ -146,6 +148,53 @@ export default function AIPerformanceReviewGenerator() {
     URL.revokeObjectURL(url);
   };
 
+  const getPDFData = (): PortfolioData => {
+    if (!review) {
+      return {
+        name: 'User',
+        title: 'Performance Review',
+        summary: '',
+        accomplishments: [],
+      };
+    }
+
+    // Get user data if available
+    const userData = localStorage.getItem('user');
+    const userName = userData ? JSON.parse(userData).name || 'Professional' : 'Professional';
+
+    const filteredEntries = getFilteredEntries();
+    const timeframeLabel = timeframe === 'custom' ? `Past ${customDays} Days` : timeframe.charAt(0).toUpperCase() + timeframe.slice(1);
+
+    // Convert review sections to accomplishments
+    const accomplishments = review.sections.flatMap(section =>
+      section.bullets.map((bullet, index) => ({
+        title: `${section.title} - Achievement ${index + 1}`,
+        description: bullet,
+        date: new Date().toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long'
+        }),
+        category: section.title,
+      }))
+    );
+
+    // Calculate metrics
+    const uniqueCategories = new Set(filteredEntries.map(e => e.category || 'General'));
+
+    return {
+      name: userName,
+      title: `Performance Review - ${timeframeLabel}`,
+      summary: review.summary,
+      accomplishments,
+      metrics: [
+        { label: 'Review Period', value: timeframeLabel },
+        { label: 'Total Entries', value: filteredEntries.length },
+        { label: 'Key Areas', value: uniqueCategories.size },
+      ],
+      period: `Generated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`,
+    };
+  };
+
   const filteredEntries = getFilteredEntries();
 
   return (
@@ -281,21 +330,29 @@ export default function AIPerformanceReviewGenerator() {
           )}
 
           {/* Actions */}
-          <div className="flex gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             <button
               onClick={handleCopy}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold"
             >
               {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               {copied ? 'Copied!' : 'Copy to Clipboard'}
             </button>
             <button
               onClick={handleDownload}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
             >
               <Download className="h-4 w-4" />
-              Download as Text
+              Download Text
             </button>
+            <PDFExportButton
+              data={getPDFData()}
+              variant="primary"
+              size="md"
+              className="w-full"
+            >
+              Export PDF
+            </PDFExportButton>
           </div>
 
           {/* Summary */}
