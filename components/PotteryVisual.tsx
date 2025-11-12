@@ -223,10 +223,10 @@ export default function PotteryVisual({
         {/* Info Tooltip */}
         {showInfo && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            initial={{ opacity: 0, scale: 0.9, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="absolute bottom-full mb-2 right-0 w-64 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/90 dark:to-purple-900/90 rounded-lg p-3 shadow-xl border border-blue-200 dark:border-blue-700 z-50"
+            className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-72 bg-white dark:bg-gray-900 rounded-xl p-4 shadow-2xl border-2 border-amber-300 dark:border-amber-700 z-[100]"
           >
             <button
               onClick={() => setShowInfo(false)}
@@ -234,30 +234,30 @@ export default function PotteryVisual({
             >
               <X className="h-3 w-3" />
             </button>
-            <h4 className="text-xs font-bold text-blue-900 dark:text-blue-200 mb-1.5 flex items-center gap-1">
-              <Sparkles className="h-3 w-3" />
+            <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-1.5">
+              <Sparkles className="h-4 w-4 text-amber-500" />
               Unlock New Pottery Styles
             </h4>
-            <div className="space-y-1 text-xs text-blue-800 dark:text-blue-300">
-              <div className="flex justify-between">
-                <span>🏺 Tea Bowl</span>
-                <span className="text-blue-600 dark:text-blue-400">Now</span>
+            <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">🏺 Tea Bowl</span>
+                <span className="text-amber-600 dark:text-amber-400 font-semibold">Now</span>
               </div>
-              <div className="flex justify-between">
-                <span>🏺 Tall Vase</span>
-                <span className="text-blue-600 dark:text-blue-400">5 entries</span>
+              <div className="flex justify-between items-center">
+                <span className="font-medium">🏺 Tall Vase</span>
+                <span className="text-gray-600 dark:text-gray-400">5 entries</span>
               </div>
-              <div className="flex justify-between">
-                <span>🍽️ Serving Plate</span>
-                <span className="text-blue-600 dark:text-blue-400">12 entries</span>
+              <div className="flex justify-between items-center">
+                <span className="font-medium">🍽️ Serving Plate</span>
+                <span className="text-gray-600 dark:text-gray-400">12 entries</span>
               </div>
-              <div className="flex justify-between">
-                <span>🏺 Storage Jar</span>
-                <span className="text-blue-600 dark:text-blue-400">25 entries</span>
+              <div className="flex justify-between items-center">
+                <span className="font-medium">🏺 Storage Jar</span>
+                <span className="text-gray-600 dark:text-gray-400">25 entries</span>
               </div>
             </div>
-            <p className="text-xs text-blue-700 dark:text-blue-400 mt-2 italic">
-              💡 Change pottery in <strong>Personal Insights → Workshop Tools</strong>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700 italic">
+              💡 Change pottery in <strong className="text-gray-900 dark:text-white">Personal Insights → Workshop Tools</strong>
             </p>
           </motion.div>
         )}
