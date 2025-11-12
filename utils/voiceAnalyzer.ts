@@ -36,6 +36,23 @@ const FORMAL_INDICATORS = new Set([
   'leverage', 'utilize', 'facilitate', 'collaborate', 'synergy',
   'stakeholder', 'deliverable', 'bandwidth', 'ecosystem', 'holistic',
   'paradigm', 'optimize', 'strategize', 'actionable', 'scalable',
+  'aforementioned', 'heretofore', 'nevertheless', 'furthermore', 'therefore',
+  'accordingly', 'subsequently', 'notwithstanding', 'pursuant', 'henceforth',
+]);
+
+// Words that indicate casual/conversational tone
+const CASUAL_INDICATORS = new Set([
+  'gonna', 'wanna', 'yeah', 'nope', 'yep', 'hey', 'cool', 'awesome',
+  'stuff', 'things', 'guys', 'folks', 'basically', 'literally', 'actually',
+  'pretty', 'really', 'super', 'totally', 'kinda', 'sorta', 'okay', 'ok',
+]);
+
+// Contractions indicate more casual writing
+const CONTRACTIONS = new Set([
+  "don't", "won't", "can't", "shouldn't", "wouldn't", "couldn't", "haven't",
+  "hasn't", "hadn't", "isn't", "aren't", "wasn't", "weren't", "i'm", "i've",
+  "i'll", "i'd", "you're", "you've", "you'll", "you'd", "we're", "we've",
+  "we'll", "we'd", "they're", "they've", "they'll", "they'd", "it's", "that's",
 ]);
 
 // Pronouns to track for personal voice analysis
@@ -45,6 +62,121 @@ const PERSONAL_PRONOUNS = {
   my: ['my', 'mine'],
   our: ['our', 'ours'],
 };
+
+/**
+ * Detect tone (formal vs casual) with enhanced analysis
+ */
+function detectTone(words: string[], sentences: string[]): {
+  toneScore: number; // 1-10, where 1 is very casual, 10 is very formal
+  toneDescription: string;
+} {
+  let toneScore = 5; // Start neutral
+
+  // Check for formal indicators
+  const formalCount = words.filter(w => FORMAL_INDICATORS.has(w)).length;
+  toneScore += Math.min(formalCount * 0.3, 3);
+
+  // Check for casual indicators
+  const casualCount = words.filter(w => CASUAL_INDICATORS.has(w)).length;
+  toneScore -= Math.min(casualCount * 0.3, 3);
+
+  // Check for contractions (casual)
+  const contractionCount = words.filter(w => CONTRACTIONS.has(w)).length;
+  toneScore -= Math.min(contractionCount * 0.2, 2);
+
+  // Check sentence structure complexity
+  const avgSentenceLength = words.length / Math.max(sentences.length, 1);
+  if (avgSentenceLength > 25) toneScore += 1; // Long sentences = more formal
+  if (avgSentenceLength < 10) toneScore -= 1; // Short sentences = more casual
+
+  // Check for questions (casual) vs statements (formal)
+  const questionCount = sentences.filter(s => s.trim().endsWith('?')).length;
+  const questionRatio = questionCount / Math.max(sentences.length, 1);
+  if (questionRatio > 0.3) toneScore -= 1;
+
+  // Check for exclamations (enthusiastic/casual)
+  const exclamationCount = sentences.filter(s => s.trim().endsWith('!')).length;
+  if (exclamationCount > 0) toneScore -= 0.5;
+
+  // Clamp score between 1-10
+  toneScore = Math.max(1, Math.min(10, toneScore));
+
+  let toneDescription: string;
+  if (toneScore >= 8) toneDescription = 'Very Formal';
+  else if (toneScore >= 6) toneDescription = 'Formal';
+  else if (toneScore >= 4) toneDescription = 'Balanced';
+  else if (toneScore >= 2) toneDescription = 'Casual';
+  else toneDescription = 'Very Casual';
+
+  return { toneScore: Math.round(toneScore * 10) / 10, toneDescription };
+}
+
+/**
+ * Analyze sentence structure patterns
+ */
+function analyzeSentenceStructure(sentences: string[], words: string[]): {
+  questionFrequency: number;
+  exclamationFrequency: number;
+  avgWordsPerSentence: number;
+  sentenceVariety: number; // 0-100, measures variety in sentence length
+} {
+  const sentenceCount = Math.max(sentences.length, 1);
+  const questionCount = sentences.filter(s => s.trim().endsWith('?')).length;
+  const exclamationCount = sentences.filter(s => s.trim().endsWith('!')).length;
+
+  const questionFrequency = (questionCount / sentenceCount) * 100;
+  const exclamationFrequency = (exclamationCount / sentenceCount) * 100;
+  const avgWordsPerSentence = words.length / sentenceCount;
+
+  // Calculate sentence length variety (standard deviation)
+  const sentenceLengths = sentences.map(s =>
+    (s.match(/\b\w+(?:'\w+)?\b/g) || []).length
+  );
+  const avgLength = sentenceLengths.reduce((a, b) => a + b, 0) / sentenceCount;
+  const variance = sentenceLengths.reduce((sum, len) =>
+    sum + Math.pow(len - avgLength, 2), 0
+  ) / sentenceCount;
+  const stdDev = Math.sqrt(variance);
+
+  // Normalize variety score (higher stdDev = more variety)
+  const sentenceVariety = Math.min(100, (stdDev / avgLength) * 100);
+
+  return {
+    questionFrequency: Math.round(questionFrequency),
+    exclamationFrequency: Math.round(exclamationFrequency),
+    avgWordsPerSentence: Math.round(avgWordsPerSentence * 10) / 10,
+    sentenceVariety: Math.round(sentenceVariety),
+  };
+}
+
+/**
+ * Calculate vocabulary richness metrics
+ */
+function analyzeVocabularyRichness(words: string[]): {
+  lexicalDiversity: number; // Type-Token Ratio: unique words / total words
+  vocabularyLevel: string;
+  uniqueWordCount: number;
+} {
+  const totalWords = words.length;
+  const uniqueWords = new Set(words);
+  const uniqueWordCount = uniqueWords.size;
+
+  // Calculate lexical diversity (Type-Token Ratio)
+  const lexicalDiversity = totalWords > 0 ? (uniqueWordCount / totalWords) * 100 : 0;
+
+  let vocabularyLevel: string;
+  if (lexicalDiversity >= 70) vocabularyLevel = 'Very Rich';
+  else if (lexicalDiversity >= 50) vocabularyLevel = 'Rich';
+  else if (lexicalDiversity >= 35) vocabularyLevel = 'Moderate';
+  else if (lexicalDiversity >= 20) vocabularyLevel = 'Basic';
+  else vocabularyLevel = 'Simple';
+
+  return {
+    lexicalDiversity: Math.round(lexicalDiversity * 10) / 10,
+    vocabularyLevel,
+    uniqueWordCount,
+  };
+}
 
 /**
  * Analyze a text sample and extract voice metrics
@@ -103,6 +235,11 @@ export function analyzeWritingSample(text: string): VoiceMetrics {
     ['love', 'hate', 'excited', 'frustrated', 'proud', 'worried', 'happy', 'sad'].includes(w)
   );
 
+  // Advanced NLP Analysis
+  const toneAnalysis = detectTone(words, sentences);
+  const structureAnalysis = analyzeSentenceStructure(sentences, words);
+  const vocabularyAnalysis = analyzeVocabularyRichness(words);
+
   return {
     wordCount,
     sentenceCount,
@@ -113,6 +250,16 @@ export function analyzeWritingSample(text: string): VoiceMetrics {
     activeVoicePercentage: Math.round(activeVoicePercentage),
     pronounUsage,
     emotionalWords,
+
+    // Enhanced metrics
+    toneScore: toneAnalysis.toneScore,
+    toneDescription: toneAnalysis.toneDescription,
+    questionFrequency: structureAnalysis.questionFrequency,
+    exclamationFrequency: structureAnalysis.exclamationFrequency,
+    sentenceVariety: structureAnalysis.sentenceVariety,
+    lexicalDiversity: vocabularyAnalysis.lexicalDiversity,
+    vocabularyLevel: vocabularyAnalysis.vocabularyLevel,
+    uniqueWordCount: vocabularyAnalysis.uniqueWordCount,
   };
 }
 
@@ -176,6 +323,51 @@ export function createVoiceProfile(
 }
 
 /**
+ * Calculate confidence score using advanced metrics
+ * Confidence = quality and quantity of data we have
+ */
+function calculateConfidenceScore(
+  sampleCount: number,
+  writingSamples: WritingSample[],
+  latestMetrics: VoiceMetrics
+): number {
+  let confidence = 0;
+
+  // Base confidence from number of samples (0-40 points)
+  confidence += Math.min(40, sampleCount * 4);
+
+  // Quality bonus for substantial samples (0-20 points)
+  const totalWords = writingSamples.reduce((sum, s) => sum + s.wordCount, 0);
+  const avgWordsPerSample = totalWords / sampleCount;
+  if (avgWordsPerSample > 100) confidence += 10;
+  if (avgWordsPerSample > 200) confidence += 10;
+
+  // Diversity bonus for varied samples (0-15 points)
+  if (latestMetrics.lexicalDiversity && latestMetrics.lexicalDiversity > 40) {
+    confidence += 10;
+  }
+  if (latestMetrics.sentenceVariety && latestMetrics.sentenceVariety > 30) {
+    confidence += 5;
+  }
+
+  // Consistency bonus - if we have enough samples to detect patterns (0-15 points)
+  if (sampleCount >= 5) confidence += 10;
+  if (sampleCount >= 10) confidence += 5;
+
+  // Recency bonus - recent samples are more valuable (0-10 points)
+  const recentSamples = writingSamples.filter(s => {
+    const sampleDate = new Date(s.createdAt);
+    const daysSince = (Date.now() - sampleDate.getTime()) / (1000 * 60 * 60 * 24);
+    return daysSince < 30; // Within last 30 days
+  });
+  if (recentSamples.length >= 3) confidence += 5;
+  if (recentSamples.length >= 5) confidence += 5;
+
+  // Clamp between 0-100
+  return Math.min(100, Math.max(0, Math.round(confidence)));
+}
+
+/**
  * Update an existing voice profile with a new sample
  */
 export function updateVoiceProfileWithSample(
@@ -236,8 +428,8 @@ export function updateVoiceProfileWithSample(
   // Add sample to history (keep last N samples)
   const writingSamples = [...profile.writingSamples, sample].slice(-DEFAULT_CONFIG.maxSamples);
 
-  // Calculate confidence score (0-100)
-  const confidenceScore = Math.min(100, sampleCount * 5 + (sample.wordCount > 200 ? 10 : 0));
+  // Enhanced confidence scoring algorithm
+  const confidenceScore = calculateConfidenceScore(sampleCount, writingSamples, metrics);
 
   return {
     ...profile,
@@ -279,25 +471,47 @@ export function generateVoicePrompt(profile: VoiceProfile): string {
     pronounGuidance = 'Prefer "we" over "I" (this user emphasizes collaboration).';
   }
 
+  // Get latest sample metrics for advanced features
+  const latestSample = profile.writingSamples[profile.writingSamples.length - 1];
+  const toneGuidance = latestSample?.toneDescription
+    ? `- Tone: ${latestSample.toneDescription} (score: ${latestSample.toneScore}/10)`
+    : '';
+  const questionGuidance = latestSample?.questionFrequency
+    ? `- Use questions ${latestSample.questionFrequency}% of the time (user's natural frequency)`
+    : '';
+  const vocabularyGuidance = latestSample?.vocabularyLevel
+    ? `- Vocabulary richness: ${latestSample.vocabularyLevel}`
+    : '';
+
   return `
 CRITICAL: Match this user's authentic writing style exactly. Do not use generic AI language.
 
 WRITING STYLE:
 - Formality level: ${profile.formalityScore}/10 (${profile.formalityScore > 7 ? 'formal' : profile.formalityScore > 4 ? 'balanced' : 'casual'})
+${toneGuidance}
 - Average sentence length: ${Math.round(profile.avgSentenceLength)} words
 - Active voice: ${profile.activeVoicePercentage}% of the time
 ${pronounGuidance ? `- ${pronounGuidance}` : ''}
+${questionGuidance}
 
 VOCABULARY:
 - Words this user commonly uses: ${topWords}
 - NEVER use these words: ${avoidWords}
 ${profile.preferredPhrases.length > 0 ? `- Preferred phrases: ${profile.preferredPhrases.join(', ')}` : ''}
+${vocabularyGuidance}
 
-TONE:
+TONE & DETAIL:
 - Emotional tone: ${profile.emotionalTone}
 - Detail level: ${profile.detailLevel}
 
-Write as if you ARE this person. Match their natural voice, vocabulary, and style. If unsure, choose simpler, more direct language.
+CRITICAL REMINDERS:
+- This is a REAL PERSON with a unique voice, NOT a generic AI
+- Match their exact vocabulary, sentence patterns, and tone
+- If they use casual language, use casual language
+- If they use technical terms, use technical terms
+- If unsure, choose simpler, more direct language
+
+Write as if you ARE this person. Your goal is to be indistinguishable from their authentic writing.
 `.trim();
 }
 

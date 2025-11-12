@@ -57,6 +57,17 @@ export interface WritingSample {
   sourceType?: 'email' | 'review' | 'cover_letter' | 'linkedin' | 'other';
   date: string;
   wordCount: number;
+  createdAt: string; // ISO timestamp for recency tracking
+
+  // Advanced NLP Metrics (Phase 4 Enhancements)
+  toneScore?: number;
+  toneDescription?: string;
+  questionFrequency?: number;
+  exclamationFrequency?: number;
+  sentenceVariety?: number;
+  lexicalDiversity?: number;
+  vocabularyLevel?: string;
+  uniqueWordCount?: number;
 }
 
 export interface RejectedWord {
@@ -85,6 +96,16 @@ export interface VoiceMetrics {
   activeVoicePercentage: number;
   pronounUsage: PronounUsage;
   emotionalWords: string[]; // Words indicating tone
+
+  // Advanced NLP Metrics (Phase 4 Enhancements)
+  toneScore?: number; // 1-10 scale (1=very casual, 10=very formal)
+  toneDescription?: string; // Human-readable tone
+  questionFrequency?: number; // % of sentences that are questions
+  exclamationFrequency?: number; // % of sentences with exclamations
+  sentenceVariety?: number; // 0-100, measures variety in sentence length
+  lexicalDiversity?: number; // Type-Token Ratio: unique words / total words
+  vocabularyLevel?: string; // Simple, Basic, Moderate, Rich, Very Rich
+  uniqueWordCount?: number; // Count of unique words
 }
 
 /**
