@@ -173,6 +173,23 @@ export const KINTSUGI_PROMPTS: KintsugiPrompt[] = [
       'What makes this accomplishment meaningful to me?'
     ],
     reflectionGuide: 'Success is temporary and precious. Before rushing to the next goal, pause and fully experience this win. What does it feel like? What does it mean?'
+  },
+
+  {
+    id: 'imperfection-gratitude',
+    principle: 'wabi-sabi',
+    principleName: 'Imperfection Gratitude',
+    principleKanji: '侘寂',
+    dayOfWeek: -1, // Anytime
+    dayName: 'Imperfection Gratitude',
+    prompt: 'Find gratitude in what went wrong',
+    subPrompts: [
+      'Complete this sentence: "I\'m grateful my [thing that went wrong] happened because..."',
+      'What unexpected gift came from this imperfection or failure?',
+      'What would I have missed learning if this had gone perfectly?',
+      'How has this "failure" actually redirected me toward something better?'
+    ],
+    reflectionGuide: 'Wabi-sabi teaches us that imperfections often hold the most valuable lessons. Sometimes our biggest "failures" are actually course corrections guiding us toward our true path. Practice gratitude for what went wrong.'
   }
 ];
 
