@@ -19,6 +19,13 @@ export default function PotterySelection({
 }: PotterySelectionProps) {
   const [selectedStyle, setSelectedStyle] = useState<PotteryStyle>('bowl');
 
+  // Debug: Log pottery styles on mount
+  console.log('🏺 Pottery Selection Modal:', {
+    totalStyles: Object.keys(POTTERY_STYLES).length,
+    styles: Object.keys(POTTERY_STYLES),
+    currentEntryCount
+  });
+
   const handleConfirm = () => {
     if (areSoundsEnabled()) {
       playPotterySelectSound();
