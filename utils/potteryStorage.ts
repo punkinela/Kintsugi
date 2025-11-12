@@ -189,9 +189,9 @@ export function updateUnlockedStyles(
 ): PotteryData {
   const unlockedStyles: PotteryStyle[] = ['bowl']; // Bowl always unlocked
 
-  if (entryCount >= 10) unlockedStyles.push('vase');
-  if (entryCount >= 25) unlockedStyles.push('plate');
-  if (entryCount >= 50) unlockedStyles.push('jar');
+  if (entryCount >= 5) unlockedStyles.push('vase');  // ~1 week of casual use
+  if (entryCount >= 12) unlockedStyles.push('plate'); // ~2-3 weeks
+  if (entryCount >= 25) unlockedStyles.push('jar');   // ~1 month
 
   const updatedData = {
     ...potteryData,

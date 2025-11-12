@@ -54,7 +54,7 @@ export const POTTERY_STYLES: Record<PotteryStyle, PotteryStyleDefinition> = {
     id: 'vase',
     name: 'Tall Vase',
     description: 'Elegant vertical vessel - reach for growth',
-    unlockAt: 10,
+    unlockAt: 5, // ~1 week of casual use
     crackPattern: 'vertical',
     viewBox: '0 0 200 300',
     basePath: 'M80,50 Q100,30 120,50 L115,250 Q100,270 85,250 Z'
@@ -63,7 +63,7 @@ export const POTTERY_STYLES: Record<PotteryStyle, PotteryStyleDefinition> = {
     id: 'plate',
     name: 'Serving Plate',
     description: 'Wide surface to hold your story',
-    unlockAt: 25,
+    unlockAt: 12, // ~2-3 weeks of regular use
     crackPattern: 'spiderweb',
     viewBox: '0 0 300 100',
     basePath: 'M50,50 Q150,30 250,50 L240,60 Q150,80 60,60 Z'
@@ -72,7 +72,7 @@ export const POTTERY_STYLES: Record<PotteryStyle, PotteryStyleDefinition> = {
     id: 'jar',
     name: 'Storage Jar',
     description: 'Round, grounded vessel - holds wisdom',
-    unlockAt: 50,
+    unlockAt: 25, // ~1 month of regular use
     crackPattern: 'horizontal',
     viewBox: '0 0 200 250',
     basePath: 'M75,60 Q75,40 100,40 Q125,40 125,60 L125,200 Q100,220 75,200 Z'

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check, Lock } from 'lucide-react';
+import { X, Check, Lock, Sparkles } from 'lucide-react';
 import { PotteryStyle, POTTERY_STYLES } from '@/types/pottery';
 import { useState } from 'react';
 import { playPotterySelectSound, areSoundsEnabled } from '@/utils/potterySounds';
@@ -76,6 +76,38 @@ export default function PotterySelection({
                 (Unlock more as you journal)
               </span>
             </div>
+          </div>
+
+          {/* About Pottery Info Box */}
+          <div className="mb-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-5 border border-blue-200 dark:border-blue-800">
+            <h3 className="text-sm font-bold text-blue-900 dark:text-blue-200 mb-2 flex items-center gap-2">
+              <Sparkles className="h-4 w-4" />
+              How Pottery Unlocking Works
+            </h3>
+            <p className="text-xs text-blue-800 dark:text-blue-300 mb-3">
+              Each pottery vessel represents a stage in your transformation journey. As you document your experiences, you'll unlock new vessels:
+            </p>
+            <div className="space-y-1.5 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-blue-900 dark:text-blue-200 font-medium">🏺 Tea Bowl</span>
+                <span className="text-blue-700 dark:text-blue-300">Available immediately</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-blue-900 dark:text-blue-200 font-medium">🏺 Tall Vase</span>
+                <span className="text-blue-700 dark:text-blue-300">After 5 entries (~1 week)</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-blue-900 dark:text-blue-200 font-medium">🍽️ Serving Plate</span>
+                <span className="text-blue-700 dark:text-blue-300">After 12 entries (~2-3 weeks)</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-blue-900 dark:text-blue-200 font-medium">🏺 Storage Jar</span>
+                <span className="text-blue-700 dark:text-blue-300">After 25 entries (~1 month)</span>
+              </div>
+            </div>
+            <p className="text-xs text-blue-700 dark:text-blue-400 mt-3 italic">
+              💡 You can change your pottery style anytime in <strong>Personal Insights → Workshop Tools</strong>
+            </p>
           </div>
 
           {/* Pottery Grid */}
