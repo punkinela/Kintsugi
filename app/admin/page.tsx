@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import ThemeSelector from '@/components/ThemeSelector';
+import PotteryStyleChanger from '@/components/PotteryStyleChanger';
 import DashboardCard from '@/components/DashboardCard';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import EmptyState from '@/components/EmptyState';
@@ -1356,9 +1357,13 @@ export default function AdminDashboard() {
         {/* SETTINGS TAB - Theme & Appearance */}
         {activeTab === 'settings' && (
           <div className="space-y-6">
+            {/* Pottery Style Changer */}
+            <PotteryStyleChanger />
+
+            {/* Theme Settings */}
             <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Admin Settings
+                Appearance Settings
               </h2>
               <ThemeSelector />
             </div>

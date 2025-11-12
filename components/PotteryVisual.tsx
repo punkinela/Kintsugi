@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Download } from 'lucide-react';
 import { PotteryData, Crack, POTTERY_STYLES } from '@/types/pottery';
+import { useRef } from 'react';
 
 interface PotteryVisualProps {
   potteryData: PotteryData;
@@ -18,6 +19,7 @@ export default function PotteryVisual({
   onCrackClick
 }: PotteryVisualProps) {
   const style = POTTERY_STYLES[potteryData.selectedStyle];
+  const svgRef = useRef<SVGSVGElement>(null);
 
   // Size mappings
   const sizeClasses = {
@@ -33,6 +35,53 @@ export default function PotteryVisual({
     ? potteryData.cracks.reduce((sum, c) => sum + c.fillPercentage, 0) / totalCracks
     : 0;
 
+  // Export pottery as image
+  const handleExport = () => {
+    if (!svgRef.current) return;
+
+    try {
+      const svgElement = svgRef.current;
+      const svgData = new XMLSerializer().serializeToString(svgElement);
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Set canvas size (higher resolution for better quality)
+      canvas.width = 1200;
+      canvas.height = 1200;
+
+      const img = new Image();
+      const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(svgBlob);
+
+      img.onload = () => {
+        // Fill background with white
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw SVG
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(url);
+
+        // Convert to PNG and download
+        canvas.toBlob((blob) => {
+          if (!blob) return;
+          const pngUrl = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          const date = new Date().toISOString().split('T')[0];
+          link.download = `kintsugi-pottery-${style.name.toLowerCase().replace(' ', '-')}-${date}.png`;
+          link.href = pngUrl;
+          link.click();
+          URL.revokeObjectURL(pngUrl);
+        });
+      };
+
+      img.src = url;
+    } catch (error) {
+      console.error('Error exporting pottery:', error);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center gap-4">
       {/* SVG Pottery */}
@@ -43,6 +92,7 @@ export default function PotteryVisual({
         className={`relative ${sizeClasses[size]}`}
       >
         <svg
+          ref={svgRef}
           viewBox={style.viewBox}
           className="w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
@@ -159,6 +209,19 @@ export default function PotteryVisual({
       <p className="text-xs text-gray-500 dark:text-gray-400 italic">
         {style.name}
       </p>
+
+      {/* Export Button */}
+      {size !== 'small' && (
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleExport}
+          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-sm font-medium rounded-lg shadow-md transition-all"
+        >
+          <Download className="h-4 w-4" />
+          Export as Image
+        </motion.button>
+      )}
     </div>
   );
 }
