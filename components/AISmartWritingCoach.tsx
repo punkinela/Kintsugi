@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, TrendingUp, AlertTriangle, CheckCircle, Lightbulb, X } from 'lucide-react';
+import AIBadge from '@/components/AIBadge';
 
 interface AISmartWritingCoachProps {
   text: string;
@@ -192,6 +193,7 @@ export default function AISmartWritingCoach({ text, onSuggestionApply, compact =
           <div className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 theme-text-primary" />
             <h3 className="font-semibold text-gray-900 dark:text-white">AI Writing Coach</h3>
+            <AIBadge compact />
           </div>
           <button
             onClick={() => setShowCoach(false)}

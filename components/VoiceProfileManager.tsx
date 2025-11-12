@@ -21,6 +21,7 @@ import {
   analyzeWritingSample,
   hasConfidentVoiceProfile,
 } from '@/utils/voiceAnalyzer';
+import AIBadge from '@/components/AIBadge';
 
 interface VoiceProfileManagerProps {
   userId: string;
@@ -132,9 +133,12 @@ export default function VoiceProfileManager({ userId, onClose }: VoiceProfileMan
             <Volume2 className="h-6 w-6" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Your Voice Profile
-            </h2>
+            <div className="flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Your Voice Profile
+              </h2>
+              <AIBadge />
+            </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Teaching AI to write like you, not like ChatGPT
             </p>

@@ -11,6 +11,7 @@ import {
   type AffirmationRecommendation
 } from '@/utils/aiHelpers';
 import { JournalEntry } from '@/types/engagement';
+import AIBadge from '@/components/AIBadge';
 
 export default function AIInsightsDashboard() {
   const [entries, setEntries] = useState<JournalEntry[]>([]);
@@ -82,6 +83,7 @@ export default function AIInsightsDashboard() {
           <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
             <Brain className="h-6 w-6 text-purple-600" />
             AI Insights & Patterns
+            <AIBadge />
           </h2>
           <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
             Personalized insights based on your Impact Log entries
