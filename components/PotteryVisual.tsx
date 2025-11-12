@@ -211,12 +211,13 @@ export default function PotteryVisual({
         <p className="text-xs text-gray-500 dark:text-gray-400 italic">
           {style.name}
         </p>
+        {/* Info icon - white/light for all themes */}
         <button
           onClick={() => setShowInfo(!showInfo)}
-          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+          className="text-white/80 hover:text-white dark:text-gray-200 dark:hover:text-white transition-colors"
           title="About Pottery Unlocking"
         >
-          <Info className="h-3.5 w-3.5" />
+          <Info className="h-4 w-4" />
         </button>
 
         {/* Info Tooltip */}
