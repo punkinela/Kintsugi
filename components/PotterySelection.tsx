@@ -73,7 +73,7 @@ export default function PotterySelection({
                 4 Unique Vessels Available
               </span>
               <span className="text-amber-600 dark:text-amber-400 text-xs">
-                (Unlock more as you journal)
+                (Unlock more as you document your impact)
               </span>
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function PotterySelection({
               How Pottery Unlocking Works
             </h3>
             <p className="text-xs text-blue-800 dark:text-blue-300 mb-3">
-              Each pottery vessel represents a stage in your transformation journey. As you document your experiences, you'll unlock new vessels:
+              Each pottery vessel represents a stage in your transformation journey. As you log accomplishments and challenges, you'll unlock new vessels:
             </p>
             <div className="space-y-1.5 text-xs">
               <div className="flex items-center justify-between">

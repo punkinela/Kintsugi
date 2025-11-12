@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, Download } from 'lucide-react';
+import { Sparkles, Download, Info, X } from 'lucide-react';
 import { PotteryData, Crack, POTTERY_STYLES } from '@/types/pottery';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 interface PotteryVisualProps {
   potteryData: PotteryData;
@@ -20,6 +20,7 @@ export default function PotteryVisual({
 }: PotteryVisualProps) {
   const style = POTTERY_STYLES[potteryData.selectedStyle];
   const svgRef = useRef<SVGSVGElement>(null);
+  const [showInfo, setShowInfo] = useState(false);
 
   // Size mappings
   const sizeClasses = {
@@ -205,10 +206,61 @@ export default function PotteryVisual({
         </div>
       </motion.div>
 
-      {/* Pottery name */}
-      <p className="text-xs text-gray-500 dark:text-gray-400 italic">
-        {style.name}
-      </p>
+      {/* Pottery name with info */}
+      <div className="relative flex items-center gap-2">
+        <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+          {style.name}
+        </p>
+        <button
+          onClick={() => setShowInfo(!showInfo)}
+          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+          title="About Pottery Unlocking"
+        >
+          <Info className="h-3.5 w-3.5" />
+        </button>
+
+        {/* Info Tooltip */}
+        {showInfo && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="absolute bottom-full mb-2 right-0 w-64 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/90 dark:to-purple-900/90 rounded-lg p-3 shadow-xl border border-blue-200 dark:border-blue-700 z-50"
+          >
+            <button
+              onClick={() => setShowInfo(false)}
+              className="absolute top-1 right-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            >
+              <X className="h-3 w-3" />
+            </button>
+            <h4 className="text-xs font-bold text-blue-900 dark:text-blue-200 mb-1.5 flex items-center gap-1">
+              <Sparkles className="h-3 w-3" />
+              Unlock New Pottery Styles
+            </h4>
+            <div className="space-y-1 text-xs text-blue-800 dark:text-blue-300">
+              <div className="flex justify-between">
+                <span>🏺 Tea Bowl</span>
+                <span className="text-blue-600 dark:text-blue-400">Now</span>
+              </div>
+              <div className="flex justify-between">
+                <span>🏺 Tall Vase</span>
+                <span className="text-blue-600 dark:text-blue-400">5 entries</span>
+              </div>
+              <div className="flex justify-between">
+                <span>🍽️ Serving Plate</span>
+                <span className="text-blue-600 dark:text-blue-400">12 entries</span>
+              </div>
+              <div className="flex justify-between">
+                <span>🏺 Storage Jar</span>
+                <span className="text-blue-600 dark:text-blue-400">25 entries</span>
+              </div>
+            </div>
+            <p className="text-xs text-blue-700 dark:text-blue-400 mt-2 italic">
+              💡 Change pottery in <strong>Personal Insights → Workshop Tools</strong>
+            </p>
+          </motion.div>
+        )}
+      </div>
 
       {/* Export Button */}
       {size !== 'small' && (
