@@ -193,22 +193,22 @@ export default function PotteryVisual({
         className="flex gap-4 text-sm"
       >
         <div className="text-center">
-          <div className="font-bold text-gray-800 dark:text-gray-200">{totalCracks}</div>
-          <div className="text-xs text-gray-600 dark:text-gray-400">cracks</div>
+          <div className="font-bold text-white dark:text-white">{totalCracks}</div>
+          <div className="text-xs text-white/80 dark:text-gray-300">cracks</div>
         </div>
         <div className="text-center">
-          <div className="font-bold text-amber-600 dark:text-amber-400">{filledCracks}</div>
-          <div className="text-xs text-gray-600 dark:text-gray-400">golden seams</div>
+          <div className="font-bold text-amber-300 dark:text-amber-400">{filledCracks}</div>
+          <div className="text-xs text-white/80 dark:text-gray-300">golden seams</div>
         </div>
         <div className="text-center">
-          <div className="font-bold text-gray-800 dark:text-gray-200">{Math.round(avgFill)}%</div>
-          <div className="text-xs text-gray-600 dark:text-gray-400">healed</div>
+          <div className="font-bold text-white dark:text-white">{Math.round(avgFill)}%</div>
+          <div className="text-xs text-white/80 dark:text-gray-300">healed</div>
         </div>
       </motion.div>
 
       {/* Pottery name with info */}
       <div className="relative flex items-center gap-2">
-        <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+        <p className="text-xs text-white/90 dark:text-gray-300 italic">
           {style.name}
         </p>
         {/* Info icon - white/light for all themes */}
