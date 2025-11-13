@@ -99,22 +99,95 @@ export const XP_VALUES: Record<string, XPAction> = {
 };
 
 // Level titles and requirements
+// Journey from Fixed Mindset → Growth Mindset → Kintsugi Mastery
 export const LEVEL_TITLES: Record<number, string> = {
-  1: 'Cracked Vessel', // Acknowledging imperfection
-  2: 'Gold Seeker', // Looking for transformation
-  3: 'Seam Filler', // Beginning repair
-  4: 'Pattern Recognizer', // Seeing your growth patterns
-  5: 'Transformation Artist', // Actively creating change
-  10: 'Golden Thread Weaver', // Connecting the pieces
-  15: 'Imperfection Embracer', // Accepting flaws as beauty
-  20: 'Kintsugi Craftsperson', // Skilled at transformation
-  25: 'Master Restorer', // Expert at turning breaks into beauty
-  30: 'Wisdom Keeper', // Sharing knowledge with others
+  // Phase 1: Awakening (Fixed → Aware)
+  1: 'Curious Explorer', // Starting with openness
+  2: 'Possibility Seeker', // Recognizing growth is possible
+  3: 'Challenge Accepter', // Beginning to embrace difficulty
+  4: 'Pattern Noticer', // Observing how growth works
+  5: 'Growth Explorer', // Actively seeking development
+
+  // Phase 2: Practice (Building Growth Habits)
+  6: 'Effort Embracer', // Seeing effort as path to mastery
+  7: 'Feedback Learner', // Learning from criticism
+  8: 'Persistence Builder', // Not giving up on setbacks
+  9: 'Mistake Transformer', // Turning failures into lessons
+  10: 'Golden Thread Weaver', // Connecting growth patterns (Kintsugi begins)
+
+  // Phase 3: Integration (Growth Mindset Active)
+  11: 'Challenge Champion', // Actively seeking challenges
+  12: 'Resilience Crafter', // Building strength through adversity
+  13: 'Progress Celebrator', // Recognizing small wins
+  14: 'Breakthrough Maker', // Pushing past plateaus
+  15: 'Imperfection Appreciator', // Seeing beauty in flaws
+  16: 'Growth Catalyst', // Inspiring growth in yourself
+  17: 'Wisdom Seeker', // Always learning
+  18: 'Strength Sculptor', // Actively shaping yourself
+  19: 'Journey Embracer', // Loving the process
+  20: 'Kintsugi Apprentice', // Learning the art of transformation
+
+  // Phase 4: Mastery (Embodying Growth)
+  21: 'Transformation Guide', // Starting to help others
+  22: 'Mindset Master', // Growth is second nature
+  23: 'Adversity Alchemist', // Turning setbacks to gold
+  24: 'Limitation Breaker', // Moving past perceived limits
+  25: 'Beauty Creator', // Finding beauty in imperfection
+  26: 'Potential Unleashed', // Fully expressing capability
+  27: 'Growth Ambassador', // Spreading growth mindset
+  28: 'Resilience Exemplar', // Model of perseverance
+  29: 'Wisdom Weaver', // Connecting insights
+  30: 'Change Champion', // Leading transformation
+
+  // Phase 5: Wisdom (Kintsugi Mastery)
   35: 'Golden Vessel', // Embodying the philosophy
   40: 'Living Kintsugi', // You ARE the transformation
-  45: 'Radiant Phoenix', // Rising from every setback
-  50: 'Golden Masterwork' // The ultimate transformation
+  45: 'Radiant Phoenix', // Rising stronger from every setback
+  50: 'Masterwork in Progress' // Always growing, never "done"
 };
+
+// Growth Mindset Phase Descriptions
+export const GROWTH_PHASES = {
+  awakening: {
+    name: 'Awakening',
+    levels: [1, 2, 3, 4, 5],
+    description: 'Moving from fixed to growth mindset. Recognizing that abilities can be developed through effort and learning.',
+    color: 'from-blue-400 to-cyan-500'
+  },
+  practice: {
+    name: 'Practice',
+    levels: [6, 7, 8, 9, 10],
+    description: 'Building growth habits. Learning to embrace effort, feedback, and mistakes as opportunities.',
+    color: 'from-green-400 to-emerald-500'
+  },
+  integration: {
+    name: 'Integration',
+    levels: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+    description: 'Growth mindset becomes natural. Actively seeking challenges and celebrating progress.',
+    color: 'from-yellow-400 to-orange-500'
+  },
+  mastery: {
+    name: 'Mastery',
+    levels: [21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+    description: 'Embodying growth mindset. Turning adversity into strength and helping others grow.',
+    color: 'from-purple-400 to-pink-500'
+  },
+  wisdom: {
+    name: 'Wisdom',
+    levels: [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+    description: 'Kintsugi mastery. Living the philosophy of finding beauty in imperfection and transformation.',
+    color: 'from-amber-400 to-yellow-600'
+  }
+};
+
+// Get phase for a given level
+export function getPhaseForLevel(level: number): keyof typeof GROWTH_PHASES {
+  if (level <= 5) return 'awakening';
+  if (level <= 10) return 'practice';
+  if (level <= 20) return 'integration';
+  if (level <= 30) return 'mastery';
+  return 'wisdom';
+}
 
 // Calculate XP needed for level
 export function calculateXPForLevel(level: number): number {

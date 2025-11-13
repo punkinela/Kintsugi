@@ -35,6 +35,7 @@ import ExportManager from '@/components/ExportManager';
 import AIBadge from '@/components/AIBadge';
 import InAppWeeklyDigest from '@/components/InAppWeeklyDigest';
 import AutoProfileBuilder from '@/components/AutoProfileBuilder';
+import GrowthMindsetTracker from '@/components/GrowthMindsetTracker';
 import {
   getAnalyticsData,
   getAllFeedback,
@@ -153,7 +154,7 @@ export default function AdminDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d' | 'all'>('30d');
-  const [activeTab, setActiveTab] = useState<'overview' | 'journal' | 'demographics' | 'journey' | 'insights' | 'settings'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'journal' | 'demographics' | 'journey' | 'insights' | 'growth' | 'settings'>('overview');
   const [demographicsRefresh, setDemographicsRefresh] = useState(0);
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [currentStreak, setCurrentStreak] = useState(0);
@@ -448,6 +449,7 @@ export default function AdminDashboard() {
               { id: 'demographics', label: 'Your Profile', icon: User },
               { id: 'journey', label: 'Transformation Path', icon: Map },
               { id: 'insights', label: 'Patterns of Repair', icon: Brain },
+              { id: 'growth', label: 'Growth Mindset', icon: TrendingUp },
               { id: 'settings', label: 'Workshop Tools', icon: Settings }
             ].map((tab, index) => (
               <motion.button
@@ -844,7 +846,23 @@ export default function AdminDashboard() {
                 </h3>
                 {hasGamificationData && (
                   <div className="text-sm text-gray-500 dark:text-gray-400">
-                    Level: <span className="font-bold theme-text-primary">{gamificationData.level || 1}</span>
+                    <span className="font-bold theme-text-primary">
+                      {(() => {
+                        const level = gamificationData.level || 1;
+                        const titles: Record<number, string> = {
+                          1: 'Curious Explorer', 2: 'Possibility Seeker', 3: 'Challenge Accepter',
+                          4: 'Pattern Noticer', 5: 'Growth Explorer', 6: 'Effort Embracer',
+                          7: 'Feedback Learner', 8: 'Persistence Builder', 9: 'Mistake Transformer',
+                          10: 'Golden Thread Weaver', 15: 'Imperfection Appreciator',
+                          20: 'Kintsugi Apprentice', 25: 'Beauty Creator', 30: 'Change Champion',
+                          35: 'Golden Vessel', 40: 'Living Kintsugi', 45: 'Radiant Phoenix',
+                          50: 'Masterwork in Progress'
+                        };
+                        if (titles[level]) return titles[level];
+                        const closest = Math.max(...Object.keys(titles).map(Number).filter(k => k <= level));
+                        return titles[closest] || 'Curious Explorer';
+                      })()}
+                    </span>
                   </div>
                 )}
               </div>
@@ -863,16 +881,50 @@ export default function AdminDashboard() {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-4 rounded-lg border border-purple-200 dark:border-purple-700">
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-4 rounded-lg border border-purple-200 dark:border-purple-700 col-span-2">
                     <div className="flex items-center justify-between mb-2">
                       <Award className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                      <span className="text-xs text-purple-600 dark:text-purple-400 font-medium">Level</span>
+                      <span className="text-xs text-purple-600 dark:text-purple-400 font-medium">Growth Journey</span>
                     </div>
-                    <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">
-                      {gamificationData.level || 1}
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">
+                        Level {gamificationData.level || 1}
+                      </div>
+                      <div className="text-sm text-purple-700 dark:text-purple-300 font-medium">
+                        {(() => {
+                          const level = gamificationData.level || 1;
+                          const titles: Record<number, string> = {
+                            1: 'Curious Explorer', 2: 'Possibility Seeker', 3: 'Challenge Accepter',
+                            4: 'Pattern Noticer', 5: 'Growth Explorer', 6: 'Effort Embracer',
+                            7: 'Feedback Learner', 8: 'Persistence Builder', 9: 'Mistake Transformer',
+                            10: 'Golden Thread Weaver', 15: 'Imperfection Appreciator',
+                            20: 'Kintsugi Apprentice', 25: 'Beauty Creator', 30: 'Change Champion',
+                            35: 'Golden Vessel', 40: 'Living Kintsugi', 45: 'Radiant Phoenix',
+                            50: 'Masterwork in Progress'
+                          };
+                          if (titles[level]) return titles[level];
+                          const closest = Math.max(...Object.keys(titles).map(Number).filter(k => k <= level));
+                          return titles[closest] || 'Curious Explorer';
+                        })()}
+                      </div>
                     </div>
-                    <div className="text-xs text-purple-600 dark:text-purple-400 mt-1">
-                      Points: {gamificationData.points?.toLocaleString() || 0}
+                    <div className="flex items-center gap-2 text-xs mt-2">
+                      <span className={`px-2 py-1 rounded-full font-medium ${
+                        (gamificationData.level || 1) <= 5 ? 'bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200' :
+                        (gamificationData.level || 1) <= 10 ? 'bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200' :
+                        (gamificationData.level || 1) <= 20 ? 'bg-yellow-200 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-200' :
+                        (gamificationData.level || 1) <= 30 ? 'bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200' :
+                        'bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200'
+                      }`}>
+                        {(gamificationData.level || 1) <= 5 ? 'Awakening' :
+                         (gamificationData.level || 1) <= 10 ? 'Practice' :
+                         (gamificationData.level || 1) <= 20 ? 'Integration' :
+                         (gamificationData.level || 1) <= 30 ? 'Mastery' :
+                         'Wisdom'} Phase
+                      </span>
+                      <span className="text-purple-600 dark:text-purple-400">
+                        {gamificationData.points?.toLocaleString() || 0} Points
+                      </span>
                     </div>
                   </div>
 
@@ -1353,6 +1405,19 @@ export default function AdminDashboard() {
                 <ExportManager />
               </div>
             </div>
+          </div>
+        )}
+
+        {/* GROWTH MINDSET TAB */}
+        {activeTab === 'growth' && (
+          <div className="space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <GrowthMindsetTracker />
+            </motion.div>
           </div>
         )}
 

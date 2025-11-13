@@ -48,6 +48,7 @@ import ProfileCard from '@/components/ProfileCard';
 import ProfileCompletionReminder from '@/components/ProfileCompletionReminder';
 import FAQSidebar from '@/components/FAQSidebar';
 import AboutPhilosophyModal from '@/components/AboutPhilosophyModal';
+import JourneyProgressWidget from '@/components/JourneyProgressWidget';
 
 // Phase 9: Interactivity & Polish
 import ToastNotification, { useToast } from '@/components/ToastNotification';
@@ -1183,6 +1184,9 @@ export default function Home() {
                 onGetInsight={generateBiasInsight}
                 isLoading={biasInsightLoading}
               />
+
+              {/* Journey Progress Widget - Growth Mindset Tracker */}
+              <JourneyProgressWidget />
 
               {/* Fresh Start Welcome - Research-Backed Return Messaging */}
               {user && <FreshStartWelcome userName={user.name} />}
