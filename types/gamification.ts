@@ -24,7 +24,7 @@ export interface EnhancedAchievement {
   unlockedAt?: string;
   progress: number;
   target: number;
-  category: 'engagement' | 'streak' | 'accomplishments' | 'features' | 'social' | 'special';
+  category: 'engagement' | 'streak' | 'accomplishments' | 'features' | 'social' | 'special' | 'ai-voice' | 'ai-tools' | 'growth';
 }
 
 export interface DailyChallenge {
