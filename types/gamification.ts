@@ -24,7 +24,7 @@ export interface EnhancedAchievement {
   unlockedAt?: string;
   progress: number;
   target: number;
-  category: 'engagement' | 'streak' | 'accomplishments' | 'features' | 'social' | 'special';
+  category: 'engagement' | 'streak' | 'accomplishments' | 'features' | 'social' | 'special' | 'ai-voice' | 'ai-tools' | 'growth';
 }
 
 export interface DailyChallenge {
@@ -100,20 +100,20 @@ export const XP_VALUES: Record<string, XPAction> = {
 
 // Level titles and requirements
 export const LEVEL_TITLES: Record<number, string> = {
-  1: 'Newcomer',
-  2: 'Getting Started',
-  3: 'Rising Star',
-  4: 'Dedicated Writer',
-  5: 'Explorer',
-  10: 'Believer',
-  15: 'Achiever',
-  20: 'Champion',
-  25: 'Master',
-  30: 'Legend',
-  35: 'Icon',
-  40: 'Hero',
-  45: 'Titan',
-  50: 'Remarkable One'
+  1: 'Cracked Vessel', // Acknowledging imperfection
+  2: 'Gold Seeker', // Looking for transformation
+  3: 'Seam Filler', // Beginning repair
+  4: 'Pattern Recognizer', // Seeing your growth patterns
+  5: 'Transformation Artist', // Actively creating change
+  10: 'Golden Thread Weaver', // Connecting the pieces
+  15: 'Imperfection Embracer', // Accepting flaws as beauty
+  20: 'Kintsugi Craftsperson', // Skilled at transformation
+  25: 'Master Restorer', // Expert at turning breaks into beauty
+  30: 'Wisdom Keeper', // Sharing knowledge with others
+  35: 'Golden Vessel', // Embodying the philosophy
+  40: 'Living Kintsugi', // You ARE the transformation
+  45: 'Radiant Phoenix', // Rising from every setback
+  50: 'Golden Masterwork' // The ultimate transformation
 };
 
 // Calculate XP needed for level

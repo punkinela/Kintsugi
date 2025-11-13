@@ -255,6 +255,164 @@ export const ENHANCED_ACHIEVEMENTS: Omit<EnhancedAchievement, 'unlocked' | 'unlo
     pointsReward: 5000,
     target: 50,
     category: 'special'
+  },
+
+  // AI Feature Achievements (Phase 4)
+  {
+    id: 'voice-first-sample',
+    title: 'Finding My Voice',
+    description: 'Add your first writing sample to voice profile',
+    icon: '🎤',
+    tier: 'bronze',
+    xpReward: 150,
+    pointsReward: 75,
+    target: 1,
+    category: 'ai-voice'
+  },
+  {
+    id: 'voice-confident',
+    title: 'Voice Sculptor',
+    description: 'Build voice profile to 50% confidence',
+    icon: '🎨',
+    tier: 'silver',
+    xpReward: 300,
+    pointsReward: 150,
+    target: 50,
+    category: 'ai-voice'
+  },
+  {
+    id: 'voice-master',
+    title: 'Voice Master',
+    description: 'Achieve 100% voice profile confidence',
+    icon: '🎭',
+    tier: 'gold',
+    xpReward: 750,
+    pointsReward: 375,
+    target: 100,
+    category: 'ai-voice'
+  },
+  {
+    id: 'voice-samples-5',
+    title: 'Voice Library',
+    description: 'Add 5 writing samples to your voice profile',
+    icon: '📚',
+    tier: 'silver',
+    xpReward: 250,
+    pointsReward: 125,
+    target: 5,
+    category: 'ai-voice'
+  },
+  {
+    id: 'pdf-first-export',
+    title: 'Portfolio Pro',
+    description: 'Export your first professional PDF portfolio',
+    icon: '📄',
+    tier: 'bronze',
+    xpReward: 200,
+    pointsReward: 100,
+    target: 1,
+    category: 'ai-tools'
+  },
+  {
+    id: 'ai-generation-used',
+    title: 'AI Collaborator',
+    description: 'Use voice-matched AI generation 5 times',
+    icon: '🤝',
+    tier: 'silver',
+    xpReward: 300,
+    pointsReward: 150,
+    target: 5,
+    category: 'ai-tools'
+  },
+  {
+    id: 'ai-generation-expert',
+    title: 'AI Partnership Master',
+    description: 'Use voice-matched AI generation 25 times',
+    icon: '⚡',
+    tier: 'gold',
+    xpReward: 600,
+    pointsReward: 300,
+    target: 25,
+    category: 'ai-tools'
+  },
+  {
+    id: 'word-rejection',
+    title: 'Authenticity Guardian',
+    description: 'Teach AI by rejecting 5 suggested words',
+    icon: '🛡️',
+    tier: 'bronze',
+    xpReward: 150,
+    pointsReward: 75,
+    target: 5,
+    category: 'ai-voice'
+  },
+  {
+    id: 'ai-insights-viewed',
+    title: 'Pattern Spotter',
+    description: 'View AI Insights Dashboard 5 times',
+    icon: '🔮',
+    tier: 'silver',
+    xpReward: 200,
+    pointsReward: 100,
+    target: 5,
+    category: 'ai-tools'
+  },
+
+  // Growth Mindset Achievements
+  {
+    id: 'imperfection-gratitude-1',
+    title: 'Embracing Flaws',
+    description: 'Complete your first Imperfection Gratitude reflection',
+    icon: '✨',
+    tier: 'bronze',
+    xpReward: 150,
+    pointsReward: 75,
+    target: 1,
+    category: 'growth'
+  },
+  {
+    id: 'imperfection-gratitude-10',
+    title: 'Flaw Transformer',
+    description: 'Complete 10 Imperfection Gratitude reflections',
+    icon: '🌱',
+    tier: 'silver',
+    xpReward: 400,
+    pointsReward: 200,
+    target: 10,
+    category: 'growth'
+  },
+  {
+    id: 'imperfection-gratitude-30',
+    title: 'Kintsugi Philosopher',
+    description: 'Complete 30 Imperfection Gratitude reflections',
+    icon: '🏺',
+    tier: 'gold',
+    xpReward: 1000,
+    pointsReward: 500,
+    target: 30,
+    category: 'growth'
+  },
+  {
+    id: 'growth-mindset-streak',
+    title: 'Growth Mindset Champion',
+    description: 'Reflect on growth for 7 consecutive days',
+    icon: '💪',
+    tier: 'gold',
+    xpReward: 800,
+    pointsReward: 400,
+    target: 7,
+    category: 'growth'
+  },
+  {
+    id: 'golden-seams-found',
+    title: 'Beauty in Brokenness',
+    description: 'Identify 10 cracks that became strengths',
+    icon: '💛',
+    tier: 'silver',
+    xpReward: 350,
+    pointsReward: 175,
+    target: 10,
+    category: 'growth'
   }
 ];
 

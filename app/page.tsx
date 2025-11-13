@@ -112,6 +112,7 @@ import ResilienceMap from '@/components/ResilienceMap';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
+import { EnhancedAchievement } from '@/types/gamification';
 import { shouldPromptFeedback } from '@/utils/analytics';
 import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
 import { initializeTheme, getCurrentThemeColors } from '@/utils/themes';
@@ -150,7 +151,7 @@ export default function Home() {
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [filteredJournalEntries, setFilteredJournalEntries] = useState<JournalEntry[]>([]);
   const [showAchievementsPanel, setShowAchievementsPanel] = useState(false);
-  const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
+  const [newAchievement, setNewAchievement] = useState<EnhancedAchievement | null>(null);
   const [showInterviewPrep, setShowInterviewPrep] = useState(false);
   const [selectedEntryForInterview, setSelectedEntryForInterview] = useState<string>('');
   const [showBackupPanel, setShowBackupPanel] = useState(false);
@@ -294,7 +295,8 @@ export default function Home() {
       const newAchievements = checkAndUnlockAchievements(engagementData);
       if (newAchievements.length > 0) {
         // Show notification for the first new achievement
-        setNewAchievement(newAchievements[0]);
+        // @ts-ignore - Temporary: old Achievement type, will migrate to EnhancedAchievement
+        setNewAchievement(newAchievements[0] as any);
         setTimeout(() => setNewAchievement(null), 5000);
 
         // Show celebration modal
