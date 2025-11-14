@@ -385,6 +385,9 @@ export default function Home() {
     // Preserve existing user data if editing
     const existingUser = user || {} as Partial<UserProfile>;
 
+    // Check if this is a new profile or editing existing
+    const isNewProfile = !existingUser.name || existingUser.name === 'Guest' || !existingUser.id;
+
     // Save the complete profile including demographics
     const newUser: UserProfile = {
       ...existingUser, // Preserve any existing fields
@@ -404,13 +407,34 @@ export default function Home() {
     setShowSetup(false);
     setIsEditingProfile(false);
 
-    // Show success toast
-    addToast({
-      type: 'success',
-      title: 'Profile Updated',
-      message: 'Your profile has been saved successfully!',
-      duration: 3000
-    });
+    // Award XP for first-time profile completion
+    if (isNewProfile) {
+      const profileCompletionXP = 50;
+
+      // Update engagement data with XP
+      if (typeof window !== 'undefined') {
+        const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{}');
+        const currentXP = engagement.xp || 0;
+        engagement.xp = currentXP + profileCompletionXP;
+        localStorage.setItem('kintsugi_engagement', JSON.stringify(engagement));
+      }
+
+      // Show celebratory toast for new profile
+      addToast({
+        type: 'success',
+        title: '🎉 Welcome to Kintsugi!',
+        message: `Profile completed! You earned ${profileCompletionXP} XP. Start documenting your impact!`,
+        duration: 5000
+      });
+    } else {
+      // Show regular update toast for profile edits
+      addToast({
+        type: 'success',
+        title: 'Profile Updated',
+        message: 'Your profile has been saved successfully!',
+        duration: 3000
+      });
+    }
 
     // Trigger data refresh
     window.dispatchEvent(new Event('kintsugi-data-updated'));
@@ -483,7 +507,7 @@ export default function Home() {
     {
       key: 'j',
       ctrl: true,
-      description: 'Go to Journal tab',
+      description: 'Go to Impact Log tab',
       action: () => setActiveTab('journal'),
     },
     {
@@ -1193,7 +1217,9 @@ export default function Home() {
 
               {/* Weekly Digest - AI-Powered Progress Summary */}
               <div ref={weeklyDigestRef}>
-                <InAppWeeklyDigest />
+                <InAppWeeklyDigest
+                  onLogAchievement={() => setActiveTab('journal')}
+                />
               </div>
 
               {/* Profile Completion Reminder */}
@@ -1299,7 +1325,7 @@ export default function Home() {
                   addToast({
                     type: 'success',
                     title: 'Quick Entry Saved!',
-                    message: 'Building your Impact Loging habit, one entry at a time.',
+                    message: 'Building your Impact Log habit, one entry at a time.',
                     duration: 3000
                   });
                 }}
@@ -1858,6 +1884,10 @@ export default function Home() {
         <BiasInsightModal
           onClose={() => setShowBiasInsight(false)}
           insight={biasInsight}
+          onTakeAction={() => {
+            setActiveTab('journal');
+            setShowBiasInsight(false);
+          }}
         />
       )}
 

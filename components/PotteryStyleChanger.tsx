@@ -190,7 +190,7 @@ export default function PotteryStyleChanger() {
 
         {/* Help Text */}
         <p className="text-xs text-gray-500 dark:text-gray-400 italic mt-4 text-center">
-          Your pottery evolves as you journal. Unlock new styles by documenting your journey.
+          Your pottery evolves as you log entries. Unlock new styles by documenting your journey.
         </p>
       </div>
     </>
