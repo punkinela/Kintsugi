@@ -71,7 +71,7 @@ export default function QuickEntryCard({ onSave }: QuickEntryCardProps) {
               </span>
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Capture your thoughts lightning-fast
+              For wins, accomplishments, and things that went RIGHT
             </p>
           </div>
         </div>
@@ -172,10 +172,30 @@ export default function QuickEntryCard({ onSave }: QuickEntryCardProps) {
         </motion.div>
       )}
 
+      {/* When to Use This */}
+      <div className="mt-4 p-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800/30 rounded-lg">
+        <p className="text-xs font-semibold text-blue-700 dark:text-blue-400 mb-2">
+          ✅ Use Quick Entry for:
+        </p>
+        <ul className="text-xs text-gray-700 dark:text-gray-300 space-y-1 ml-4">
+          <li>• "Shipped the new feature today"</li>
+          <li>• "Client loved my presentation"</li>
+          <li>• "Got promoted to senior consultant"</li>
+        </ul>
+        <div className="mt-3 pt-3 border-t border-blue-200 dark:border-blue-800/30">
+          <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 mb-1">
+            💎 Got a setback or challenge?
+          </p>
+          <p className="text-xs text-gray-600 dark:text-gray-400">
+            Use the <strong>Growth Mindset Tracker</strong> (in Insights tab) to transform it into wisdom
+          </p>
+        </div>
+      </div>
+
       {/* Encouraging Message */}
       <div className="mt-4 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800/30 rounded-lg">
         <p className="text-xs text-gray-700 dark:text-gray-300">
-          <strong className="text-purple-700 dark:text-purple-400">💡 Tiny Habits Research:</strong> Even 30-second entries help build consistent Impact Loging habits. Short is better than skipping!
+          <strong className="text-purple-700 dark:text-purple-400">💡 Tiny Habits Research:</strong> Even 30-second entries help build consistent Impact Log habits. Short is better than skipping!
         </p>
       </div>
     </motion.div>
