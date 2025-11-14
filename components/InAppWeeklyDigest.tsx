@@ -8,6 +8,7 @@ interface InAppWeeklyDigestProps {
   weeklyData?: WeeklyData;
   onSetGoals?: () => void;
   onViewEntry?: (entryId: string) => void;
+  onLogAchievement?: () => void;
 }
 
 interface WeeklyData {
@@ -143,7 +144,7 @@ function generateMockWeeklyData(): WeeklyData {
   };
 }
 
-export default function InAppWeeklyDigest({ weeklyData, onSetGoals, onViewEntry }: InAppWeeklyDigestProps) {
+export default function InAppWeeklyDigest({ weeklyData, onSetGoals, onViewEntry, onLogAchievement }: InAppWeeklyDigestProps) {
   const [expandedSection, setExpandedSection] = useState<string | null>('highlights');
 
   // Track feature usage
@@ -486,7 +487,10 @@ export default function InAppWeeklyDigest({ weeklyData, onSetGoals, onViewEntry 
         <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
           You're making great progress. Log your next achievement to continue building confidence.
         </p>
-        <button className="px-6 py-3 theme-btn-primary text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all">
+        <button
+          onClick={onLogAchievement}
+          className="px-6 py-3 theme-btn-primary text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all"
+        >
           Log New Achievement
         </button>
       </div>

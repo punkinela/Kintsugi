@@ -367,32 +367,54 @@ export function getPersonalizedWisdom(userProfile: {
   profession?: string;
 }): CulturalQuote[] {
   return CULTURAL_WISDOM.filter(quote => {
-    // Universal quotes always match
-    if (quote.relevantFor.universal) return true;
+    let ethnicityMatch = false;
+    let genderMatch = false;
+    let professionMatch = false;
 
     // Check ethnicity match
     if (userProfile.ethnicity && quote.relevantFor.ethnicities) {
-      if (quote.relevantFor.ethnicities.includes(userProfile.ethnicity)) {
-        return true;
-      }
+      ethnicityMatch = quote.relevantFor.ethnicities.includes(userProfile.ethnicity);
+    } else if (!userProfile.ethnicity && quote.relevantFor.ethnicities) {
+      // If user hasn't specified ethnicity, don't show ethnicity-specific quotes
+      ethnicityMatch = false;
+    } else if (!quote.relevantFor.ethnicities) {
+      // Quote has no specific ethnicity (truly universal)
+      ethnicityMatch = true;
     }
 
     // Check gender match
     if (userProfile.gender && quote.relevantFor.genders) {
-      if (quote.relevantFor.genders.includes(userProfile.gender)) {
-        return true;
-      }
+      genderMatch = quote.relevantFor.genders.includes(userProfile.gender);
+    } else if (!userProfile.gender && quote.relevantFor.genders && !quote.relevantFor.universal) {
+      // If user hasn't specified gender and quote is gender-specific and not universal, don't show
+      genderMatch = false;
+    } else if (!quote.relevantFor.genders) {
+      // Quote has no specific gender requirement
+      genderMatch = true;
+    } else if (quote.relevantFor.universal) {
+      // Universal quotes that have gender can still be shown
+      genderMatch = true;
     }
 
     // Check profession match
     if (userProfile.profession && quote.relevantFor.professions) {
-      const professionMatch = quote.relevantFor.professions.some(prof =>
+      professionMatch = quote.relevantFor.professions.some(prof =>
         userProfile.profession?.toLowerCase().includes(prof.toLowerCase())
       );
-      if (professionMatch) return true;
+    } else if (!quote.relevantFor.professions) {
+      // Quote has no specific profession requirement
+      professionMatch = true;
     }
 
-    return false;
+    // For ethnicity-specific quotes: must match user's ethnicity
+    // For other quotes: match any of the criteria
+    if (quote.relevantFor.ethnicities && quote.relevantFor.ethnicities.length > 0) {
+      // This quote is tied to specific ethnicities - user must match
+      return ethnicityMatch;
+    }
+
+    // For non-ethnicity-specific quotes, match on gender or profession or be truly universal
+    return genderMatch || professionMatch || (!quote.relevantFor.genders && !quote.relevantFor.professions);
   });
 }
 
