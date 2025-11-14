@@ -81,8 +81,11 @@ export default function GrowthMindsetTracker() {
                 Growth Mindset Tracker
               </h2>
             </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Transform challenges into strengths. Track how your "cracks" became golden seams.
+            <p className="text-gray-600 dark:text-gray-400 mb-2">
+              For setbacks, challenges, and things that went WRONG (but you learned from)
+            </p>
+            <p className="text-sm text-amber-600 dark:text-amber-400 mb-4">
+              Transform your "cracks" into golden seams of wisdom
             </p>
 
             {/* Stats Row */}
@@ -130,6 +133,29 @@ export default function GrowthMindsetTracker() {
               <CheckCircle2 className="h-4 w-4" />
               <span>Kintsugi Philosopher (30 reflections)</span>
               {reflections.length >= 30 && <Award className="h-4 w-4 ml-auto" />}
+            </div>
+          </div>
+        </div>
+
+        {/* When to Use This */}
+        <div className="mt-4 pt-4 border-t border-purple-200 dark:border-gray-700">
+          <div className="p-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200 dark:border-amber-800/30 rounded-lg">
+            <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 mb-2">
+              💎 Use Growth Mindset Tracker for:
+            </p>
+            <ul className="text-xs text-gray-700 dark:text-gray-300 space-y-1 ml-4">
+              <li>• "Got rejected from 3 interviews but learned..."</li>
+              <li>• "Missed deadline but built in buffer time now"</li>
+              <li>• "Public call-out for vague emails, created checklist"</li>
+              <li>• "Project failed but discovered better approach"</li>
+            </ul>
+            <div className="mt-3 pt-3 border-t border-amber-200 dark:border-amber-800/30">
+              <p className="text-xs font-semibold text-blue-700 dark:text-blue-400 mb-1">
+                ✅ Got a win or accomplishment?
+              </p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">
+                Use <strong>Quick Entry</strong> (in Home tab) to build momentum fast
+              </p>
             </div>
           </div>
         </div>
@@ -292,12 +318,12 @@ export default function GrowthMindsetTracker() {
               {/* Imperfection/Challenge */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  What was the challenge, flaw, or "crack"?
+                  💔 The Crack: What was the challenge, flaw, or setback?
                 </label>
                 <textarea
                   value={imperfection}
                   onChange={(e) => setImperfection(e.target.value)}
-                  placeholder="Example: I received critical feedback that my presentation skills needed improvement..."
+                  placeholder="Example: Got called out twice for vague email responses. Customer said 'we need timelines' and another colleague found the answer themselves. Manager told me to think before responding vaguely."
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                   rows={3}
                 />
@@ -305,13 +331,13 @@ export default function GrowthMindsetTracker() {
 
               {/* Transformation */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  How did this become a strength or "golden seam"?
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-1">
+                  ✨ The Golden Seam: How did this become a strength?
                 </label>
                 <textarea
                   value={transformation}
                   onChange={(e) => setTransformation(e.target.value)}
-                  placeholder="Example: I practiced public speaking, took a course, and now I confidently present to large audiences..."
+                  placeholder="Example: Created a 5-point email checklist: (1) Does this answer the question? (2) Did I give SPECIFIC timeline? (3) If I don't know, did I say what I'll review and when? (4) Does it sound senior? (5) Would I be satisfied getting this email?"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                   rows={3}
                 />
@@ -319,13 +345,13 @@ export default function GrowthMindsetTracker() {
 
               {/* Lesson Learned */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  What did you learn from this transformation?
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-1">
+                  💡 The Wisdom: What did you learn?
                 </label>
                 <textarea
                   value={lesson}
                   onChange={(e) => setLesson(e.target.value)}
-                  placeholder="Example: Feedback isn't failure—it's information that helps me grow..."
+                  placeholder="Example: When shaken, catch the spiral early. One bad email day doesn't make me incompetent. Writing it down stops the rumination loop. Tools can help but can't replace judgment."
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                   rows={3}
                 />

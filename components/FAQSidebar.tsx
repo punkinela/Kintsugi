@@ -267,6 +267,56 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                 research="Prochaska & DiClemente (1983): Transtheoretical Model—people need different support at different change stages"
               />
 
+              {/* Using the App */}
+              <div className="mt-6 mb-4">
+                <h3 className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-2">
+                  Using the App
+                </h3>
+              </div>
+
+              <FAQItem
+                question="When should I use Quick Entry vs Growth Mindset Tracker?"
+                answer={
+                  <>
+                    <p className="mb-3">
+                      <strong className="text-blue-600 dark:text-blue-400">Use Quick Entry for wins and accomplishments:</strong>
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-3 ml-2 text-sm">
+                      <li>"Shipped the new feature today"</li>
+                      <li>"Client loved my presentation"</li>
+                      <li>"Got promoted to senior consultant"</li>
+                      <li>"Finished migration under budget"</li>
+                    </ul>
+                    <p className="mb-3 text-sm">
+                      <strong>Purpose:</strong> Build confidence momentum, document your impact, stack up wins quickly (30 seconds).
+                    </p>
+
+                    <div className="border-t border-gray-200 dark:border-gray-700 my-3 pt-3">
+                      <p className="mb-3">
+                        <strong className="text-amber-600 dark:text-amber-400">Use Growth Mindset Tracker for setbacks and challenges:</strong>
+                      </p>
+                      <ul className="list-disc list-inside space-y-1 mb-3 ml-2 text-sm">
+                        <li>"Got called out for vague emails but created checklist"</li>
+                        <li>"Missed deadline but learned to build in buffer time"</li>
+                        <li>"Project failed but discovered better approach"</li>
+                        <li>"Got rejected from interviews but identified gaps"</li>
+                      </ul>
+                      <p className="mb-2 text-sm">
+                        <strong>Purpose:</strong> Transform mistakes into wisdom, process spiral-inducing moments, find the gold in the cracks (Kintsugi philosophy).
+                      </p>
+                    </div>
+
+                    <div className="mt-3 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                      <p className="text-xs text-gray-700 dark:text-gray-300">
+                        <strong>💡 The Key Difference:</strong> Quick Entry = "I did something good, let me log it" |
+                        Growth Mindset Tracker = "Something went wrong, but here's what I learned"
+                      </p>
+                    </div>
+                  </>
+                }
+                research="Carol Dweck's Growth Mindset Theory: Focusing on learning from setbacks (not just wins) builds resilience and achievement"
+              />
+
               {/* Career Impact */}
               <div className="mt-6 mb-4">
                 <h3 className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-2">
