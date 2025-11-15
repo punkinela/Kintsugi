@@ -21,19 +21,41 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
   const [rotation, setRotation] = useState(0);
   const [selectedCrack, setSelectedCrack] = useState<Crack | null>(null);
 
-  // Generate cracks based on challenges
+  // Generate cracks based on challenges (more flexible detection)
   const { challenges, growthEntries } = useMemo(() => {
-    const challengeWords = ['difficult', 'struggle', 'challenge', 'hard', 'failed', 'problem'];
-    const growthWords = ['learned', 'grew', 'overcame', 'succeeded', 'achieved'];
+    // Expanded challenge keywords - things people naturally say when facing difficulties
+    const challengeWords = [
+      'difficult', 'struggle', 'challenge', 'hard', 'failed', 'problem',
+      'tough', 'frustrat', 'stress', 'overwhelm', 'worry', 'anxious',
+      'concern', 'issue', 'obstacle', 'barrier', 'setback', 'mistake',
+      'error', 'wrong', 'mistak', 'didn\'t work', 'fell short', 'miss',
+      'delay', 'behind', 'stuck', 'block', 'confus', 'uncertain',
+      'doubt', 'fear', 'afraid', 'nervous', 'pressure', 'deadline',
+      'reject', 'fail', 'loss', 'disappoint', 'upset', 'sad'
+    ];
+
+    // Expanded growth keywords - all the ways people document wins and learning
+    const growthWords = [
+      'learned', 'grew', 'overcame', 'succeeded', 'achieved', 'accomplished',
+      'completed', 'finished', 'delivered', 'shipped', 'launched', 'released',
+      'solved', 'resolved', 'fixed', 'improved', 'better', 'progress',
+      'advance', 'develop', 'built', 'created', 'made', 'designed',
+      'implement', 'success', 'win', 'victory', 'breakthrough', 'milestone',
+      'proud', 'happy', 'excited', 'grateful', 'thankful', 'appreciat',
+      'understand', 'realize', 'discover', 'insight', 'figured out',
+      'master', 'skill', 'expert', 'confident', 'strong', 'capable',
+      'helped', 'support', 'contribut', 'impact', 'difference', 'valuable'
+    ];
 
     const challenges = entries.filter(entry => {
       const text = `${entry.accomplishment} ${entry.reflection || ''}`.toLowerCase();
       return challengeWords.some(word => text.includes(word));
     });
 
+    // Count ANY entry with growth words OR any entry with a reflection as growth
     const growthEntries = entries.filter(entry => {
       const text = `${entry.accomplishment} ${entry.reflection || ''}`.toLowerCase();
-      return growthWords.some(word => text.includes(word)) || entry.reflection;
+      return growthWords.some(word => text.includes(word)) || entry.reflection || entry.accomplishment.length > 20;
     });
 
     return { challenges, growthEntries };

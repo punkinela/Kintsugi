@@ -185,7 +185,7 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
               </h2>
             </div>
             <p className="text-white/90">
-              AI-powered analysis helps you understand and articulate your achievements
+              Automated analysis helps you understand and articulate your achievements
             </p>
             
             {/* Action Buttons */}
@@ -300,11 +300,11 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
                       className="mt-2 flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
                     >
                       <Sparkles className="w-4 h-4" />
-                      Analyze with AI
+                      Analyze Impact
                     </button>
                   </div>
 
-                  {/* AI Analysis Results */}
+                  {/* Automated Analysis Results */}
                   {showAnalysis && analysis && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
