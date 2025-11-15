@@ -76,6 +76,8 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
 
   // Create crack patterns
   useEffect(() => {
+    console.log('🔨 Creating cracks from', challenges.length, 'challenges');
+
     const newCracks: Crack[] = challenges.slice(0, 8).map((entry, index) => {
       // Generate varied crack patterns
       const patterns = [
@@ -93,6 +95,8 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
         new Date(g.date) > new Date(entry.date)
       );
 
+      console.log(`   Crack ${index}: "${entry.accomplishment.substring(0, 30)}" - Repaired: ${hasGrowth}`);
+
       return {
         id: entry.id,
         path: patterns[index] || patterns[0],
@@ -101,6 +105,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       };
     });
 
+    console.log('✅ Setting', newCracks.length, 'cracks, repaired:', newCracks.filter(c => c.isRepaired).length);
     setCracks(newCracks);
   }, [challenges, growthEntries]);
 
@@ -113,6 +118,12 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
   // Repair stats
   const repairedCount = cracks.filter(c => c.isRepaired).length;
   const repairPercentage = cracks.length > 0 ? (repairedCount / cracks.length) * 100 : 0;
+
+  console.log('📊 Vessel stats:', {
+    cracksLength: cracks.length,
+    repairedCount,
+    repairPercentage: repairPercentage.toFixed(1) + '%'
+  });
 
   return (
     <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
