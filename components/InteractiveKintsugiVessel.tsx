@@ -76,37 +76,44 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
 
   // Create crack patterns
   useEffect(() => {
-    console.log('🔨 Creating cracks from', challenges.length, 'challenges');
+    try {
+      console.log('🔨 Creating cracks from', challenges.length, 'challenges');
+      console.log('🔨 Growth entries available:', growthEntries.length);
 
-    const newCracks: Crack[] = challenges.slice(0, 8).map((entry, index) => {
-      // Generate varied crack patterns
-      const patterns = [
-        'M 150,50 Q 160,100 150,150', // Vertical crack
-        'M 50,150 Q 100,140 150,150', // Horizontal crack
-        'M 200,100 Q 180,120 160,140', // Diagonal crack
-        'M 100,50 Q 110,80 120,110', // Short crack
-        'M 250,120 Q 230,140 210,160', // Right side crack
-        'M 150,200 Q 140,220 130,240', // Bottom crack
-        'M 80,80 Q 90,110 100,140', // Left diagonal
-        'M 180,180 Q 170,200 160,220', // Right diagonal
-      ];
+      const newCracks: Crack[] = challenges.slice(0, 8).map((entry, index) => {
+        // Generate varied crack patterns
+        const patterns = [
+          'M 150,50 Q 160,100 150,150', // Vertical crack
+          'M 50,150 Q 100,140 150,150', // Horizontal crack
+          'M 200,100 Q 180,120 160,140', // Diagonal crack
+          'M 100,50 Q 110,80 120,110', // Short crack
+          'M 250,120 Q 230,140 210,160', // Right side crack
+          'M 150,200 Q 140,220 130,240', // Bottom crack
+          'M 80,80 Q 90,110 100,140', // Left diagonal
+          'M 180,180 Q 170,200 160,220', // Right diagonal
+        ];
 
-      const hasGrowth = growthEntries.some(g =>
-        new Date(g.date) > new Date(entry.date)
-      );
+        const hasGrowth = growthEntries.some(g =>
+          new Date(g.date) > new Date(entry.date)
+        );
 
-      console.log(`   Crack ${index}: "${entry.accomplishment.substring(0, 30)}" - Repaired: ${hasGrowth}`);
+        const entryText = entry.accomplishment || 'No description';
+        console.log(`   Crack ${index}: "${entryText.substring(0, 30)}" - Repaired: ${hasGrowth}`);
 
-      return {
-        id: entry.id,
-        path: patterns[index] || patterns[0],
-        fromEntry: entry.accomplishment,
-        isRepaired: hasGrowth
-      };
-    });
+        return {
+          id: entry.id,
+          path: patterns[index] || patterns[0],
+          fromEntry: entry.accomplishment || '',
+          isRepaired: hasGrowth
+        };
+      });
 
-    console.log('✅ Setting', newCracks.length, 'cracks, repaired:', newCracks.filter(c => c.isRepaired).length);
-    setCracks(newCracks);
+      console.log('✅ Setting', newCracks.length, 'cracks, repaired:', newCracks.filter(c => c.isRepaired).length);
+      setCracks(newCracks);
+      console.log('✅ Cracks state updated successfully');
+    } catch (error) {
+      console.error('❌ Error in crack creation useEffect:', error);
+    }
   }, [challenges, growthEntries]);
 
   // Download as image
@@ -119,11 +126,19 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
   const repairedCount = cracks.filter(c => c.isRepaired).length;
   const repairPercentage = cracks.length > 0 ? (repairedCount / cracks.length) * 100 : 0;
 
+  console.log('📊 Vessel RENDER - Cracks in state:', cracks.length);
   console.log('📊 Vessel stats:', {
     cracksLength: cracks.length,
     repairedCount,
-    repairPercentage: repairPercentage.toFixed(1) + '%'
+    repairPercentage: repairPercentage.toFixed(1) + '%',
+    cracksState: cracks
   });
+
+  if (cracks.length === 0 && entries.length > 0) {
+    console.warn('⚠️ WARNING: Vessel has entries but no cracks! This is the bug.');
+    console.log('⚠️ Entries received:', entries.length);
+    console.log('⚠️ Check if useEffect is running');
+  }
 
   return (
     <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
