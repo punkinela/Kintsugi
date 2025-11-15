@@ -192,7 +192,7 @@ export default function AISmartWritingCoach({ text, onSuggestionApply, compact =
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 theme-text-primary" />
-            <h3 className="font-semibold text-gray-900 dark:text-white">AI Writing Coach</h3>
+            <h3 className="font-semibold text-gray-900 dark:text-white">Writing Coach</h3>
             <AIBadge compact />
           </div>
           <button

@@ -1423,8 +1423,9 @@ export default function Home() {
                 user={user}
                 currentStreak={currentStreak}
                 totalEntries={totalEntries}
-                onGetInsight={generateBiasInsight}
+                onGetInsight={() => setShowAccomplishments(true)}
                 isLoading={biasInsightLoading}
+                journalEntries={journalEntries}
               />
 
               {/* Journey Progress Widget - Growth Mindset Tracker */}

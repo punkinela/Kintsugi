@@ -155,7 +155,7 @@ export default function KintsugiWelcomeBanner({
               className="hidden sm:flex flex-shrink-0 items-center px-6 py-3 bg-white theme-text-primary font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Heart className="h-5 w-5 mr-2" />
-              {isLoading ? 'Generating...' : 'Get Insight'}
+              Document Impact
             </motion.button>
           </div>
 

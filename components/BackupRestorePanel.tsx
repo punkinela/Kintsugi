@@ -4,10 +4,13 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield, Download, Upload, AlertTriangle, CheckCircle2,
-  Clock, Database, Calendar, Info, RefreshCw, X
+  Clock, Database, Calendar, Info, RefreshCw, X, FileText, FileJson, FileSpreadsheet
 } from 'lucide-react';
 import {
   downloadBackup,
+  downloadBackupAsJSON,
+  downloadBackupAsCSV,
+  downloadBackupAsMarkdown,
   restoreFromFile,
   getBackupSummary,
   exportAllData
@@ -24,19 +27,34 @@ export default function BackupRestorePanel({ onClose }: BackupRestorePanelProps)
     message: string;
   }>({ type: null, message: '' });
   const [isRestoring, setIsRestoring] = useState(false);
+  const [exportedFormat, setExportedFormat] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleBackup = () => {
-    downloadBackup();
+  const handleBackup = (format: 'json' | 'csv' | 'markdown') => {
+    // Call appropriate export function
+    switch (format) {
+      case 'json':
+        downloadBackupAsJSON();
+        break;
+      case 'csv':
+        downloadBackupAsCSV();
+        break;
+      case 'markdown':
+        downloadBackupAsMarkdown();
+        break;
+    }
+
     setBackupSummary(getBackupSummary());
+    setExportedFormat(format);
     setRestoreStatus({
       type: 'success',
-      message: 'Backup downloaded successfully!'
+      message: `Backup downloaded as ${format.toUpperCase()} successfully!`
     });
 
-    // Clear success message after 3 seconds
+    // Clear success message and format after 3 seconds
     setTimeout(() => {
       setRestoreStatus({ type: null, message: '' });
+      setExportedFormat(null);
     }, 3000);
   };
 
@@ -208,20 +226,115 @@ export default function BackupRestorePanel({ onClose }: BackupRestorePanelProps)
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
               <Download className="h-5 w-5 theme-text-primary" />
-              Create Backup
+              Create Backup - Choose Format
             </h3>
-            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border-2 border-blue-200 dark:border-blue-700">
-              <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-                Download all your data including journal entries, achievements, XP progress, and settings.
-                Keep this file safe - you can use it to restore your data anytime.
-              </p>
-              <button
-                onClick={handleBackup}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Download your data in the format that works best for you
+            </p>
+
+            {/* Export Format Options */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {/* JSON Format */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border-2 border-blue-200 dark:border-blue-700 cursor-pointer transition-all"
+                onClick={() => handleBackup('json')}
               >
-                <Download className="h-5 w-5" />
-                Download Backup File
-              </button>
+                <div className="flex flex-col items-center text-center gap-2">
+                  <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl text-white">
+                    <FileJson className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
+                    JSON (Complete)
+                  </h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    Full backup with all data - can be restored
+                  </p>
+                  {exportedFormat === 'json' ? (
+                    <div className="flex items-center gap-1 text-green-600 dark:text-green-400 text-xs font-medium">
+                      <CheckCircle2 className="h-3 w-3" />
+                      Downloaded!
+                    </div>
+                  ) : (
+                    <button className="w-full mt-2 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg text-xs font-medium hover:shadow-lg transition-all">
+                      Export JSON
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* CSV Format */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border-2 border-green-200 dark:border-green-700 cursor-pointer transition-all"
+                onClick={() => handleBackup('csv')}
+              >
+                <div className="flex flex-col items-center text-center gap-2">
+                  <div className="p-3 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl text-white">
+                    <FileSpreadsheet className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
+                    CSV Spreadsheet
+                  </h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    Journal entries for Excel/Sheets analysis
+                  </p>
+                  {exportedFormat === 'csv' ? (
+                    <div className="flex items-center gap-1 text-green-600 dark:text-green-400 text-xs font-medium">
+                      <CheckCircle2 className="h-3 w-3" />
+                      Downloaded!
+                    </div>
+                  ) : (
+                    <button className="w-full mt-2 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg text-xs font-medium hover:shadow-lg transition-all">
+                      Export CSV
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* Markdown Format */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border-2 border-purple-200 dark:border-purple-700 cursor-pointer transition-all"
+                onClick={() => handleBackup('markdown')}
+              >
+                <div className="flex flex-col items-center text-center gap-2">
+                  <div className="p-3 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl text-white">
+                    <FileText className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
+                    Markdown File
+                  </h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    Human-readable format for notes
+                  </p>
+                  {exportedFormat === 'markdown' ? (
+                    <div className="flex items-center gap-1 text-green-600 dark:text-green-400 text-xs font-medium">
+                      <CheckCircle2 className="h-3 w-3" />
+                      Downloaded!
+                    </div>
+                  ) : (
+                    <button className="w-full mt-2 px-3 py-1.5 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-lg text-xs font-medium hover:shadow-lg transition-all">
+                      Export Markdown
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Format Tips */}
+            <div className="mt-4 bg-gray-50 dark:bg-kintsugi-dark-700 rounded-lg p-3 border theme-border-light">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2 text-sm">
+                💡 Format Guide
+              </h4>
+              <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                <li>• <strong>JSON:</strong> Complete backup - use this to restore all your data</li>
+                <li>• <strong>CSV:</strong> Spreadsheet format - analyze your entries in Excel or Google Sheets</li>
+                <li>• <strong>Markdown:</strong> Plain text - read in note apps or view on GitHub</li>
+              </ul>
             </div>
           </div>
 

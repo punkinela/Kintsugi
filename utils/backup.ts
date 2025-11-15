@@ -104,9 +104,16 @@ export function importAllData(backupData: BackupData): {
 }
 
 /**
- * Download backup data as JSON file
+ * Download backup data as JSON file (default format)
  */
 export function downloadBackup(): void {
+  downloadBackupAsJSON();
+}
+
+/**
+ * Download backup as JSON (complete data preservation)
+ */
+export function downloadBackupAsJSON(): void {
   const backupData = exportAllData();
   const filename = `kintsugi-backup-${new Date().toISOString().split('T')[0]}.json`;
 
@@ -114,16 +121,167 @@ export function downloadBackup(): void {
     type: 'application/json'
   });
 
+  downloadFile(blob, filename);
+
+  // Update last backup date
+  localStorage.setItem('lastBackupDate', new Date().toISOString());
+}
+
+/**
+ * Download backup as CSV (journal entries only, for spreadsheet analysis)
+ */
+export function downloadBackupAsCSV(): void {
+  const backupData = exportAllData();
+  const engagementData = backupData.data.engagementData;
+
+  if (!engagementData || !engagementData.journalEntries || engagementData.journalEntries.length === 0) {
+    alert('No journal entries to export. Your backup is empty.');
+    return;
+  }
+
+  const entries = engagementData.journalEntries;
+
+  // CSV Headers
+  const headers = ['Date', 'Category', 'Mood', 'Accomplishment', 'Reflection', 'Tags', 'Impact Score'];
+
+  // Build CSV content
+  const rows = entries.map((entry: any) => [
+    new Date(entry.date).toLocaleDateString(),
+    entry.category || '',
+    entry.mood || '',
+    `"${(entry.accomplishment || '').replace(/"/g, '""')}"`, // Escape quotes
+    `"${(entry.reflection || '').replace(/"/g, '""')}"`,
+    (entry.tags || []).join('; '),
+    entry.impactScore || ''
+  ]);
+
+  // Combine headers and rows
+  const csvContent = [
+    headers.join(','),
+    ...rows.map((row: string[]) => row.join(','))
+  ].join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const filename = `kintsugi-backup-${new Date().toISOString().split('T')[0]}.csv`;
+
+  downloadFile(blob, filename);
+
+  // Update last backup date
+  localStorage.setItem('lastBackupDate', new Date().toISOString());
+}
+
+/**
+ * Download backup as Markdown (human-readable format)
+ */
+export function downloadBackupAsMarkdown(): void {
+  const backupData = exportAllData();
+  const engagementData = backupData.data.engagementData;
+
+  let markdown = '# Kintsugi Data Backup\n\n';
+
+  // Metadata
+  markdown += `**Backup Date:** ${new Date(backupData.timestamp).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  })}\n\n`;
+  markdown += `**Version:** ${backupData.version}\n\n`;
+  markdown += '---\n\n';
+
+  // User Profile
+  if (backupData.data.userProfile) {
+    const profile = backupData.data.userProfile;
+    markdown += '## User Profile\n\n';
+    if (profile.name) markdown += `**Name:** ${profile.name}\n`;
+    if (profile.profession) markdown += `**Profession:** ${profile.profession}\n`;
+    if (profile.yearsOfExperience) markdown += `**Years of Experience:** ${profile.yearsOfExperience}\n`;
+    markdown += '\n---\n\n';
+  }
+
+  // Gamification Stats
+  if (backupData.data.gamificationData) {
+    const gamification = backupData.data.gamificationData;
+    markdown += '## Progress & Achievements\n\n';
+    if (gamification.totalXP) markdown += `**Total XP:** ${gamification.totalXP}\n`;
+    if (gamification.level) markdown += `**Level:** ${gamification.level}\n`;
+    if (gamification.currentStreak) markdown += `**Current Streak:** ${gamification.currentStreak} days 🔥\n`;
+    markdown += '\n---\n\n';
+  }
+
+  // Journal Entries
+  if (engagementData && engagementData.journalEntries && engagementData.journalEntries.length > 0) {
+    const entries = engagementData.journalEntries;
+    markdown += `## Journal Entries (${entries.length} total)\n\n`;
+
+    entries.forEach((entry: any, index: number) => {
+      markdown += `### ${index + 1}. ${entry.category || 'General'}\n\n`;
+      markdown += `**Date:** ${new Date(entry.date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}\n\n`;
+
+      if (entry.mood) {
+        const moodEmojis: Record<string, string> = {
+          'great': '😄',
+          'good': '🙂',
+          'neutral': '😐',
+          'challenging': '😟',
+          'difficult': '😔'
+        };
+        const moodEmoji = moodEmojis[entry.mood] || '😐';
+        markdown += `**Mood:** ${moodEmoji} ${entry.mood}\n\n`;
+      }
+
+      markdown += `**Accomplishment:**\n\n${entry.accomplishment}\n\n`;
+
+      if (entry.reflection) {
+        markdown += `**Reflection:**\n\n${entry.reflection}\n\n`;
+      }
+
+      if (entry.tags && entry.tags.length > 0) {
+        markdown += `**Tags:** ${entry.tags.map((t: string) => `#${t}`).join(' ')}\n\n`;
+      }
+
+      if (entry.impactScore) {
+        markdown += `**Impact Score:** ${entry.impactScore}/100\n\n`;
+      }
+
+      markdown += '---\n\n';
+    });
+  }
+
+  // Settings
+  if (backupData.data.theme || backupData.data.themeColor) {
+    markdown += '## Settings\n\n';
+    if (backupData.data.theme) markdown += `**Theme:** ${backupData.data.theme}\n`;
+    if (backupData.data.themeColor) markdown += `**Theme Color:** ${backupData.data.themeColor}\n`;
+    markdown += '\n---\n\n';
+  }
+
+  markdown += '\n*Generated by Kintsugi - Own Your Impact*\n';
+
+  const blob = new Blob([markdown], { type: 'text/markdown' });
+  const filename = `kintsugi-backup-${new Date().toISOString().split('T')[0]}.md`;
+
+  downloadFile(blob, filename);
+
+  // Update last backup date
+  localStorage.setItem('lastBackupDate', new Date().toISOString());
+}
+
+/**
+ * Helper function to download a file
+ */
+function downloadFile(blob: Blob, filename: string): void {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
   link.download = filename;
   link.click();
-
   URL.revokeObjectURL(url);
-
-  // Update last backup date
-  localStorage.setItem('lastBackupDate', new Date().toISOString());
 }
 
 /**
