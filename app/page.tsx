@@ -358,11 +358,22 @@ export default function Home() {
 
     const loadData = () => {
       try {
-        const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
+        // Check BOTH possible storage keys (some users have 'engagementData', others have 'kintsugi_engagement')
+        let engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
+
+        // If kintsugi_engagement is empty, try the old key 'engagementData'
+        if (!engagement.journalEntries || engagement.journalEntries.length === 0) {
+          const oldData = JSON.parse(localStorage.getItem('engagementData') || '{"journalEntries":[]}');
+          if (oldData.journalEntries && oldData.journalEntries.length > 0) {
+            console.log('📦 Found data in OLD key (engagementData), using that instead');
+            engagement = oldData;
+          }
+        }
+
         const entries = engagement.journalEntries || [];
 
-        // Debug: Check what's in kintsugi_engagement
-        console.log('🔍 Quick Entry data (kintsugi_engagement):', entries.length, 'entries');
+        // Debug: Check what's in storage
+        console.log('🔍 Quick Entry data:', entries.length, 'entries');
         if (entries.length > 0) {
           console.log('   First entry:', entries[0]);
         }
