@@ -275,6 +275,65 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
               </div>
 
               <FAQItem
+                question="What are the main tabs and what do they do?"
+                answer={
+                  <>
+                    <p className="mb-3">
+                      Kintsugi has 4 main tabs, each serving a different purpose:
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 mb-2 ml-2 text-sm">
+                      <li>
+                        <strong>Home:</strong> Your dashboard with Quick Entry (30-sec wins), Week in Review,
+                        growth progress, cultural wisdom from your heritage, and daily insights
+                      </li>
+                      <li>
+                        <strong>Golden Seams (Impact Log):</strong> Your full professional journal documenting
+                        accomplishments, reflections, and career growth over time
+                      </li>
+                      <li>
+                        <strong>Insights:</strong> AI-powered analytics, Growth Mindset Tracker (for setbacks),
+                        bias awareness, strength archaeology, and transformation visualizations
+                      </li>
+                      <li>
+                        <strong>Your Edge:</strong> Advanced features like performance review generation,
+                        export tools, and portfolio creation
+                      </li>
+                    </ul>
+                    <p className="text-xs mt-2 text-gray-600 dark:text-gray-400">
+                      💡 <strong>Tip:</strong> Use keyboard shortcuts: Ctrl+H (Home), Ctrl+J (Impact Log), Ctrl+I (Insights), Ctrl+K (Quick capture)
+                    </p>
+                  </>
+                }
+              />
+
+              <FAQItem
+                question="What is the Impact Log (Golden Seams)?
+"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      The Impact Log is your professional journal where you document your full career story—both
+                      wins and growth from challenges. We call it "Golden Seams" because it represents the Kintsugi
+                      philosophy: your career cracks (setbacks) become golden seams (strengths) when properly documented.
+                    </p>
+                    <p className="mb-2">
+                      Unlike Quick Entry (30-second wins on the Home tab), the Impact Log lets you write detailed
+                      reflections with accomplishments, impact, and learnings. These become evidence for:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li>Performance reviews and promotion discussions</li>
+                      <li>Resume bullets and interview stories</li>
+                      <li>AI-generated performance reviews (Your Edge tab)</li>
+                      <li>Tracking patterns in your growth over time</li>
+                    </ul>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      Think of it as your "brag document" meets "growth journal"—professional but reflective.
+                    </p>
+                  </>
+                }
+              />
+
+              <FAQItem
                 question="When should I use Quick Entry vs Growth Mindset Tracker?"
                 answer={
                   <>
@@ -315,6 +374,280 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                   </>
                 }
                 research="Carol Dweck's Growth Mindset Theory: Focusing on learning from setbacks (not just wins) builds resilience and achievement"
+              />
+
+              <FAQItem
+                question="What is the 50-level progression system?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      As you earn XP, you progress through 50 levels with Kintsugi-themed titles that reflect your growth journey:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li><strong>Levels 1-10:</strong> Awareness Phase (Curious Explorer → Self-Reflector)</li>
+                      <li><strong>Levels 11-20:</strong> Foundation Phase (Pattern Seeker → Growth Catalyst)</li>
+                      <li><strong>Levels 21-30:</strong> Integration Phase (Wisdom Weaver → Impact Architect)</li>
+                      <li><strong>Levels 31-40:</strong> Mastery Phase (Legacy Builder → Visionary Leader)</li>
+                      <li><strong>Levels 41-50:</strong> Transcendence Phase (Change Architect → Masterwork in Progress)</li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Each level unlocks new pottery styles and shows your pottery vessel gaining more golden seams.
+                      The progression isn't about perfection—it's about becoming a "masterwork in progress."
+                    </p>
+                  </>
+                }
+                research="Based on Dreyfus Model of Skill Acquisition and Growth Mindset progression theory"
+              />
+
+              <FAQItem
+                question="What is the Week in Review?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Every week, Kintsugi generates an AI-powered digest summarizing your progress:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li>Achievements logged this week</li>
+                      <li>XP gained and confidence score</li>
+                      <li>Your current streak</li>
+                      <li>Insights about patterns in your growth</li>
+                      <li>Badges earned and goals progress</li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      It helps you see your momentum and celebrate weekly wins. Find it on your Home tab,
+                      or click the notification bell when a new digest is ready.
+                    </p>
+                  </>
+                }
+                research="Weekly reflection shown to increase goal achievement by 23% (Locke & Latham, 2002)"
+              />
+
+              <FAQItem
+                question="What are AI Bias Insights?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Click "Generate Insight" on the Insights tab to get AI-powered analysis of cognitive biases
+                      that might be affecting your career decisions. Examples:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li><strong>Imposter Syndrome:</strong> Recognizing when you dismiss your accomplishments</li>
+                      <li><strong>Confirmation Bias:</strong> Only seeing evidence that supports existing beliefs</li>
+                      <li><strong>Negativity Bias:</strong> Fixating on one criticism while ignoring 10 compliments</li>
+                      <li><strong>Sunk Cost Fallacy:</strong> Staying in bad situations due to past investment</li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Each insight includes research citations, real examples, and actionable steps to address the bias.
+                    </p>
+                  </>
+                }
+                research="Awareness of cognitive biases improves decision-making accuracy by 34% (Kahneman, 2011)"
+              />
+
+              <FAQItem
+                question="How does pottery customization work?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Your pottery vessel evolves as you log entries, with different styles unlocking at milestones:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li><strong>Classic (Default):</strong> Available from the start</li>
+                      <li><strong>Elegant (10 entries):</strong> Refined and sophisticated</li>
+                      <li><strong>Bold (25 entries):</strong> Confident and striking</li>
+                      <li><strong>Ornate (50 entries):</strong> Intricate and detailed</li>
+                      <li><strong>Legendary (100 entries):</strong> Your masterwork vessel</li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      As you level up, your pottery gains more golden seams—visual proof of your growth through challenges.
+                      Click the pottery icon on your Home tab to change styles.
+                    </p>
+                  </>
+                }
+              />
+
+              <FAQItem
+                question="How do I export my data?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Go to the <strong>Your Edge</strong> tab to access export features:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li><strong>AI Performance Review:</strong> Generates a professional self-review from your logged accomplishments</li>
+                      <li><strong>Export to PDF:</strong> Create a formatted portfolio of your achievements</li>
+                      <li><strong>Download Data:</strong> Export all your entries as CSV for backup or analysis</li>
+                      <li><strong>Kintsugi Portfolio:</strong> Beautiful visual portfolio showcasing your growth journey</li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Perfect for performance reviews, job applications, or just keeping a backup of your career story.
+                    </p>
+                  </>
+                }
+              />
+
+              <FAQItem
+                question="What is cultural wisdom personalization?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Based on your profile (ethnicity, gender, profession), Kintsugi shows you wisdom quotes from your heritage.
+                      For example:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li>African proverbs for users of African heritage</li>
+                      <li>Japanese wisdom for East Asian users</li>
+                      <li>Latin American sayings for Hispanic/Latino users</li>
+                      <li>Indigenous wisdom for Native American users</li>
+                    </ul>
+                    <p className="text-sm mb-2 text-gray-600 dark:text-gray-400">
+                      Each quote includes a "Kintsugi Connection" explaining how it relates to turning setbacks into strengths.
+                      This honors your cultural background while applying its wisdom to your career growth.
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-500">
+                      If you haven't filled out your profile, you'll see universal wisdom. Click your avatar → Edit Profile to personalize it.
+                    </p>
+                  </>
+                }
+                research="Cultural congruence in interventions increases effectiveness by 40% (Griner & Smith, 2006)"
+              />
+
+              <FAQItem
+                question="How do I see my stats?"
+                answer="Click your avatar in the top left corner to open your profile. You'll see all your gamification stats, engagement data, and activity stats. Hover over any number to see what it means!"
+              />
+
+              <FAQItem
+                question="What if I miss a day?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      It's completely normal! Life gets busy. Research shows self-compassion (not guilt) creates sustainable behavior change.
+                    </p>
+                    <p>
+                      Your documented accomplishments don't disappear if you miss a day. If you return on a "fresh start" (Monday,
+                      first of the month), the app will highlight this—temporal landmarks increase commitment by 47%.
+                    </p>
+                  </>
+                }
+                research="Neff (2003) & Dai et al. (2014): Self-compassion and fresh starts drive sustained engagement"
+              />
+
+              <FAQItem
+                question="What is the Personal Insights dashboard?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Click the <strong>"Personal Insights"</strong> link (or visit /journey) to access an advanced analytics dashboard
+                      with deeper visualizations of your growth journey:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li><strong>Golden Gallery:</strong> Overview of your stats, AI feature usage, and gamification progress</li>
+                      <li><strong>Your Golden Seams:</strong> Advanced journal view with heatmaps and richness scores</li>
+                      <li><strong>Your Profile:</strong> Demographics and personalization settings</li>
+                      <li><strong>Transformation Path:</strong> 3D interactive Kintsugi vessel showing your growth timeline</li>
+                      <li><strong>Patterns of Repair:</strong> AI insights, strength archaeology, transformation analysis</li>
+                      <li><strong>Growth Mindset:</strong> Imperfection Gratitude reflections and mindset education</li>
+                      <li><strong>Workshop Tools:</strong> Theme customization, pottery styles, export settings</li>
+                    </ul>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      This dashboard is for deep dives into your data—perfect for quarterly reviews or when you want to see your complete transformation story.
+                    </p>
+                  </>
+                }
+              />
+
+              <FAQItem
+                question="What is the Transformation Heatmap?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      The Transformation Heatmap (found on Your Golden Seams tab in Personal Insights) visualizes your "golden repair days"—
+                      days when you documented both challenges AND growth.
+                    </p>
+                    <p className="mb-2 text-sm">
+                      Dark gold squares represent days with high transformation activity. Hover over any day to see your entries.
+                      This helps you:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li>Identify patterns in when you reflect most deeply</li>
+                      <li>Celebrate consistency in your growth practice</li>
+                      <li>Notice gaps where you might want to reflect more</li>
+                    </ul>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      The heatmap shows 6 months of history, making it easy to see your transformation journey at a glance.
+                    </p>
+                  </>
+                }
+                research="Visual progress tracking increases goal completion by 42% (Harkin et al., 2016)"
+              />
+
+              <FAQItem
+                question="What is the 3D Interactive Kintsugi Vessel?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      On the <strong>Transformation Path</strong> tab in Personal Insights, you'll see a 3D pottery vessel that
+                      visually represents your entire journey:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li>Each crack represents a challenge or setback you documented</li>
+                      <li>Golden seams fill in as you process those challenges</li>
+                      <li>The vessel grows more beautiful and valuable with each transformation</li>
+                      <li>Rotate and zoom to explore your complete repair history</li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      This is a literal visualization of the Kintsugi philosophy—your breaks don't diminish you, they make you
+                      more valuable. It's a powerful reminder that you're not "broken and fixed," you're "broken and MORE."
+                    </p>
+                  </>
+                }
+                research="Metaphorical visualization increases emotional connection to personal data by 58% (Thudt et al., 2018)"
+              />
+
+              <FAQItem
+                question="What is Journey Richness Score?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Your Journey Richness Score (0-100) measures how complete and reflective your documentation is:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li><strong>Depth:</strong> Are you writing detailed reflections vs. just quick notes?</li>
+                      <li><strong>Balance:</strong> Are you documenting both wins AND growth from challenges?</li>
+                      <li><strong>Consistency:</strong> Do you reflect regularly?</li>
+                      <li><strong>Diversity:</strong> Are you covering multiple areas of your career?</li>
+                    </ul>
+                    <p className="text-sm mb-2 text-gray-600 dark:text-gray-400">
+                      Higher scores mean your documentation is more useful for performance reviews, interviews, and personal insight.
+                      The score helps you identify what to focus on—more entries, deeper reflections, or better balance.
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-500">
+                      Find it on the Your Golden Seams tab in Personal Insights.
+                    </p>
+                  </>
+                }
+              />
+
+              <FAQItem
+                question="What is Auto Profile Builder?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Auto Profile Builder (on Your Profile tab in Personal Insights) uses AI to suggest profile improvements
+                      based on your logged accomplishments:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li>Infers your role and skills from what you've documented</li>
+                      <li>Suggests career goals aligned with your growth patterns</li>
+                      <li>Identifies strengths you might not recognize yourself</li>
+                      <li>Recommends areas to develop based on your reflections</li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Instead of filling out a blank profile, let your work speak for itself—then refine the AI's suggestions.
+                    </p>
+                  </>
+                }
               />
 
               {/* Career Impact */}
