@@ -19,10 +19,28 @@ const defaultEngagementData: EngagementData = {
 // Get engagement data from localStorage
 export function getEngagementData(): EngagementData {
   if (typeof window === 'undefined') return defaultEngagementData;
-  
-  const stored = localStorage.getItem(STORAGE_KEY);
+
+  // Check new key first
+  let stored = localStorage.getItem(STORAGE_KEY);
+
+  // If new key is empty or has no entries, try the old key 'engagementData'
+  if (!stored || (stored && JSON.parse(stored).journalEntries?.length === 0)) {
+    const oldStored = localStorage.getItem('engagementData');
+    if (oldStored) {
+      try {
+        const oldData = JSON.parse(oldStored);
+        if (oldData.journalEntries && oldData.journalEntries.length > 0) {
+          console.log('📦 getEngagementData: Found data in OLD key (engagementData), using that');
+          return oldData;
+        }
+      } catch {
+        // Ignore parse error, will fall through to default
+      }
+    }
+  }
+
   if (!stored) return defaultEngagementData;
-  
+
   try {
     return JSON.parse(stored);
   } catch {
