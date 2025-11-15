@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield, FileText, Volume2 } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield, FileText, Volume2, Download, Filter, TrendingDown, Minus, Activity, Map, Layers, Heart, Star, Users, BarChart3, Trophy } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 // Import components
@@ -103,6 +103,17 @@ import BackupRestorePanel from '@/components/BackupRestorePanel';
 // Voice Learning System
 import VoiceProfileManager from '@/components/VoiceProfileManager';
 
+// Journey App Components
+import KintsugiJournalInsights from '@/components/KintsugiJournalInsights';
+import KintsugiUserJourney from '@/components/KintsugiUserJourney';
+import KintsugiInsightsDashboard from '@/components/KintsugiInsightsDashboard';
+import PotteryStyleChanger from '@/components/PotteryStyleChanger';
+import DashboardCard from '@/components/DashboardCard';
+import LoadingSkeleton from '@/components/LoadingSkeleton';
+import EmptyState from '@/components/EmptyState';
+import AIBadge from '@/components/AIBadge';
+import GrowthMindsetTracker from '@/components/GrowthMindsetTracker';
+
 // Premium Features
 import { PremiumProvider } from '@/contexts/PremiumContext';
 import PremiumBadge from '@/components/PremiumBadge';
@@ -115,15 +126,105 @@ import ResilienceMap from '@/components/ResilienceMap';
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
 import { EnhancedAchievement } from '@/types/gamification';
-import { shouldPromptFeedback } from '@/utils/analytics';
+import { shouldPromptFeedback, getAnalyticsData, getAllFeedback, exportAnalyticsData, exportFeedbackAsCSV, exportAnalyticsSummaryAsCSV, exportCompleteDataAsCSV, downloadFile } from '@/utils/analytics';
+import { analyzeSentiment, analyzeFeedbackSentiments, extractKeywords, analyzeDemographics, getEngagementOverTime, getRatingsTrend, compareWeekOverWeek, analyzeCohorts, analyzeFunnel, getUserJourney } from '@/utils/enhancedAnalytics';
+import { AnalyticsData, UserFeedback } from '@/types/analytics';
 import { useKeyboardShortcuts, type KeyboardShortcut } from '@/hooks/useKeyboardShortcuts';
 import { initializeTheme, getCurrentThemeColors } from '@/utils/themes';
 import { checkAndUnlockAchievements, getAchievementProgress, getEngagementData, updateStreakFromEntries } from '@/utils/engagement';
+import {
+  LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+  Area, AreaChart
+} from 'recharts';
+
+// Color palette for charts
+const COLORS = {
+  primary: '#D4AF37',
+  secondary: '#3B82F6',
+  success: '#10B981',
+  warning: '#F59E0B',
+  danger: '#EF4444',
+  purple: '#8B5CF6',
+  pink: '#EC4899'
+};
+
+const SENTIMENT_COLORS = {
+  positive: COLORS.success,
+  negative: COLORS.danger,
+  neutral: '#6B7280'
+};
+
+type StatCardProps = {
+  title: string;
+  value: string | number;
+  icon: React.ReactNode;
+  trend?: string;
+  trendType?: 'up' | 'down' | 'neutral';
+  color?: string;
+};
+
+const StatCard = ({ title, value, icon, trend, trendType = 'neutral', color = 'theme-gradient-to-r' }: StatCardProps) => {
+  const trendColors = {
+    up: 'text-green-600 dark:text-green-400',
+    down: 'text-red-600 dark:text-red-400',
+    neutral: 'text-gray-600 dark:text-gray-400'
+  };
+
+  const trendIcons = {
+    up: <TrendingUp className="h-4 w-4" />,
+    down: <TrendingDown className="h-4 w-4" />,
+    neutral: <Minus className="h-4 w-4" />
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white dark:bg-kintsugi-dark-800 overflow-hidden shadow-lg rounded-xl border theme-border-light dark:theme-border-primary/50"
+    >
+      <div className="p-5">
+        <div className="flex items-center justify-between">
+          <div className={`flex-shrink-0 p-3 rounded-lg bg-gradient-to-r ${color}`}>
+            <div className="text-white">{icon}</div>
+          </div>
+          <div className="flex-1 ml-5">
+            <dl>
+              <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                {title}
+              </dt>
+              <dd className="flex items-baseline">
+                <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  {value}
+                </div>
+              </dd>
+              {trend && (
+                <dd className={`flex items-center text-sm ${trendColors[trendType]} mt-1`}>
+                  {trendIcons[trendType]}
+                  <span className="ml-1">{trend}</span>
+                </dd>
+              )}
+            </dl>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 export default function Home() {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
-  const [activeTab, setActiveTab] = useState<'home' | 'journal' | 'insights' | 'your-edge'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'journal' | 'insights' | 'your-edge' | 'your-journey'>('home');
+
+  // Your Journey Tab State
+  const [activeJourneyTab, setActiveJourneyTab] = useState<'overview' | 'journal' | 'demographics' | 'journey' | 'insights' | 'growth' | 'settings'>('overview');
+  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
+  const [feedback, setFeedback] = useState<UserFeedback[]>([]);
+  const [isLoadingAnalytics, setIsLoadingAnalytics] = useState(true);
+  const [analyticsError, setAnalyticsError] = useState<string | null>(null);
+  const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d' | 'all'>('30d');
+  const [demographicsRefresh, setDemographicsRefresh] = useState(0);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showBiasInsight, setShowBiasInsight] = useState(false);
   const [themeVersion, setThemeVersion] = useState(0); // Used for data-theme-version attribute
@@ -352,6 +453,39 @@ export default function Home() {
     };
   }, [isClient, statsRefreshKey]);
 
+  // Load analytics data for Your Journey tab
+  useEffect(() => {
+    if (!isClient || activeTab !== 'your-journey') return;
+
+    const loadAnalyticsData = async () => {
+      try {
+        setIsLoadingAnalytics(true);
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const analyticsData = getAnalyticsData();
+        const feedbackData = getAllFeedback();
+
+        setAnalytics(analyticsData);
+        setFeedback(feedbackData);
+        setAnalyticsError(null);
+      } catch (err) {
+        setAnalyticsError('Failed to load analytics data');
+        console.error('Analytics loading error:', err);
+      } finally {
+        setIsLoadingAnalytics(false);
+      }
+    };
+
+    loadAnalyticsData();
+  }, [isClient, activeTab, dateRange, demographicsRefresh]);
+
+  // Reload demographics when activeJourneyTab changes
+  useEffect(() => {
+    if (activeJourneyTab === 'demographics') {
+      setDemographicsRefresh(prev => prev + 1);
+    }
+  }, [activeJourneyTab]);
+
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -381,6 +515,36 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, [isClient, showSetup]);
+
+  // Analytics calculations for Your Journey tab
+  const sentimentData = useMemo(() => {
+    if (!feedback.length) return { positive: 0, neutral: 0, negative: 0 };
+    return analyzeFeedbackSentiments(feedback);
+  }, [feedback]);
+
+  const keywords = useMemo(() => {
+    if (!feedback.length) return [];
+    return extractKeywords(feedback);
+  }, [feedback]);
+
+  const demographics = useMemo(() => {
+    if (!feedback.length || activeJourneyTab !== 'demographics') return null;
+    return analyzeDemographics(feedback);
+  }, [feedback, activeJourneyTab, demographicsRefresh]);
+
+  const engagementTrend = useMemo(() => {
+    if (!analytics) return [];
+    const days = dateRange === '7d' ? 7 : dateRange === '30d' ? 30 : dateRange === '90d' ? 90 : undefined;
+    return getEngagementOverTime(days);
+  }, [analytics, dateRange]);
+
+  const weeklyComparison = useMemo(() => {
+    if (!analytics || !analytics.totalAccomplishments) return null;
+    // Calculate weekly comparison based on analytics data
+    const currentWeek = analytics.totalAccomplishments;
+    const previousWeek = Math.max(0, currentWeek - 5); // Simplified comparison
+    return compareWeekOverWeek(currentWeek, previousWeek);
+  }, [analytics]);
 
   // Handle profile save
   const handleProfileSave = (profileData: UserProfile) => {
@@ -496,6 +660,25 @@ export default function Home() {
         block: 'center'
       });
     }, 100);
+  };
+
+  // Analytics Export Handlers
+  const handleExportJSON = () => {
+    const data = exportAnalyticsData();
+    downloadFile(JSON.stringify(data, null, 2), 'kintsugi-analytics.json', 'application/json');
+    addToast({ type: 'success', title: 'Export Successful', message: 'Analytics data exported as JSON' });
+  };
+
+  const handleExportFeedbackCSV = () => {
+    const csv = exportFeedbackAsCSV();
+    downloadFile(csv, 'kintsugi-feedback.csv', 'text/csv');
+    addToast({ type: 'success', title: 'Export Successful', message: 'Feedback exported as CSV' });
+  };
+
+  const handleExportCompleteCSV = () => {
+    const csv = exportCompleteDataAsCSV();
+    downloadFile(csv, 'kintsugi-complete-data.csv', 'text/csv');
+    addToast({ type: 'success', title: 'Export Successful', message: 'Complete data exported as CSV' });
   };
 
   // Keyboard shortcuts configuration
@@ -719,16 +902,6 @@ export default function Home() {
                             <Sparkles className="h-4 w-4 theme-text-primary" />
                             <span>Golden Seam Timeline</span>
                           </button>
-                          <button
-                            onClick={() => {
-                              router.push('/journey?tab=growth');
-                              setShowInsightsDropdown(false);
-                            }}
-                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
-                          >
-                            <Target className="h-4 w-4 theme-text-primary" />
-                            <span>Growth Mindset Tracker</span>
-                          </button>
                         </div>
                       </motion.div>
                     )}
@@ -878,6 +1051,16 @@ export default function Home() {
                     )}
                   </AnimatePresence>
                 </div>
+
+                {/* Your Journey Tab */}
+                <button
+                  onClick={() => setActiveTab('your-journey')}
+                  data-active={activeTab === 'your-journey'}
+                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  title="Explore your transformation journey with powerful analytics and insights"
+                >
+                  Your Journey
+                </button>
               </nav>
             </div>
             <div className="hidden md:ml-6 md:flex md:items-center">
@@ -1177,6 +1360,17 @@ export default function Home() {
                   title="Document setbacks today. Sell them as strengths tomorrow."
                 >
                   Your Edge
+                </button>
+                <button
+                  onClick={() => {
+                    setActiveTab('your-journey');
+                    setShowMobileMenu(false);
+                  }}
+                  data-active={activeTab === 'your-journey'}
+                  className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
+                  title="Explore your transformation journey with powerful analytics and insights"
+                >
+                  Your Journey
                 </button>
                 <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center px-4">
@@ -1885,6 +2079,372 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+              )}
+            </div>
+          )}
+          {/* YOUR JOURNEY TAB */}
+          {activeTab === 'your-journey' && (
+            <div className="space-y-6">
+              {/* Journey Header with Tabs */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="theme-gradient-to-br rounded-2xl shadow-2xl overflow-hidden"
+                style={{
+                  background: 'linear-gradient(to bottom right, var(--theme-primary), var(--theme-secondary), var(--theme-accent))'
+                }}
+              >
+                <div className="relative px-6 py-8 sm:px-8 sm:py-10">
+                  <div className="relative flex flex-col gap-4">
+                    <div>
+                      <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                        <Map className="h-8 w-8" />
+                        Your Journey
+                      </h2>
+                      <p className="text-white/90 text-lg">
+                        Your Transformation Journey, Visualized
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Journey Sub-Tabs */}
+                <div className="flex gap-2 flex-wrap px-6 pb-6">
+                  {[
+                    { id: 'overview', label: 'Golden Gallery', icon: Sparkles },
+                    { id: 'journal', label: 'Your Golden Seams', icon: BookOpen },
+                    { id: 'demographics', label: 'Your Profile', icon: User },
+                    { id: 'journey', label: 'Transformation Path', icon: Map },
+                    { id: 'insights', label: 'Patterns of Repair', icon: Brain },
+                    { id: 'growth', label: 'Growth Mindset', icon: TrendingUp },
+                    { id: 'settings', label: 'Workshop Tools', icon: Settings }
+                  ].map((tab, index) => (
+                    <motion.button
+                      key={tab.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      onClick={() => setActiveJourneyTab(tab.id as any)}
+                      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl transition-all font-medium ${
+                        activeJourneyTab === tab.id
+                          ? 'bg-white text-kintsugi-gold-700 shadow-lg scale-105'
+                          : 'bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:scale-105'
+                      }`}
+                    >
+                      <tab.icon className="h-4 w-4" />
+                      {tab.label}
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Date Range Filter & Export */}
+              <div className="flex flex-wrap justify-between items-center gap-3">
+                <div className="flex items-center gap-2">
+                  <Filter className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                  <select
+                    value={dateRange}
+                    onChange={(e) => setDateRange(e.target.value as any)}
+                    className="px-4 py-2 bg-white dark:bg-kintsugi-dark-800 border theme-border-light dark:theme-border-primary/50 rounded-md text-gray-900 dark:text-white focus:ring-2 focus:ring-kintsugi-gold-500"
+                  >
+                    <option value="7d">Last 7 Days</option>
+                    <option value="30d">Last 30 Days</option>
+                    <option value="90d">Last 90 Days</option>
+                    <option value="all">All Time</option>
+                  </select>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={handleExportJSON}
+                    className="inline-flex items-center px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md shadow-sm transition-colors text-sm"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    JSON
+                  </button>
+                  <button
+                    onClick={handleExportFeedbackCSV}
+                    className="inline-flex items-center px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md shadow-sm transition-colors text-sm"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Feedback CSV
+                  </button>
+                  <button
+                    onClick={handleExportCompleteCSV}
+                    className="inline-flex items-center px-3 py-2 theme-bg-primary hover:bg-kintsugi-gold-700 text-white rounded-md shadow-sm transition-colors text-sm"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Complete Data
+                  </button>
+                </div>
+              </div>
+
+              {/* Privacy Notice */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 flex items-start gap-3"
+              >
+                <div className="flex-shrink-0 bg-blue-500 rounded-lg p-2">
+                  <Shield className="h-5 w-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-1">
+                    🪞 Your Personal Reflection Mirror
+                  </h3>
+                  <p className="text-xs text-blue-800 dark:text-blue-200">
+                    This is your personal reflection mirror. 🪞
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Loading State */}
+              {isLoadingAnalytics && (
+                <LoadingSkeleton />
+              )}
+
+              {/* Error State */}
+              {analyticsError && (
+                <EmptyState
+                  icon={Shield}
+                  title="Error Loading Analytics"
+                  description={analyticsError}
+                  iconColor="text-red-500"
+                />
+              )}
+
+              {/* Tab Contents */}
+              {!isLoadingAnalytics && !analyticsError && analytics && (
+                <>
+                  {/* GOLDEN GALLERY TAB - Overview/Stats */}
+                  {activeJourneyTab === 'overview' && (
+                    <div className="space-y-6">
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-center py-6"
+                      >
+                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+                          Your Golden Gallery 🏺
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                          Welcome to your personal transformation archive. Every number here represents
+                          a moment you chose to honor your cracks and fill them with gold.
+                        </p>
+                      </motion.div>
+
+                      {/* Stats Cards */}
+                      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                        <StatCard
+                          title="Your Journey"
+                          value={analytics.activeUsers === 1 ? "Active" : analytics.activeUsers}
+                          icon={<Sparkles className="h-6 w-6" />}
+                          trend={weeklyComparison ? `${Math.abs(weeklyComparison.changePercent).toFixed(1)}% this week` : undefined}
+                          trendType={weeklyComparison?.trend}
+                          color="from-amber-500 to-orange-500"
+                        />
+                        <StatCard
+                          title="Golden Moments"
+                          value={analytics.totalAccomplishments.toLocaleString()}
+                          icon={<Award className="h-6 w-6" />}
+                          trend={`${analytics.averageStreak} day healing streak`}
+                          trendType="up"
+                          color="from-purple-500 to-pink-500"
+                        />
+                        <StatCard
+                          title="Healing Resonance"
+                          value={analytics.averageRating ? `${analytics.averageRating.toFixed(1)} ❤️` : 'N/A'}
+                          icon={<Heart className="h-6 w-6" />}
+                          trend={analytics.feedbackCount > 0 ? `${analytics.feedbackCount} reflections` : 'No feedback yet'}
+                          trendType={analytics.averageRating >= 4 ? 'up' : 'neutral'}
+                          color="from-pink-500 to-rose-500"
+                        />
+                        <StatCard
+                          title="Transformation Energy"
+                          value={`${sentimentData.positive}/${feedback.length || 1}`}
+                          icon={<Sparkles className="h-6 w-6" />}
+                          trend="Glowing with hope"
+                          trendType="up"
+                          color="from-green-500 to-teal-500"
+                        />
+                      </div>
+
+                      {/* Engagement Chart */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-white dark:bg-kintsugi-dark-800 p-6 rounded-lg shadow-lg border theme-border-light dark:theme-border-primary/50"
+                      >
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center">
+                          <TrendingUp className="h-5 w-5 mr-2 theme-text-primary" />
+                          The Golden Wave
+                        </h3>
+                        <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
+                          Watch how healing spreads through time ✨
+                        </p>
+                        <ResponsiveContainer width="100%" height={250}>
+                          <AreaChart data={engagementTrend}>
+                            <defs>
+                              <linearGradient id="colorEngagement" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.8}/>
+                                <stop offset="95%" stopColor={COLORS.primary} stopOpacity={0}/>
+                              </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.1} />
+                            <XAxis
+                              dataKey="date"
+                              stroke="#6B7280"
+                              tick={{ fontSize: 12 }}
+                              tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                            />
+                            <YAxis stroke="#6B7280" tick={{ fontSize: 12 }} />
+                            <Tooltip
+                              contentStyle={{
+                                backgroundColor: '#1F2937',
+                                border: '1px solid #D4AF37',
+                                borderRadius: '8px',
+                                color: '#fff'
+                              }}
+                            />
+                            <Area
+                              type="monotone"
+                              dataKey="value"
+                              stroke={COLORS.primary}
+                              fillOpacity={1}
+                              fill="url(#colorEngagement)"
+                            />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </motion.div>
+                    </div>
+                  )}
+
+                  {/* YOUR GOLDEN SEAMS TAB - Journal Insights */}
+                  {activeJourneyTab === 'journal' && (
+                    <div className="space-y-6">
+                      <KintsugiJournalInsights entries={journalEntries} />
+                      <JourneyRichnessScore entries={journalEntries} />
+                      <TransformationHeatmap entries={journalEntries} monthsToShow={6} />
+                      <GoldenSeamTimeline entries={journalEntries} />
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <StreakCalendar entries={journalEntries} />
+                        <JournalProgressDashboard entries={journalEntries} />
+                      </div>
+                      <MilestoneTracker
+                        entryCount={journalEntries.length}
+                        currentStreak={currentStreak}
+                      />
+                    </div>
+                  )}
+
+                  {/* YOUR PROFILE TAB - Demographics */}
+                  {activeJourneyTab === 'demographics' && demographics && (
+                    <div className="space-y-6">
+                      {(() => {
+                        const userProfileStr = typeof window !== 'undefined' ? localStorage.getItem('kintsugiUser') : null;
+                        if (userProfileStr) {
+                          try {
+                            const profile = JSON.parse(userProfileStr);
+                            return (
+                              <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="bg-gradient-to-r theme-bg-primary-light border-2 theme-border-accent dark:theme-border-primary/50 rounded-lg p-6"
+                              >
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                                  <User className="h-5 w-5 theme-text-primary" />
+                                  Your Profile
+                                </h3>
+                                <div className="space-y-2">
+                                  <p className="text-sm"><span className="font-medium">Name:</span> {profile.name}</p>
+                                  {profile.email && <p className="text-sm"><span className="font-medium">Email:</span> {profile.email}</p>}
+                                  {profile.role && <p className="text-sm"><span className="font-medium">Role:</span> {profile.role}</p>}
+                                  {profile.company && <p className="text-sm"><span className="font-medium">Company:</span> {profile.company}</p>}
+                                  {profile.yearsOfExperience && <p className="text-sm"><span className="font-medium">Experience:</span> {profile.yearsOfExperience} years</p>}
+                                </div>
+                              </motion.div>
+                            );
+                          } catch (e) {
+                            return null;
+                          }
+                        }
+                        return null;
+                      })()}
+                    </div>
+                  )}
+
+                  {/* TRANSFORMATION PATH TAB - User Journey */}
+                  {activeJourneyTab === 'journey' && (
+                    <KintsugiUserJourney entries={journalEntries} user={user} />
+                  )}
+
+                  {/* PATTERNS OF REPAIR TAB - AI Insights */}
+                  {activeJourneyTab === 'insights' && (
+                    <div className="space-y-6">
+                      <InAppWeeklyDigest />
+                      <KintsugiInsightsDashboard feedback={feedback} />
+                      <AIInsightsDashboard />
+                      {user && journalEntries.length > 0 && (
+                        <AutoProfileBuilder
+                          entries={journalEntries.map(entry => ({
+                            id: entry.id,
+                            text: `${entry.accomplishment} ${entry.reflection || ''}`,
+                            date: new Date(entry.date)
+                          }))}
+                          currentProfile={user}
+                          onUpdateProfile={(updates) => {
+                            console.log('Profile updates (journey view):', updates);
+                          }}
+                        />
+                      )}
+                      <StrengthArchaeology entries={journalEntries} />
+                      <InteractiveKintsugiVessel entries={journalEntries} />
+
+                      {/* Professional Export Tools */}
+                      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                          Professional Export Tools
+                        </h3>
+                        <div className="mb-6">
+                          <AIPerformanceReviewGenerator />
+                        </div>
+                        <ExportManager />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* GROWTH MINDSET TAB */}
+                  {activeJourneyTab === 'growth' && (
+                    <div className="space-y-6">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <GrowthMindsetTracker />
+                      </motion.div>
+                    </div>
+                  )}
+
+                  {/* WORKSHOP TOOLS TAB - Settings */}
+                  {activeJourneyTab === 'settings' && (
+                    <div className="space-y-6">
+                      <PotteryStyleChanger />
+                      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                          Appearance Settings
+                        </h2>
+                        <ThemeSelector />
+                      </div>
+                      <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-gray-700 p-6">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                          Voice Profile Settings
+                        </h2>
+                        <VoiceProfileManager userId={user?.id || '1'} />
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           )}
