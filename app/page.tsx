@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Lightbulb, Zap, Check, X, Menu, Bell, User, ChevronDown, ChevronUp, ChevronRight, Settings, Keyboard, Target, BookOpen, Award, Brain, Plus, Calendar, HelpCircle, TrendingUp, MessageSquare, Shield, FileText, Volume2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 // Import components
 import XPBar from '@/components/XPBar';
@@ -120,6 +121,7 @@ import { initializeTheme, getCurrentThemeColors } from '@/utils/themes';
 import { checkAndUnlockAchievements, getAchievementProgress, getEngagementData, updateStreakFromEntries } from '@/utils/engagement';
 
 export default function Home() {
+  const router = useRouter();
   const [isClient, setIsClient] = useState(false);
   const [activeTab, setActiveTab] = useState<'home' | 'journal' | 'insights' | 'your-edge'>('home');
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -716,6 +718,16 @@ export default function Home() {
                           >
                             <Sparkles className="h-4 w-4 theme-text-primary" />
                             <span>Golden Seam Timeline</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              router.push('/journey?tab=growth');
+                              setShowInsightsDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <Target className="h-4 w-4 theme-text-primary" />
+                            <span>Growth Mindset Tracker</span>
                           </button>
                         </div>
                       </motion.div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
 import {
   Users, TrendingUp, Star, MessageCircle, Award, BookOpen,
   Download, Calendar, Target, BarChart3, Home, Filter,
@@ -149,6 +150,7 @@ const StatCard = ({ title, value, icon, trend, trendType = 'neutral', color = 't
 };
 
 export default function AdminDashboard() {
+  const searchParams = useSearchParams();
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
   const [feedback, setFeedback] = useState<UserFeedback[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -160,6 +162,16 @@ export default function AdminDashboard() {
   const [currentStreak, setCurrentStreak] = useState(0);
   const [user, setUser] = useState<any>(null);
   const [userQuestions, setUserQuestions] = useState<any[]>([]);
+
+  // Handle tab parameter from URL
+  useEffect(() => {
+    if (searchParams) {
+      const tabParam = searchParams.get('tab');
+      if (tabParam && ['overview', 'journal', 'demographics', 'journey', 'insights', 'growth', 'settings'].includes(tabParam)) {
+        setActiveTab(tabParam as 'overview' | 'journal' | 'demographics' | 'journey' | 'insights' | 'growth' | 'settings');
+      }
+    }
+  }, [searchParams]);
 
   // Load data
   useEffect(() => {
