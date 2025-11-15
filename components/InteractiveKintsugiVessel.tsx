@@ -21,6 +21,9 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
   const [rotation, setRotation] = useState(0);
   const [selectedCrack, setSelectedCrack] = useState<Crack | null>(null);
 
+  // Debug: Log what entries the vessel receives
+  console.log('🏺 Vessel received', entries.length, 'entries');
+
   // Generate cracks based on challenges (more flexible detection)
   const { challenges, growthEntries } = useMemo(() => {
     // Expanded challenge keywords - things people naturally say when facing difficulties
@@ -57,6 +60,16 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       const text = `${entry.accomplishment} ${entry.reflection || ''}`.toLowerCase();
       return growthWords.some(word => text.includes(word)) || entry.reflection || entry.accomplishment.length > 20;
     });
+
+    console.log('🏺 Vessel analysis:');
+    console.log('   - Challenge entries found:', challenges.length);
+    console.log('   - Growth entries found:', growthEntries.length);
+    if (challenges.length > 0) {
+      console.log('   - First challenge:', challenges[0].accomplishment.substring(0, 50));
+    }
+    if (growthEntries.length > 0) {
+      console.log('   - First growth:', growthEntries[0].accomplishment.substring(0, 50));
+    }
 
     return { challenges, growthEntries };
   }, [entries]);

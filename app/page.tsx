@@ -361,8 +361,19 @@ export default function Home() {
         const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
         const entries = engagement.journalEntries || [];
 
+        // Debug: Check what's in kintsugi_engagement
+        console.log('🔍 Quick Entry data (kintsugi_engagement):', entries.length, 'entries');
+        if (entries.length > 0) {
+          console.log('   First entry:', entries[0]);
+        }
+
         // Also load Growth Mindset reflections and convert them to journal entries for the vessel
         const growthReflections = JSON.parse(localStorage.getItem('imperfectionReflections') || '[]');
+        console.log('🔍 Growth Mindset data (imperfectionReflections):', growthReflections.length, 'entries');
+        if (growthReflections.length > 0) {
+          console.log('   First reflection:', growthReflections[0]);
+        }
+
         const growthEntries = growthReflections.map((reflection: any) => ({
           id: reflection.id,
           date: reflection.date,
@@ -374,6 +385,10 @@ export default function Home() {
 
         // Combine both data sources so the vessel can see ALL your work
         const allEntries = [...entries, ...growthEntries];
+        console.log('🏺 TOTAL entries being passed to vessel:', allEntries.length);
+        console.log('   - Quick Entries:', entries.length);
+        console.log('   - Growth Entries:', growthEntries.length);
+
         setJournalEntries(allEntries);
         setFilteredJournalEntries(allEntries);
 
