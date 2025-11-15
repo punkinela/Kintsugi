@@ -360,10 +360,24 @@ export default function Home() {
       try {
         const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"journalEntries":[]}');
         const entries = engagement.journalEntries || [];
-        setJournalEntries(entries);
-        setFilteredJournalEntries(entries);
 
-        // Update streak based on impact entries
+        // Also load Growth Mindset reflections and convert them to journal entries for the vessel
+        const growthReflections = JSON.parse(localStorage.getItem('imperfectionReflections') || '[]');
+        const growthEntries = growthReflections.map((reflection: any) => ({
+          id: reflection.id,
+          date: reflection.date,
+          accomplishment: `${reflection.imperfection} → ${reflection.transformation}`,
+          reflection: reflection.lesson,
+          category: 'Growth Mindset',
+          tags: [reflection.category, 'growth'],
+        }));
+
+        // Combine both data sources so the vessel can see ALL your work
+        const allEntries = [...entries, ...growthEntries];
+        setJournalEntries(allEntries);
+        setFilteredJournalEntries(allEntries);
+
+        // Update streak based on impact entries (original entries only)
         if (entries.length > 0) {
           updateStreakFromEntries();
         }
