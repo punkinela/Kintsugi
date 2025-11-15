@@ -903,6 +903,17 @@ export default function Home() {
                             <Sparkles className="h-4 w-4 theme-text-primary" />
                             <span>Golden Seam Timeline</span>
                           </button>
+                          <button
+                            onClick={() => {
+                              setActiveTab('your-journey');
+                              setActiveJourneyTab('growth');
+                              setShowInsightsDropdown(false);
+                            }}
+                            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-kintsugi-dark-700 flex items-center gap-2"
+                          >
+                            <Target className="h-4 w-4 theme-text-primary" />
+                            <span>Growth Mindset Tracker</span>
+                          </button>
                         </div>
                       </motion.div>
                     )}
@@ -1453,6 +1464,11 @@ export default function Home() {
 
               {/* Golden Repairs Panel */}
               <GoldenRepairsPanel entries={journalEntries} />
+
+              {/* Interactive Kintsugi Vessel - Your Golden Jar */}
+              {journalEntries.length > 0 && (
+                <InteractiveKintsugiVessel entries={journalEntries} />
+              )}
 
               {/* Unified Philosophy Explanation */}
               <UnifiedPhilosophyCard />
