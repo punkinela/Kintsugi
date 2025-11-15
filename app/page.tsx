@@ -122,6 +122,7 @@ import DevModeToggle from '@/components/DevModeToggle';
 import StrengthDiscovery from '@/components/StrengthDiscovery';
 import ResumeGenerator from '@/components/ResumeGenerator';
 import ResilienceMap from '@/components/ResilienceMap';
+import BiasResearchShowcase from '@/components/BiasResearchShowcase';
 
 import type { BiasInsight, UserProfile } from '@/types';
 import { JournalEntry, Achievement } from '@/types/engagement';
@@ -1834,6 +1835,9 @@ export default function Home() {
 
               {/* Phase 7: Professional Tools */}
               <ExportManager />
+
+              {/* Bias Research Showcase - The Science Behind Kintsugi */}
+              <BiasResearchShowcase />
             </div>
           )}
 
