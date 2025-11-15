@@ -271,7 +271,7 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
               >
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-purple-600" />
-                  New Accomplishment with AI Analysis
+                  New Accomplishment with Automated Analysis
                 </h3>
                 
                 <div className="space-y-4">
