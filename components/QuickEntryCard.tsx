@@ -125,7 +125,7 @@ export default function QuickEntryCard({ onSave }: QuickEntryCardProps) {
         </div>
       </div>
 
-      {/* AI Writing Coach */}
+      {/* Writing Coach */}
       {text.trim().length > 10 && (
         <div className="mt-4">
           <AISmartWritingCoach text={text} compact={false} />
