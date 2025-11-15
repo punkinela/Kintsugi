@@ -82,11 +82,11 @@ export default function AIInsightsDashboard() {
         <div>
           <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
             <Brain className="h-6 w-6 text-purple-600" />
-            AI Insights & Patterns
+            Pattern Insights
             <AIBadge />
           </h2>
           <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">
-            Personalized insights based on your Impact Log entries
+            Automated insights based on your documented experiences
           </p>
         </div>
 

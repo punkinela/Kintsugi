@@ -207,7 +207,7 @@ export default function AISmartTaggingSearch({ entries = [], onEntryClick, compa
             <Search className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">AI Smart Search</h3>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Intelligent Search</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Find entries by skills, themes, or semantic meaning
             </p>
