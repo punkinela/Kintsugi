@@ -34,7 +34,7 @@ import ReturnMotivation from '@/components/ReturnMotivation';
 import EngagingJournalPrompt from '@/components/EngagingJournalPrompt';
 import SocialProofTestimonials from '@/components/SocialProofTestimonials';
 
-// Phase 6: AI-Powered Features
+// Phase 6: Advanced Features
 import AIInsightsDashboard from '@/components/AIInsightsDashboard';
 import AIPerformanceReviewGenerator from '@/components/AIPerformanceReviewGenerator';
 
@@ -88,7 +88,7 @@ import InteractiveKintsugiVessel from '@/components/InteractiveKintsugiVessel';
 import KintsugiPortfolioGenerator from '@/components/KintsugiPortfolioGenerator';
 import JourneyRichnessScore from '@/components/JourneyRichnessScore';
 
-// Phase 14: AI-Powered Enhancements
+// Phase 14: Advanced Enhancements
 import InAppWeeklyDigest from '@/components/InAppWeeklyDigest';
 import AICareerGapAnalyzer from '@/components/AICareerGapAnalyzer';
 import AIConfidenceScoreTracker from '@/components/AIConfidenceScoreTracker';
@@ -1433,7 +1433,7 @@ export default function Home() {
               {/* Fresh Start Welcome - Research-Backed Return Messaging */}
               {user && <FreshStartWelcome userName={user.name} />}
 
-              {/* Weekly Digest - AI-Powered Progress Summary */}
+              {/* Weekly Digest - Automated Progress Summary */}
               <div ref={weeklyDigestRef}>
                 <InAppWeeklyDigest
                   onLogAchievement={() => setActiveTab('journal')}
@@ -1505,7 +1505,7 @@ export default function Home() {
 
           {activeTab === 'journal' && (
             <div className="space-y-6">
-              {/* AI Smart Search - Tagging & Semantic Search */}
+              {/* Intelligent Search - Tagging & Semantic Search */}
               {journalEntries.length > 0 && (
                 <AISmartTaggingSearch
                   entries={journalEntries.map(entry => ({
@@ -1739,7 +1739,7 @@ export default function Home() {
                         Your Insights & Analytics
                       </h2>
                       <p className="text-white/90 text-lg">
-                        Discover patterns, analyze growth, and get AI-powered insights
+                        Discover patterns, analyze growth, and get automated insights
                       </p>
                     </div>
                     <motion.button
@@ -1762,7 +1762,7 @@ export default function Home() {
                       transition={{ delay: 0.1 }}
                       className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
                     >
-                      <p className="text-white/80 text-sm font-medium">AI Analyses</p>
+                      <p className="text-white/80 text-sm font-medium">Automated Analyses</p>
                       <p className="text-white text-2xl font-bold mt-1">
                         <AnimatedCounter
                           value={(() => {
@@ -1813,7 +1813,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* AI Confidence Score Tracker - Track Writing Confidence Over Time */}
+              {/* Confidence Score Tracker - Track Writing Confidence Over Time */}
               {journalEntries.length > 0 && (
                 <AIConfidenceScoreTracker
                   entries={journalEntries.map(entry => ({
@@ -1838,7 +1838,7 @@ export default function Home() {
               {/* Phase 13: Interactive Kintsugi Vessel - 3D Visualization */}
               <InteractiveKintsugiVessel entries={journalEntries} />
 
-              {/* Phase 6: AI-Powered Features */}
+              {/* Phase 6: Advanced Features */}
               <AIInsightsDashboard />
               <AIPerformanceReviewGenerator />
 
@@ -1948,7 +1948,7 @@ export default function Home() {
                     addToast({
                       type: 'success',
                       title: 'Profile Updated',
-                      message: 'Your profile has been enhanced with AI suggestions!',
+                      message: 'Your profile has been enhanced with automated suggestions!',
                       duration: 3000
                     });
                     window.dispatchEvent(new Event('kintsugi-data-updated'));
@@ -1997,7 +1997,7 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-6">
-                  {/* AI Performance Review Generator */}
+                  {/* Performance Review Generator */}
                   <div ref={performanceReviewRef} className="border-t border-gray-200 dark:border-gray-700 pt-6">
                     <AIPerformanceReviewGenerator />
                   </div>
@@ -2398,7 +2398,7 @@ export default function Home() {
                     <KintsugiUserJourney entries={journalEntries} user={user} />
                   )}
 
-                  {/* PATTERNS OF REPAIR TAB - AI Insights */}
+                  {/* PATTERNS OF REPAIR TAB - Pattern Insights */}
                   {activeJourneyTab === 'insights' && (
                     <div className="space-y-6">
                       <InAppWeeklyDigest />
