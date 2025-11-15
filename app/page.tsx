@@ -732,26 +732,100 @@ export default function Home() {
   // Initialize keyboard shortcuts
   useKeyboardShortcuts(shortcuts);
 
-  // Generate bias insight
+  // Generate bias insight with more variety
   const generateBiasInsight = async () => {
     setBiasInsightLoading(true);
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Mock response
-      const mockDescription = `Based on your recent reflections, I notice you tend to be hard on yourself about ${['productivity', 'meeting expectations', 'perfectionism'][Math.floor(Math.random() * 3)]}.`;
-      
+
+      // Expanded insight variations
+      const insights = [
+        // Productivity patterns
+        {
+          description: "Based on your recent reflections, I notice you tend to be hard on yourself about productivity.",
+          reflection: "You might be overlooking how much you actually accomplish. Consider tracking small wins too.",
+          research: { citation: 'Baumeister & Tierney (2011). Willpower', year: 2011, finding: 'People who celebrate small wins maintain higher motivation and achieve more over time.' }
+        },
+        {
+          description: "I see a pattern where you focus more on tasks left undone rather than what you've completed.",
+          reflection: "This is a common productivity bias. Try ending each day by reviewing what you DID accomplish.",
+          research: { citation: 'Amabile & Kramer (2011). The Progress Principle', year: 2011, finding: 'Small wins and tracking progress are the most powerful motivators in professional work.' }
+        },
+        {
+          description: "Your entries suggest you measure productivity in hours rather than outcomes.",
+          reflection: "Time spent isn't always the best measure. Some of your most valuable work might take less time.",
+          research: { citation: 'Newport, C. (2016). Deep Work', year: 2016, finding: 'Quality of focused work matters far more than quantity of hours spent working.' }
+        },
+
+        // Meeting expectations
+        {
+          description: "I notice you tend to be hard on yourself about meeting expectations.",
+          reflection: "Whose expectations are these? Sometimes we hold ourselves to standards others don't even expect.",
+          research: { citation: 'Brown, B. (2012). Daring Greatly', year: 2012, finding: 'Perfectionism is not the same as striving for excellence. It is correlated with depression and anxiety.' }
+        },
+        {
+          description: "Your reflections show a pattern of comparing yourself to an idealized standard.",
+          reflection: "Consider: Are these expectations realistic, or are you using them to feel inadequate?",
+          research: { citation: 'Gilbert, P. (2009). The Compassionate Mind', year: 2009, finding: 'Self-compassion leads to greater resilience and achievement than self-criticism.' }
+        },
+        {
+          description: "I see you often worry about disappointing others, even when there's no evidence they're disappointed.",
+          reflection: "This might be more about your internal critic than external reality. What would others actually say?",
+          research: { citation: 'Neff, K. (2011). Self-Compassion', year: 2011, finding: 'People who practice self-compassion have lower anxiety and higher motivation than those who are self-critical.' }
+        },
+
+        // Perfectionism
+        {
+          description: "Based on your recent reflections, I notice perfectionist thinking patterns.",
+          reflection: "Perfectionism often masks a fear of judgment. What would 'good enough' look like?",
+          research: { citation: 'Dweck, C. (2006). Mindset', year: 2006, finding: 'Growth mindset (learning-focused) leads to greater achievement than fixed mindset (perfection-focused).' }
+        },
+        {
+          description: "Your entries suggest you delay starting or finishing tasks until conditions are 'perfect'.",
+          reflection: "Progress beats perfection. What's one imperfect step you could take today?",
+          research: { citation: 'Brach, T. (2003). Radical Acceptance', year: 2003, finding: 'Accepting imperfection paradoxically leads to better performance and wellbeing.' }
+        },
+        {
+          description: "I notice you focus on flaws rather than celebrating what went well.",
+          reflection: "Your brain's negativity bias is at work. Try: What went well? What did I learn? What's one thing to improve?",
+          research: { citation: 'Hanson, R. (2013). Hardwiring Happiness', year: 2013, finding: 'Deliberately savoring positive experiences rewires the brain for resilience and confidence.' }
+        },
+
+        // Growth and learning
+        {
+          description: "Your reflections show you're learning and growing, even when you don't acknowledge it.",
+          reflection: "Growth isn't always linear or dramatic. Sometimes it's quiet and cumulative.",
+          research: { citation: 'Tough, P. (2012). How Children Succeed', year: 2012, finding: 'Character strengths like grit and resilience matter more than talent for long-term success.' }
+        },
+        {
+          description: "I see evidence of you developing new skills, even if you're not giving yourself credit.",
+          reflection: "Compare yourself to your past self, not to others. Where have you grown?",
+          research: { citation: 'Clear, J. (2018). Atomic Habits', year: 2018, finding: 'Small, consistent improvements compound into remarkable results over time.' }
+        },
+
+        // Resilience patterns
+        {
+          description: "Your entries show you bounce back from setbacks, even when you don't recognize it.",
+          reflection: "Resilience isn't about not falling - it's about getting back up. You're doing that.",
+          research: { citation: 'Southwick & Charney (2012). Resilience', year: 2012, finding: 'Resilient people reframe challenges as opportunities for growth rather than threats.' }
+        },
+        {
+          description: "I notice you've handled difficult situations this week that might have derailed you before.",
+          reflection: "Your capacity to handle challenges is growing. Are you acknowledging this progress?",
+          research: { citation: 'Masten, A. (2014). Ordinary Magic', year: 2014, finding: 'Resilience is built through successfully navigating small challenges, not just big ones.' }
+        }
+      ];
+
+      // Pick random insight
+      const randomInsight = insights[Math.floor(Math.random() * insights.length)];
+
       setBiasInsight({
         ...biasInsight,
-        description: mockDescription,
-        reflection: 'Consider how this pattern shows up in your daily life.',
+        description: randomInsight.description,
+        reflection: randomInsight.reflection,
         actionStep: 'Reflect on this insight in your Impact Log',
-        research: [{
-          citation: 'Dweck, C. (2006). Mindset: The New Psychology of Success',
-          year: 2006,
-          finding: 'Adopting a growth mindset can lead to greater resilience and achievement.'
-        }]
+        research: [randomInsight.research]
       });
       setShowBiasInsight(true);
     } catch (error) {
@@ -759,6 +833,18 @@ export default function Home() {
     } finally {
       setBiasInsightLoading(false);
     }
+  };
+
+  // Option C: Show insight first, then open Quick Entry
+  const handleDocumentImpact = async () => {
+    // Step 1: Generate and show insight
+    await generateBiasInsight();
+
+    // Step 2: After showing insight, automatically open Quick Entry after user sees it
+    // The insight modal will show for a moment, then we open the entry modal
+    setTimeout(() => {
+      setShowAccomplishments(true);
+    }, 3000); // Give user 3 seconds to read the insight
   };
 
   if (!isClient || loading) {
@@ -1423,7 +1509,7 @@ export default function Home() {
                 user={user}
                 currentStreak={currentStreak}
                 totalEntries={totalEntries}
-                onGetInsight={() => setShowAccomplishments(true)}
+                onGetInsight={handleDocumentImpact}
                 isLoading={biasInsightLoading}
                 journalEntries={journalEntries}
               />
