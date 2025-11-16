@@ -314,25 +314,18 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       </div>
 
       {/* Stats Grid */}
-      <div className="px-6 py-4 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-700">
-        {/* DEBUG: Visual indicator */}
-        <div className="mb-4 p-2 bg-yellow-100 border border-yellow-400 rounded text-xs">
-          DEBUG: cracks.length={cracks.length}, repairedCount={repairedCount}, entries={entries.length}
+      <div className="px-6 py-4 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-700 grid grid-cols-3 gap-4">
+        <div className="text-center">
+          <div className="text-2xl font-bold text-gray-900 dark:text-white">{cracks.length}</div>
+          <div className="text-xs text-gray-600 dark:text-gray-400">Total Cracks</div>
         </div>
-
-        <div className="grid grid-cols-3 gap-4">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-gray-900 dark:text-white">{cracks.length}</div>
-            <div className="text-xs text-gray-600 dark:text-gray-400">Total Cracks</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold theme-text-primary dark:theme-text-secondary">{repairedCount}</div>
-            <div className="text-xs text-gray-600 dark:text-gray-400">Golden Repairs</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-gray-500 dark:text-gray-400">{cracks.length - repairedCount}</div>
-            <div className="text-xs text-gray-600 dark:text-gray-400">Healing</div>
-          </div>
+        <div className="text-center">
+          <div className="text-2xl font-bold theme-text-primary dark:theme-text-secondary">{repairedCount}</div>
+          <div className="text-xs text-gray-600 dark:text-gray-400">Golden Repairs</div>
+        </div>
+        <div className="text-center">
+          <div className="text-2xl font-bold text-gray-500 dark:text-gray-400">{cracks.length - repairedCount}</div>
+          <div className="text-xs text-gray-600 dark:text-gray-400">Healing</div>
         </div>
       </div>
 

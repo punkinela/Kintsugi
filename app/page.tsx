@@ -471,9 +471,31 @@ export default function Home() {
     if (!isClient) return;
 
     const loadStats = () => {
-      const engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"currentStreak":0,"journalEntries":[],"achievements":[]}');
+      // Check BOTH possible storage keys (same logic as loadData)
+      let engagement = JSON.parse(localStorage.getItem('kintsugi_engagement') || '{"currentStreak":0,"journalEntries":[],"achievements":[]}');
+
+      // If kintsugi_engagement is empty, try the old key 'engagementData'
+      if (!engagement.journalEntries || engagement.journalEntries.length === 0) {
+        const oldData = JSON.parse(localStorage.getItem('engagementData') || '{"currentStreak":0,"journalEntries":[],"achievements":[]}');
+        if (oldData.journalEntries && oldData.journalEntries.length > 0) {
+          console.log('📊 Stats: Found data in OLD key (engagementData)');
+          engagement = oldData;
+        }
+      }
+
+      // Also count Growth Mindset entries
+      const growthReflections = JSON.parse(localStorage.getItem('imperfectionReflections') || '[]');
+      const totalEntriesCount = (engagement.journalEntries?.length || 0) + growthReflections.length;
+
+      console.log('📊 Stats updated:', {
+        streak: engagement.currentStreak || 0,
+        quickEntries: engagement.journalEntries?.length || 0,
+        growthEntries: growthReflections.length,
+        totalEntries: totalEntriesCount
+      });
+
       setCurrentStreak(engagement.currentStreak || 0);
-      setTotalEntries(engagement.journalEntries?.length || 0);
+      setTotalEntries(totalEntriesCount);
       setTotalAchievements(engagement.achievements?.length || 0);
     };
 
