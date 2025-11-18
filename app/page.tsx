@@ -79,6 +79,7 @@ import FreshStartWelcome from '@/components/FreshStartWelcome';
 // Phase 13: Kintsugi Philosophy Features (10 Remarkable Features)
 import MushinReflectionMode from '@/components/MushinReflectionMode';
 import KintsugiPromptsCarousel from '@/components/KintsugiPromptsCarousel';
+import GrowthMindsetCarousel from '@/components/GrowthMindsetCarousel';
 import StrengthArchaeology from '@/components/StrengthArchaeology';
 import ImpermanenceReminder from '@/components/ImpermanenceReminder';
 import GoldenSeamTimeline from '@/components/GoldenSeamTimeline';
@@ -1705,6 +1706,13 @@ export default function Home() {
 
               {/* Phase 13: Kintsugi Philosophy Prompts - Daily Wisdom */}
               <KintsugiPromptsCarousel
+                onSelectPrompt={(prompt) => {
+                  setShowAccomplishments(true);
+                }}
+              />
+
+              {/* Growth Mindset Affirmations - Daily Empowerment */}
+              <GrowthMindsetCarousel
                 onSelectPrompt={(prompt) => {
                   setShowAccomplishments(true);
                 }}
