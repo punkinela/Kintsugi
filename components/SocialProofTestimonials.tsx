@@ -133,61 +133,6 @@ export default function SocialProofTestimonials() {
         </div>
       </div>
 
-      {/* Before & After Examples */}
-      <div className="theme-bg-primary-light rounded-2xl p-8 border-2 theme-border-light">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-          How AI Helps You Write Better
-        </h3>
-        <div className="space-y-6">
-          {realExamples.map((example, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-kintsugi-dark-800 rounded-xl p-6 shadow"
-            >
-              <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 mb-4">
-                {example.category}
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-red-600 font-bold">❌ Before:</span>
-                    <span className="text-xs text-gray-500">(Minimizing language)</span>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-400 italic pl-6">
-                    "{example.before}"
-                  </p>
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-green-600 font-bold">✓ After AI Enhancement:</span>
-                  </div>
-                  <p className="text-gray-900 dark:text-white font-medium pl-6">
-                    "{example.after}"
-                  </p>
-                </div>
-
-                <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-                  <p className="text-sm text-blue-800 dark:text-blue-300">
-                    <strong>Impact:</strong> {example.impact}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mt-6 text-center">
-          <p className="text-gray-700 dark:text-gray-300 font-medium">
-            AI detects minimizing language and suggests powerful alternatives
-          </p>
-        </div>
-      </div>
-
       {/* Trust Badges */}
       <div className="bg-white dark:bg-kintsugi-dark-800 rounded-2xl p-6 shadow-lg border-2 border-gray-200 dark:border-gray-700">
         <h4 className="font-bold text-gray-900 dark:text-white mb-4 text-center">

@@ -1616,9 +1616,7 @@ export default function Home() {
               <GoldenRepairsPanel entries={journalEntries} />
 
               {/* Interactive Kintsugi Vessel - Your Golden Jar */}
-              {journalEntries.length > 0 && (
-                <InteractiveKintsugiVessel entries={journalEntries} />
-              )}
+              <InteractiveKintsugiVessel entries={journalEntries} />
 
               {/* Unified Philosophy Explanation */}
               <UnifiedPhilosophyCard />
@@ -1640,6 +1638,13 @@ export default function Home() {
 
               {/* Phase 4: Custom Affirmations */}
               <CustomAffirmationsManager />
+
+              {/* Growth Mindset Affirmations - Daily Empowerment */}
+              <GrowthMindsetCarousel
+                onSelectPrompt={(prompt) => {
+                  setShowAccomplishments(true);
+                }}
+              />
 
               {/* Quick Actions */}
               <QuickCapture
@@ -1706,13 +1711,6 @@ export default function Home() {
 
               {/* Phase 13: Kintsugi Philosophy Prompts - Daily Wisdom */}
               <KintsugiPromptsCarousel
-                onSelectPrompt={(prompt) => {
-                  setShowAccomplishments(true);
-                }}
-              />
-
-              {/* Growth Mindset Affirmations - Daily Empowerment */}
-              <GrowthMindsetCarousel
                 onSelectPrompt={(prompt) => {
                   setShowAccomplishments(true);
                 }}
