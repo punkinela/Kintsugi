@@ -496,11 +496,18 @@ const achievementDefinitions: Achievement[] = [
 // Check and unlock achievements
 export function checkAndUnlockAchievements(data: EngagementData): Achievement[] {
   const newlyUnlocked: Achievement[] = [];
-  const unlockedIds = new Set((data.achievements || []).map(a => a.id));
+  // Ensure required arrays exist
+  if (!data.achievements) {
+    data.achievements = [];
+  }
+  if (!data.journalEntries) {
+    data.journalEntries = [];
+  }
+  const unlockedIds = new Set(data.achievements.map(a => a.id));
 
   // Helper functions
   const getTotalWords = () => {
-    return (data.journalEntries || []).reduce((sum, entry) => {
+    return data.journalEntries.reduce((sum, entry) => {
       const text = `${entry.accomplishment || ''} ${entry.reflection || ''}`;
       return sum + text.split(/\s+/).filter(w => w.length > 0).length;
     }, 0);
@@ -508,7 +515,7 @@ export function checkAndUnlockAchievements(data: EngagementData): Achievement[] 
 
   const getUniqueDates = () => {
     const dates = new Set<string>();
-    (data.journalEntries || []).forEach(entry => {
+    data.journalEntries.forEach(entry => {
       const date = new Date(entry.date).toDateString();
       dates.add(date);
     });
@@ -517,43 +524,43 @@ export function checkAndUnlockAchievements(data: EngagementData): Achievement[] 
 
   const getUniqueCategories = () => {
     const categories = new Set<string>();
-    (data.journalEntries || []).forEach(entry => {
+    data.journalEntries.forEach(entry => {
       if (entry.category) categories.add(entry.category);
     });
     return categories.size;
   };
 
   const getMoodEntries = () => {
-    return (data.journalEntries || []).filter(entry => entry.mood).length;
+    return data.journalEntries.filter(entry => entry.mood).length;
   };
 
   const getTaggedEntries = () => {
-    return (data.journalEntries || []).filter(entry => entry.tags && entry.tags.length > 0).length;
+    return data.journalEntries.filter(entry => entry.tags && entry.tags.length > 0).length;
   };
 
   const hasWeekendEntries = () => {
-    const saturday = (data.journalEntries || []).some(entry => new Date(entry.date).getDay() === 6);
-    const sunday = (data.journalEntries || []).some(entry => new Date(entry.date).getDay() === 0);
+    const saturday = data.journalEntries.some(entry => new Date(entry.date).getDay() === 6);
+    const sunday = data.journalEntries.some(entry => new Date(entry.date).getDay() === 0);
     return saturday && sunday;
   };
 
   const hasEarlyEntry = () => {
-    return (data.journalEntries || []).some(entry => {
+    return data.journalEntries.some(entry => {
       const hour = new Date(entry.date).getHours();
       return hour < 8;
     });
   };
 
   const hasLateEntry = () => {
-    return (data.journalEntries || []).some(entry => {
+    return data.journalEntries.some(entry => {
       const hour = new Date(entry.date).getHours();
       return hour >= 22;
     });
   };
 
   const getDaysSinceCreation = () => {
-    if (!(data.journalEntries || []).length) return 0;
-    const firstEntry = (data.journalEntries || [])[(data.journalEntries || []).length - 1];
+    if (!data.journalEntries.length) return 0;
+    const firstEntry = data.journalEntries[data.journalEntries.length - 1];
     const now = new Date();
     const first = new Date(firstEntry.date);
     return Math.floor((now.getTime() - first.getTime()) / (1000 * 60 * 60 * 24));
