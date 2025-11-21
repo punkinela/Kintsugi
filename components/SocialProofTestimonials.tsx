@@ -10,7 +10,7 @@ export default function SocialProofTestimonials() {
       role: "Senior Software Engineer",
       company: "Tech Startup",
       image: "👩‍💻",
-      quote: "I used to discount my accomplishments constantly. After 30 days of tracking with this app, I had concrete evidence for my performance review and got promoted. The AI bias detection was eye-opening!",
+      quote: "I used to discount my accomplishments constantly. After 30 days of tracking with this app, I had concrete evidence for my performance review and got promoted. The bias detection helped me see my real value!",
       outcome: "Promoted to Senior Engineer",
       stats: { entries: 47, streak: 28 }
     },
