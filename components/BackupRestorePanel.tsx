@@ -11,6 +11,9 @@ import {
   downloadBackupAsJSON,
   downloadBackupAsCSV,
   downloadBackupAsMarkdown,
+  downloadBackupAsTXT,
+  downloadBackupAsPDF,
+  downloadBackupAsDOCX,
   restoreFromFile,
   getBackupSummary,
   exportAllData
@@ -30,7 +33,7 @@ export default function BackupRestorePanel({ onClose }: BackupRestorePanelProps)
   const [exportedFormat, setExportedFormat] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleBackup = (format: 'json' | 'csv' | 'markdown') => {
+  const handleBackup = (format: 'json' | 'csv' | 'markdown' | 'txt' | 'pdf' | 'docx') => {
     // Call appropriate export function
     switch (format) {
       case 'json':
@@ -41,6 +44,15 @@ export default function BackupRestorePanel({ onClose }: BackupRestorePanelProps)
         break;
       case 'markdown':
         downloadBackupAsMarkdown();
+        break;
+      case 'txt':
+        downloadBackupAsTXT();
+        break;
+      case 'pdf':
+        downloadBackupAsPDF();
+        break;
+      case 'docx':
+        downloadBackupAsDOCX();
         break;
     }
 
@@ -323,6 +335,96 @@ export default function BackupRestorePanel({ onClose }: BackupRestorePanelProps)
                   )}
                 </div>
               </motion.div>
+
+              {/* TXT Format */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 border-2 border-gray-300 dark:border-gray-600 cursor-pointer transition-all"
+                onClick={() => handleBackup('txt')}
+              >
+                <div className="flex flex-col items-center text-center gap-2">
+                  <div className="p-3 bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl text-white">
+                    <FileText className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
+                    Plain Text (TXT)
+                  </h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    Simple text file for any editor
+                  </p>
+                  {exportedFormat === 'txt' ? (
+                    <div className="flex items-center gap-1 text-green-600 dark:text-green-400 text-xs font-medium">
+                      <CheckCircle2 className="h-3 w-3" />
+                      Downloaded!
+                    </div>
+                  ) : (
+                    <button className="w-full mt-2 px-3 py-1.5 bg-gradient-to-r from-gray-600 to-gray-800 text-white rounded-lg text-xs font-medium hover:shadow-lg transition-all">
+                      Export TXT
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* PDF Format */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4 border-2 border-red-200 dark:border-red-700 cursor-pointer transition-all"
+                onClick={() => handleBackup('pdf')}
+              >
+                <div className="flex flex-col items-center text-center gap-2">
+                  <div className="p-3 bg-gradient-to-br from-red-500 to-rose-600 rounded-xl text-white">
+                    <FileText className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
+                    PDF Document
+                  </h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    Professional formatted document
+                  </p>
+                  {exportedFormat === 'pdf' ? (
+                    <div className="flex items-center gap-1 text-green-600 dark:text-green-400 text-xs font-medium">
+                      <CheckCircle2 className="h-3 w-3" />
+                      Downloaded!
+                    </div>
+                  ) : (
+                    <button className="w-full mt-2 px-3 py-1.5 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-lg text-xs font-medium hover:shadow-lg transition-all">
+                      Export PDF
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* DOCX Format */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-sky-50 dark:bg-sky-900/20 rounded-lg p-4 border-2 border-sky-200 dark:border-sky-700 cursor-pointer transition-all"
+                onClick={() => handleBackup('docx')}
+              >
+                <div className="flex flex-col items-center text-center gap-2">
+                  <div className="p-3 bg-gradient-to-br from-sky-500 to-blue-600 rounded-xl text-white">
+                    <FileText className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
+                    Word Document
+                  </h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    Opens in Microsoft Word
+                  </p>
+                  {exportedFormat === 'docx' ? (
+                    <div className="flex items-center gap-1 text-green-600 dark:text-green-400 text-xs font-medium">
+                      <CheckCircle2 className="h-3 w-3" />
+                      Downloaded!
+                    </div>
+                  ) : (
+                    <button className="w-full mt-2 px-3 py-1.5 bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-lg text-xs font-medium hover:shadow-lg transition-all">
+                      Export DOCX
+                    </button>
+                  )}
+                </div>
+              </motion.div>
             </div>
 
             {/* Format Tips */}
@@ -334,6 +436,9 @@ export default function BackupRestorePanel({ onClose }: BackupRestorePanelProps)
                 <li>• <strong>JSON:</strong> Complete backup - use this to restore all your data</li>
                 <li>• <strong>CSV:</strong> Spreadsheet format - analyze your entries in Excel or Google Sheets</li>
                 <li>• <strong>Markdown:</strong> Plain text - read in note apps or view on GitHub</li>
+                <li>• <strong>TXT:</strong> Simple plain text - opens in any text editor</li>
+                <li>• <strong>PDF:</strong> Professional document - formatted for printing or sharing</li>
+                <li>• <strong>DOCX:</strong> Word-compatible - edit in Microsoft Word or Google Docs</li>
               </ul>
             </div>
           </div>
