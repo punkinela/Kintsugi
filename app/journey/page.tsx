@@ -972,7 +972,7 @@ export default function AdminDashboard() {
                   </div>
 
                   <div className="bg-gray-50 dark:bg-kintsugi-dark-700 p-3 rounded-lg border theme-border-light">
-                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400">Journal Entries</div>
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400">Impact Log Entries</div>
                     <div className="text-lg font-bold theme-text-primary">{gamificationStats.totalJournalEntries || 0}</div>
                   </div>
 

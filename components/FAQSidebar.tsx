@@ -287,7 +287,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                         growth progress, cultural wisdom from your heritage, and daily insights
                       </li>
                       <li>
-                        <strong>Golden Seams (Impact Log):</strong> Your full professional journal documenting
+                        <strong>Golden Seams (Impact Log):</strong> Your comprehensive record documenting
                         accomplishments, reflections, and career growth over time
                       </li>
                       <li>
@@ -327,7 +327,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                       <li>Tracking patterns in your growth over time</li>
                     </ul>
                     <p className="text-xs text-gray-600 dark:text-gray-400">
-                      Think of it as your "brag document" meets "growth journal"—professional but reflective.
+                      Think of it as your "brag document" meets "growth tracker"—professional but reflective.
                     </p>
                   </>
                 }
