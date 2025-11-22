@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import type { JournalEntry } from '@/types/engagement';
+import { getCurrentTheme, getCurrentColorMode } from '@/utils/themes';
 
 interface Crack {
   id: string;
@@ -20,9 +21,64 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
   const [cracks, setCracks] = useState<Crack[]>([]);
   const [rotation, setRotation] = useState(0);
   const [selectedCrack, setSelectedCrack] = useState<Crack | null>(null);
+  const [vesselColors, setVesselColors] = useState({ top: '#8B7355', mid: '#6B5D4F', bottom: '#5A4E42' });
 
   // Debug: Log what entries the vessel receives
   console.log('🏺 Vessel received', entries.length, 'entries');
+
+  // Get theme-aware vessel colors
+  useEffect(() => {
+    const theme = getCurrentTheme();
+    const colorMode = getCurrentColorMode();
+    const isDark = colorMode === 'dark' || (colorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    // Choose vessel colors that contrast well with gold (#d97706) for each theme
+    const vesselColorMap: Record<string, { top: string; mid: string; bottom: string }> = {
+      // Gold theme: Rich terracotta/clay to complement gold
+      gold: isDark
+        ? { top: '#8B7355', mid: '#6B5D4F', bottom: '#5A4E42' } // Warm brown
+        : { top: '#9C6644', mid: '#7C5436', bottom: '#6B4423' }, // Terracotta
+
+      // Professional Blue: Slate gray (neutral, professional)
+      professional: isDark
+        ? { top: '#64748b', mid: '#475569', bottom: '#334155' } // Cool slate
+        : { top: '#94a3b8', mid: '#64748b', bottom: '#475569' }, // Light slate
+
+      // Energetic Purple: Warm gray to balance cool purple
+      energetic: isDark
+        ? { top: '#78716c', mid: '#57534e', bottom: '#44403c' } // Warm stone
+        : { top: '#a8a29e', mid: '#78716c', bottom: '#57534e' }, // Light stone
+
+      // Calm Green: Rich earth tones
+      calm: isDark
+        ? { top: '#92400e', mid: '#78350f', bottom: '#6B5D4F' } // Dark amber/brown
+        : { top: '#a16207', mid: '#854d0e', bottom: '#713f12' }, // Warm brown
+
+      // Bold Red: Cool gray for contrast
+      bold: isDark
+        ? { top: '#6b7280', mid: '#4b5563', bottom: '#374151' } // Cool gray
+        : { top: '#9ca3af', mid: '#6b7280', bottom: '#4b5563' }, // Light gray
+
+      // Elegant Rose: Warm taupe
+      elegant: isDark
+        ? { top: '#78716c', mid: '#57534e', bottom: '#44403c' } // Warm stone
+        : { top: '#a8a29e', mid: '#78716c', bottom: '#57534e' }, // Taupe
+    };
+
+    setVesselColors(vesselColorMap[theme] || vesselColorMap.gold);
+
+    // Listen for theme changes
+    const handleThemeChange = () => {
+      const newTheme = getCurrentTheme();
+      const newColorMode = getCurrentColorMode();
+      const newIsDark = newColorMode === 'dark' || (newColorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const newColors = vesselColorMap[newTheme] || vesselColorMap.gold;
+      setVesselColors(newColors);
+    };
+
+    window.addEventListener('theme-changed', handleThemeChange);
+    return () => window.removeEventListener('theme-changed', handleThemeChange);
+  }, []);
 
   // Generate cracks based on challenges (more flexible detection)
   const { challenges, growthEntries } = useMemo(() => {
@@ -213,9 +269,9 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
             {/* Vessel body */}
             <defs>
               <linearGradient id="vesselGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#f5f5f5" />
-                <stop offset="50%" stopColor="#e0e0e0" />
-                <stop offset="100%" stopColor="#d0d0d0" />
+                <stop offset="0%" stopColor={vesselColors.top} />
+                <stop offset="50%" stopColor={vesselColors.mid} />
+                <stop offset="100%" stopColor={vesselColors.bottom} />
               </linearGradient>
 
               <filter id="shadow">
