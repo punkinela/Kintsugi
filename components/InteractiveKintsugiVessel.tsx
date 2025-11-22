@@ -26,58 +26,66 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
   // Debug: Log what entries the vessel receives
   console.log('🏺 Vessel received', entries.length, 'entries');
 
-  // Get theme-aware vessel colors
+  // Get theme-aware vessel colors - updates when theme changes
   useEffect(() => {
-    const theme = getCurrentTheme();
-    const colorMode = getCurrentColorMode();
-    const isDark = colorMode === 'dark' || (colorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const updateVesselColors = () => {
+      const theme = getCurrentTheme();
+      const colorMode = getCurrentColorMode();
+      const isDark = colorMode === 'dark' || (colorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-    // Choose vessel colors that contrast well with gold (#d97706) for each theme
-    const vesselColorMap: Record<string, { top: string; mid: string; bottom: string }> = {
-      // Gold theme: Rich terracotta/clay to complement gold
-      gold: isDark
-        ? { top: '#8B7355', mid: '#6B5D4F', bottom: '#5A4E42' } // Warm brown
-        : { top: '#9C6644', mid: '#7C5436', bottom: '#6B4423' }, // Terracotta
+      console.log('🎨 Updating vase colors for theme:', theme, 'isDark:', isDark);
 
-      // Professional Blue: Slate gray (neutral, professional)
-      professional: isDark
-        ? { top: '#64748b', mid: '#475569', bottom: '#334155' } // Cool slate
-        : { top: '#94a3b8', mid: '#64748b', bottom: '#475569' }, // Light slate
+      // Choose vessel colors that contrast well with gold (#d97706) for each theme
+      const vesselColorMap: Record<string, { top: string; mid: string; bottom: string }> = {
+        // Gold theme: Rich terracotta/clay to complement gold
+        gold: isDark
+          ? { top: '#8B7355', mid: '#6B5D4F', bottom: '#5A4E42' } // Warm brown
+          : { top: '#9C6644', mid: '#7C5436', bottom: '#6B4423' }, // Terracotta
 
-      // Energetic Purple: Warm gray to balance cool purple
-      energetic: isDark
-        ? { top: '#78716c', mid: '#57534e', bottom: '#44403c' } // Warm stone
-        : { top: '#a8a29e', mid: '#78716c', bottom: '#57534e' }, // Light stone
+        // Professional Blue: Slate gray (neutral, professional)
+        professional: isDark
+          ? { top: '#64748b', mid: '#475569', bottom: '#334155' } // Cool slate
+          : { top: '#94a3b8', mid: '#64748b', bottom: '#475569' }, // Light slate
 
-      // Calm Green: Rich earth tones
-      calm: isDark
-        ? { top: '#92400e', mid: '#78350f', bottom: '#6B5D4F' } // Dark amber/brown
-        : { top: '#a16207', mid: '#854d0e', bottom: '#713f12' }, // Warm brown
+        // Energetic Purple: Warm gray to balance cool purple
+        energetic: isDark
+          ? { top: '#78716c', mid: '#57534e', bottom: '#44403c' } // Warm stone
+          : { top: '#a8a29e', mid: '#78716c', bottom: '#57534e' }, // Light stone
 
-      // Bold Red: Cool gray for contrast
-      bold: isDark
-        ? { top: '#6b7280', mid: '#4b5563', bottom: '#374151' } // Cool gray
-        : { top: '#9ca3af', mid: '#6b7280', bottom: '#4b5563' }, // Light gray
+        // Calm Green: Rich earth tones
+        calm: isDark
+          ? { top: '#92400e', mid: '#78350f', bottom: '#6B5D4F' } // Dark amber/brown
+          : { top: '#a16207', mid: '#854d0e', bottom: '#713f12' }, // Warm brown
 
-      // Elegant Rose: Warm taupe
-      elegant: isDark
-        ? { top: '#78716c', mid: '#57534e', bottom: '#44403c' } // Warm stone
-        : { top: '#a8a29e', mid: '#78716c', bottom: '#57534e' }, // Taupe
-    };
+        // Bold Red: Cool gray for contrast
+        bold: isDark
+          ? { top: '#6b7280', mid: '#4b5563', bottom: '#374151' } // Cool gray
+          : { top: '#9ca3af', mid: '#6b7280', bottom: '#4b5563' }, // Light gray
 
-    setVesselColors(vesselColorMap[theme] || vesselColorMap.gold);
+        // Elegant Rose: Warm taupe
+        elegant: isDark
+          ? { top: '#78716c', mid: '#57534e', bottom: '#44403c' } // Warm stone
+          : { top: '#a8a29e', mid: '#78716c', bottom: '#57534e' }, // Taupe
+      };
 
-    // Listen for theme changes
-    const handleThemeChange = () => {
-      const newTheme = getCurrentTheme();
-      const newColorMode = getCurrentColorMode();
-      const newIsDark = newColorMode === 'dark' || (newColorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      const newColors = vesselColorMap[newTheme] || vesselColorMap.gold;
+      const newColors = vesselColorMap[theme] || vesselColorMap.gold;
+      console.log('🏺 Setting vase colors:', newColors);
       setVesselColors(newColors);
     };
 
-    window.addEventListener('theme-changed', handleThemeChange);
-    return () => window.removeEventListener('theme-changed', handleThemeChange);
+    // Update colors on mount
+    updateVesselColors();
+
+    // Listen for theme changes
+    window.addEventListener('theme-changed', updateVesselColors);
+
+    // Also check periodically in case theme changed but event didn't fire
+    const interval = setInterval(updateVesselColors, 2000);
+
+    return () => {
+      window.removeEventListener('theme-changed', updateVesselColors);
+      clearInterval(interval);
+    };
   }, []);
 
   // Generate cracks based on ALL entries (Kintsugi philosophy: every accomplishment required effort)
