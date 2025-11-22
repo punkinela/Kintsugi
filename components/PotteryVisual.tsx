@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Download, Info, X } from 'lucide-react';
 import { PotteryData, Crack, POTTERY_STYLES } from '@/types/pottery';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import { getCurrentTheme, getCurrentColorMode } from '@/utils/themes';
 
 interface PotteryVisualProps {
   potteryData: PotteryData;
@@ -21,6 +22,53 @@ export default function PotteryVisual({
   const style = POTTERY_STYLES[potteryData.selectedStyle];
   const svgRef = useRef<SVGSVGElement>(null);
   const [showInfo, setShowInfo] = useState(false);
+  const [vesselColors, setVesselColors] = useState({ fill: '#E07856', stroke: '#B85635' });
+
+  // Get theme-aware vessel colors - same logic as InteractiveKintsugiVessel
+  useEffect(() => {
+    const updateVesselColors = () => {
+      const theme = getCurrentTheme();
+      const colorMode = getCurrentColorMode();
+      const isDark = colorMode === 'dark' || (colorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      console.log('🏺 PotteryVisual: Updating colors for theme:', theme, 'isDark:', isDark);
+
+      // Same color scheme as InteractiveKintsugiVessel
+      const vesselColorMap: Record<string, { fill: string; stroke: string }> = {
+        gold: isDark
+          ? { fill: '#8B7355', stroke: '#6B5D4F' }
+          : { fill: '#9C6644', stroke: '#7C5436' },
+        professional: isDark
+          ? { fill: '#64748b', stroke: '#475569' }
+          : { fill: '#94a3b8', stroke: '#64748b' },
+        energetic: isDark
+          ? { fill: '#78716c', stroke: '#57534e' }
+          : { fill: '#a8a29e', stroke: '#78716c' },
+        calm: isDark
+          ? { fill: '#92400e', stroke: '#78350f' }
+          : { fill: '#a16207', stroke: '#854d0e' },
+        bold: isDark
+          ? { fill: '#6b7280', stroke: '#4b5563' }
+          : { fill: '#9ca3af', stroke: '#6b7280' },
+        elegant: isDark
+          ? { fill: '#78716c', stroke: '#57534e' }
+          : { fill: '#a8a29e', stroke: '#78716c' },
+      };
+
+      const newColors = vesselColorMap[theme] || vesselColorMap.gold;
+      console.log('🏺 PotteryVisual: Setting colors:', newColors);
+      setVesselColors(newColors);
+    };
+
+    updateVesselColors();
+    window.addEventListener('theme-changed', updateVesselColors);
+    const interval = setInterval(updateVesselColors, 2000);
+
+    return () => {
+      window.removeEventListener('theme-changed', updateVesselColors);
+      clearInterval(interval);
+    };
+  }, []);
 
   // Size mappings
   const sizeClasses = {
@@ -98,11 +146,11 @@ export default function PotteryVisual({
           className="w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Vessel Base */}
+          {/* Vessel Base - THEME-AWARE COLORS */}
           <motion.path
             d={style.basePath}
-            fill="#E07856"
-            stroke="#B85635"
+            fill={vesselColors.fill}
+            stroke={vesselColors.stroke}
             strokeWidth="2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
