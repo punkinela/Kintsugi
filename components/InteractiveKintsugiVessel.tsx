@@ -40,37 +40,37 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       console.log('🎨 Updating vase colors for theme:', theme, 'isDark:', isDark);
       console.log('🎨 Current vesselColors state:', vesselColors);
 
-      // Choose vessel colors that contrast well with gold (#d97706) for each theme
+      // Vessel colors that MATCH the theme (not grey!)
       const vesselColorMap: Record<string, { top: string; mid: string; bottom: string }> = {
         // Gold theme: Rich terracotta/clay to complement gold
         gold: isDark
-          ? { top: '#8B7355', mid: '#6B5D4F', bottom: '#5A4E42' } // Warm brown
-          : { top: '#9C6644', mid: '#7C5436', bottom: '#6B4423' }, // Terracotta
+          ? { top: '#d97706', mid: '#b45309', bottom: '#92400e' } // Warm amber/gold
+          : { top: '#f59e0b', mid: '#d97706', bottom: '#b45309' }, // Bright gold
 
-        // Professional Blue: Slate gray (neutral, professional)
+        // Professional Blue: Blue tones (not grey!)
         professional: isDark
-          ? { top: '#64748b', mid: '#475569', bottom: '#334155' } // Cool slate
-          : { top: '#94a3b8', mid: '#64748b', bottom: '#475569' }, // Light slate
+          ? { top: '#3b82f6', mid: '#2563eb', bottom: '#1e40af' } // Bright blue
+          : { top: '#60a5fa', mid: '#3b82f6', bottom: '#2563eb' }, // Light blue
 
-        // Energetic Purple: Warm gray to balance cool purple
+        // Energetic Purple: Purple tones (not grey!)
         energetic: isDark
-          ? { top: '#78716c', mid: '#57534e', bottom: '#44403c' } // Warm stone
-          : { top: '#a8a29e', mid: '#78716c', bottom: '#57534e' }, // Light stone
+          ? { top: '#a855f7', mid: '#9333ea', bottom: '#7e22ce' } // Bright purple
+          : { top: '#c084fc', mid: '#a855f7', bottom: '#9333ea' }, // Light purple
 
-        // Calm Green: Rich earth tones
+        // Calm Green: Green tones
         calm: isDark
-          ? { top: '#92400e', mid: '#78350f', bottom: '#6B5D4F' } // Dark amber/brown
-          : { top: '#a16207', mid: '#854d0e', bottom: '#713f12' }, // Warm brown
+          ? { top: '#10b981', mid: '#059669', bottom: '#047857' } // Bright green
+          : { top: '#34d399', mid: '#10b981', bottom: '#059669' }, // Light green
 
-        // Bold Red: Cool gray for contrast
+        // Bold Red: Red tones (not grey!)
         bold: isDark
-          ? { top: '#6b7280', mid: '#4b5563', bottom: '#374151' } // Cool gray
-          : { top: '#9ca3af', mid: '#6b7280', bottom: '#4b5563' }, // Light gray
+          ? { top: '#ef4444', mid: '#dc2626', bottom: '#b91c1c' } // Bright red
+          : { top: '#f87171', mid: '#ef4444', bottom: '#dc2626' }, // Light red
 
-        // Elegant Rose: Warm taupe
+        // Elegant Rose: Pink/rose tones (not grey!)
         elegant: isDark
-          ? { top: '#78716c', mid: '#57534e', bottom: '#44403c' } // Warm stone
-          : { top: '#a8a29e', mid: '#78716c', bottom: '#57534e' }, // Taupe
+          ? { top: '#ec4899', mid: '#db2777', bottom: '#be185d' } // Bright pink
+          : { top: '#f472b6', mid: '#ec4899', bottom: '#db2777' }, // Light pink
       };
 
       const newColors = vesselColorMap[theme] || vesselColorMap.gold;

@@ -2,30 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-/* GLOBAL: Disable ALL blur effects for eye comfort */
-@layer utilities {
-  .backdrop-blur-sm,
-  .backdrop-blur,
-  .backdrop-blur-md,
-  .backdrop-blur-lg,
-  .backdrop-blur-xl,
-  .backdrop-blur-2xl,
-  .backdrop-blur-3xl,
-  [class*="backdrop-blur"] {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
+/* CRITICAL: Disable ALL blur effects GLOBALLY for eye comfort */
+/* This must be OUTSIDE @layer to have maximum specificity */
+*[class*="backdrop-blur"],
+.backdrop-blur-sm,
+.backdrop-blur,
+.backdrop-blur-md,
+.backdrop-blur-lg,
+.backdrop-blur-xl,
+.backdrop-blur-2xl,
+.backdrop-blur-3xl,
+div[class*="backdrop-blur"],
+span[class*="backdrop-blur"],
+section[class*="backdrop-blur"],
+header[class*="backdrop-blur"],
+nav[class*="backdrop-blur"],
+main[class*="backdrop-blur"],
+footer[class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
 
-  .blur-sm,
-  .blur,
-  .blur-md,
-  .blur-lg,
-  .blur-xl,
-  .blur-2xl,
-  .blur-3xl,
-  [class*="blur-"] {
-    filter: none !important;
-  }
+*[class*="blur-"],
+.blur-sm,
+.blur,
+.blur-md,
+.blur-lg,
+.blur-xl,
+.blur-2xl,
+.blur-3xl,
+div[class*="blur-"],
+span[class*="blur-"] {
+  filter: none !important;
 }
 
 /* High-contrast mode backdrop-blur override - must be in utilities layer for highest specificity */

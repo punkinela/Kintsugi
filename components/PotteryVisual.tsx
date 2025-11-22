@@ -35,26 +35,26 @@ export default function PotteryVisual({
 
       console.log('🏺 PotteryVisual: Updating colors for theme:', theme, 'isDark:', isDark);
 
-      // Same color scheme as InteractiveKintsugiVessel
+      // Vessel colors that MATCH the theme (not grey!)
       const vesselColorMap: Record<string, { fill: string; stroke: string }> = {
         gold: isDark
-          ? { fill: '#8B7355', stroke: '#6B5D4F' }
-          : { fill: '#9C6644', stroke: '#7C5436' },
+          ? { fill: '#d97706', stroke: '#b45309' }
+          : { fill: '#f59e0b', stroke: '#d97706' },
         professional: isDark
-          ? { fill: '#64748b', stroke: '#475569' }
-          : { fill: '#94a3b8', stroke: '#64748b' },
+          ? { fill: '#3b82f6', stroke: '#2563eb' }
+          : { fill: '#60a5fa', stroke: '#3b82f6' },
         energetic: isDark
-          ? { fill: '#78716c', stroke: '#57534e' }
-          : { fill: '#a8a29e', stroke: '#78716c' },
+          ? { fill: '#a855f7', stroke: '#9333ea' }
+          : { fill: '#c084fc', stroke: '#a855f7' },
         calm: isDark
-          ? { fill: '#92400e', stroke: '#78350f' }
-          : { fill: '#a16207', stroke: '#854d0e' },
+          ? { fill: '#10b981', stroke: '#059669' }
+          : { fill: '#34d399', stroke: '#10b981' },
         bold: isDark
-          ? { fill: '#6b7280', stroke: '#4b5563' }
-          : { fill: '#9ca3af', stroke: '#6b7280' },
+          ? { fill: '#ef4444', stroke: '#dc2626' }
+          : { fill: '#f87171', stroke: '#ef4444' },
         elegant: isDark
-          ? { fill: '#78716c', stroke: '#57534e' }
-          : { fill: '#a8a29e', stroke: '#78716c' },
+          ? { fill: '#ec4899', stroke: '#db2777' }
+          : { fill: '#f472b6', stroke: '#ec4899' },
       };
 
       const newColors = vesselColorMap[theme] || vesselColorMap.gold;
@@ -76,16 +76,23 @@ export default function PotteryVisual({
   const dynamicCracks = useMemo(() => {
     if (journalEntries.length === 0) return [];
 
-    // Predefined crack patterns for different pottery styles
+    // Get viewBox dimensions for current pottery style
+    const viewBox = style.viewBox.split(' ').map(Number);
+    const width = viewBox[2];
+    const height = viewBox[3];
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    // Generate crack patterns scaled to the pottery's viewBox
     const crackPatterns = [
-      'M 150,80 Q 155,120 150,160',   // Center vertical
-      'M 120,150 Q 140,145 160,150',  // Upper horizontal
-      'M 180,120 Q 165,140 150,160',  // Right diagonal
-      'M 120,100 Q 125,130 130,160',  // Left upper
-      'M 170,180 Q 160,210 150,240',  // Right lower
-      'M 130,220 Q 135,250 140,280',  // Bottom left
-      'M 110,140 Q 120,170 130,200',  // Left middle
-      'M 160,200 Q 165,230 170,260',  // Right middle
+      `M ${centerX},${height * 0.2} Q ${centerX + 5},${height * 0.4} ${centerX},${height * 0.6}`,   // Center vertical
+      `M ${centerX - 30},${height * 0.5} Q ${centerX},${height * 0.48} ${centerX + 30},${height * 0.5}`,  // Horizontal
+      `M ${centerX + 30},${height * 0.3} Q ${centerX + 10},${height * 0.45} ${centerX},${height * 0.6}`,  // Right diagonal
+      `M ${centerX - 30},${height * 0.3} Q ${centerX - 10},${height * 0.45} ${centerX - 5},${height * 0.6}`,  // Left upper
+      `M ${centerX + 20},${height * 0.6} Q ${centerX + 10},${height * 0.75} ${centerX},${height * 0.85}`,  // Right lower
+      `M ${centerX - 20},${height * 0.7} Q ${centerX - 10},${height * 0.8} ${centerX - 5},${height * 0.9}`,  // Bottom left
+      `M ${centerX - 40},${height * 0.45} Q ${centerX - 20},${height * 0.6} ${centerX - 10},${height * 0.75}`,  // Left middle
+      `M ${centerX + 30},${height * 0.65} Q ${centerX + 15},${height * 0.75} ${centerX + 10},${height * 0.85}`,  // Right middle
     ];
 
     return journalEntries.slice(0, 8).map((entry, index) => {
