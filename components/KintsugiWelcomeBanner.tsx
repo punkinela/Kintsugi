@@ -166,16 +166,16 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white/20 rounded-xl p-4 border border-white/30"
+              className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-4 border border-white/50 dark:border-gray-700"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Consistent Impact</p>
-                  <p className="text-white text-2xl font-bold mt-1">{currentStreak} days 🔥</p>
-                  <p className="text-white/70 text-xs mt-1">Showing up daily</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">Consistent Impact</p>
+                  <p className="text-gray-900 dark:text-white text-2xl font-bold mt-1">{currentStreak} days 🔥</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">Showing up daily</p>
                 </div>
-                <div className="bg-white/20 rounded-full p-3">
-                  <TrendingUp className="h-6 w-6 text-white" />
+                <div className="bg-amber-100 dark:bg-amber-900/30 rounded-full p-3">
+                  <TrendingUp className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                 </div>
               </div>
             </motion.div>
@@ -184,16 +184,16 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white/20 rounded-xl p-4 border border-white/30"
+              className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-4 border border-white/50 dark:border-gray-700"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Your Impact Story</p>
-                  <p className="text-white text-2xl font-bold mt-1">{totalEntries} ✍️</p>
-                  <p className="text-white/70 text-xs mt-1">Wins + growth documented</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">Your Impact Story</p>
+                  <p className="text-gray-900 dark:text-white text-2xl font-bold mt-1">{totalEntries} ✍️</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">Wins + growth documented</p>
                 </div>
-                <div className="bg-white/20 rounded-full p-3">
-                  <Heart className="h-6 w-6 text-white" />
+                <div className="bg-red-100 dark:bg-red-900/30 rounded-full p-3">
+                  <Heart className="h-6 w-6 text-red-600 dark:text-red-400" />
                 </div>
               </div>
             </motion.div>
@@ -202,16 +202,16 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-white/20 rounded-xl p-4 border border-white/30"
+              className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-4 border border-white/50 dark:border-gray-700"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Golden Moments</p>
-                  <p className="text-white text-2xl font-bold mt-1">{goldenMoments} ✨</p>
-                  <p className="text-white/70 text-xs mt-1">Challenges turned to gold</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">Golden Moments</p>
+                  <p className="text-gray-900 dark:text-white text-2xl font-bold mt-1">{goldenMoments} ✨</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">Challenges turned to gold</p>
                 </div>
-                <div className="bg-white/20 rounded-full p-3">
-                  <Sparkles className="h-6 w-6 text-white" />
+                <div className="bg-amber-100 dark:bg-amber-900/30 rounded-full p-3">
+                  <Sparkles className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                 </div>
               </div>
             </motion.div>
