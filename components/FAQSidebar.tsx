@@ -291,7 +291,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                         accomplishments, reflections, and career growth over time
                       </li>
                       <li>
-                        <strong>Insights:</strong> AI-powered analytics, Growth Mindset Tracker (for setbacks),
+                        <strong>Insights:</strong> Advanced analytics, Growth Mindset Tracker (for setbacks),
                         bias awareness, strength archaeology, and transformation visualizations
                       </li>
                       <li>
@@ -323,7 +323,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                     <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
                       <li>Performance reviews and promotion discussions</li>
                       <li>Resume bullets and interview stories</li>
-                      <li>AI-generated performance reviews (Your Edge tab)</li>
+                      <li>Professional performance reviews (Your Edge tab)</li>
                       <li>Tracking patterns in your growth over time</li>
                     </ul>
                     <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -404,7 +404,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                 answer={
                   <>
                     <p className="mb-2">
-                      Every week, Kintsugi generates an AI-powered digest summarizing your progress:
+                      Every week, Kintsugi generates an intelligent digest summarizing your progress:
                     </p>
                     <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
                       <li>Achievements logged this week</li>
@@ -423,11 +423,11 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
               />
 
               <FAQItem
-                question="What are AI Bias Insights?"
+                question="What are Bias Insights?"
                 answer={
                   <>
                     <p className="mb-2">
-                      Click "Generate Insight" on the Insights tab to get AI-powered analysis of cognitive biases
+                      Click "Generate Insight" on the Insights tab to get intelligent analysis of cognitive biases
                       that might be affecting your career decisions. Examples:
                     </p>
                     <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
@@ -474,7 +474,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                       Go to the <strong>Your Edge</strong> tab to access export features:
                     </p>
                     <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
-                      <li><strong>AI Performance Review:</strong> Generates a professional self-review from your logged accomplishments</li>
+                      <li><strong>Performance Review Builder:</strong> Generates a professional self-review from your logged accomplishments</li>
                       <li><strong>Export to PDF:</strong> Create a formatted portfolio of your achievements</li>
                       <li><strong>Download Data:</strong> Export all your entries as CSV for backup or analysis</li>
                       <li><strong>Kintsugi Portfolio:</strong> Beautiful visual portfolio showcasing your growth journey</li>
@@ -542,11 +542,11 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                       with deeper visualizations of your growth journey:
                     </p>
                     <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
-                      <li><strong>Golden Gallery:</strong> Overview of your stats, AI feature usage, and gamification progress</li>
-                      <li><strong>Your Golden Seams:</strong> Advanced journal view with heatmaps and richness scores</li>
+                      <li><strong>Golden Gallery:</strong> Overview of your stats, feature usage, and gamification progress</li>
+                      <li><strong>Your Golden Seams:</strong> Advanced Impact Log view with heatmaps and richness scores</li>
                       <li><strong>Your Profile:</strong> Demographics and personalization settings</li>
                       <li><strong>Transformation Path:</strong> 3D interactive Kintsugi vessel showing your growth timeline</li>
-                      <li><strong>Patterns of Repair:</strong> AI insights, strength archaeology, transformation analysis</li>
+                      <li><strong>Patterns of Repair:</strong> Intelligent insights, strength archaeology, transformation analysis</li>
                       <li><strong>Growth Mindset:</strong> Imperfection Gratitude reflections and mindset education</li>
                       <li><strong>Workshop Tools:</strong> Theme customization, pottery styles, export settings</li>
                     </ul>
@@ -634,7 +634,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                 answer={
                   <>
                     <p className="mb-2">
-                      Auto Profile Builder (on Your Profile tab in Personal Insights) uses AI to suggest profile improvements
+                      Auto Profile Builder (on Your Profile tab in Personal Insights) intelligently suggests profile improvements
                       based on your logged accomplishments:
                     </p>
                     <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
@@ -644,7 +644,7 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                       <li>Recommends areas to develop based on your reflections</li>
                     </ul>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Instead of filling out a blank profile, let your work speak for itself—then refine the AI's suggestions.
+                      Instead of filling out a blank profile, let your work speak for itself—then refine the suggestions.
                     </p>
                   </>
                 }
