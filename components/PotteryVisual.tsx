@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Download, Info, X } from 'lucide-react';
 import { PotteryData, Crack, POTTERY_STYLES } from '@/types/pottery';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { getCurrentTheme, getCurrentColorMode } from '@/utils/themes';
 
 interface PotteryVisualProps {
@@ -11,13 +11,15 @@ interface PotteryVisualProps {
   size?: 'small' | 'medium' | 'large';
   interactive?: boolean;
   onCrackClick?: (crack: Crack) => void;
+  journalEntries?: any[]; // For dynamic crack generation
 }
 
 export default function PotteryVisual({
   potteryData,
   size = 'medium',
   interactive = false,
-  onCrackClick
+  onCrackClick,
+  journalEntries = []
 }: PotteryVisualProps) {
   const style = POTTERY_STYLES[potteryData.selectedStyle];
   const svgRef = useRef<SVGSVGElement>(null);
@@ -70,6 +72,50 @@ export default function PotteryVisual({
     };
   }, []);
 
+  // Generate cracks dynamically from journal entries (like InteractiveKintsugiVessel)
+  const dynamicCracks = useMemo(() => {
+    if (journalEntries.length === 0) return [];
+
+    // Predefined crack patterns for different pottery styles
+    const crackPatterns = [
+      'M 150,80 Q 155,120 150,160',   // Center vertical
+      'M 120,150 Q 140,145 160,150',  // Upper horizontal
+      'M 180,120 Q 165,140 150,160',  // Right diagonal
+      'M 120,100 Q 125,130 130,160',  // Left upper
+      'M 170,180 Q 160,210 150,240',  // Right lower
+      'M 130,220 Q 135,250 140,280',  // Bottom left
+      'M 110,140 Q 120,170 130,200',  // Left middle
+      'M 160,200 Q 165,230 170,260',  // Right middle
+    ];
+
+    return journalEntries.slice(0, 8).map((entry, index) => {
+      // Check if entry is "repaired with gold"
+      const repairWords = [
+        'learned', 'grew', 'overcame', 'succeeded', 'achieved', 'accomplished',
+        'completed', 'finished', 'delivered', 'shipped', 'solved', 'resolved',
+        'fixed', 'improved', 'better', 'progress', 'built', 'created'
+      ];
+
+      const text = `${entry.accomplishment || ''} ${entry.reflection || ''}`.toLowerCase();
+      const hasRepairWords = repairWords.some(word => text.includes(word));
+      const hasReflection = entry.reflection && entry.reflection.length > 10;
+      const isSubstantial = (entry.accomplishment?.length || 0) >= 50;
+      const fillPercentage = (hasRepairWords || hasReflection || isSubstantial) ? 100 : 0;
+
+      return {
+        id: entry.id || `crack_${index}`,
+        position: { x: 50, y: 50 + (index * 30) },
+        path: crackPatterns[index] || crackPatterns[0],
+        createdAt: new Date(entry.date || Date.now()),
+        trigger: 'challenge' as const,
+        isFilled: fillPercentage === 100,
+        fillPercentage,
+        associatedEntryId: entry.id,
+        severity: 'moderate' as const
+      } as Crack;
+    });
+  }, [journalEntries]);
+
   // Size mappings
   const sizeClasses = {
     small: 'w-32 h-32',
@@ -77,12 +123,38 @@ export default function PotteryVisual({
     large: 'w-64 h-64'
   };
 
-  // Calculate stats
-  const totalCracks = potteryData.cracks.length;
-  const filledCracks = potteryData.cracks.filter(c => c.fillPercentage === 100).length;
-  const avgFill = totalCracks > 0
-    ? potteryData.cracks.reduce((sum, c) => sum + c.fillPercentage, 0) / totalCracks
-    : 0;
+  // Calculate stats from journal entries (like InteractiveKintsugiVessel)
+  // EVERY entry is a crack - represents a challenge/effort you documented
+  const totalCracks = journalEntries.length;
+
+  // Expanded "golden repair" keywords - signs of completion, learning, and growth
+  const repairWords = [
+    'learned', 'grew', 'overcame', 'succeeded', 'achieved', 'accomplished',
+    'completed', 'finished', 'delivered', 'shipped', 'launched', 'released',
+    'solved', 'resolved', 'fixed', 'improved', 'better', 'progress',
+    'advance', 'develop', 'built', 'created', 'made', 'designed',
+    'implement', 'success', 'win', 'victory', 'breakthrough', 'milestone',
+    'proud', 'happy', 'excited', 'grateful', 'thankful', 'appreciat',
+    'understand', 'realize', 'discover', 'insight', 'figured out',
+    'master', 'skill', 'expert', 'confident', 'strong', 'capable',
+    'helped', 'support', 'contribut', 'impact', 'difference', 'valuable',
+    'led', 'managed', 'coordinated', 'presented', 'wrote', 'published',
+    'increased', 'reduced', 'optimized', 'streamlined', 'automated',
+    'organized', 'facilitated', 'negotiated', 'secured'
+  ];
+
+  // Entries are "repaired with gold" if they have repair/accomplishment keywords, reflections, or are substantial
+  const filledCracks = journalEntries.filter(entry => {
+    const text = `${entry.accomplishment || ''} ${entry.reflection || ''}`.toLowerCase();
+    const hasRepairWords = repairWords.some(word => text.includes(word));
+    const hasReflection = entry.reflection && entry.reflection.length > 10;
+    const isSubstantial = (entry.accomplishment?.length || 0) >= 50;
+    return hasRepairWords || hasReflection || isSubstantial;
+  }).length;
+
+  const avgFill = totalCracks > 0 ? Math.round((filledCracks / totalCracks) * 100) : 0;
+
+  console.log('🏺 PotteryVisual stats:', { totalCracks, filledCracks, avgFill });
 
   // Export pottery as image
   const handleExport = () => {
@@ -157,8 +229,8 @@ export default function PotteryVisual({
             transition={{ delay: 0.2 }}
           />
 
-          {/* Cracks */}
-          {potteryData.cracks.map((crack, index) => (
+          {/* Cracks - use dynamic cracks from journal entries */}
+          {dynamicCracks.map((crack, index) => (
             <motion.g
               key={crack.id}
               initial={{ opacity: 0 }}
@@ -214,7 +286,7 @@ export default function PotteryVisual({
             animate={{ opacity: [0.3, 0.6, 0.3] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            {potteryData.cracks
+            {dynamicCracks
               .filter(c => c.fillPercentage === 100)
               .slice(0, 3)
               .map((crack, i) => (
@@ -249,7 +321,7 @@ export default function PotteryVisual({
           <div className="text-xs text-white/80 dark:text-gray-300">golden seams</div>
         </div>
         <div className="text-center">
-          <div className="font-bold text-white dark:text-white">{Math.round(avgFill)}%</div>
+          <div className="font-bold text-white dark:text-white">{avgFill}%</div>
           <div className="text-xs text-white/80 dark:text-gray-300">healed</div>
         </div>
       </motion.div>

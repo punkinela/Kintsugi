@@ -95,6 +95,7 @@ export default function KintsugiWelcomeBanner({
                   potteryData={potteryData}
                   size="small"
                   interactive={false}
+                  journalEntries={journalEntries}
                 />
               </motion.div>
             )}
