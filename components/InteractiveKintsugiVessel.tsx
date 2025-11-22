@@ -81,16 +81,16 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       console.log('🔨 Growth entries available:', growthEntries.length);
 
       const newCracks: Crack[] = challenges.slice(0, 8).map((entry, index) => {
-        // Generate varied crack patterns
+        // Generate varied crack patterns - ALL WITHIN VESSEL BOUNDS (X: 100-200, Y: 50-340)
         const patterns = [
-          'M 150,50 Q 160,100 150,150', // Vertical crack
-          'M 50,150 Q 100,140 150,150', // Horizontal crack
-          'M 200,100 Q 180,120 160,140', // Diagonal crack
-          'M 100,50 Q 110,80 120,110', // Short crack
-          'M 250,120 Q 230,140 210,160', // Right side crack
-          'M 150,200 Q 140,220 130,240', // Bottom crack
-          'M 80,80 Q 90,110 100,140', // Left diagonal
-          'M 180,180 Q 170,200 160,220', // Right diagonal
+          'M 150,80 Q 155,120 150,160',   // Center vertical crack
+          'M 120,150 Q 140,145 160,150',  // Upper horizontal crack
+          'M 180,120 Q 165,140 150,160',  // Right diagonal crack
+          'M 120,100 Q 125,130 130,160',  // Left upper crack
+          'M 170,180 Q 160,210 150,240',  // Right lower crack
+          'M 130,220 Q 135,250 140,280',  // Bottom left crack
+          'M 110,140 Q 120,170 130,200',  // Left middle crack
+          'M 160,200 Q 165,230 170,260',  // Right middle crack
         ];
 
         const hasGrowth = growthEntries.some(g =>
