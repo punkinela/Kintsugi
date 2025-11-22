@@ -246,14 +246,15 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
                 {/* Crack line */}
                 <motion.path
                   d={crack.path}
-                  stroke={crack.isRepaired ? '#d97706' : '#666'}
-                  strokeWidth={crack.isRepaired ? '3' : '2'}
+                  stroke={crack.isRepaired ? '#d97706' : '#000000'}
+                  strokeWidth={crack.isRepaired ? '4' : '3'}
                   fill="none"
+                  strokeLinecap="round"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
                   transition={{ duration: 0.8, delay: index * 0.2 }}
                   style={{
-                    filter: crack.isRepaired ? 'drop-shadow(0 0 4px #d97706)' : 'none'
+                    filter: crack.isRepaired ? 'drop-shadow(0 0 6px #d97706)' : 'drop-shadow(0 0 2px rgba(0,0,0,0.5))'
                   }}
                   onMouseEnter={() => setSelectedCrack(crack)}
                   onMouseLeave={() => setSelectedCrack(null)}
@@ -265,7 +266,8 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
                   <motion.path
                     d={crack.path}
                     stroke="url(#goldShimmer)"
-                    strokeWidth="4"
+                    strokeWidth="5"
+                    strokeLinecap="round"
                     fill="none"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: [0.3, 0.7, 0.3] }}
