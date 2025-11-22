@@ -68,9 +68,9 @@ export default function KintsugiWelcomeBanner({
         />
       )}
 
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 -mt-4 -mr-4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-64 h-64 bg-yellow-300/10 rounded-full blur-3xl"></div>
+      {/* Decorative elements - NO BLUR for eye comfort */}
+      <div className="absolute top-0 right-0 -mt-4 -mr-4 w-48 h-48 bg-white/10 rounded-full"></div>
+      <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-64 h-64 bg-yellow-300/10 rounded-full"></div>
 
       {/* Kintsugi pattern overlay */}
       <div className="absolute inset-0 opacity-10">
@@ -102,7 +102,7 @@ export default function KintsugiWelcomeBanner({
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg"
+              className="flex-shrink-0 bg-white/20 rounded-2xl p-4 shadow-lg"
             >
               <Sparkles className="h-10 w-10 text-white" />
             </motion.div>
@@ -116,7 +116,7 @@ export default function KintsugiWelcomeBanner({
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 }}
-                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-amber-400/30 to-yellow-300/30 backdrop-blur-sm rounded-full border border-amber-300/50 shadow-lg"
+                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-amber-400/30 to-yellow-300/30 rounded-full border border-amber-300/50 shadow-lg"
                   title="Kintsugi pronunciation guide"
                 >
                   <span className="text-white font-bold text-sm">金継ぎ</span>
@@ -133,7 +133,7 @@ export default function KintsugiWelcomeBanner({
               </p>
 
               {/* Unified Philosophy Quote */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="bg-white/10 rounded-xl p-4 border border-white/20">
                 <p className="text-white/95 text-sm font-semibold mb-2">
                   Own Your Impact + Kintsugi Philosophy
                 </p>
@@ -165,7 +165,7 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+              className="bg-white/20 rounded-xl p-4 border border-white/30"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -183,7 +183,7 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+              className="bg-white/20 rounded-xl p-4 border border-white/30"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -201,7 +201,7 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+              className="bg-white/20 rounded-xl p-4 border border-white/30"
             >
               <div className="flex items-center justify-between">
                 <div>

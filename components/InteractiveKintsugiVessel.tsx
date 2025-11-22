@@ -29,11 +29,16 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
   // Get theme-aware vessel colors - updates when theme changes
   useEffect(() => {
     const updateVesselColors = () => {
+      // Debug: Check localStorage directly
+      const storedTheme = typeof window !== 'undefined' ? localStorage.getItem('kintsugi_theme') : null;
+      console.log('📦 localStorage kintsugi_theme:', storedTheme);
+
       const theme = getCurrentTheme();
       const colorMode = getCurrentColorMode();
       const isDark = colorMode === 'dark' || (colorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
       console.log('🎨 Updating vase colors for theme:', theme, 'isDark:', isDark);
+      console.log('🎨 Current vesselColors state:', vesselColors);
 
       // Choose vessel colors that contrast well with gold (#d97706) for each theme
       const vesselColorMap: Record<string, { top: string; mid: string; bottom: string }> = {
@@ -272,6 +277,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
           style={{ width: '300px', height: '400px' }}
         >
           <svg
+            key={`${vesselColors.top}-${vesselColors.mid}-${vesselColors.bottom}`}
             viewBox="0 0 300 400"
             className="w-full h-full drop-shadow-2xl"
           >
