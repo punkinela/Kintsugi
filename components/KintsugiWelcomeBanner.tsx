@@ -57,7 +57,7 @@ export default function KintsugiWelcomeBanner({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative overflow-hidden bg-gradient-to-br theme-gradient-to-r  rounded-2xl shadow-2xl"
+      className="relative overflow-hidden bg-gradient-to-br theme-gradient-to-r rounded-2xl shadow-2xl"
     >
       {/* Pottery Selection Modal */}
       {showPotterySelection && (
@@ -68,17 +68,7 @@ export default function KintsugiWelcomeBanner({
         />
       )}
 
-      {/* Decorative elements - NO BLUR for eye comfort */}
-      <div className="absolute top-0 right-0 -mt-4 -mr-4 w-48 h-48 bg-white/10 rounded-full"></div>
-      <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-64 h-64 bg-yellow-300/10 rounded-full"></div>
-
-      {/* Kintsugi pattern overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-          backgroundSize: '30px 30px'
-        }}></div>
-      </div>
+      {/* Main Content - NO overlays for crisp text */}
 
       <div className="relative px-6 py-8 sm:px-8 sm:py-10">
         {/* Header with Kintsugi Philosophy */}
@@ -166,7 +156,7 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-4 border border-white/50 dark:border-gray-700"
+              className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -184,7 +174,7 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-4 border border-white/50 dark:border-gray-700"
+              className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -202,7 +192,7 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-4 border border-white/50 dark:border-gray-700"
+              className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <div>
