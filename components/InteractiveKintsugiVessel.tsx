@@ -80,21 +80,13 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
     return () => window.removeEventListener('theme-changed', handleThemeChange);
   }, []);
 
-  // Generate cracks based on challenges (more flexible detection)
-  const { challenges, growthEntries } = useMemo(() => {
-    // Expanded challenge keywords - things people naturally say when facing difficulties
-    const challengeWords = [
-      'difficult', 'struggle', 'challenge', 'hard', 'failed', 'problem',
-      'tough', 'frustrat', 'stress', 'overwhelm', 'worry', 'anxious',
-      'concern', 'issue', 'obstacle', 'barrier', 'setback', 'mistake',
-      'error', 'wrong', 'mistak', 'didn\'t work', 'fell short', 'miss',
-      'delay', 'behind', 'stuck', 'block', 'confus', 'uncertain',
-      'doubt', 'fear', 'afraid', 'nervous', 'pressure', 'deadline',
-      'reject', 'fail', 'loss', 'disappoint', 'upset', 'sad'
-    ];
+  // Generate cracks based on ALL entries (Kintsugi philosophy: every accomplishment required effort)
+  const { challenges, repairedEntries } = useMemo(() => {
+    // EVERY entry represents effort/challenge - that's why you documented it!
+    const challenges = entries;
 
-    // Expanded growth keywords - all the ways people document wins and learning
-    const growthWords = [
+    // Expanded "golden repair" keywords - signs of completion, learning, and growth
+    const repairWords = [
       'learned', 'grew', 'overcame', 'succeeded', 'achieved', 'accomplished',
       'completed', 'finished', 'delivered', 'shipped', 'launched', 'released',
       'solved', 'resolved', 'fixed', 'improved', 'better', 'progress',
@@ -103,38 +95,48 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       'proud', 'happy', 'excited', 'grateful', 'thankful', 'appreciat',
       'understand', 'realize', 'discover', 'insight', 'figured out',
       'master', 'skill', 'expert', 'confident', 'strong', 'capable',
-      'helped', 'support', 'contribut', 'impact', 'difference', 'valuable'
+      'helped', 'support', 'contribut', 'impact', 'difference', 'valuable',
+      // Common accomplishment verbs
+      'led', 'managed', 'coordinated', 'presented', 'wrote', 'published',
+      'increased', 'reduced', 'optimized', 'streamlined', 'automated',
+      'organized', 'facilitated', 'negotiated', 'secured'
     ];
 
-    const challenges = entries.filter(entry => {
+    // Entries are "repaired with gold" if they have:
+    // 1. Repair/accomplishment keywords
+    // 2. A reflection (showing thoughtfulness)
+    // 3. Are substantial (50+ characters, showing detail)
+    const repairedEntries = entries.filter(entry => {
       const text = `${entry.accomplishment} ${entry.reflection || ''}`.toLowerCase();
-      return challengeWords.some(word => text.includes(word));
+      const hasRepairWords = repairWords.some(word => text.includes(word));
+      const hasReflection = entry.reflection && entry.reflection.length > 10;
+      const isSubstantial = entry.accomplishment.length >= 50;
+
+      return hasRepairWords || hasReflection || isSubstantial;
     });
 
-    // Count ANY entry with growth words OR any entry with a reflection as growth
-    const growthEntries = entries.filter(entry => {
-      const text = `${entry.accomplishment} ${entry.reflection || ''}`.toLowerCase();
-      return growthWords.some(word => text.includes(word)) || entry.reflection || entry.accomplishment.length > 20;
-    });
+    console.log('🏺 Vessel analysis (NEW LOGIC):');
+    console.log('   - Total entries (cracks):', challenges.length);
+    console.log('   - Repaired entries (gold):', repairedEntries.length);
+    console.log('   - Repair rate:', challenges.length > 0 ? `${Math.round(repairedEntries.length / challenges.length * 100)}%` : '0%');
 
-    console.log('🏺 Vessel analysis:');
-    console.log('   - Challenge entries found:', challenges.length);
-    console.log('   - Growth entries found:', growthEntries.length);
-    if (challenges.length > 0) {
-      console.log('   - First challenge:', challenges[0].accomplishment.substring(0, 50));
-    }
-    if (growthEntries.length > 0) {
-      console.log('   - First growth:', growthEntries[0].accomplishment.substring(0, 50));
+    if (entries.length > 0) {
+      console.log('   - Sample entry:', entries[0].accomplishment.substring(0, 60));
+      const sampleText = `${entries[0].accomplishment} ${entries[0].reflection || ''}`.toLowerCase();
+      const isRepaired = repairWords.some(word => sampleText.includes(word)) ||
+                        (entries[0].reflection && entries[0].reflection.length > 10) ||
+                        entries[0].accomplishment.length >= 50;
+      console.log('   - Sample is repaired:', isRepaired);
     }
 
-    return { challenges, growthEntries };
+    return { challenges, repairedEntries };
   }, [entries]);
 
   // Create crack patterns
   useEffect(() => {
     try {
-      console.log('🔨 Creating cracks from', challenges.length, 'challenges');
-      console.log('🔨 Growth entries available:', growthEntries.length);
+      console.log('🔨 Creating cracks from', challenges.length, 'entries');
+      console.log('🔨 Repaired entries:', repairedEntries.length);
 
       const newCracks: Crack[] = challenges.slice(0, 8).map((entry, index) => {
         // Generate varied crack patterns - ALL WITHIN VESSEL BOUNDS (X: 100-200, Y: 50-340)
@@ -149,18 +151,17 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
           'M 160,200 Q 165,230 170,260',  // Right middle crack
         ];
 
-        const hasGrowth = growthEntries.some(g =>
-          new Date(g.date) > new Date(entry.date)
-        );
+        // Check if this entry is "repaired with gold"
+        const isRepaired = repairedEntries.some(r => r.id === entry.id);
 
         const entryText = entry.accomplishment || 'No description';
-        console.log(`   Crack ${index}: "${entryText.substring(0, 30)}" - Repaired: ${hasGrowth}`);
+        console.log(`   Crack ${index}: "${entryText.substring(0, 30)}" - Repaired: ${isRepaired}`);
 
         return {
           id: entry.id,
           path: patterns[index] || patterns[0],
           fromEntry: entry.accomplishment || '',
-          isRepaired: hasGrowth
+          isRepaired: isRepaired
         };
       });
 
@@ -170,7 +171,7 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
     } catch (error) {
       console.error('❌ Error in crack creation useEffect:', error);
     }
-  }, [challenges, growthEntries]);
+  }, [challenges, repairedEntries]);
 
   // Download as image
   const downloadVessel = () => {
@@ -237,10 +238,10 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       <div className="px-6 py-4 bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Repair Progress
+            Golden Seam Progress
           </span>
           <span className="text-sm font-bold theme-text-primary dark:theme-text-secondary">
-            {repairedCount} / {cracks.length} cracks repaired
+            {repairedCount} / {cracks.length} entries enhanced
           </span>
         </div>
 
@@ -375,24 +376,25 @@ export default function InteractiveKintsugiVessel({ entries }: InteractiveKintsu
       <div className="px-6 py-4 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-700 grid grid-cols-3 gap-4">
         <div className="text-center">
           <div className="text-2xl font-bold text-gray-900 dark:text-white">{cracks.length}</div>
-          <div className="text-xs text-gray-600 dark:text-gray-400">Total Cracks</div>
+          <div className="text-xs text-gray-600 dark:text-gray-400">Entries Documented</div>
         </div>
         <div className="text-center">
           <div className="text-2xl font-bold theme-text-primary dark:theme-text-secondary">{repairedCount}</div>
-          <div className="text-xs text-gray-600 dark:text-gray-400">Golden Repairs</div>
+          <div className="text-xs text-gray-600 dark:text-gray-400">Golden Seams</div>
         </div>
         <div className="text-center">
           <div className="text-2xl font-bold text-gray-500 dark:text-gray-400">{cracks.length - repairedCount}</div>
-          <div className="text-xs text-gray-600 dark:text-gray-400">Healing</div>
+          <div className="text-xs text-gray-600 dark:text-gray-400">In Progress</div>
         </div>
       </div>
 
       {/* Philosophy Note */}
       <div className="px-6 py-4 bg-gradient-to-r from-theme-primary-light to-orange-50  border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-700 dark:text-gray-300">
-          <span className="font-semibold">金継ぎ Kintsukuroi:</span> Each crack represents a
-          challenge you've faced. The golden repairs show where you've grown stronger. Your vessel
-          is more beautiful and valuable because of its history.
+          <span className="font-semibold">金継ぎ Kintsukuroi:</span> Each crack represents an
+          accomplishment you documented - proof of effort and growth. The golden repairs appear
+          when you add reflection, detail, or accomplishment keywords. Your vessel grows more
+          beautiful with every entry.
         </p>
       </div>
     </div>
