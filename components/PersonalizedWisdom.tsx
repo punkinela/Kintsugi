@@ -97,7 +97,7 @@ export default function PersonalizedWisdom({ user }: PersonalizedWisdomProps) {
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.3 }}
             onClick={handleNextQuote}
-            className="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors"
+            className="p-2 bg-white/30 rounded-lg hover:bg-white/40 transition-colors"
             aria-label="Next wisdom"
           >
             <RefreshCw className="h-5 w-5 text-white" />

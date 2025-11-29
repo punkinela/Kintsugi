@@ -133,7 +133,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
 
         <div className="relative">
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-4 bg-white/20 backdrop-blur-sm rounded-2xl">
+            <div className="p-4 bg-white/20  rounded-2xl">
               <Sparkles className="h-10 w-10" />
             </div>
             <div>
@@ -145,19 +145,19 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+            <div className="bg-white/10  rounded-xl p-4">
               <p className="text-white/80 text-sm">Total Entries</p>
               <p className="text-4xl font-bold mt-1">
                 <AnimatedCounter value={entries.length} />
               </p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+            <div className="bg-white/10  rounded-xl p-4">
               <p className="text-white/80 text-sm">Words of Wisdom</p>
               <p className="text-4xl font-bold mt-1">
                 <AnimatedCounter value={insights.totalWords} />
               </p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+            <div className="bg-white/10  rounded-xl p-4">
               <p className="text-white/80 text-sm">Healing Score</p>
               <p className="text-4xl font-bold mt-1">
                 <AnimatedCounter value={insights.healingJourney} suffix="%" />

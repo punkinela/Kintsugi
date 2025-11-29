@@ -127,7 +127,7 @@ export default function KintsugiUserJourney({ entries, user }: KintsugiUserJourn
       {/* Header */}
       <div className="bg-gradient-to-r theme-gradient-to-r dark:from-theme-primary dark:to-theme-primary px-6 py-8 text-white">
         <div className="flex items-start gap-4 mb-4">
-          <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+          <div className="p-3 bg-white/20  rounded-xl">
             <BookOpen className="h-8 w-8" />
           </div>
           <div className="flex-1">

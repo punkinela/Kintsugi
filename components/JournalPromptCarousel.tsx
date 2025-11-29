@@ -177,7 +177,7 @@ export default function JournalPromptCarousel({ user, onSelectPrompt }: JournalP
           >
             <div className={`bg-gradient-to-r ${currentPrompt.color} rounded-xl p-6`}>
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 p-3 bg-white/20 backdrop-blur-sm rounded-lg">
+                <div className="flex-shrink-0 p-3 bg-white/20  rounded-lg">
                   <Icon className="h-8 w-8 text-white" />
                 </div>
                 <div className="flex-1">
