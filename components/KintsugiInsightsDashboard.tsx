@@ -132,7 +132,7 @@ export default function KintsugiInsightsDashboard({ feedback }: KintsugiInsights
         className="bg-gradient-to-r theme-gradient-to-r dark:from-theme-primary dark:to-theme-primary rounded-2xl shadow-2xl p-8 text-white"
       >
         <div className="flex items-start gap-4">
-          <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+          <div className="p-3 bg-white/20  rounded-xl">
             <Sparkles className="h-8 w-8" />
           </div>
           <div className="flex-1">

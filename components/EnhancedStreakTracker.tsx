@@ -50,7 +50,7 @@ export default function EnhancedStreakTracker() {
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="p-2 bg-white/20 rounded-lg backdrop-blur-sm"
+                className="p-2 bg-white/20 rounded-lg "
               >
                 <Flame className="h-6 w-6" />
               </motion.div>
@@ -75,7 +75,7 @@ export default function EnhancedStreakTracker() {
               <span className="opacity-90">Next Milestone: {nextMilestone.title}</span>
               <span className="font-semibold">{nextMilestone.days} days</span>
             </div>
-            <div className="h-2 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
+            <div className="h-2 bg-white/20 rounded-full overflow-hidden ">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${progressToNext}%` }}

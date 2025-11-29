@@ -140,7 +140,7 @@ export default function EngagingJournalPrompt({ onOpenJournal }: EngagingJournal
               </div>
 
               {/* Writing Prompt */}
-              <div className="bg-white/20 backdrop-blur-sm rounded-xl p-5 mb-6 border-2 border-white/30">
+              <div className="bg-white/20  rounded-xl p-5 mb-6 border-2 border-white/30">
                 <div className="flex items-start gap-3">
                   <Lightbulb className="h-6 w-6 text-yellow-300 flex-shrink-0 mt-1" />
                   <div>

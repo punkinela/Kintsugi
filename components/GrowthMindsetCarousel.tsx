@@ -108,7 +108,7 @@ export default function GrowthMindsetCarousel({ onSelectPrompt }: GrowthMindsetC
             </div>
 
             {/* Main Affirmation */}
-            <div className="mb-6 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm">
+            <div className="mb-6 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl ">
               <div className="flex items-start gap-3">
                 <Lightbulb className="h-6 w-6 theme-text-primary flex-shrink-0 mt-1" />
                 <p className="text-xl font-bold text-gray-900 dark:text-white italic">

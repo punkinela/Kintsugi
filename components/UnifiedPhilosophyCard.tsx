@@ -36,7 +36,7 @@ export default function UnifiedPhilosophyCard() {
         </div>
 
         {/* Main Message */}
-        <div className="bg-white/60 dark:bg-kintsugi-dark-800/60 backdrop-blur-sm rounded-xl p-5 mb-4">
+        <div className="bg-white/80 dark:bg-kintsugi-dark-800/80 rounded-xl p-5 mb-4">
           <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed mb-3">
             <span className="font-bold text-theme-primary dark:theme-text-secondary">Your impact</span> isn't just your accomplishments.
             It's also how you've <span className="font-bold">grown through challenges</span>.
