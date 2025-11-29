@@ -258,11 +258,7 @@ html {
     color: white !important;
   }
 
-  /* Add text shadow for better readability on gradient backgrounds */
-  .theme-gradient-to-r *:not(svg):not(path),
-  .theme-gradient-to-br *:not(svg):not(path) {
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  }
+  /* NO text shadow - keeps text crisp and sharp */
 
   /* Buttons using theme colors */
   .theme-btn-primary {
