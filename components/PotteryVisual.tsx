@@ -3,24 +3,125 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Download, Info, X } from 'lucide-react';
 import { PotteryData, Crack, POTTERY_STYLES } from '@/types/pottery';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
+import { getCurrentTheme, getCurrentColorMode } from '@/utils/themes';
 
 interface PotteryVisualProps {
   potteryData: PotteryData;
   size?: 'small' | 'medium' | 'large';
   interactive?: boolean;
   onCrackClick?: (crack: Crack) => void;
+  journalEntries?: any[]; // For dynamic crack generation
 }
 
 export default function PotteryVisual({
   potteryData,
   size = 'medium',
   interactive = false,
-  onCrackClick
+  onCrackClick,
+  journalEntries = []
 }: PotteryVisualProps) {
   const style = POTTERY_STYLES[potteryData.selectedStyle];
   const svgRef = useRef<SVGSVGElement>(null);
   const [showInfo, setShowInfo] = useState(false);
+  const [vesselColors, setVesselColors] = useState({ fill: '#E07856', stroke: '#B85635' });
+
+  // Get theme-aware vessel colors - same logic as InteractiveKintsugiVessel
+  useEffect(() => {
+    const updateVesselColors = () => {
+      const theme = getCurrentTheme();
+      const colorMode = getCurrentColorMode();
+      const isDark = colorMode === 'dark' || (colorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      console.log('🏺 PotteryVisual: Updating colors for theme:', theme, 'isDark:', isDark);
+
+      // Vessel colors that MATCH the theme (not grey!)
+      const vesselColorMap: Record<string, { fill: string; stroke: string }> = {
+        gold: isDark
+          ? { fill: '#d97706', stroke: '#b45309' }
+          : { fill: '#f59e0b', stroke: '#d97706' },
+        professional: isDark
+          ? { fill: '#3b82f6', stroke: '#2563eb' }
+          : { fill: '#60a5fa', stroke: '#3b82f6' },
+        energetic: isDark
+          ? { fill: '#a855f7', stroke: '#9333ea' }
+          : { fill: '#c084fc', stroke: '#a855f7' },
+        calm: isDark
+          ? { fill: '#10b981', stroke: '#059669' }
+          : { fill: '#34d399', stroke: '#10b981' },
+        bold: isDark
+          ? { fill: '#ef4444', stroke: '#dc2626' }
+          : { fill: '#f87171', stroke: '#ef4444' },
+        elegant: isDark
+          ? { fill: '#ec4899', stroke: '#db2777' }
+          : { fill: '#f472b6', stroke: '#ec4899' },
+      };
+
+      const newColors = vesselColorMap[theme] || vesselColorMap.gold;
+      console.log('🏺 PotteryVisual: Setting colors:', newColors);
+      setVesselColors(newColors);
+    };
+
+    updateVesselColors();
+    window.addEventListener('theme-changed', updateVesselColors);
+    const interval = setInterval(updateVesselColors, 2000);
+
+    return () => {
+      window.removeEventListener('theme-changed', updateVesselColors);
+      clearInterval(interval);
+    };
+  }, []);
+
+  // Generate cracks dynamically from journal entries (like InteractiveKintsugiVessel)
+  const dynamicCracks = useMemo(() => {
+    if (journalEntries.length === 0) return [];
+
+    // Get viewBox dimensions for current pottery style
+    const viewBox = style.viewBox.split(' ').map(Number);
+    const width = viewBox[2];
+    const height = viewBox[3];
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    // Generate crack patterns scaled to the pottery's viewBox
+    const crackPatterns = [
+      `M ${centerX},${height * 0.2} Q ${centerX + 5},${height * 0.4} ${centerX},${height * 0.6}`,   // Center vertical
+      `M ${centerX - 30},${height * 0.5} Q ${centerX},${height * 0.48} ${centerX + 30},${height * 0.5}`,  // Horizontal
+      `M ${centerX + 30},${height * 0.3} Q ${centerX + 10},${height * 0.45} ${centerX},${height * 0.6}`,  // Right diagonal
+      `M ${centerX - 30},${height * 0.3} Q ${centerX - 10},${height * 0.45} ${centerX - 5},${height * 0.6}`,  // Left upper
+      `M ${centerX + 20},${height * 0.6} Q ${centerX + 10},${height * 0.75} ${centerX},${height * 0.85}`,  // Right lower
+      `M ${centerX - 20},${height * 0.7} Q ${centerX - 10},${height * 0.8} ${centerX - 5},${height * 0.9}`,  // Bottom left
+      `M ${centerX - 40},${height * 0.45} Q ${centerX - 20},${height * 0.6} ${centerX - 10},${height * 0.75}`,  // Left middle
+      `M ${centerX + 30},${height * 0.65} Q ${centerX + 15},${height * 0.75} ${centerX + 10},${height * 0.85}`,  // Right middle
+    ];
+
+    return journalEntries.slice(0, 8).map((entry, index) => {
+      // Check if entry is "repaired with gold"
+      const repairWords = [
+        'learned', 'grew', 'overcame', 'succeeded', 'achieved', 'accomplished',
+        'completed', 'finished', 'delivered', 'shipped', 'solved', 'resolved',
+        'fixed', 'improved', 'better', 'progress', 'built', 'created'
+      ];
+
+      const text = `${entry.accomplishment || ''} ${entry.reflection || ''}`.toLowerCase();
+      const hasRepairWords = repairWords.some(word => text.includes(word));
+      const hasReflection = entry.reflection && entry.reflection.length > 10;
+      const isSubstantial = (entry.accomplishment?.length || 0) >= 50;
+      const fillPercentage = (hasRepairWords || hasReflection || isSubstantial) ? 100 : 0;
+
+      return {
+        id: entry.id || `crack_${index}`,
+        position: { x: 50, y: 50 + (index * 30) },
+        path: crackPatterns[index] || crackPatterns[0],
+        createdAt: new Date(entry.date || Date.now()),
+        trigger: 'challenge' as const,
+        isFilled: fillPercentage === 100,
+        fillPercentage,
+        associatedEntryId: entry.id,
+        severity: 'moderate' as const
+      } as Crack;
+    });
+  }, [journalEntries]);
 
   // Size mappings
   const sizeClasses = {
@@ -29,12 +130,38 @@ export default function PotteryVisual({
     large: 'w-64 h-64'
   };
 
-  // Calculate stats
-  const totalCracks = potteryData.cracks.length;
-  const filledCracks = potteryData.cracks.filter(c => c.fillPercentage === 100).length;
-  const avgFill = totalCracks > 0
-    ? potteryData.cracks.reduce((sum, c) => sum + c.fillPercentage, 0) / totalCracks
-    : 0;
+  // Calculate stats from journal entries (like InteractiveKintsugiVessel)
+  // EVERY entry is a crack - represents a challenge/effort you documented
+  const totalCracks = journalEntries.length;
+
+  // Expanded "golden repair" keywords - signs of completion, learning, and growth
+  const repairWords = [
+    'learned', 'grew', 'overcame', 'succeeded', 'achieved', 'accomplished',
+    'completed', 'finished', 'delivered', 'shipped', 'launched', 'released',
+    'solved', 'resolved', 'fixed', 'improved', 'better', 'progress',
+    'advance', 'develop', 'built', 'created', 'made', 'designed',
+    'implement', 'success', 'win', 'victory', 'breakthrough', 'milestone',
+    'proud', 'happy', 'excited', 'grateful', 'thankful', 'appreciat',
+    'understand', 'realize', 'discover', 'insight', 'figured out',
+    'master', 'skill', 'expert', 'confident', 'strong', 'capable',
+    'helped', 'support', 'contribut', 'impact', 'difference', 'valuable',
+    'led', 'managed', 'coordinated', 'presented', 'wrote', 'published',
+    'increased', 'reduced', 'optimized', 'streamlined', 'automated',
+    'organized', 'facilitated', 'negotiated', 'secured'
+  ];
+
+  // Entries are "repaired with gold" if they have repair/accomplishment keywords, reflections, or are substantial
+  const filledCracks = journalEntries.filter(entry => {
+    const text = `${entry.accomplishment || ''} ${entry.reflection || ''}`.toLowerCase();
+    const hasRepairWords = repairWords.some(word => text.includes(word));
+    const hasReflection = entry.reflection && entry.reflection.length > 10;
+    const isSubstantial = (entry.accomplishment?.length || 0) >= 50;
+    return hasRepairWords || hasReflection || isSubstantial;
+  }).length;
+
+  const avgFill = totalCracks > 0 ? Math.round((filledCracks / totalCracks) * 100) : 0;
+
+  console.log('🏺 PotteryVisual stats:', { totalCracks, filledCracks, avgFill });
 
   // Export pottery as image
   const handleExport = () => {
@@ -98,19 +225,19 @@ export default function PotteryVisual({
           className="w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Vessel Base */}
+          {/* Vessel Base - THEME-AWARE COLORS */}
           <motion.path
             d={style.basePath}
-            fill="#E07856"
-            stroke="#B85635"
+            fill={vesselColors.fill}
+            stroke={vesselColors.stroke}
             strokeWidth="2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           />
 
-          {/* Cracks */}
-          {potteryData.cracks.map((crack, index) => (
+          {/* Cracks - use dynamic cracks from journal entries */}
+          {dynamicCracks.map((crack, index) => (
             <motion.g
               key={crack.id}
               initial={{ opacity: 0 }}
@@ -166,7 +293,7 @@ export default function PotteryVisual({
             animate={{ opacity: [0.3, 0.6, 0.3] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            {potteryData.cracks
+            {dynamicCracks
               .filter(c => c.fillPercentage === 100)
               .slice(0, 3)
               .map((crack, i) => (
@@ -201,7 +328,7 @@ export default function PotteryVisual({
           <div className="text-xs text-white/80 dark:text-gray-300">golden seams</div>
         </div>
         <div className="text-center">
-          <div className="font-bold text-white dark:text-white">{Math.round(avgFill)}%</div>
+          <div className="font-bold text-white dark:text-white">{avgFill}%</div>
           <div className="text-xs text-white/80 dark:text-gray-300">healed</div>
         </div>
       </motion.div>

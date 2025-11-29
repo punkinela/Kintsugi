@@ -98,7 +98,7 @@ export default function AIInterviewPrepGenerator({ achievementText = '', compact
             <MessageSquare className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">AI Interview Prep Generator</h3>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Interview Prep Generator</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">Convert your achievements into compelling interview responses</p>
           </div>
         </div>

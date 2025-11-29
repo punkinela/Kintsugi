@@ -203,7 +203,7 @@ export default function AIPerformanceReviewGenerator() {
       <div>
         <h2 className="text-2xl font-bold text-kintsugi-dark-900 dark:text-white flex items-center gap-2">
           <FileText className="h-6 w-6 text-blue-600" />
-          AI Performance Review Generator
+          Performance Review Builder
           <AIBadge />
         </h2>
         <p className="text-sm text-kintsugi-dark-600 dark:theme-text-secondary mt-1">

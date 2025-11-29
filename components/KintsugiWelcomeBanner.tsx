@@ -57,7 +57,7 @@ export default function KintsugiWelcomeBanner({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative overflow-hidden bg-gradient-to-br theme-gradient-to-r  rounded-2xl shadow-2xl"
+      className="relative overflow-hidden bg-gradient-to-br theme-gradient-to-r rounded-2xl shadow-2xl"
     >
       {/* Pottery Selection Modal */}
       {showPotterySelection && (
@@ -68,17 +68,7 @@ export default function KintsugiWelcomeBanner({
         />
       )}
 
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 -mt-4 -mr-4 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-64 h-64 bg-yellow-300/10 rounded-full blur-3xl"></div>
-
-      {/* Kintsugi pattern overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-          backgroundSize: '30px 30px'
-        }}></div>
-      </div>
+      {/* Main Content - NO overlays for crisp text */}
 
       <div className="relative px-6 py-8 sm:px-8 sm:py-10">
         {/* Header with Kintsugi Philosophy */}
@@ -95,6 +85,7 @@ export default function KintsugiWelcomeBanner({
                   potteryData={potteryData}
                   size="small"
                   interactive={false}
+                  journalEntries={journalEntries}
                 />
               </motion.div>
             )}
@@ -102,7 +93,7 @@ export default function KintsugiWelcomeBanner({
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg"
+              className="flex-shrink-0 bg-white/20 rounded-2xl p-4 shadow-lg"
             >
               <Sparkles className="h-10 w-10 text-white" />
             </motion.div>
@@ -116,7 +107,7 @@ export default function KintsugiWelcomeBanner({
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 }}
-                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-amber-400/30 to-yellow-300/30 backdrop-blur-sm rounded-full border border-amber-300/50 shadow-lg"
+                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-amber-400/30 to-yellow-300/30 rounded-full border border-amber-300/50 shadow-lg"
                   title="Kintsugi pronunciation guide"
                 >
                   <span className="text-white font-bold text-sm">金継ぎ</span>
@@ -133,7 +124,7 @@ export default function KintsugiWelcomeBanner({
               </p>
 
               {/* Unified Philosophy Quote */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="bg-white/10 rounded-xl p-4 border border-white/20">
                 <p className="text-white/95 text-sm font-semibold mb-2">
                   Own Your Impact + Kintsugi Philosophy
                 </p>
@@ -165,16 +156,16 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+              className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Consistent Impact</p>
-                  <p className="text-white text-2xl font-bold mt-1">{currentStreak} days 🔥</p>
-                  <p className="text-white/70 text-xs mt-1">Showing up daily</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">Consistent Impact</p>
+                  <p className="text-gray-900 dark:text-white text-2xl font-bold mt-1">{currentStreak} days 🔥</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">Showing up daily</p>
                 </div>
-                <div className="bg-white/20 rounded-full p-3">
-                  <TrendingUp className="h-6 w-6 text-white" />
+                <div className="bg-amber-100 dark:bg-amber-900/30 rounded-full p-3">
+                  <TrendingUp className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                 </div>
               </div>
             </motion.div>
@@ -183,16 +174,16 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+              className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Your Impact Story</p>
-                  <p className="text-white text-2xl font-bold mt-1">{totalEntries} ✍️</p>
-                  <p className="text-white/70 text-xs mt-1">Wins + growth documented</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">Your Impact Story</p>
+                  <p className="text-gray-900 dark:text-white text-2xl font-bold mt-1">{totalEntries} ✍️</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">Wins + growth documented</p>
                 </div>
-                <div className="bg-white/20 rounded-full p-3">
-                  <Heart className="h-6 w-6 text-white" />
+                <div className="bg-red-100 dark:bg-red-900/30 rounded-full p-3">
+                  <Heart className="h-6 w-6 text-red-600 dark:text-red-400" />
                 </div>
               </div>
             </motion.div>
@@ -201,16 +192,16 @@ export default function KintsugiWelcomeBanner({
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+              className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Golden Moments</p>
-                  <p className="text-white text-2xl font-bold mt-1">{goldenMoments} ✨</p>
-                  <p className="text-white/70 text-xs mt-1">Challenges turned to gold</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">Golden Moments</p>
+                  <p className="text-gray-900 dark:text-white text-2xl font-bold mt-1">{goldenMoments} ✨</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">Challenges turned to gold</p>
                 </div>
-                <div className="bg-white/20 rounded-full p-3">
-                  <Sparkles className="h-6 w-6 text-white" />
+                <div className="bg-amber-100 dark:bg-amber-900/30 rounded-full p-3">
+                  <Sparkles className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                 </div>
               </div>
             </motion.div>

@@ -504,6 +504,13 @@ const achievementDefinitions: Achievement[] = [
 // Check and unlock achievements
 export function checkAndUnlockAchievements(data: EngagementData): Achievement[] {
   const newlyUnlocked: Achievement[] = [];
+  // Ensure required arrays exist
+  if (!data.achievements) {
+    data.achievements = [];
+  }
+  if (!data.journalEntries) {
+    data.journalEntries = [];
+  }
   const unlockedIds = new Set(data.achievements.map(a => a.id));
 
   // Helper functions

@@ -79,6 +79,7 @@ import FreshStartWelcome from '@/components/FreshStartWelcome';
 // Phase 13: Kintsugi Philosophy Features (10 Remarkable Features)
 import MushinReflectionMode from '@/components/MushinReflectionMode';
 import KintsugiPromptsCarousel from '@/components/KintsugiPromptsCarousel';
+import GrowthMindsetCarousel from '@/components/GrowthMindsetCarousel';
 import StrengthArchaeology from '@/components/StrengthArchaeology';
 import ImpermanenceReminder from '@/components/ImpermanenceReminder';
 import GoldenSeamTimeline from '@/components/GoldenSeamTimeline';
@@ -1615,9 +1616,7 @@ export default function Home() {
               <GoldenRepairsPanel entries={journalEntries} />
 
               {/* Interactive Kintsugi Vessel - Your Golden Jar */}
-              {journalEntries.length > 0 && (
-                <InteractiveKintsugiVessel entries={journalEntries} />
-              )}
+              <InteractiveKintsugiVessel entries={journalEntries} />
 
               {/* Unified Philosophy Explanation */}
               <UnifiedPhilosophyCard />
@@ -1639,6 +1638,13 @@ export default function Home() {
 
               {/* Phase 4: Custom Affirmations */}
               <CustomAffirmationsManager />
+
+              {/* Growth Mindset Affirmations - Daily Empowerment */}
+              <GrowthMindsetCarousel
+                onSelectPrompt={(prompt) => {
+                  setShowAccomplishments(true);
+                }}
+              />
 
               {/* Quick Actions */}
               <QuickCapture

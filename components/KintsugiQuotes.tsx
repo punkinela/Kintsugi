@@ -75,16 +75,9 @@ export default function KintsugiQuotes() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative overflow-hidden bg-gradient-to-br theme-gradient-to-br  rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50"
+      className="relative overflow-hidden bg-gradient-to-br theme-gradient-to-br rounded-2xl shadow-lg border-2 theme-border-accent dark:theme-border-primary/50"
+      style={{ WebkitFontSmoothing: 'antialiased', MozOsxFontSmoothing: 'grayscale' }}
     >
-      {/* Decorative pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
-          backgroundSize: '24px 24px',
-          color: '#D4AF37'
-        }}></div>
-      </div>
 
       <div className="relative p-6">
         <div className="flex items-start justify-between mb-4">
@@ -119,7 +112,7 @@ export default function KintsugiQuotes() {
             transition={{ duration: 0.5 }}
           >
             <blockquote className="mb-4">
-              <p className="text-lg font-serif italic text-gray-800 dark:text-gray-200 leading-relaxed">
+              <p className="text-lg font-serif italic text-gray-900 dark:text-white leading-relaxed font-medium">
                 "{currentQuote.quote}"
               </p>
             </blockquote>
