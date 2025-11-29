@@ -214,6 +214,29 @@ For spiritual orientation:
 23. Accountability & Feedback
 24. From Awareness to Action
 
+### Additional Biases Worth Highlighting
+
+Beyond the 24 core biases, these cognitive patterns are rich territory for exploration:
+
+| Bias | What It Is | How App Can Address It |
+|------|-----------|------------------------|
+| **Negativity Bias** | Bad feels stronger than good | Journal prompts that surface forgotten wins |
+| **Spotlight Effect** | Thinking everyone notices our flaws | Reflection showing others are self-focused too |
+| **Attribution Error** | We judge ourselves harshly, others kindly | Prompts to apply same kindness to self |
+| **Confirmation Bias** | Seeking evidence we're "not enough" | AI highlights counter-evidence in their own words |
+| **Availability Heuristic** | Recent failures feel like patterns | Show long-term trends, not just recent data |
+| **Self-Serving Bias** | (Flip it positive) | Help users own their successes, not dismiss them |
+
+### Growth Mindset Research to Incorporate
+
+| Concept | Source | App Feature |
+|---------|--------|-------------|
+| **Power of "Yet"** | Carol Dweck | Reframe "I can't" to "I can't YET" in reflections |
+| **Neuroplasticity** | Brain science | Explain that journaling literally rewires the brain |
+| **Effort Attribution** | Dweck | Celebrate effort, not just outcomes |
+| **Process Praise** | Research on motivation | AI feedback focuses on HOW they grew |
+| **Deliberate Practice** | Ericsson | Structured reflection prompts, not just freeform |
+
 ### Psychological Research Citations
 
 | Concept | Source | Application |
@@ -226,6 +249,19 @@ For spiritual orientation:
 | Psychological Safety | Edmondson (1999) | Team features |
 | Intersectionality | Crenshaw (1989) | Cultural awareness |
 | CBT Frameworks | Beck (1979) | Confidence toolkit |
+
+### Research Hub Recommendation
+
+Build research into the unified app through these mechanisms:
+
+| Feature | Purpose | Implementation |
+|---------|---------|----------------|
+| **Bias Library** | Educate users about biases they might have | Dedicated section with all biases, citations, and "Document This" actions |
+| **"Why This Works"** | Subtle explanations of psychology behind features | Tooltips, info icons, and expandable "Learn More" sections |
+| **Progressive Revelation** | Meet users where they are | Skeptics see proof/research first; believers see philosophy first |
+| **Personalized Insights** | Connect research to their data | "Based on your entries, you might be experiencing negativity bias..." |
+
+**Design Principle**: Research should feel empowering, not academic. Users should think "Ah, that explains why I feel this way!" not "This is a psychology textbook."
 
 ---
 
@@ -247,16 +283,26 @@ For spiritual orientation:
 
 ### Engagement Strategies (Research-Backed)
 
+#### For Skeptics (Getting Them to Stay)
+
 | Strategy | Research Basis | Implementation |
 |----------|---------------|----------------|
 | **Foot-in-the-Door** | Small commitments → larger ones | Start with ONE reflection, not full onboarding |
-| **Fresh Start Effect** | Temporal landmarks | Leverage Mondays, month starts, birthdays |
-| **Loss Aversion** | Fear of losing > desire to gain | "Don't lose your streak" messaging |
+| **Fresh Start Effect** | Temporal landmarks | Leverage Mondays, month starts, birthdays as entry points |
+| **Loss Aversion** | People fear losing more than gaining | "You've already logged 3 days - don't lose your streak" |
 | **IKEA Effect** | We value what we create | Show THEIR data, THEIR patterns early |
-| **Social Proof** | Others like me succeeded | Anonymous success stories |
-| **Curiosity Gap** | Incomplete info drives engagement | "After 7 entries, we'll reveal your pattern..." |
-| **Variable Rewards** | Dopamine from unpredictability | Random golden nugget insights |
-| **Endowed Progress** | We finish what's started | Show journey as already begun |
+| **Social Proof** | "Others like me succeeded" | Anonymous success stories, aggregate stats |
+| **Curiosity Gap** | Incomplete info drives engagement | "After 7 entries, we'll reveal your hidden bias pattern..." |
+
+#### For Retention (Keeping Everyone Engaged)
+
+| Strategy | Research Basis | Implementation |
+|----------|---------------|----------------|
+| **Variable Rewards** | Dopamine from unpredictability | Random "golden nugget" insights, surprise affirmations |
+| **Zeigarnik Effect** | Incomplete tasks stick in memory | "Your reflection is 80% complete..." |
+| **Endowed Progress** | We finish what's started | Show journey as already begun, not starting from zero |
+| **Implementation Intentions** | "When X, I will Y" | Prompt users to set specific journaling triggers |
+| **Self-Determination** | Autonomy, competence, relatedness | Choices, progress feedback, community elements |
 
 ### The 6-Stage Skeptic Journey
 
