@@ -42,7 +42,15 @@ export function getEngagementData(): EngagementData {
   if (!stored) return defaultEngagementData;
 
   try {
-    return JSON.parse(stored);
+    const parsed = JSON.parse(stored);
+    // Merge with defaults to ensure all fields exist
+    return {
+      ...defaultEngagementData,
+      ...parsed,
+      journalEntries: parsed.journalEntries || [],
+      achievements: parsed.achievements || [],
+      viewedInsightIds: parsed.viewedInsightIds || [],
+    };
   } catch {
     return defaultEngagementData;
   }
