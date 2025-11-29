@@ -17,7 +17,7 @@ interface EnhancedProgressJournalProps {
 
 export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedProgressJournalProps) {
   const [entries, setEntries] = useState<JournalEntry[]>(() => {
-    return getEngagementData().journalEntries;
+    return getEngagementData().journalEntries || [];
   });
   const [showAddForm, setShowAddForm] = useState(false);
   const [newEntry, setNewEntry] = useState({
@@ -35,7 +35,7 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
   useEffect(() => {
     if (isOpen) {
       const data = getEngagementData();
-      setEntries(data.journalEntries);
+      setEntries(data.journalEntries || []);
     }
   }, [isOpen]);
 
