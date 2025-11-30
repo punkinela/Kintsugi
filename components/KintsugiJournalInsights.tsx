@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, TrendingUp, Heart, BookOpen, Award, Target } from 'lucide-react';
+import { Sparkles, TrendingUp, Heart, BookOpen, Award, Target, Brain, Loader2, RefreshCw } from 'lucide-react';
 import { JournalEntry } from '@/types/engagement';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import AnimatedCounter from './AnimatedCounter';
 
 interface KintsugiJournalInsightsProps {
@@ -11,6 +11,46 @@ interface KintsugiJournalInsightsProps {
 }
 
 export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsightsProps) {
+  const [smartInsight, setSmartInsight] = useState<string | null>(null);
+  const [isLoadingInsight, setIsLoadingInsight] = useState(false);
+  const [insightError, setInsightError] = useState<string | null>(null);
+
+  const generateSmartInsight = async () => {
+    if (entries.length === 0) return;
+
+    setIsLoadingInsight(true);
+    setInsightError(null);
+
+    try {
+      // Get recent entries for context (last 10)
+      const recentEntries = entries.slice(0, 10).map(e => ({
+        accomplishment: e.accomplishment,
+        reflection: e.reflection,
+        mood: e.mood,
+        date: e.date
+      }));
+
+      const response = await fetch('/api/smart/generate-insight', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entries: recentEntries }),
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.insight) {
+        setSmartInsight(data.insight);
+      } else {
+        setInsightError('Could not generate insight. Try again later.');
+      }
+    } catch (err) {
+      setInsightError('Smart features may not be enabled.');
+      console.error('Smart insight error:', err);
+    } finally {
+      setIsLoadingInsight(false);
+    }
+  };
+
   const insights = useMemo(() => {
     if (entries.length === 0) {
       return {
@@ -323,6 +363,73 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
           </div>
         </motion.div>
       </div>
+
+      {/* Smart Insights Panel */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.55 }}
+        className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl shadow-lg border-2 border-amber-200 dark:border-amber-800 p-6"
+      >
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <Brain className="h-5 w-5 text-amber-600" />
+          Smart Insights
+          <span className="text-xs px-2 py-0.5 bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 rounded-full ml-2">
+            Powered by Claude
+          </span>
+        </h3>
+
+        {!smartInsight ? (
+          <div className="text-center py-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Get personalized insights based on your journal entries using advanced AI analysis.
+            </p>
+            <button
+              onClick={generateSmartInsight}
+              disabled={isLoadingInsight || entries.length === 0}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl hover:from-amber-600 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium shadow-md"
+            >
+              {isLoadingInsight ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Analyzing your journey...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-5 h-5" />
+                  Generate Smart Insight
+                </>
+              )}
+            </button>
+            {insightError && (
+              <p className="text-sm text-red-600 dark:text-red-400 mt-3">{insightError}</p>
+            )}
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-amber-500">
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                {smartInsight}
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                setSmartInsight(null);
+                generateSmartInsight();
+              }}
+              disabled={isLoadingInsight}
+              className="inline-flex items-center gap-2 text-sm text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300"
+            >
+              {isLoadingInsight ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <RefreshCw className="w-4 h-4" />
+              )}
+              Generate new insight
+            </button>
+          </div>
+        )}
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
