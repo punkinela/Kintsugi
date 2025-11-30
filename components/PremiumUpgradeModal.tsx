@@ -62,7 +62,7 @@ export default function PremiumUpgradeModal({ isOpen, onClose, featureName }: Pr
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
               <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-                Unlock the full power of Kintsugi's AI-powered features to transform your setbacks into career strengths.
+                Unlock the full power of Kintsugi's Smart-powered features to transform your setbacks into career strengths.
               </p>
 
               {/* Premium Features */}
@@ -76,7 +76,7 @@ export default function PremiumUpgradeModal({ isOpen, onClose, featureName }: Pr
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Skills Growth Roadmap</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      AI-powered career gap analysis tailored to your goals
+                      Smart-powered career gap analysis tailored to your goals
                     </p>
                   </div>
                 </div>
@@ -96,7 +96,7 @@ export default function PremiumUpgradeModal({ isOpen, onClose, featureName }: Pr
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Portfolio Generator</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      AI-crafted portfolio pieces showcasing your resilience
+                      Smart-crafted portfolio pieces showcasing your resilience
                     </p>
                   </div>
                 </div>
@@ -104,7 +104,7 @@ export default function PremiumUpgradeModal({ isOpen, onClose, featureName }: Pr
                 <div className="flex items-start gap-3 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
                   <Zap className="h-5 w-5 theme-text-primary flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-gray-900 dark:text-white">AI-Powered Insights</p>
+                    <p className="font-semibold text-gray-900 dark:text-white">Smart-Powered Insights</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       Deep analysis of your growth patterns and strengths
                     </p>
@@ -121,7 +121,7 @@ export default function PremiumUpgradeModal({ isOpen, onClose, featureName }: Pr
                   Premium features will be available starting at <strong className="text-purple-600 dark:text-purple-400">$8/month</strong> with a free trial to get you started.
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Your data remains private. We process AI requests and immediately delete them—no storage, no logging of your personal information.
+                  Your data remains private. We process Smart requests and immediately delete them—no storage, no logging of your personal information.
                 </p>
               </div>
 

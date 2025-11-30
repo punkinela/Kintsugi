@@ -141,7 +141,7 @@ export default function VoiceProfileManager({ userId, onClose }: VoiceProfileMan
               <AIBadge />
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Teaching AI to write like you, not like ChatGPT
+              Teaching Smart to write like you, not like ChatGPT
             </p>
           </div>
         </div>
@@ -250,7 +250,7 @@ export default function VoiceProfileManager({ userId, onClose }: VoiceProfileMan
                   <p className="font-semibold mb-1">Why add writing samples?</p>
                   <p>
                     We analyze your past writing to learn your unique voice, vocabulary, and style. This
-                    prevents AI-generated content from sounding generic or using words you'd never say.
+                    prevents Smart-generated content from sounding generic or using words you'd never say.
                   </p>
                 </div>
               </div>
@@ -409,7 +409,7 @@ export default function VoiceProfileManager({ userId, onClose }: VoiceProfileMan
                 Words to Avoid
               </h3>
               <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
-                These words will never appear in AI-generated content
+                These words will never appear in Smart-generated content
               </p>
               <div className="flex flex-wrap gap-2 mb-3">
                 {profile?.avoidedWords.map((word) => (
@@ -451,7 +451,7 @@ export default function VoiceProfileManager({ userId, onClose }: VoiceProfileMan
                 Preferred Phrases
               </h3>
               <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
-                Phrases you commonly use that AI should include
+                Phrases you commonly use that Smart should include
               </p>
               <div className="flex flex-wrap gap-2 mb-3">
                 {profile?.preferredPhrases.map((phrase) => (

@@ -382,7 +382,7 @@ export default function KintsugiJournalInsights({ entries }: KintsugiJournalInsi
         {!smartInsight ? (
           <div className="text-center py-4">
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Get personalized insights based on your journal entries using advanced AI analysis.
+              Get personalized insights based on your journal entries using advanced Smart analysis.
             </p>
             <button
               onClick={generateSmartInsight}
