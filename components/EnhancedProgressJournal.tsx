@@ -9,6 +9,7 @@ import { analyzeAccomplishment, generateSummary, generateInsights, AnalysisResul
 import { awardXP, incrementStat } from '@/utils/gamification';
 import AccomplishmentHelper from './AccomplishmentHelper';
 import MushinReflectionMode from './MushinReflectionMode';
+import SmartAnalysisPanel from './SmartAnalysisPanel';
 
 interface EnhancedProgressJournalProps {
   isOpen: boolean;
@@ -288,20 +289,28 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
                     />
                     
                     {/* Accomplishment Helper with Emoticons */}
-                    <AccomplishmentHelper 
+                    <AccomplishmentHelper
                       text={newEntry.accomplishment}
                       onTextChange={(text) => setNewEntry({ ...newEntry, accomplishment: text })}
                       showHelper={true}
                     />
-                    
-                    <button
-                      onClick={handleAnalyze}
-                      disabled={!newEntry.accomplishment.trim()}
-                      className="mt-2 flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
-                    >
-                      <Sparkles className="w-4 h-4" />
-                      Analyze Impact
-                    </button>
+
+                    <div className="flex gap-2 mt-2">
+                      <button
+                        onClick={handleAnalyze}
+                        disabled={!newEntry.accomplishment.trim()}
+                        className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+                      >
+                        <Sparkles className="w-4 h-4" />
+                        Analyze Impact
+                      </button>
+                    </div>
+
+                    {/* Smart Analysis with Claude */}
+                    <SmartAnalysisPanel
+                      text={`${newEntry.accomplishment} ${newEntry.reflection}`}
+                      showBiasDetection={true}
+                    />
                   </div>
 
                   {/* Automated Analysis Results */}

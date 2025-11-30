@@ -18,7 +18,14 @@ import {
 } from '@/utils/smartSentiment';
 
 export interface InsightRequest {
-  recentEntries: Array<{
+  // Accept either 'entries' or 'recentEntries' for flexibility
+  entries?: Array<{
+    accomplishment: string;
+    reflection?: string;
+    date: string;
+    mood?: string;
+  }>;
+  recentEntries?: Array<{
     accomplishment: string;
     reflection?: string;
     date: string;
@@ -45,7 +52,9 @@ export interface InsightResponse {
 export async function POST(request: NextRequest): Promise<NextResponse<InsightResponse>> {
   try {
     const body: InsightRequest = await request.json();
-    const { recentEntries, userProfile, insightType = 'pattern' } = body;
+    // Accept either 'entries' or 'recentEntries'
+    const recentEntries = body.entries || body.recentEntries;
+    const { userProfile, insightType = 'pattern' } = body;
 
     if (!recentEntries || recentEntries.length === 0) {
       return NextResponse.json({
@@ -123,10 +132,18 @@ Provide:
   }
 }
 
+// Define entry type for reuse
+type JournalEntryInput = {
+  accomplishment: string;
+  reflection?: string;
+  date: string;
+  mood?: string;
+};
+
 /**
  * Generate insight using local analysis only
  */
-function generateLocalInsight(entries: InsightRequest['recentEntries']): NextResponse<InsightResponse> {
+function generateLocalInsight(entries: JournalEntryInput[]): NextResponse<InsightResponse> {
   // Analyze sentiment of all entries
   const sentiments = entries.map(entry => {
     const text = `${entry.accomplishment} ${entry.reflection || ''}`;
@@ -205,7 +222,7 @@ function extractPatterns(content: string): string[] {
 /**
  * Extract patterns using local analysis
  */
-function extractLocalPatterns(entries: InsightRequest['recentEntries']): string[] {
+function extractLocalPatterns(entries: JournalEntryInput[]): string[] {
   const patterns: string[] = [];
 
   // Check for consistency
