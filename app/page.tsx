@@ -217,7 +217,7 @@ const StatCard = ({ title, value, icon, trend, trendType = 'neutral', color = 't
 export default function Home() {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
-  const [activeTab, setActiveTab] = useState<'home' | 'journal' | 'insights' | 'your-edge' | 'your-journey'>('home');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'reflections' | 'insights' | 'your-edge' | 'profile'>('dashboard');
 
   // Your Journey Tab State
   const [activeJourneyTab, setActiveJourneyTab] = useState<'overview' | 'journal' | 'demographics' | 'journey' | 'insights' | 'growth' | 'settings'>('overview');
@@ -281,7 +281,7 @@ export default function Home() {
   const strengthVizRef = useRef<HTMLDivElement>(null);
 
   // Navigation helper to scroll to specific sections
-  const navigateToSection = (tab: 'home' | 'journal' | 'insights' | 'your-edge', ref: React.RefObject<HTMLDivElement>) => {
+  const navigateToSection = (tab: 'dashboard' | 'reflections' | 'insights' | 'your-edge', ref: React.RefObject<HTMLDivElement>) => {
     setActiveTab(tab);
     setTimeout(() => {
       ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -519,7 +519,7 @@ export default function Home() {
 
   // Load analytics data for Your Journey tab
   useEffect(() => {
-    if (!isClient || activeTab !== 'your-journey') return;
+    if (!isClient || activeTab !== 'profile') return;
 
     const loadAnalyticsData = async () => {
       try {
@@ -716,7 +716,7 @@ export default function Home() {
 
   // Navigate to Weekly Digest
   const navigateToWeeklyDigest = () => {
-    setActiveTab('home');
+    setActiveTab('dashboard');
     setShowNotifications(false);
     setTimeout(() => {
       weeklyDigestRef.current?.scrollIntoView({
@@ -750,14 +750,14 @@ export default function Home() {
     {
       key: 'h',
       ctrl: true,
-      description: 'Go to Home tab',
-      action: () => setActiveTab('home'),
+      description: 'Go to Dashboard tab',
+      action: () => setActiveTab('dashboard'),
     },
     {
       key: 'j',
       ctrl: true,
-      description: 'Go to Impact Log tab',
-      action: () => setActiveTab('journal'),
+      description: 'Go to Reflections tab',
+      action: () => setActiveTab('reflections'),
     },
     {
       key: 'i',
@@ -970,18 +970,18 @@ export default function Home() {
               </div>
               <nav className="hidden md:ml-6 md:flex md:space-x-8">
                 <button
-                  onClick={() => setActiveTab('home')}
-                  data-active={activeTab === 'home'}
+                  onClick={() => setActiveTab('dashboard')}
+                  data-active={activeTab === 'dashboard'}
                   className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
-                  Home
+                  Dashboard
                 </button>
                 <button
-                  onClick={() => setActiveTab('journal')}
-                  data-active={activeTab === 'journal'}
+                  onClick={() => setActiveTab('reflections')}
+                  data-active={activeTab === 'reflections'}
                   className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
-                  Golden Seams
+                  Reflections
                 </button>
                 {/* Insights Tab with Dropdown */}
                 <div className="relative">
@@ -1054,7 +1054,7 @@ export default function Home() {
                           </button>
                           <button
                             onClick={() => {
-                              setActiveTab('your-journey');
+                              setActiveTab('profile');
                               setActiveJourneyTab('growth');
                               setShowInsightsDropdown(false);
                             }}
@@ -1213,14 +1213,14 @@ export default function Home() {
                   </AnimatePresence>
                 </div>
 
-                {/* Your Journey Tab */}
+                {/* Profile Tab */}
                 <button
-                  onClick={() => setActiveTab('your-journey')}
-                  data-active={activeTab === 'your-journey'}
+                  onClick={() => setActiveTab('profile')}
+                  data-active={activeTab === 'profile'}
                   className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  title="Explore your transformation journey with powerful analytics and insights"
+                  title="Your profile, settings, and data management"
                 >
-                  Your Journey
+                  Profile
                 </button>
               </nav>
             </div>
@@ -1483,23 +1483,23 @@ export default function Home() {
               <div className="pt-2 pb-3 space-y-1">
                 <button
                   onClick={() => {
-                    setActiveTab('home');
+                    setActiveTab('dashboard');
                     setShowMobileMenu(false);
                   }}
-                  data-active={activeTab === 'home'}
+                  data-active={activeTab === 'dashboard'}
                   className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                 >
-                  Home
+                  Dashboard
                 </button>
                 <button
                   onClick={() => {
-                    setActiveTab('journal');
+                    setActiveTab('reflections');
                     setShowMobileMenu(false);
                   }}
-                  data-active={activeTab === 'journal'}
+                  data-active={activeTab === 'reflections'}
                   className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
                 >
-                  Impact Log
+                  Reflections
                 </button>
                 <button
                   onClick={() => {
@@ -1524,14 +1524,14 @@ export default function Home() {
                 </button>
                 <button
                   onClick={() => {
-                    setActiveTab('your-journey');
+                    setActiveTab('profile');
                     setShowMobileMenu(false);
                   }}
-                  data-active={activeTab === 'your-journey'}
+                  data-active={activeTab === 'profile'}
                   className="nav-tab-mobile block w-full text-left pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors"
-                  title="Explore your transformation journey with powerful analytics and insights"
+                  title="Your profile, settings, and data management"
                 >
-                  Your Journey
+                  Profile
                 </button>
                 <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center px-4">
@@ -1565,7 +1565,7 @@ export default function Home() {
 
         {/* Main Content */}
         <div className="px-4 py-6 sm:px-0">
-          {activeTab === 'home' && (
+          {activeTab === 'dashboard' && (
             <div className="space-y-6">
               {/* Kintsugi Welcome Banner */}
               <KintsugiWelcomeBanner
@@ -1586,7 +1586,7 @@ export default function Home() {
               {/* Weekly Digest - Automated Progress Summary */}
               <div ref={weeklyDigestRef}>
                 <InAppWeeklyDigest
-                  onLogAchievement={() => setActiveTab('journal')}
+                  onLogAchievement={() => setActiveTab('reflections')}
                 />
               </div>
 
@@ -1658,7 +1658,7 @@ export default function Home() {
             </div>
           )}
 
-          {activeTab === 'journal' && (
+          {activeTab === 'reflections' && (
             <div className="space-y-6">
               {/* Intelligent Search - Tagging & Semantic Search */}
               {journalEntries.length > 0 && (
@@ -2225,7 +2225,7 @@ export default function Home() {
                       to unlock powerful career tools, insights, and professional exports.
                     </p>
                     <button
-                      onClick={() => setActiveTab('journal')}
+                      onClick={() => setActiveTab('reflections')}
                       className="theme-btn-primary px-8 py-3 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
                     >
                       <Plus className="h-5 w-5" />
@@ -2258,7 +2258,7 @@ export default function Home() {
             </div>
           )}
           {/* YOUR JOURNEY TAB */}
-          {activeTab === 'your-journey' && (
+          {activeTab === 'profile' && (
             <div className="space-y-6">
               {/* Journey Header with Tabs */}
               <motion.div
@@ -2632,7 +2632,7 @@ export default function Home() {
           onClose={() => setShowBiasInsight(false)}
           insight={biasInsight}
           onTakeAction={() => {
-            setActiveTab('journal');
+            setActiveTab('reflections');
             setShowBiasInsight(false);
           }}
         />
