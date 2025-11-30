@@ -968,18 +968,18 @@ export default function Home() {
                   <Volume2 className="h-3 w-3 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
                 </button>
               </div>
-              <nav className="hidden md:ml-6 md:flex md:space-x-8">
+              <nav className="hidden md:ml-6 md:flex md:space-x-4 lg:space-x-6">
                 <button
                   onClick={() => setActiveTab('dashboard')}
                   data-active={activeTab === 'dashboard'}
-                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  className="nav-tab inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium whitespace-nowrap"
                 >
                   Dashboard
                 </button>
                 <button
                   onClick={() => setActiveTab('reflections')}
                   data-active={activeTab === 'reflections'}
-                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  className="nav-tab inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium whitespace-nowrap"
                 >
                   Reflections
                 </button>
@@ -993,7 +993,7 @@ export default function Home() {
                     onMouseEnter={() => setShowInsightsDropdown(true)}
                     onMouseLeave={() => setShowInsightsDropdown(false)}
                     data-active={activeTab === 'insights'}
-                    className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium gap-1"
+                    className="nav-tab inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium gap-1 whitespace-nowrap"
                   >
                     Insights
                     <ChevronDown className="h-3 w-3" />
@@ -1079,7 +1079,7 @@ export default function Home() {
                     onMouseEnter={() => setShowYourEdgeDropdown(true)}
                     onMouseLeave={() => setShowYourEdgeDropdown(false)}
                     data-active={activeTab === 'your-edge'}
-                    className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium gap-1"
+                    className="nav-tab inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium gap-1 whitespace-nowrap"
                     title="Document setbacks today. Sell them as strengths tomorrow."
                   >
                     Your Edge
@@ -1217,7 +1217,7 @@ export default function Home() {
                 <button
                   onClick={() => setActiveTab('profile')}
                   data-active={activeTab === 'profile'}
-                  className="nav-tab inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  className="nav-tab inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium whitespace-nowrap"
                   title="Your profile, settings, and data management"
                 >
                   Profile
