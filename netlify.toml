@@ -8,3 +8,28 @@
 
 [build.environment]
   NODE_VERSION = "18"
+
+# Server-side redirects for unified app
+[[redirects]]
+  from = "/journey"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/journey/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/"
+  status = 301
+  force = true
