@@ -941,11 +941,11 @@ export default function Home() {
       <header className="bg-white dark:bg-kintsugi-dark-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <div className="flex-shrink-0 flex items-center">
+            {/* Logo Section - fixed width */}
+            <div className="flex-shrink-0 flex items-center">
                 <Sparkles className="h-8 w-8 theme-text-primary" />
                 <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Kintsugi</span>
-                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Turn setbacks into your career's golden seams</span>
+                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 hidden xl:inline">Turn setbacks into your career's golden seams</span>
                 <button
                   onClick={() => {
                     const utterance = new SpeechSynthesisUtterance('keen tsoo gee');
@@ -967,8 +967,9 @@ export default function Home() {
                   </span>
                   <Volume2 className="h-3 w-3 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
                 </button>
-              </div>
-              <nav className="hidden md:ml-6 md:flex md:space-x-4 lg:space-x-6">
+            </div>
+            {/* Navigation Tabs - flexible middle section with proper spacing */}
+            <nav className="hidden md:flex md:items-center md:space-x-4 lg:space-x-6 flex-1 justify-center max-w-2xl mx-4">
                 <button
                   onClick={() => setActiveTab('dashboard')}
                   data-active={activeTab === 'dashboard'}
@@ -1223,8 +1224,8 @@ export default function Home() {
                   Profile
                 </button>
               </nav>
-            </div>
-            <div className="hidden md:ml-6 md:flex md:items-center">
+            {/* Right Section - Icons and User */}
+            <div className="hidden md:flex md:items-center flex-shrink-0">
               <ThemeToggle />
 
               {/* Notifications Bell */}
