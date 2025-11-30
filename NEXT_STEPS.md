@@ -95,6 +95,30 @@
 
 ---
 
+## Future Phases (Roadmap)
+
+### Phase 2: Smart Integration (API)
+Claude/GPT-4 powered features:
+- [ ] **Personalized bias insights** (not hardcoded) - Dynamic detection based on user's patterns
+- [ ] **Cultural-aware affirmations** - Generated based on user's background/context
+- [ ] **Voice-matched performance reviews** - Match user's writing style
+- [ ] **Contextual communication coaching** - Situation-specific guidance
+
+### Phase 3: Premium Features
+Advanced AI capabilities:
+- [ ] **Real-time writing coach with LLM** - As-you-type suggestions
+- [ ] **Interview practice with AI feedback** - Simulated interviews with coaching
+- [ ] **Career story generation** - Auto-generate compelling narratives from entries
+- [ ] **Resume bullet refinement** - Transform accomplishments into resume-ready bullets
+
+### Phase 4: Scale & Polish
+- [ ] Performance optimization for LLM calls
+- [ ] Caching strategies for common insights
+- [ ] A/B testing framework for AI prompts
+- [ ] User feedback loop to improve AI quality
+
+---
+
 ## Environment Setup (For Reference)
 
 ### Local Development

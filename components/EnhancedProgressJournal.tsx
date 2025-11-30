@@ -263,7 +263,7 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
               </button>
             )}
 
-            {/* Add Entry Form with AI Analysis */}
+            {/* Add Entry Form with Smart Analysis */}
             {showAddForm && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
@@ -322,7 +322,7 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
                     >
                       <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-purple-600" />
-                        AI Analysis Results
+                        Smart Analysis Results
                       </h4>
                       
                       <div className="space-y-3">
@@ -549,7 +549,7 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
                   No accomplishments recorded yet
                 </p>
                 <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">
-                  Start documenting your achievements with AI-powered insights!
+                  Start documenting your achievements with Smart-powered insights!
                 </p>
               </div>
             ) : (

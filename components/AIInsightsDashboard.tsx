@@ -219,7 +219,7 @@ export default function AIInsightsDashboard() {
             Keep Journaling to Unlock Insights
           </h3>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Log at least 3 accomplishments to get personalized AI insights and pattern analysis.
+            Log at least 3 accomplishments to get personalized Smart insights and pattern analysis.
           </p>
           <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
             <div className="flex gap-1">

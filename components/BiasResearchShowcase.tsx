@@ -143,7 +143,7 @@ const biasesData: BiasData[] = [
     realWorldExample: 'A software engineer with 10 years experience thinks: "I just got lucky. They\'ll figure out I don\'t know what I\'m doing any day now."',
     howKintsugiHelps: [
       'Documented evidence of achievements creates undeniable track record',
-      'AI-generated performance reviews highlight real competencies',
+      'Smart-generated performance reviews highlight real competencies',
       'Pattern recognition shows consistent growth over time',
       'Strength archaeology identifies hidden skills you didn\'t recognize'
     ],
@@ -180,7 +180,7 @@ const biasesData: BiasData[] = [
     howKintsugiHelps: [
       'Data-driven insights reveal patterns you didn\'t see',
       'Transformation heatmap shows objective progress',
-      'AI analysis surfaces strengths you overlooked',
+      'Smart analysis surfaces strengths you overlooked',
       'Complete historical record prevents selective memory'
     ],
     prevalence: 'Universal - affects all decision-making processes'
@@ -325,7 +325,7 @@ const biasesData: BiasData[] = [
       'Skill progression tracking shows actual growth over time',
       'Comparative analysis reveals true competency development',
       'Reflection prompts encourage metacognition',
-      'AI insights provide objective skill assessment'
+      'Smart insights provide objective skill assessment'
     ],
     prevalence: 'Affects skill assessment across all domains'
   }
