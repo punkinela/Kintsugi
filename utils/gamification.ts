@@ -229,12 +229,100 @@ export function getNextMilestone(): {
   target: number;
 } | null {
   const data = getGamificationData();
-  
+
   // Next level is always a milestone
   return {
     type: 'level',
     description: `Reach Level ${data.level + 1}`,
     progress: data.xp,
     target: data.xpToNextLevel
+  };
+}
+
+// Migration function to retroactively award XP for existing journal entries
+export function migrateExistingXP(): {
+  migrated: boolean;
+  entriesFound: number;
+  xpAwarded: number;
+  newLevel: number;
+  oldLevel: number;
+} {
+  const MIGRATION_KEY = 'gamification_xp_migrated_v2';
+
+  // Check if migration already done
+  if (localStorage.getItem(MIGRATION_KEY)) {
+    const data = getGamificationData();
+    return { migrated: false, entriesFound: 0, xpAwarded: 0, newLevel: data.level, oldLevel: data.level };
+  }
+
+  // Get existing journal entries from engagement data
+  let journalEntries: unknown[] = [];
+
+  // Check both storage keys for journal entries
+  const newKey = localStorage.getItem('kintsugi_engagement');
+  const oldKey = localStorage.getItem('engagementData');
+
+  if (newKey) {
+    try {
+      const parsed = JSON.parse(newKey);
+      if (parsed.journalEntries?.length > 0) {
+        journalEntries = parsed.journalEntries;
+      }
+    } catch { /* ignore */ }
+  }
+
+  if (journalEntries.length === 0 && oldKey) {
+    try {
+      const parsed = JSON.parse(oldKey);
+      if (parsed.journalEntries?.length > 0) {
+        journalEntries = parsed.journalEntries;
+      }
+    } catch { /* ignore */ }
+  }
+
+  if (journalEntries.length === 0) {
+    // No entries to migrate, but mark as done
+    localStorage.setItem(MIGRATION_KEY, 'true');
+    const data = getGamificationData();
+    return { migrated: true, entriesFound: 0, xpAwarded: 0, newLevel: data.level, oldLevel: data.level };
+  }
+
+  // Calculate XP to award (50 XP per journal entry with new values)
+  const xpPerEntry = XP_VALUES['journal']?.xp || 50;
+  const pointsPerEntry = XP_VALUES['journal']?.points || 25;
+  const totalXP = journalEntries.length * xpPerEntry;
+  const totalPoints = journalEntries.length * pointsPerEntry;
+
+  // Get current data and update
+  const data = getGamificationData();
+  const oldLevel = data.level;
+
+  // Add the retroactive XP
+  data.xp += totalXP;
+  data.totalXpEarned += totalXP;
+  data.points += totalPoints;
+  data.stats.totalJournalEntries = journalEntries.length;
+
+  // Process level ups
+  while (data.xp >= data.xpToNextLevel && data.level < 50) {
+    data.xp -= data.xpToNextLevel;
+    data.level++;
+    data.xpToNextLevel = calculateXPForLevel(data.level + 1);
+  }
+
+  // Save updated data
+  localStorage.setItem('gamificationData', JSON.stringify(data));
+
+  // Mark migration as complete
+  localStorage.setItem(MIGRATION_KEY, 'true');
+
+  console.log(`🎉 XP Migration Complete! Found ${journalEntries.length} entries, awarded ${totalXP} XP. Level ${oldLevel} → ${data.level}`);
+
+  return {
+    migrated: true,
+    entriesFound: journalEntries.length,
+    xpAwarded: totalXP,
+    newLevel: data.level,
+    oldLevel
   };
 }
