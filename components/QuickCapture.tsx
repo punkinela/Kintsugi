@@ -44,6 +44,13 @@ export default function QuickCapture({ isOpen, onClose, onSaved }: QuickCaptureP
     window.dispatchEvent(new Event('kintsugi-data-updated'));
     window.dispatchEvent(new Event('gamification-update'));
 
+    // Dispatch level-up event if leveled up (triggers philosophy celebration)
+    if (xpResult.leveledUp && xpResult.newLevel) {
+      window.dispatchEvent(new CustomEvent('kintsugi-level-up', {
+        detail: { newLevel: xpResult.newLevel, oldLevel: xpResult.oldLevel }
+      }));
+    }
+
     setSaved(true);
     setTimeout(() => {
       setSaved(false);

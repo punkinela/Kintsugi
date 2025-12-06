@@ -5,7 +5,11 @@ import {
   XP_VALUES,
   calculateXPForLevel,
   getLevelFromXP,
-  LEVEL_TITLES
+  LEVEL_TITLES,
+  LEVEL_UP_MESSAGES,
+  KINTSUGI_PRINCIPLES,
+  GROWTH_PHASES,
+  getPhaseForLevel
 } from '@/types/gamification';
 
 // Initialize gamification data
@@ -343,5 +347,54 @@ export function migrateExistingXP(): {
     xpAwarded: totalXP,
     newLevel: data.level,
     oldLevel
+  };
+}
+
+// Get level-up message with philosophy
+export function getLevelUpMessage(level: number): {
+  title: string;
+  message: string;
+  principle: {
+    title: string;
+    description: string;
+    icon: string;
+    color: string;
+  };
+  phase: string;
+  phaseMessage: string;
+} {
+  // Get the phase for this level
+  const phaseName = getPhaseForLevel(level);
+  const phase = GROWTH_PHASES[phaseName];
+
+  // Get specific level message or fallback to phase message
+  const levelMessage = LEVEL_UP_MESSAGES[level];
+  const principleKey = levelMessage?.principle || phase.principle;
+  const principle = KINTSUGI_PRINCIPLES[principleKey as keyof typeof KINTSUGI_PRINCIPLES];
+
+  // Get level title
+  let title = LEVEL_TITLES[level];
+  if (!title) {
+    // Find the closest lower level title
+    const levelKeys = Object.keys(LEVEL_TITLES).map(Number).sort((a, b) => b - a);
+    for (const lvl of levelKeys) {
+      if (level >= lvl) {
+        title = LEVEL_TITLES[lvl];
+        break;
+      }
+    }
+  }
+
+  return {
+    title: title || 'Growth Seeker',
+    message: levelMessage?.message || phase.philosophyMessage,
+    principle: {
+      title: principle.title,
+      description: principle.description,
+      icon: principle.icon,
+      color: principle.color
+    },
+    phase: phase.name,
+    phaseMessage: phase.philosophyMessage
   };
 }

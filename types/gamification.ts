@@ -149,38 +149,128 @@ export const LEVEL_TITLES: Record<number, string> = {
   50: 'Masterwork in Progress' // Always growing, never "done"
 };
 
-// Growth Mindset Phase Descriptions
+// The 5 Core Kintsugi Principles
+export const KINTSUGI_PRINCIPLES = {
+  embrace: {
+    title: 'Embrace Imperfection',
+    description: 'Scars are beautiful, not shameful',
+    icon: '🏺',
+    color: 'from-amber-400 to-orange-500'
+  },
+  honor: {
+    title: 'Honor Your History',
+    description: 'Breaks are part of your story',
+    icon: '📜',
+    color: 'from-blue-400 to-indigo-500'
+  },
+  transform: {
+    title: 'Transform Through Healing',
+    description: 'Challenges make you stronger',
+    icon: '🦋',
+    color: 'from-purple-400 to-pink-500'
+  },
+  value: {
+    title: 'Value in Repair',
+    description: 'What was broken becomes MORE valuable',
+    icon: '✨',
+    color: 'from-yellow-400 to-amber-500'
+  },
+  wholeness: {
+    title: 'Wholeness Over Perfection',
+    description: 'Golden seams make you unique',
+    icon: '👑',
+    color: 'from-amber-500 to-yellow-600'
+  }
+};
+
+// Growth Mindset Phase Descriptions with Kintsugi Philosophy
 export const GROWTH_PHASES = {
   awakening: {
     name: 'Awakening',
     levels: [1, 2, 3, 4, 5],
     description: 'Moving from fixed to growth mindset. Recognizing that abilities can be developed through effort and learning.',
-    color: 'from-blue-400 to-cyan-500'
+    color: 'from-blue-400 to-cyan-500',
+    principle: 'embrace',
+    philosophyMessage: 'Like a vessel beginning its journey, you are learning that imperfections are not flaws—they are the starting points of transformation.'
   },
   practice: {
     name: 'Practice',
     levels: [6, 7, 8, 9, 10],
     description: 'Building growth habits. Learning to embrace effort, feedback, and mistakes as opportunities.',
-    color: 'from-green-400 to-emerald-500'
+    color: 'from-green-400 to-emerald-500',
+    principle: 'honor',
+    philosophyMessage: 'Every crack in your story holds meaning. You are learning to honor your full history—the struggles and the triumphs alike.'
   },
   integration: {
     name: 'Integration',
     levels: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
     description: 'Growth mindset becomes natural. Actively seeking challenges and celebrating progress.',
-    color: 'from-yellow-400 to-orange-500'
+    color: 'from-yellow-400 to-orange-500',
+    principle: 'transform',
+    philosophyMessage: 'You are transforming through healing. Each challenge you face is filling your cracks with gold, making you stronger than before.'
   },
   mastery: {
     name: 'Mastery',
     levels: [21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
     description: 'Embodying growth mindset. Turning adversity into strength and helping others grow.',
-    color: 'from-purple-400 to-pink-500'
+    color: 'from-purple-400 to-pink-500',
+    principle: 'value',
+    philosophyMessage: 'What was once broken has become more valuable. Your repaired places are not weaknesses—they are your greatest treasures.'
   },
   wisdom: {
     name: 'Wisdom',
     levels: [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
     description: 'Kintsugi mastery. Living the philosophy of finding beauty in imperfection and transformation.',
-    color: 'from-amber-400 to-yellow-600'
+    color: 'from-amber-400 to-yellow-600',
+    principle: 'wholeness',
+    philosophyMessage: 'You embody wholeness over perfection. Your golden seams tell a story of resilience, making you uniquely beautiful.'
   }
+};
+
+// Level-up messages tied to Kintsugi philosophy
+export const LEVEL_UP_MESSAGES: Record<number, { message: string; principle: keyof typeof KINTSUGI_PRINCIPLES }> = {
+  // Awakening Phase - Embrace Imperfection
+  2: { message: 'You\'ve taken your first step. Remember: every journey begins with acknowledging where we are.', principle: 'embrace' },
+  3: { message: 'Growth is happening! Your willingness to show up imperfectly is your greatest strength.', principle: 'embrace' },
+  4: { message: 'You\'re discovering that cracks let the light in. Keep going.', principle: 'embrace' },
+  5: { message: 'Phase complete! You\'ve learned to embrace imperfection—scars are beautiful, not shameful.', principle: 'embrace' },
+
+  // Practice Phase - Honor Your History
+  6: { message: 'Welcome to the Practice phase. Every break in your story has made you who you are today.', principle: 'honor' },
+  7: { message: 'Your past struggles aren\'t weaknesses—they\'re the foundation of your strength.', principle: 'honor' },
+  8: { message: 'Each entry you write honors your journey. Your history matters.', principle: 'honor' },
+  9: { message: 'You\'re weaving gold into your story. Every thread connects.', principle: 'honor' },
+  10: { message: 'The Golden Thread is yours! You\'ve learned to honor your full history—breaks are part of your story.', principle: 'honor' },
+
+  // Integration Phase - Transform Through Healing
+  11: { message: 'Integration begins. You\'re not just surviving challenges—you\'re growing through them.', principle: 'transform' },
+  12: { message: 'Like the lotus rising from mud, your struggles nurture your growth.', principle: 'transform' },
+  13: { message: 'Transformation is active within you. Each challenge adds more gold.', principle: 'transform' },
+  14: { message: 'You\'re becoming stronger in the broken places. This is Kintsugi in action.', principle: 'transform' },
+  15: { message: 'Halfway to mastery! You appreciate imperfection as part of beauty.', principle: 'transform' },
+  16: { message: 'Your healing journey inspires growth in yourself and others.', principle: 'transform' },
+  17: { message: 'Wisdom flows through your golden seams. Keep seeking, keep growing.', principle: 'transform' },
+  18: { message: 'You\'re actively sculpting your strength from life\'s challenges.', principle: 'transform' },
+  19: { message: 'The journey itself has become the destination. You embrace the process.', principle: 'transform' },
+  20: { message: 'Kintsugi Apprentice achieved! Challenges make you stronger—you embody transformation through healing.', principle: 'transform' },
+
+  // Mastery Phase - Value in Repair
+  21: { message: 'Mastery phase unlocked. What was broken in you has become your greatest asset.', principle: 'value' },
+  22: { message: 'Your growth mindset is second nature now. You see gold where others see cracks.', principle: 'value' },
+  23: { message: 'Adversity Alchemist—you turn setbacks into precious gold.', principle: 'value' },
+  24: { message: 'Your perceived limits were illusions. You\'ve moved beyond them.', principle: 'value' },
+  25: { message: 'Quarter century of levels! You create beauty from imperfection.', principle: 'value' },
+  26: { message: 'Your potential is fully unleashed. Your repairs make you MORE valuable.', principle: 'value' },
+  27: { message: 'You spread the growth mindset to others through your example.', principle: 'value' },
+  28: { message: 'Resilience exemplified. Your repaired cracks shine brightest.', principle: 'value' },
+  29: { message: 'You weave wisdom from every experience, golden thread by golden thread.', principle: 'value' },
+  30: { message: 'Change Champion! You\'ve mastered the truth: what was broken becomes MORE valuable.', principle: 'value' },
+
+  // Wisdom Phase - Wholeness Over Perfection
+  35: { message: 'Golden Vessel achieved. You embody the Kintsugi philosophy completely.', principle: 'wholeness' },
+  40: { message: 'Living Kintsugi. You ARE the transformation—whole, unique, and luminous.', principle: 'wholeness' },
+  45: { message: 'Radiant Phoenix. You rise stronger from every setback, your golden seams lighting the way.', principle: 'wholeness' },
+  50: { message: 'Masterwork in Progress—the ultimate truth. We are always growing, never "done." Your golden seams make you uniquely beautiful.', principle: 'wholeness' }
 };
 
 // Get phase for a given level

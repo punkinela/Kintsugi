@@ -381,22 +381,70 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                 answer={
                   <>
                     <p className="mb-2">
-                      As you earn XP, you progress through 50 levels with Kintsugi-themed titles that reflect your growth journey:
+                      As you earn XP, you progress through 50 levels across 5 growth phases—each tied to a core Kintsugi principle:
                     </p>
-                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
-                      <li><strong>Levels 1-10:</strong> Awareness Phase (Curious Explorer → Self-Reflector)</li>
-                      <li><strong>Levels 11-20:</strong> Foundation Phase (Pattern Seeker → Growth Catalyst)</li>
-                      <li><strong>Levels 21-30:</strong> Integration Phase (Wisdom Weaver → Impact Architect)</li>
-                      <li><strong>Levels 31-40:</strong> Mastery Phase (Legacy Builder → Visionary Leader)</li>
-                      <li><strong>Levels 41-50:</strong> Transcendence Phase (Change Architect → Masterwork in Progress)</li>
+                    <ul className="list-disc list-inside space-y-2 mb-3 ml-2 text-sm">
+                      <li>
+                        <strong className="text-blue-600 dark:text-blue-400">Awakening (Levels 1-5):</strong> Embrace Imperfection
+                        <span className="block text-xs text-gray-500 ml-4">Learning that scars are beautiful, not shameful</span>
+                      </li>
+                      <li>
+                        <strong className="text-green-600 dark:text-green-400">Practice (Levels 6-10):</strong> Honor Your History
+                        <span className="block text-xs text-gray-500 ml-4">Recognizing that breaks are part of your story</span>
+                      </li>
+                      <li>
+                        <strong className="text-yellow-600 dark:text-yellow-400">Integration (Levels 11-20):</strong> Transform Through Healing
+                        <span className="block text-xs text-gray-500 ml-4">Understanding that challenges make you stronger</span>
+                      </li>
+                      <li>
+                        <strong className="text-purple-600 dark:text-purple-400">Mastery (Levels 21-30):</strong> Value in Repair
+                        <span className="block text-xs text-gray-500 ml-4">Embodying that what was broken becomes MORE valuable</span>
+                      </li>
+                      <li>
+                        <strong className="text-amber-600 dark:text-amber-400">Wisdom (Levels 31-50):</strong> Wholeness Over Perfection
+                        <span className="block text-xs text-gray-500 ml-4">Living the truth that golden seams make you unique</span>
+                      </li>
                     </ul>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Each level unlocks new pottery styles and shows your pottery vessel gaining more golden seams.
-                      The progression isn't about perfection—it's about becoming a "masterwork in progress."
+                      Each level-up includes a philosophy message connecting your growth to Kintsugi wisdom.
+                      You also unlock new avatar collections and rewards as you progress—your pottery vessel gains more golden seams with each phase.
                     </p>
                   </>
                 }
-                research="Based on Dreyfus Model of Skill Acquisition and Growth Mindset progression theory"
+                research="Growth phases aligned with Kintsugi philosophy and Carol Dweck's Growth Mindset progression theory"
+              />
+
+              <FAQItem
+                question="What are the 5 Kintsugi principles?"
+                answer={
+                  <>
+                    <p className="mb-3">
+                      Kintsugi (金継ぎ) is built on five core principles that guide your journey:
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 mb-3 ml-2 text-sm">
+                      <li>
+                        <strong>🏺 Embrace Imperfection:</strong> Scars are beautiful, not shameful. Your cracks let the light in.
+                      </li>
+                      <li>
+                        <strong>📜 Honor Your History:</strong> Breaks are part of your story. Every struggle has shaped who you are today.
+                      </li>
+                      <li>
+                        <strong>🦋 Transform Through Healing:</strong> Challenges make you stronger. Growth comes from working through difficulty.
+                      </li>
+                      <li>
+                        <strong>✨ Value in Repair:</strong> What was broken becomes MORE valuable. Your repaired places are treasures.
+                      </li>
+                      <li>
+                        <strong>👑 Wholeness Over Perfection:</strong> Golden seams make you unique. You are whole, not despite your cracks, but because of them.
+                      </li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      These principles are woven throughout your journey—in level-up messages, avatar collections, affirmations, and insights.
+                      As you progress through the 5 growth phases, you'll deeply embody each principle.
+                    </p>
+                  </>
+                }
+                research="Ancient Japanese Kintsugi philosophy combined with post-traumatic growth theory (Tedeschi & Calhoun)"
               />
 
               <FAQItem
