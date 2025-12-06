@@ -35,7 +35,7 @@ export default function QuickCapture({ isOpen, onClose, onSaved }: QuickCaptureP
     updateStreakFromEntries();
 
     // Award XP for impact entry
-    const xpResult = awardXP('journal_entry');
+    const xpResult = awardXP('journal');
 
     // Update gamification stats
     incrementStat('totalJournalEntries', 1);
