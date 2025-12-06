@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, TrendingUp, Brain, Target, CheckCircle2, Plus, X, Lightbulb, Award, ChevronDown, ChevronUp } from 'lucide-react';
 import { getEnhancedAchievements } from '@/utils/enhancedAchievements';
+import { awardXP } from '@/utils/gamification';
 
 interface ImperfectionReflection {
   id: string;
@@ -52,6 +53,20 @@ export default function GrowthMindsetTracker() {
 
     // Store count for achievement tracking
     localStorage.setItem('imperfectionGratitudeCount', updated.length.toString());
+
+    // Award XP for growth mindset reflection
+    const xpResult = awardXP('reflection');
+
+    // Trigger gamification update events
+    window.dispatchEvent(new Event('kintsugi-data-updated'));
+    window.dispatchEvent(new Event('gamification-update'));
+
+    // Dispatch level-up event if leveled up (triggers philosophy celebration)
+    if (xpResult.leveledUp && xpResult.newLevel) {
+      window.dispatchEvent(new CustomEvent('kintsugi-level-up', {
+        detail: { newLevel: xpResult.newLevel, oldLevel: xpResult.oldLevel }
+      }));
+    }
 
     // Reset form
     setImperfection('');

@@ -805,12 +805,49 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
 
               <FAQItem
                 question="What is XP and how do I earn it?"
-                answer="XP (Experience Points) are earned by completing actions in the app. Visit daily (+10 XP), log accomplishments (+50 XP), view affirmations (+5 XP), read insights (+15 XP), and complete challenges for bonus XP. As you earn XP, you level up and unlock rewards!"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      <strong>XP (Experience Points)</strong> is a gamification concept borrowed from video games.
+                      You earn XP by engaging with the app, and when you accumulate enough, you level up!
+                    </p>
+                    <p className="mb-2 font-medium">How to earn XP:</p>
+                    <ul className="list-disc list-inside space-y-1 mb-3 ml-2 text-sm">
+                      <li><strong>Document Impact entry:</strong> +50 XP</li>
+                      <li><strong>Growth Mindset reflection:</strong> +40 XP</li>
+                      <li><strong>Daily visit:</strong> +25 XP</li>
+                      <li><strong>View insight:</strong> +25 XP</li>
+                      <li><strong>View affirmation:</strong> +15 XP</li>
+                      <li><strong>Complete daily challenge:</strong> +75 XP each</li>
+                      <li><strong>3-day streak bonus:</strong> +100 XP</li>
+                      <li><strong>7-day streak bonus:</strong> +250 XP</li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      As you level up, you unlock new avatar collections, earn titles, and receive philosophy messages
+                      connecting your growth to Kintsugi wisdom.
+                    </p>
+                  </>
+                }
+                research="Gamification increases engagement by 40% and motivation by 34% (Hamari et al., 2014)"
               />
 
               <FAQItem
                 question="How do I level up faster?"
-                answer="Focus on daily challenges (big XP rewards), log accomplishments regularly (+50 XP each), maintain your streak (bonus XP at milestones), and use all features to unlock achievements. Complete all 3 daily challenges for +225 XP!"
+                answer={
+                  <>
+                    <p className="mb-2">Here are the best ways to level up quickly:</p>
+                    <ul className="list-disc list-inside space-y-1 mb-2 ml-2 text-sm">
+                      <li><strong>Complete daily challenges</strong> - +75 XP each (225 XP for all 3!)</li>
+                      <li><strong>Log Impact Entries regularly</strong> - +50 XP each</li>
+                      <li><strong>Add Growth Mindset reflections</strong> - +40 XP each</li>
+                      <li><strong>Maintain your streak</strong> - Bonus XP at 3, 7, 30, and 100 days</li>
+                      <li><strong>Explore all features</strong> - Unlock achievements for bonus XP</li>
+                    </ul>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Pro tip: Both Impact Entries AND Growth Mindset reflections count toward your progress!
+                    </p>
+                  </>
+                }
               />
 
               {/* Using the App */}
