@@ -88,17 +88,20 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
     window.dispatchEvent(new Event('kintsugi-data-updated'));
     window.dispatchEvent(new Event('gamification-update'));
 
+    // Dispatch level-up event if leveled up (triggers philosophy celebration)
+    if (xpResult.leveledUp && xpResult.newLevel) {
+      console.log(`🎉 Level Up! You're now level ${xpResult.newLevel}!`);
+      window.dispatchEvent(new CustomEvent('kintsugi-level-up', {
+        detail: { newLevel: xpResult.newLevel, oldLevel: xpResult.oldLevel }
+      }));
+    }
+
     setEntries(data.journalEntries);
     setNewEntry({ accomplishment: '', reflection: '', category: '', mood: '', tags: [] });
     setTagInput('');
     setShowAddForm(false);
     setShowAnalysis(false);
     setAnalysis(null);
-
-    // Show XP notification if leveled up
-    if (xpResult.leveledUp) {
-      console.log(`🎉 Level Up! You're now level ${xpResult.newLevel}!`);
-    }
   };
 
   const handleExport = () => {

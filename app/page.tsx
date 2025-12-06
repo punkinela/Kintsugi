@@ -57,6 +57,7 @@ import AnimatedCounter from '@/components/AnimatedCounter';
 import ProgressRing from '@/components/ProgressRing';
 import FloatingActionButton from '@/components/FloatingActionButton';
 import CelebrationModal from '@/components/CelebrationModal';
+import LevelUpCelebration from '@/components/LevelUpCelebration';
 
 // Phase 10: Journal Engagement & Retention (Research-Backed)
 import StreakCalendar from '@/components/StreakCalendar';
@@ -292,6 +293,8 @@ export default function Home() {
   const { toasts, addToast, removeToast } = useToast();
   const [showCelebration, setShowCelebration] = useState(false);
   const [celebrationData, setCelebrationData] = useState({ title: '', message: '', type: 'achievement' as const });
+  const [showLevelUp, setShowLevelUp] = useState(false);
+  const [levelUpLevel, setLevelUpLevel] = useState(1);
 
   // Homepage stats (reactive)
   const [currentStreak, setCurrentStreak] = useState(0);
@@ -466,6 +469,25 @@ export default function Home() {
       }
     }
   }, [isClient, journalEntries.length, addToast]);
+
+  // Listen for level-up events to show philosophy celebration
+  useEffect(() => {
+    if (!isClient) return;
+
+    const handleLevelUp = (event: CustomEvent) => {
+      const { newLevel } = event.detail;
+      if (newLevel) {
+        setLevelUpLevel(newLevel);
+        setShowLevelUp(true);
+      }
+    };
+
+    window.addEventListener('kintsugi-level-up' as any, handleLevelUp as EventListener);
+
+    return () => {
+      window.removeEventListener('kintsugi-level-up' as any, handleLevelUp as EventListener);
+    };
+  }, [isClient]);
 
   // Load and refresh homepage stats
   useEffect(() => {
@@ -2851,6 +2873,13 @@ export default function Home() {
         title={celebrationData.title}
         message={celebrationData.message}
         type={celebrationData.type}
+      />
+
+      {/* Level Up Celebration with Philosophy */}
+      <LevelUpCelebration
+        isOpen={showLevelUp}
+        onClose={() => setShowLevelUp(false)}
+        newLevel={levelUpLevel}
       />
 
       {/* Onboarding Tour */}
