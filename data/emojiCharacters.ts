@@ -1,5 +1,5 @@
-// Themed emoji character collections for profile avatars
-// Inspired by empowerment, growth, and self-recognition themes
+// Kintsugi-themed emoji character collections for profile avatars
+// Aligned with Kintsugi philosophy: embracing imperfection, finding beauty in repair, growth mindset
 
 export interface EmojiCharacter {
   emoji: string;
@@ -10,376 +10,271 @@ export interface EmojiCharacter {
   recommendedFor: string[];
 }
 
+export interface CategoryUnlock {
+  unlockLevel: number;
+  rarity: 'common' | 'rare' | 'epic' | 'legendary';
+}
+
+// Category unlock requirements
+export const CATEGORY_UNLOCKS: { [category: string]: CategoryUnlock } = {
+  vessels: { unlockLevel: 1, rarity: 'common' },
+  nature: { unlockLevel: 5, rarity: 'common' },
+  golden: { unlockLevel: 10, rarity: 'rare' },
+  transformers: { unlockLevel: 20, rarity: 'epic' },
+  masters: { unlockLevel: 30, rarity: 'legendary' }
+};
+
 export const emojiCharacters: { [category: string]: EmojiCharacter[] } = {
-  // The Achievers - Goal-oriented, ambitious, driven
-  achievers: [
+  // The Vessels - Starting point, embracing the journey (Level 1+)
+  vessels: [
     {
-      emoji: '🏆',
-      name: 'Trophy',
-      personality: 'The Champion',
-      theme: 'Achievement & Success',
-      description: 'Celebrates every win, big or small. Always striving for excellence.',
-      recommendedFor: ['competitive', 'goal-oriented', 'high-achiever', 'ambitious']
+      emoji: '🏺',
+      name: 'Sacred Vessel',
+      personality: 'The Beginner',
+      theme: 'Starting the Journey',
+      description: 'Every masterpiece starts as a humble vessel. Your journey of transformation begins here.',
+      recommendedFor: ['new', 'beginning', 'humble', 'open']
     },
     {
-      emoji: '🚀',
-      name: 'Rocket',
-      personality: 'The Innovator',
-      theme: 'Growth & Progress',
-      description: 'Always moving forward, reaching for the stars. Unstoppable momentum.',
-      recommendedFor: ['ambitious', 'fast-paced', 'innovative', 'forward-thinking']
+      emoji: '🫖',
+      name: 'Tea Ceremony',
+      personality: 'The Mindful',
+      theme: 'Present Moment',
+      description: 'Like the tea ceremony, you find meaning in mindful presence and intentional action.',
+      recommendedFor: ['mindful', 'calm', 'present', 'intentional']
     },
     {
-      emoji: '👑',
-      name: 'Crown',
-      personality: 'The Leader',
-      theme: 'Leadership & Confidence',
-      description: 'Natural leader who owns their power. Confident and inspiring.',
-      recommendedFor: ['leadership', 'confident', 'inspiring', 'authoritative']
+      emoji: '🍵',
+      name: 'Matcha Bowl',
+      personality: 'The Practitioner',
+      theme: 'Daily Practice',
+      description: 'Strength comes from daily practice. Each cup, each day, builds your resilience.',
+      recommendedFor: ['consistent', 'disciplined', 'patient', 'dedicated']
     },
     {
-      emoji: '🎯',
-      name: 'Target',
-      personality: 'The Focused',
-      theme: 'Precision & Clarity',
-      description: 'Laser-focused on goals. Strategic and intentional in every action.',
-      recommendedFor: ['focused', 'strategic', 'precise', 'goal-driven']
+      emoji: '🥣',
+      name: 'Humble Bowl',
+      personality: 'The Simple',
+      theme: 'Wabi-Sabi Beauty',
+      description: 'Finding beauty in simplicity and imperfection. The cracks tell your story.',
+      recommendedFor: ['simple', 'authentic', 'grounded', 'honest']
     },
     {
-      emoji: '⚡',
-      name: 'Lightning',
-      personality: 'The Energizer',
-      theme: 'Energy & Action',
-      description: 'High energy, quick to act. Makes things happen with electric enthusiasm.',
-      recommendedFor: ['energetic', 'action-oriented', 'dynamic', 'fast-paced']
+      emoji: '⚱️',
+      name: 'Ancient Urn',
+      personality: 'The Wise',
+      theme: 'Timeless Wisdom',
+      description: 'Carrying wisdom from those who came before. Your history makes you stronger.',
+      recommendedFor: ['wise', 'experienced', 'reflective', 'deep']
     }
   ],
 
-  // The Creatives - Artistic, imaginative, expressive
-  creatives: [
-    {
-      emoji: '🎨',
-      name: 'Palette',
-      personality: 'The Artist',
-      theme: 'Creativity & Expression',
-      description: 'Sees the world in color. Creates beauty and meaning in everything.',
-      recommendedFor: ['creative', 'artistic', 'expressive', 'imaginative']
-    },
-    {
-      emoji: '✨',
-      name: 'Sparkles',
-      personality: 'The Magical',
-      theme: 'Wonder & Possibility',
-      description: 'Brings magic to the ordinary. Believes in infinite possibilities.',
-      recommendedFor: ['optimistic', 'imaginative', 'inspiring', 'positive']
-    },
-    {
-      emoji: '🌈',
-      name: 'Rainbow',
-      personality: 'The Colorful',
-      theme: 'Diversity & Joy',
-      description: 'Celebrates diversity and brings joy. Brightens every room.',
-      recommendedFor: ['joyful', 'inclusive', 'positive', 'uplifting']
-    },
-    {
-      emoji: '🦋',
-      name: 'Butterfly',
-      personality: 'The Transformer',
-      theme: 'Change & Growth',
-      description: 'Embraces transformation. Beautiful evolution through change.',
-      recommendedFor: ['adaptable', 'evolving', 'graceful', 'transformative']
-    },
-    {
-      emoji: '🎭',
-      name: 'Theater',
-      personality: 'The Performer',
-      theme: 'Expression & Drama',
-      description: 'Life is a stage. Expressive, dramatic, and captivating.',
-      recommendedFor: ['expressive', 'dramatic', 'entertaining', 'bold']
-    }
-  ],
-
-  // The Nurturers - Caring, supportive, empathetic
-  nurturers: [
-    {
-      emoji: '💜',
-      name: 'Purple Heart',
-      personality: 'The Compassionate',
-      theme: 'Love & Care',
-      description: 'Leads with heart. Compassionate, caring, and deeply empathetic.',
-      recommendedFor: ['caring', 'empathetic', 'supportive', 'kind']
-    },
+  // The Nature Spirits - Japanese growth symbols (Level 5+)
+  nature: [
     {
       emoji: '🌸',
-      name: 'Blossom',
-      personality: 'The Gentle',
-      theme: 'Grace & Beauty',
-      description: 'Gentle strength. Beautiful inside and out, nurturing growth.',
-      recommendedFor: ['gentle', 'nurturing', 'graceful', 'patient']
+      name: 'Cherry Blossom',
+      personality: 'The Transient',
+      theme: 'Mono no Aware',
+      description: 'Like sakura, you understand that beauty is precious because it is fleeting. Embrace each moment.',
+      recommendedFor: ['appreciative', 'present', 'graceful', 'accepting']
     },
     {
-      emoji: '🤗',
-      name: 'Hug',
-      personality: 'The Warm',
-      theme: 'Connection & Support',
-      description: 'Warm embrace for all. Makes everyone feel valued and supported.',
-      recommendedFor: ['warm', 'welcoming', 'supportive', 'friendly']
+      emoji: '🎋',
+      name: 'Bamboo',
+      personality: 'The Flexible',
+      theme: 'Bend Don\'t Break',
+      description: 'Bamboo bends in the storm but never breaks. Your flexibility is your greatest strength.',
+      recommendedFor: ['flexible', 'resilient', 'adaptable', 'strong']
     },
     {
-      emoji: '🌻',
-      name: 'Sunflower',
-      personality: 'The Bright',
-      theme: 'Positivity & Growth',
-      description: 'Always faces the light. Grows tall and spreads sunshine.',
-      recommendedFor: ['positive', 'optimistic', 'growing', 'cheerful']
+      emoji: '🪷',
+      name: 'Lotus',
+      personality: 'The Rising',
+      theme: 'Beauty from Mud',
+      description: 'The lotus rises from muddy waters to bloom beautifully. Your struggles nurture your growth.',
+      recommendedFor: ['rising', 'overcoming', 'beautiful', 'hopeful']
     },
     {
-      emoji: '🕊️',
-      name: 'Dove',
-      personality: 'The Peaceful',
-      theme: 'Peace & Harmony',
-      description: 'Brings peace and calm. Creates harmony wherever they go.',
-      recommendedFor: ['peaceful', 'calm', 'harmonious', 'balanced']
+      emoji: '🌊',
+      name: 'Great Wave',
+      personality: 'The Flowing',
+      theme: 'Embrace Change',
+      description: 'Like the wave, you flow with life\'s changes rather than fighting against them.',
+      recommendedFor: ['flowing', 'accepting', 'powerful', 'natural']
+    },
+    {
+      emoji: '🗻',
+      name: 'Mount Fuji',
+      personality: 'The Steadfast',
+      theme: 'Unwavering Purpose',
+      description: 'Standing tall through all seasons. Your purpose remains clear despite life\'s storms.',
+      recommendedFor: ['steady', 'purposeful', 'enduring', 'majestic']
     }
   ],
 
-  // The Warriors - Strong, resilient, courageous
-  warriors: [
+  // The Golden Repair - Core Kintsugi theme (Level 10+)
+  golden: [
     {
-      emoji: '💪',
-      name: 'Muscle',
-      personality: 'The Strong',
-      theme: 'Strength & Power',
-      description: 'Physical and mental strength. Overcomes any obstacle.',
-      recommendedFor: ['strong', 'resilient', 'determined', 'powerful']
+      emoji: '✨',
+      name: 'Golden Light',
+      personality: 'The Illuminated',
+      theme: 'Finding Your Gold',
+      description: 'You\'ve found the gold within your cracks. Your wounds have become your wisdom.',
+      recommendedFor: ['enlightened', 'healing', 'radiant', 'transformed']
     },
     {
-      emoji: '🔥',
-      name: 'Fire',
-      personality: 'The Passionate',
-      theme: 'Passion & Intensity',
-      description: 'Burns bright with passion. Intense, driven, and unstoppable.',
-      recommendedFor: ['passionate', 'intense', 'driven', 'fierce']
-    },
-    {
-      emoji: '🦁',
-      name: 'Lion',
-      personality: 'The Brave',
-      theme: 'Courage & Strength',
-      description: 'Courageous leader. Faces fear with roaring confidence.',
-      recommendedFor: ['brave', 'courageous', 'bold', 'fearless']
-    },
-    {
-      emoji: '🛡️',
-      name: 'Shield',
-      personality: 'The Protector',
-      theme: 'Protection & Defense',
-      description: 'Protects boundaries. Strong defender of self and others.',
-      recommendedFor: ['protective', 'strong', 'defensive', 'guardian']
-    },
-    {
-      emoji: '⚔️',
-      name: 'Sword',
-      personality: 'The Fighter',
-      theme: 'Battle & Victory',
-      description: 'Fights for what\'s right. Warrior spirit, never gives up.',
-      recommendedFor: ['fighter', 'persistent', 'determined', 'warrior']
-    }
-  ],
-
-  // The Thinkers - Intelligent, analytical, wise
-  thinkers: [
-    {
-      emoji: '🧠',
-      name: 'Brain',
-      personality: 'The Intellectual',
-      theme: 'Intelligence & Logic',
-      description: 'Sharp mind, deep thoughts. Analyzes and understands complexity.',
-      recommendedFor: ['intelligent', 'analytical', 'logical', 'thoughtful']
-    },
-    {
-      emoji: '💡',
-      name: 'Lightbulb',
-      personality: 'The Innovator',
-      theme: 'Ideas & Innovation',
-      description: 'Bright ideas constantly flowing. Innovative problem solver.',
-      recommendedFor: ['innovative', 'creative-thinker', 'problem-solver', 'inventive']
-    },
-    {
-      emoji: '🔬',
-      name: 'Microscope',
-      personality: 'The Researcher',
-      theme: 'Discovery & Analysis',
-      description: 'Curious investigator. Discovers truth through careful analysis.',
-      recommendedFor: ['curious', 'analytical', 'detail-oriented', 'scientific']
-    },
-    {
-      emoji: '📚',
-      name: 'Books',
-      personality: 'The Scholar',
-      theme: 'Knowledge & Learning',
-      description: 'Lifelong learner. Wisdom through continuous study and growth.',
-      recommendedFor: ['studious', 'knowledgeable', 'learning', 'wise']
-    },
-    {
-      emoji: '🦉',
-      name: 'Owl',
-      personality: 'The Wise',
-      theme: 'Wisdom & Insight',
-      description: 'Wise beyond years. Sees what others miss with deep insight.',
-      recommendedFor: ['wise', 'insightful', 'observant', 'thoughtful']
-    }
-  ],
-
-  // The Joyful - Happy, playful, fun-loving
-  joyful: [
-    {
-      emoji: '😊',
-      name: 'Smile',
-      personality: 'The Happy',
-      theme: 'Joy & Contentment',
-      description: 'Radiates happiness. Finds joy in simple moments.',
-      recommendedFor: ['happy', 'content', 'positive', 'cheerful']
-    },
-    {
-      emoji: '🥳',
-      name: 'Party',
-      personality: 'The Celebrator',
-      theme: 'Celebration & Fun',
-      description: 'Life is a celebration! Finds reasons to party every day.',
-      recommendedFor: ['celebratory', 'fun', 'enthusiastic', 'festive']
+      emoji: '💫',
+      name: 'Stardust',
+      personality: 'The Cosmic',
+      theme: 'Scattered but Whole',
+      description: 'Like stardust, you are scattered pieces of something magnificent coming together.',
+      recommendedFor: ['cosmic', 'connected', 'magical', 'whole']
     },
     {
       emoji: '🌟',
-      name: 'Star',
-      personality: 'The Shining',
-      theme: 'Brilliance & Light',
-      description: 'Shines bright. Natural star who lights up every space.',
-      recommendedFor: ['bright', 'outstanding', 'special', 'radiant']
+      name: 'North Star',
+      personality: 'The Guide',
+      theme: 'Guiding Light',
+      description: 'Your healing journey makes you a beacon for others finding their way.',
+      recommendedFor: ['guiding', 'inspiring', 'leading', 'bright']
     },
     {
-      emoji: '🎈',
-      name: 'Balloon',
-      personality: 'The Uplifting',
-      theme: 'Lightness & Joy',
-      description: 'Lifts spirits effortlessly. Brings lightness and joy to all.',
-      recommendedFor: ['uplifting', 'light-hearted', 'joyful', 'fun']
+      emoji: '💛',
+      name: 'Golden Heart',
+      personality: 'The Compassionate',
+      theme: 'Self-Love',
+      description: 'Your heart, mended with gold, loves deeper. Self-compassion flows through every crack.',
+      recommendedFor: ['loving', 'compassionate', 'kind', 'gentle']
     },
     {
-      emoji: '🎉',
-      name: 'Confetti',
-      personality: 'The Festive',
-      theme: 'Celebration & Excitement',
-      description: 'Every moment is worth celebrating. Spreads excitement everywhere.',
-      recommendedFor: ['celebratory', 'exciting', 'enthusiastic', 'lively']
+      emoji: '🔆',
+      name: 'Radiance',
+      personality: 'The Glowing',
+      theme: 'Inner Light',
+      description: 'The gold doesn\'t hide your breaks—it illuminates them. You glow from within.',
+      recommendedFor: ['radiant', 'confident', 'shining', 'proud']
     }
   ],
 
-  // The Mystical - Spiritual, intuitive, magical
-  mystical: [
+  // The Transformers - Growth mindset embodied (Level 20+)
+  transformers: [
     {
-      emoji: '🔮',
-      name: 'Crystal Ball',
-      personality: 'The Intuitive',
-      theme: 'Intuition & Vision',
-      description: 'Sees beyond the surface. Strong intuition guides the way.',
-      recommendedFor: ['intuitive', 'visionary', 'perceptive', 'spiritual']
+      emoji: '🦋',
+      name: 'Butterfly',
+      personality: 'The Transformed',
+      theme: 'Complete Metamorphosis',
+      description: 'You\'ve emerged from the chrysalis. The struggle gave you wings to fly.',
+      recommendedFor: ['transformed', 'free', 'beautiful', 'evolved']
     },
     {
-      emoji: '🌙',
-      name: 'Moon',
-      personality: 'The Dreamer',
-      theme: 'Dreams & Mystery',
-      description: 'Dreams big under moonlight. Mysterious and deeply reflective.',
-      recommendedFor: ['dreamy', 'reflective', 'mysterious', 'introspective']
+      emoji: '🌱',
+      name: 'Seedling',
+      personality: 'The Growing',
+      theme: 'Continuous Growth',
+      description: 'Growth never stops. Even the mightiest oak was once a seedling pushing through soil.',
+      recommendedFor: ['growing', 'learning', 'developing', 'emerging']
     },
     {
-      emoji: '⭐',
-      name: 'Starlight',
-      personality: 'The Cosmic',
-      theme: 'Universe & Wonder',
-      description: 'Connected to the cosmos. Sees the bigger picture always.',
-      recommendedFor: ['cosmic', 'philosophical', 'wondering', 'expansive']
+      emoji: '🔥',
+      name: 'Phoenix Flame',
+      personality: 'The Reborn',
+      theme: 'Rising from Ashes',
+      description: 'Like the phoenix, you rise from every setback stronger and more brilliant than before.',
+      recommendedFor: ['reborn', 'resilient', 'powerful', 'unstoppable']
     },
     {
-      emoji: '🦄',
-      name: 'Unicorn',
-      personality: 'The Rare',
-      theme: 'Uniqueness & Magic',
-      description: 'One of a kind. Rare, magical, and absolutely unique.',
-      recommendedFor: ['unique', 'special', 'magical', 'rare']
+      emoji: '🌈',
+      name: 'After the Storm',
+      personality: 'The Hopeful',
+      theme: 'Promise of Tomorrow',
+      description: 'Every storm passes. You are the rainbow that appears after the rain.',
+      recommendedFor: ['hopeful', 'optimistic', 'colorful', 'promising']
     },
     {
-      emoji: '🧙',
-      name: 'Wizard',
-      personality: 'The Magical',
-      theme: 'Magic & Power',
-      description: 'Wields inner magic. Transforms reality with intention.',
-      recommendedFor: ['magical', 'powerful', 'transformative', 'mystical']
+      emoji: '🌅',
+      name: 'New Dawn',
+      personality: 'The Renewed',
+      theme: 'Fresh Beginnings',
+      description: 'Each day brings a new dawn, a fresh chance. Yesterday\'s cracks become today\'s gold.',
+      recommendedFor: ['renewed', 'fresh', 'beginning', 'bright']
     }
   ],
 
-  // The Professionals - Career-focused, ambitious, polished
-  professionals: [
+  // The Masters - Wisdom and mastery achieved (Level 30+)
+  masters: [
     {
-      emoji: '💼',
-      name: 'Briefcase',
-      personality: 'The Professional',
-      theme: 'Career & Success',
-      description: 'Business-minded and professional. Climbs the ladder with grace.',
-      recommendedFor: ['professional', 'career-focused', 'business', 'polished']
+      emoji: '🧘',
+      name: 'Zen Master',
+      personality: 'The Peaceful',
+      theme: 'Inner Harmony',
+      description: 'You\'ve found peace with all your pieces. Serenity flows through every golden seam.',
+      recommendedFor: ['peaceful', 'centered', 'balanced', 'serene']
     },
     {
-      emoji: '💻',
-      name: 'Laptop',
-      personality: 'The Tech-Savvy',
-      theme: 'Technology & Innovation',
-      description: 'Digital native. Tech-savvy and always connected.',
-      recommendedFor: ['tech', 'digital', 'modern', 'connected']
+      emoji: '🪬',
+      name: 'Guardian Spirit',
+      personality: 'The Protector',
+      theme: 'Wisdom Keeper',
+      description: 'Your journey makes you a guardian of wisdom, protecting and guiding others on their path.',
+      recommendedFor: ['protective', 'wise', 'guardian', 'spiritual']
     },
     {
-      emoji: '📊',
-      name: 'Chart',
-      personality: 'The Analyst',
-      theme: 'Data & Strategy',
-      description: 'Data-driven decisions. Strategic thinker who measures success.',
-      recommendedFor: ['analytical', 'strategic', 'data-driven', 'methodical']
+      emoji: '🐉',
+      name: 'Dragon',
+      personality: 'The Powerful',
+      theme: 'Wisdom & Strength',
+      description: 'The dragon represents mastery of both power and wisdom. You embody both.',
+      recommendedFor: ['powerful', 'wise', 'ancient', 'respected']
     },
     {
-      emoji: '🎓',
-      name: 'Graduation',
-      personality: 'The Educated',
-      theme: 'Education & Achievement',
-      description: 'Values education. Continuously learning and growing.',
-      recommendedFor: ['educated', 'academic', 'learning', 'scholarly']
+      emoji: '👑',
+      name: 'Kintsugi Crown',
+      personality: 'The Sovereign',
+      theme: 'Mastery Achieved',
+      description: 'You wear your golden scars as a crown. Your imperfections are your greatest treasure.',
+      recommendedFor: ['sovereign', 'accomplished', 'regal', 'complete']
     },
     {
-      emoji: '💎',
-      name: 'Diamond',
-      personality: 'The Valuable',
-      theme: 'Worth & Excellence',
-      description: 'Knows their worth. Rare, valuable, and unbreakable.',
-      recommendedFor: ['valuable', 'precious', 'excellent', 'rare']
+      emoji: '🏆',
+      name: 'Golden Trophy',
+      personality: 'The Exceptional',
+      theme: 'The Exceptional One',
+      description: 'You\'ve reached the pinnacle. A masterwork of gold-filled beauty and strength.',
+      recommendedFor: ['exceptional', 'achieved', 'masterful', 'legendary']
     }
   ]
 };
 
+// Get characters available for a given level
+export function getUnlockedCategories(level: number): string[] {
+  return Object.entries(CATEGORY_UNLOCKS)
+    .filter(([_, unlock]) => level >= unlock.unlockLevel)
+    .map(([category, _]) => category);
+}
+
+// Check if a category is unlocked
+export function isCategoryUnlocked(category: string, level: number): boolean {
+  const unlock = CATEGORY_UNLOCKS[category];
+  return unlock ? level >= unlock.unlockLevel : false;
+}
+
 // Get character by personality type
 export function getCharactersByPersonality(traits: string[]): EmojiCharacter[] {
   const matches: EmojiCharacter[] = [];
-  
+
   Object.values(emojiCharacters).forEach(category => {
     category.forEach(character => {
-      const matchScore = character.recommendedFor.filter(rec => 
+      const matchScore = character.recommendedFor.filter(rec =>
         traits.some(trait => trait.toLowerCase().includes(rec.toLowerCase()))
       ).length;
-      
+
       if (matchScore > 0) {
         matches.push(character);
       }
     });
   });
-  
+
   // Sort by match score and return top matches
   return matches.slice(0, 5);
 }
@@ -389,50 +284,35 @@ export function getAllCharacterCategories(): string[] {
   return Object.keys(emojiCharacters);
 }
 
-// Get category display info
+// Get category display info - updated for Kintsugi theme
 export function getCategoryInfo(category: string): { name: string; description: string; emoji: string } {
   const categoryInfo: { [key: string]: { name: string; description: string; emoji: string } } = {
-    achievers: {
-      name: 'The Achievers',
-      description: 'Goal-oriented, ambitious, and driven to succeed',
-      emoji: '🏆'
+    vessels: {
+      name: 'The Vessels',
+      description: 'Where every Kintsugi journey begins - humble, open, ready for transformation',
+      emoji: '🏺'
     },
-    creatives: {
-      name: 'The Creatives',
-      description: 'Artistic, imaginative, and expressive souls',
-      emoji: '🎨'
+    nature: {
+      name: 'Nature Spirits',
+      description: 'Japanese symbols of resilience, growth, and natural wisdom',
+      emoji: '🌸'
     },
-    nurturers: {
-      name: 'The Nurturers',
-      description: 'Caring, supportive, and deeply empathetic',
-      emoji: '💜'
+    golden: {
+      name: 'Golden Repair',
+      description: 'The heart of Kintsugi - finding gold in your cracks, light in your wounds',
+      emoji: '✨'
     },
-    warriors: {
-      name: 'The Warriors',
-      description: 'Strong, resilient, and courageously fierce',
-      emoji: '💪'
+    transformers: {
+      name: 'The Transformers',
+      description: 'Growth mindset embodied - rising, evolving, becoming',
+      emoji: '🦋'
     },
-    thinkers: {
-      name: 'The Thinkers',
-      description: 'Intelligent, analytical, and wise',
-      emoji: '🧠'
-    },
-    joyful: {
-      name: 'The Joyful',
-      description: 'Happy, playful, and fun-loving spirits',
-      emoji: '😊'
-    },
-    mystical: {
-      name: 'The Mystical',
-      description: 'Spiritual, intuitive, and magical beings',
-      emoji: '🔮'
-    },
-    professionals: {
-      name: 'The Professionals',
-      description: 'Career-focused, ambitious, and polished',
-      emoji: '💼'
+    masters: {
+      name: 'The Masters',
+      description: 'Wisdom achieved through the journey - peace, power, and purpose',
+      emoji: '👑'
     }
   };
-  
+
   return categoryInfo[category] || { name: category, description: '', emoji: '✨' };
 }
