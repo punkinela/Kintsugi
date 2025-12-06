@@ -247,11 +247,14 @@ export function migrateExistingXP(): {
   newLevel: number;
   oldLevel: number;
 } {
-  const MIGRATION_KEY = 'gamification_xp_migrated_v2';
+  const MIGRATION_KEY = 'gamification_xp_migrated_v3';
+
+  console.log('🔄 XP Migration: Starting check...');
 
   // Check if migration already done
   if (localStorage.getItem(MIGRATION_KEY)) {
     const data = getGamificationData();
+    console.log('🔄 XP Migration: Already completed, skipping. Current level:', data.level);
     return { migrated: false, entriesFound: 0, xpAwarded: 0, newLevel: data.level, oldLevel: data.level };
   }
 
@@ -262,28 +265,41 @@ export function migrateExistingXP(): {
   const newKey = localStorage.getItem('kintsugi_engagement');
   const oldKey = localStorage.getItem('engagementData');
 
+  console.log('🔄 XP Migration: Checking storage keys...');
+  console.log('   - kintsugi_engagement exists:', !!newKey);
+  console.log('   - engagementData exists:', !!oldKey);
+
   if (newKey) {
     try {
       const parsed = JSON.parse(newKey);
+      console.log('   - kintsugi_engagement journalEntries:', parsed.journalEntries?.length || 0);
       if (parsed.journalEntries?.length > 0) {
         journalEntries = parsed.journalEntries;
       }
-    } catch { /* ignore */ }
+    } catch (e) {
+      console.log('   - Error parsing kintsugi_engagement:', e);
+    }
   }
 
   if (journalEntries.length === 0 && oldKey) {
     try {
       const parsed = JSON.parse(oldKey);
+      console.log('   - engagementData journalEntries:', parsed.journalEntries?.length || 0);
       if (parsed.journalEntries?.length > 0) {
         journalEntries = parsed.journalEntries;
       }
-    } catch { /* ignore */ }
+    } catch (e) {
+      console.log('   - Error parsing engagementData:', e);
+    }
   }
+
+  console.log('🔄 XP Migration: Found', journalEntries.length, 'total entries');
 
   if (journalEntries.length === 0) {
     // No entries to migrate, but mark as done
     localStorage.setItem(MIGRATION_KEY, 'true');
     const data = getGamificationData();
+    console.log('🔄 XP Migration: No entries found, marking complete');
     return { migrated: true, entriesFound: 0, xpAwarded: 0, newLevel: data.level, oldLevel: data.level };
   }
 
@@ -297,6 +313,8 @@ export function migrateExistingXP(): {
   const data = getGamificationData();
   const oldLevel = data.level;
 
+  console.log('🔄 XP Migration: Current state - Level:', oldLevel, 'XP:', data.xp, 'xpToNextLevel:', data.xpToNextLevel);
+
   // Add the retroactive XP
   data.xp += totalXP;
   data.totalXpEarned += totalXP;
@@ -308,6 +326,7 @@ export function migrateExistingXP(): {
     data.xp -= data.xpToNextLevel;
     data.level++;
     data.xpToNextLevel = calculateXPForLevel(data.level + 1);
+    console.log('🔄 XP Migration: Leveled up to', data.level);
   }
 
   // Save updated data
