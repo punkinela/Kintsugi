@@ -79,7 +79,7 @@ export default function EnhancedProgressJournal({ isOpen, onClose }: EnhancedPro
     updateStreakFromEntries();
 
     // Award XP for impact entry
-    const xpResult = awardXP('journal_entry');
+    const xpResult = awardXP('journal');
 
     // Update gamification stats
     incrementStat('totalJournalEntries', 1);

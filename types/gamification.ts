@@ -82,20 +82,23 @@ export interface XPAction {
   description: string;
 }
 
-// XP values for different actions
+// XP values for different actions - balanced for engagement
 export const XP_VALUES: Record<string, XPAction> = {
-  'visit': { action: 'visit', xp: 10, points: 5, description: 'Daily visit' },
-  'accomplishment': { action: 'accomplishment', xp: 50, points: 25, description: 'Log accomplishment' },
-  'affirmation': { action: 'affirmation', xp: 5, points: 2, description: 'View affirmation' },
-  'insight': { action: 'insight', xp: 15, points: 8, description: 'View insight' },
-  'journal': { action: 'journal', xp: 30, points: 15, description: 'Journal entry' },
+  'welcome': { action: 'welcome', xp: 50, points: 25, description: 'Welcome bonus' },
+  'visit': { action: 'visit', xp: 25, points: 10, description: 'Daily visit' },
+  'accomplishment': { action: 'accomplishment', xp: 75, points: 35, description: 'Log accomplishment' },
+  'affirmation': { action: 'affirmation', xp: 15, points: 8, description: 'View affirmation' },
+  'insight': { action: 'insight', xp: 25, points: 12, description: 'View insight' },
+  'journal': { action: 'journal', xp: 50, points: 25, description: 'Journal entry' },
+  'reflection': { action: 'reflection', xp: 40, points: 20, description: 'Complete reflection' },
   'streak-3': { action: 'streak-3', xp: 100, points: 50, description: '3-day streak' },
   'streak-7': { action: 'streak-7', xp: 250, points: 125, description: '7-day streak' },
   'streak-30': { action: 'streak-30', xp: 1000, points: 500, description: '30-day streak' },
   'achievement': { action: 'achievement', xp: 100, points: 50, description: 'Unlock achievement' },
   'challenge': { action: 'challenge', xp: 75, points: 40, description: 'Complete challenge' },
   'feedback': { action: 'feedback', xp: 50, points: 25, description: 'Give feedback' },
-  'profile-complete': { action: 'profile-complete', xp: 100, points: 50, description: 'Complete profile' }
+  'profile-complete': { action: 'profile-complete', xp: 100, points: 50, description: 'Complete profile' },
+  'feature-explore': { action: 'feature-explore', xp: 20, points: 10, description: 'Explore new feature' }
 };
 
 // Level titles and requirements
@@ -191,8 +194,21 @@ export function getPhaseForLevel(level: number): keyof typeof GROWTH_PHASES {
 
 // Calculate XP needed for level
 export function calculateXPForLevel(level: number): number {
-  // Progressive XP curve: level^2 * 100
-  return Math.floor(Math.pow(level, 2) * 100);
+  // Gentler progression curve for better early experience
+  // Levels 2-5: Quick wins to encourage engagement (75-375 XP)
+  // Levels 6-10: Moderate challenge (450-750 XP)
+  // Levels 11+: Progressive difficulty for long-term engagement
+  if (level <= 5) {
+    return level * 75; // L2:150, L3:225, L4:300, L5:375
+  }
+  if (level <= 10) {
+    return level * 75 + 75; // L6:525, L7:600, L8:675, L9:750, L10:825
+  }
+  if (level <= 20) {
+    return level * 100 + 100; // L11:1200, L15:1600, L20:2100
+  }
+  // Higher levels: steeper curve for dedicated users
+  return Math.floor(Math.pow(level, 1.6) * 20 + 500);
 }
 
 // Get level from total XP

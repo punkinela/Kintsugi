@@ -1,27 +1,33 @@
 // Gamification system logic
 
-import { 
-  GamificationData, 
-  XP_VALUES, 
-  calculateXPForLevel, 
+import {
+  GamificationData,
+  XP_VALUES,
+  calculateXPForLevel,
   getLevelFromXP,
-  LEVEL_TITLES 
+  LEVEL_TITLES
 } from '@/types/gamification';
 
 // Initialize gamification data
 export function initializeGamification(): GamificationData {
   const saved = localStorage.getItem('gamificationData');
-  
+
   if (saved) {
-    return JSON.parse(saved);
+    const data = JSON.parse(saved);
+    // Recalculate xpToNextLevel with new formula for existing users
+    data.xpToNextLevel = calculateXPForLevel(data.level + 1);
+    return data;
   }
-  
+
+  // Welcome bonus for new users - start with 50 XP toward level 2
+  const welcomeBonus = XP_VALUES['welcome']?.xp || 50;
+
   const initial: GamificationData = {
-    points: 0,
+    points: 25,
     level: 1,
-    xp: 0,
+    xp: welcomeBonus, // Start with welcome bonus XP
     xpToNextLevel: calculateXPForLevel(2),
-    totalXpEarned: 0,
+    totalXpEarned: welcomeBonus,
     achievements: [],
     dailyChallenges: [],
     unlockedRewards: [],
@@ -32,13 +38,13 @@ export function initializeGamification(): GamificationData {
       totalJournalEntries: 0,
       longestStreak: 0,
       currentStreak: 0,
-      totalVisits: 0,
-      daysActive: 0,
+      totalVisits: 1, // First visit counted
+      daysActive: 1,
       achievementsUnlocked: 0,
       challengesCompleted: 0
     }
   };
-  
+
   localStorage.setItem('gamificationData', JSON.stringify(initial));
   return initial;
 }
