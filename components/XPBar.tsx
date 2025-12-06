@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Trophy, Star } from 'lucide-react';
-import { getCurrentLevelInfo } from '@/utils/gamification';
+import { getCurrentLevelInfo, migrateExistingXP } from '@/utils/gamification';
 import { useEffect, useState } from 'react';
 import { useTooltipPosition, getArrowClass } from '@/hooks/useTooltipPosition';
 
@@ -15,17 +15,24 @@ export default function XPBar({ compact = false }: XPBarProps) {
   const [levelInfo, setLevelInfo] = useState(getCurrentLevelInfo());
   
   useEffect(() => {
+    // Run XP migration for existing users (one-time)
+    const migrationResult = migrateExistingXP();
+    if (migrationResult.migrated && migrationResult.entriesFound > 0) {
+      // Trigger update event so other components refresh
+      window.dispatchEvent(new Event('gamification-update'));
+    }
+
     // Update level info when component mounts
     setLevelInfo(getCurrentLevelInfo());
-    
+
     // Listen for XP updates
     const handleStorageChange = () => {
       setLevelInfo(getCurrentLevelInfo());
     };
-    
+
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('gamification-update', handleStorageChange);
-    
+
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('gamification-update', handleStorageChange);
