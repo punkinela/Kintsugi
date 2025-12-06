@@ -3,40 +3,41 @@
 import { Reward } from '@/types/gamification';
 import { getGamificationData } from './gamification';
 
-// Available rewards
+// Available rewards - aligned with Kintsugi philosophy
 export const REWARDS: Reward[] = [
-  // Avatar rewards
-  { id: 'avatar-pack-1', name: 'Mystical Avatars', description: 'Unlock 5 mystical character avatars', icon: '🔮', type: 'avatar', unlockLevel: 5, rarity: 'common' },
-  { id: 'avatar-pack-2', name: 'Legendary Heroes', description: 'Unlock 5 legendary hero avatars', icon: '⚔️', type: 'avatar', unlockLevel: 15, rarity: 'rare' },
-  { id: 'avatar-pack-3', name: 'Cosmic Beings', description: 'Unlock 5 cosmic avatars', icon: '🌌', type: 'avatar', unlockLevel: 30, rarity: 'epic' },
-  { id: 'avatar-custom', name: 'Custom Avatar Creator', description: 'Create your own custom avatar', icon: '🎨', type: 'avatar', unlockLevel: 50, rarity: 'legendary' },
-  
-  // Theme rewards
-  { id: 'theme-ocean', name: 'Ocean Theme', description: 'Beautiful ocean-inspired color scheme', icon: '🌊', type: 'theme', unlockLevel: 3, rarity: 'common' },
-  { id: 'theme-sunset', name: 'Sunset Theme', description: 'Warm sunset colors', icon: '🌅', type: 'theme', unlockLevel: 8, rarity: 'common' },
-  { id: 'theme-forest', name: 'Forest Theme', description: 'Nature-inspired greens', icon: '🌲', type: 'theme', unlockLevel: 12, rarity: 'rare' },
-  { id: 'theme-galaxy', name: 'Galaxy Theme', description: 'Cosmic purple and blue', icon: '🌠', type: 'theme', unlockLevel: 20, rarity: 'epic' },
-  { id: 'theme-gold', name: 'Golden Theme', description: 'Luxurious gold accents', icon: '✨', type: 'theme', unlockLevel: 40, rarity: 'legendary' },
-  
-  // Badge rewards
-  { id: 'badge-starter', name: 'Starter Badge', description: 'You\'ve begun your journey', icon: '🌱', type: 'badge', unlockLevel: 1, rarity: 'common' },
-  { id: 'badge-achiever', name: 'Achiever Badge', description: 'Consistent progress', icon: '🎯', type: 'badge', unlockLevel: 10, rarity: 'rare' },
-  { id: 'badge-champion', name: 'Champion Badge', description: 'True dedication', icon: '🏆', type: 'badge', unlockLevel: 25, rarity: 'epic' },
-  { id: 'badge-legend', name: 'Legend Badge', description: 'Exceptional achievement', icon: '👑', type: 'badge', unlockLevel: 50, rarity: 'legendary' },
-  
+  // Avatar Collection rewards (Kintsugi-themed)
+  { id: 'avatar-vessels', name: 'The Vessels', description: 'Humble beginnings - 5 sacred vessel avatars', icon: '🏺', type: 'avatar', unlockLevel: 1, rarity: 'common' },
+  { id: 'avatar-nature', name: 'Nature Spirits', description: 'Japanese symbols of growth - 5 nature avatars', icon: '🌸', type: 'avatar', unlockLevel: 5, rarity: 'common' },
+  { id: 'avatar-golden', name: 'Golden Repair', description: 'The heart of Kintsugi - 5 golden avatars', icon: '✨', type: 'avatar', unlockLevel: 10, rarity: 'rare' },
+  { id: 'avatar-transformers', name: 'The Transformers', description: 'Growth mindset embodied - 5 transformation avatars', icon: '🦋', type: 'avatar', unlockLevel: 20, rarity: 'epic' },
+  { id: 'avatar-masters', name: 'The Masters', description: 'Wisdom achieved - 5 master avatars', icon: '👑', type: 'avatar', unlockLevel: 30, rarity: 'legendary' },
+
+  // Theme rewards (Kintsugi-inspired)
+  { id: 'theme-ocean', name: 'Ocean Wave Theme', description: 'Flow with the tide - calm blues', icon: '🌊', type: 'theme', unlockLevel: 3, rarity: 'common' },
+  { id: 'theme-sakura', name: 'Sakura Theme', description: 'Cherry blossom pink - embrace transience', icon: '🌸', type: 'theme', unlockLevel: 8, rarity: 'common' },
+  { id: 'theme-bamboo', name: 'Bamboo Forest Theme', description: 'Flexible strength - natural greens', icon: '🎋', type: 'theme', unlockLevel: 12, rarity: 'rare' },
+  { id: 'theme-galaxy', name: 'Cosmic Theme', description: 'Connected to the universe', icon: '🌠', type: 'theme', unlockLevel: 20, rarity: 'epic' },
+  { id: 'theme-gold', name: 'Pure Gold Theme', description: 'The ultimate Kintsugi expression', icon: '✨', type: 'theme', unlockLevel: 40, rarity: 'legendary' },
+
+  // Badge rewards (Kintsugi journey)
+  { id: 'badge-cracked', name: 'First Crack', description: 'You\'ve acknowledged imperfection', icon: '🏺', type: 'badge', unlockLevel: 1, rarity: 'common' },
+  { id: 'badge-golden-thread', name: 'Golden Thread', description: 'You\'re weaving gold into your story', icon: '✨', type: 'badge', unlockLevel: 10, rarity: 'rare' },
+  { id: 'badge-restored', name: 'Beautifully Restored', description: 'Stronger in the broken places', icon: '🌟', type: 'badge', unlockLevel: 25, rarity: 'epic' },
+  { id: 'badge-masterpiece', name: 'Living Masterpiece', description: 'A work of golden art', icon: '👑', type: 'badge', unlockLevel: 50, rarity: 'legendary' },
+
   // Feature rewards
-  { id: 'feature-analytics', name: 'Advanced Analytics', description: 'Detailed progress analytics', icon: '📊', type: 'feature', unlockLevel: 7, rarity: 'rare' },
-  { id: 'feature-export', name: 'Data Export', description: 'Export your data anytime', icon: '💾', type: 'feature', unlockLevel: 10, rarity: 'rare' },
-  { id: 'feature-custom-goals', name: 'Custom Goals', description: 'Set personalized goals', icon: '🎯', type: 'feature', unlockLevel: 15, rarity: 'epic' },
-  { id: 'feature-ai-insights', name: 'AI Insights', description: 'Personalized AI recommendations', icon: '🤖', type: 'feature', unlockLevel: 35, rarity: 'legendary' },
-  
-  // Title rewards
-  { id: 'title-newcomer', name: 'Newcomer', description: 'Just getting started', icon: '🌱', type: 'title', unlockLevel: 1, rarity: 'common' },
-  { id: 'title-explorer', name: 'Explorer', description: 'Discovering your potential', icon: '🔍', type: 'title', unlockLevel: 5, rarity: 'common' },
-  { id: 'title-achiever', name: 'Achiever', description: 'Making real progress', icon: '⭐', type: 'title', unlockLevel: 10, rarity: 'rare' },
-  { id: 'title-champion', name: 'Champion', description: 'Leading by example', icon: '🏆', type: 'title', unlockLevel: 20, rarity: 'epic' },
-  { id: 'title-legend', name: 'Legend', description: 'Truly exceptional', icon: '💫', type: 'title', unlockLevel: 30, rarity: 'epic' },
-  { id: 'title-exceptional', name: 'The Exceptional One', description: 'Ultimate achievement', icon: '👑', type: 'title', unlockLevel: 50, rarity: 'legendary' }
+  { id: 'feature-analytics', name: 'Journey Analytics', description: 'See your transformation in data', icon: '📊', type: 'feature', unlockLevel: 7, rarity: 'rare' },
+  { id: 'feature-export', name: 'Story Export', description: 'Save your Kintsugi journey', icon: '💾', type: 'feature', unlockLevel: 10, rarity: 'rare' },
+  { id: 'feature-custom-goals', name: 'Personal Intentions', description: 'Set your own growth path', icon: '🎯', type: 'feature', unlockLevel: 15, rarity: 'epic' },
+  { id: 'feature-ai-insights', name: 'Wisdom Insights', description: 'AI-powered growth guidance', icon: '🧠', type: 'feature', unlockLevel: 35, rarity: 'legendary' },
+
+  // Title rewards (Kintsugi journey stages)
+  { id: 'title-vessel', name: 'The Vessel', description: 'Beginning the journey', icon: '🏺', type: 'title', unlockLevel: 1, rarity: 'common' },
+  { id: 'title-seeker', name: 'Gold Seeker', description: 'Looking for light in cracks', icon: '🔍', type: 'title', unlockLevel: 5, rarity: 'common' },
+  { id: 'title-artisan', name: 'Kintsugi Artisan', description: 'Learning the craft of repair', icon: '🎨', type: 'title', unlockLevel: 10, rarity: 'rare' },
+  { id: 'title-craftsman', name: 'Golden Craftsman', description: 'Skilled in transformation', icon: '⭐', type: 'title', unlockLevel: 20, rarity: 'epic' },
+  { id: 'title-master', name: 'Kintsugi Master', description: 'Wisdom through golden scars', icon: '💫', type: 'title', unlockLevel: 30, rarity: 'epic' },
+  { id: 'title-masterpiece', name: 'Living Masterpiece', description: 'The gold runs through you', icon: '👑', type: 'title', unlockLevel: 50, rarity: 'legendary' }
 ];
 
 // Check and unlock rewards based on level
