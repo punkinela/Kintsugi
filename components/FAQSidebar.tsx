@@ -267,6 +267,79 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                 research="Prochaska & DiClemente (1983): Transtheoretical Model—people need different support at different change stages"
               />
 
+              {/* Progressive Disclosure & Unlocking */}
+              <div className="mt-6 mb-4">
+                <h3 className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wide mb-2">
+                  Unlocking Features
+                </h3>
+              </div>
+
+              <FAQItem
+                question="How do I unlock new features?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Features unlock progressively as you level up through your journey. This design reduces overwhelm
+                      and lets you master each tool before getting the next.
+                    </p>
+                    <p className="mb-2 font-medium">Key unlock milestones:</p>
+                    <ul className="list-disc list-inside space-y-1 mb-3 ml-2 text-sm">
+                      <li><strong className="text-blue-600 dark:text-blue-400">Level 1:</strong> Quick Capture, XP Bar, Daily Affirmations, Streak Counter</li>
+                      <li><strong className="text-green-600 dark:text-green-400">Level 2:</strong> Growth Mindset Tracker (transform setbacks into strengths)</li>
+                      <li><strong className="text-purple-600 dark:text-purple-400">Level 5:</strong> Insights Tab (analytics, patterns, visualizations)</li>
+                      <li><strong className="text-amber-600 dark:text-amber-400">Level 10:</strong> Your Edge Tab (professional tools, exports, portfolio)</li>
+                    </ul>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Each entry earns +50 XP, with bonus XP for streaks and challenges. Most users reach Level 5 within 8-10 entries!
+                    </p>
+                  </>
+                }
+                research="Progressive disclosure reduces cognitive load by 47% and increases feature adoption (Nielsen Norman Group, 2019)"
+              />
+
+              <FAQItem
+                question="Why are some tabs locked?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      Tabs like <strong>Insights</strong> and <strong>Your Edge</strong> are locked initially to help you focus on
+                      building the habit of documenting your impact first.
+                    </p>
+                    <p className="mb-2">
+                      <strong>Insights Tab (Level 5)</strong> analyzes your entries to find patterns—but you need entries first!
+                      By the time you unlock it, you'll have enough data for meaningful insights.
+                    </p>
+                    <p className="mb-2">
+                      <strong>Your Edge Tab (Level 10)</strong> generates professional outputs like performance reviews and portfolios.
+                      These work best with 15+ well-documented entries.
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Think of it like learning to cook: you master the basics before attempting a complex recipe.
+                      Each unlock is a reward for your consistency!
+                    </p>
+                  </>
+                }
+              />
+
+              <FAQItem
+                question="I'm an existing user - why do I see all features?"
+                answer={
+                  <>
+                    <p className="mb-2">
+                      <strong>You're grandfathered in!</strong> If you used Kintsugi before the progressive disclosure update,
+                      you have full access to all features regardless of your level.
+                    </p>
+                    <p className="mb-2">
+                      This is our way of thanking early adopters. You've already proven your commitment to documenting
+                      your journey, so all tools are available to you.
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      New users will unlock features gradually as they level up, but your experience remains unchanged.
+                    </p>
+                  </>
+                }
+              />
+
               {/* Using the App */}
               <div className="mt-6 mb-4">
                 <h3 className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-2">
@@ -285,18 +358,22 @@ export default function FAQSidebar({ isOpen, onClose }: FAQSidebarProps) {
                       <li>
                         <strong>Home:</strong> Your dashboard with Quick Entry (30-sec wins), Week in Review,
                         growth progress, cultural wisdom from your heritage, and daily insights
+                        <span className="text-green-600 dark:text-green-400 text-xs ml-1">(Always available)</span>
                       </li>
                       <li>
                         <strong>Golden Seams (Impact Log):</strong> Your comprehensive record documenting
                         accomplishments, reflections, and career growth over time
+                        <span className="text-green-600 dark:text-green-400 text-xs ml-1">(Always available)</span>
                       </li>
                       <li>
                         <strong>Insights:</strong> Advanced analytics, Growth Mindset Tracker (for setbacks),
                         bias awareness, strength archaeology, and transformation visualizations
+                        <span className="text-purple-600 dark:text-purple-400 text-xs ml-1">(Unlocks at Level 5)</span>
                       </li>
                       <li>
                         <strong>Your Edge:</strong> Advanced features like performance review generation,
                         export tools, and portfolio creation
+                        <span className="text-amber-600 dark:text-amber-400 text-xs ml-1">(Unlocks at Level 10)</span>
                       </li>
                     </ul>
                     <p className="text-xs mt-2 text-gray-600 dark:text-gray-400">

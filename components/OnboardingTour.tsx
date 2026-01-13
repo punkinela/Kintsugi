@@ -13,29 +13,19 @@ interface OnboardingStep {
 
 const onboardingSteps: OnboardingStep[] = [
   {
-    title: 'Welcome to Own Your Impact! 👋',
-    description: 'Track your accomplishments AND your resilience. This research-backed tool helps you document your complete impact story—wins + growth through challenges. Inspired by Kintsugi (金継ぎ), the Japanese art of repairing broken pottery with gold, we believe challenges make you MORE valuable.',
+    title: 'Welcome to Your Golden Journey',
+    description: 'In Kintsugi (金継ぎ), broken pottery is repaired with gold, making it MORE valuable than before.\n\nYour career challenges, setbacks, and growth moments aren\'t flaws to hide—they\'re golden seams that make your story unique and powerful.',
     icon: <Sparkles className="h-12 w-12" />,
   },
   {
-    title: 'Document Your Full Impact',
-    description: 'Use the Journal tab to capture accomplishments AND moments of growth through challenges. Both build your professional story. Your resilience navigating obstacles is PART of your impact, not something to hide.',
+    title: 'Document Your First Impact',
+    description: 'Start by capturing one accomplishment—big or small. What did you do today that made a difference?\n\nEach entry earns XP, helping you level up and unlock new features. Your first entry is the first crack filled with gold.',
     icon: <BookOpen className="h-12 w-12" />,
   },
   {
-    title: 'Get Insights',
-    description: 'The Insights tab shows your patterns, mood trends, and personalized bias insights. See both your wins and how you\'ve grown through challenges—your complete impact picture.',
+    title: 'Grow With Every Entry',
+    description: 'As you document your journey, you\'ll earn XP and unlock:\n\n• Level 2: Growth Mindset Tracker\n• Level 5: Insights & Analytics\n• Level 10: Professional Tools\n\nYour data stays private on your device. Ready to begin?',
     icon: <TrendingUp className="h-12 w-12" />,
-  },
-  {
-    title: 'Celebrate Wins + Resilience',
-    description: 'Build streaks, complete milestones, and unlock achievements for consistently documenting your journey. We celebrate BOTH accomplishments and the challenges you\'ve overcome—they\'re all golden moments.',
-    icon: <Award className="h-12 w-12" />,
-  },
-  {
-    title: 'Quick Tips',
-    description: '• Press Ctrl+K for quick capture\n• Press Shift+? for keyboard shortcuts\n• Your data stays private on your device\n• Export your full impact story for performance reviews\n• Remember: Impact = Wins + Resilience',
-    icon: <Zap className="h-12 w-12" />,
   },
 ];
 
@@ -102,7 +92,7 @@ export default function OnboardingTour() {
               className="bg-white dark:bg-kintsugi-dark-800 rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden"
             >
               {/* Header */}
-              <div className="relative bg-gradient-to-r from-blue-600 to-indigo-700 px-8 py-6 text-white">
+              <div className="relative bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 px-8 py-6 text-white">
                 <button
                   onClick={handleSkip}
                   className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-lg transition-colors"
@@ -184,11 +174,11 @@ export default function OnboardingTour() {
 
                   <button
                     onClick={handleNext}
-                    className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-800 transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
+                    className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
                   >
                     {currentStep === onboardingSteps.length - 1 ? (
                       <>
-                        Get Started
+                        Begin My Journey
                         <Sparkles className="h-4 w-4" />
                       </>
                     ) : (

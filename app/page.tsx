@@ -58,6 +58,10 @@ import ProgressRing from '@/components/ProgressRing';
 import FloatingActionButton from '@/components/FloatingActionButton';
 import CelebrationModal from '@/components/CelebrationModal';
 import LevelUpCelebration from '@/components/LevelUpCelebration';
+import SimplifiedHomeTab from '@/components/SimplifiedHomeTab';
+import FirstWinCelebration from '@/components/FirstWinCelebration';
+import LockedFeatureTeaser from '@/components/LockedFeatureTeaser';
+import { useFeatureUnlock } from '@/hooks/useFeatureUnlock';
 
 // Phase 10: Journal Engagement & Retention (Research-Backed)
 import StreakCalendar from '@/components/StreakCalendar';
@@ -296,6 +300,29 @@ export default function Home() {
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [levelUpLevel, setLevelUpLevel] = useState(1);
 
+  // Progressive Disclosure - Feature Unlocking
+  const {
+    level: userLevel,
+    isGrandfathered,
+    isLoading: featureUnlockLoading,
+    canAccessInsights,
+    canAccessYourEdge,
+    canAccessGrowthMindset,
+    nextUnlock
+  } = useFeatureUnlock();
+  const [showFirstWin, setShowFirstWin] = useState(false);
+  const [hasShownFirstWin, setHasShownFirstWin] = useState(false);
+
+  // Check for first win celebration
+  useEffect(() => {
+    if (!isClient) return;
+
+    const firstWinShown = localStorage.getItem('kintsugi_first_win_shown');
+    if (firstWinShown) {
+      setHasShownFirstWin(true);
+    }
+  }, [isClient]);
+
   // Homepage stats (reactive)
   const [currentStreak, setCurrentStreak] = useState(0);
   const [totalEntries, setTotalEntries] = useState(0);
@@ -488,6 +515,26 @@ export default function Home() {
       window.removeEventListener('kintsugi-level-up' as any, handleLevelUp as EventListener);
     };
   }, [isClient]);
+
+  // First Win Celebration - Trigger when first entry is saved (new users only)
+  useEffect(() => {
+    if (!isClient) return;
+
+    // Only show for new (non-grandfathered) users who have exactly 1 entry
+    // and haven't seen the first win celebration yet
+    if (
+      journalEntries.length === 1 &&
+      !hasShownFirstWin &&
+      !isGrandfathered
+    ) {
+      // Small delay to let the entry save feel complete first
+      const timer = setTimeout(() => {
+        setShowFirstWin(true);
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isClient, journalEntries.length, hasShownFirstWin, isGrandfathered]);
 
   // Load and refresh homepage stats
   useEffect(() => {
@@ -1590,6 +1637,19 @@ export default function Home() {
         <div className="px-4 py-6 sm:px-0">
           {activeTab === 'dashboard' && (
             <div className="space-y-6">
+              {/* Simplified Home for New Users (Level 1-4, not grandfathered) */}
+              {!isGrandfathered && userLevel < 5 ? (
+                <SimplifiedHomeTab
+                  onQuickCapture={() => setShowQuickCapture(true)}
+                  onGrowthMindset={() => {
+                    if (canAccessGrowthMindset) {
+                      setActiveTab('insights');
+                    }
+                  }}
+                  currentStreak={currentStreak}
+                />
+              ) : (
+              <>
               {/* Kintsugi Welcome Banner */}
               <KintsugiWelcomeBanner
                 user={user}
@@ -1678,6 +1738,8 @@ export default function Home() {
 
               {/* Weekly Summary */}
               <WeeklySummary isOpen={false} onClose={() => {}} />
+              </>
+              )}
             </div>
           )}
 
@@ -1896,6 +1958,17 @@ export default function Home() {
 
           {activeTab === 'insights' && (
             <div className="space-y-6">
+              {/* Show locked teaser for users without access */}
+              {!canAccessInsights ? (
+                <LockedFeatureTeaser
+                  featureName="Insights & Analytics"
+                  unlockLevel={5}
+                  currentLevel={userLevel}
+                  description="Discover patterns, analyze your growth journey, and get AI-powered insights about your professional development."
+                  variant="tab"
+                />
+              ) : (
+              <>
               {/* Enhanced Insights Header */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -2032,11 +2105,24 @@ export default function Home() {
 
               {/* Bias Research Showcase - The Science Behind Kintsugi */}
               <BiasResearchShowcase />
+              </>
+              )}
             </div>
           )}
 
           {activeTab === 'your-edge' && (
             <div className="space-y-6">
+              {/* Show locked teaser for users without access */}
+              {!canAccessYourEdge ? (
+                <LockedFeatureTeaser
+                  featureName="Your Edge - Professional Tools"
+                  unlockLevel={10}
+                  currentLevel={userLevel}
+                  description="Access performance review generators, interview prep tools, portfolio creation, and more career-boosting features."
+                  variant="tab"
+                />
+              ) : (
+              <>
               {/* Your Edge Header */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -2277,6 +2363,8 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+              )}
+              </>
               )}
             </div>
           )}
@@ -2880,6 +2968,16 @@ export default function Home() {
         isOpen={showLevelUp}
         onClose={() => setShowLevelUp(false)}
         newLevel={levelUpLevel}
+      />
+
+      {/* First Win Celebration - First Entry for New Users */}
+      <FirstWinCelebration
+        isOpen={showFirstWin}
+        onClose={() => {
+          setShowFirstWin(false);
+          localStorage.setItem('kintsugi_first_win_shown', 'true');
+          setHasShownFirstWin(true);
+        }}
       />
 
       {/* Onboarding Tour */}
