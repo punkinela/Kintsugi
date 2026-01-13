@@ -1,8 +1,20 @@
 # Phase 1: Progressive Disclosure - Feature-to-Level Mapping
 
-> **Status:** DRAFT - Awaiting Review
+> **Status:** APPROVED - Ready for Implementation
 > **Created:** December 6, 2025
+> **Updated:** December 6, 2025
 > **Purpose:** Define which features unlock at each level to reduce new user overwhelm while preserving all 130+ components
+
+---
+
+## User Decisions (Approved)
+
+| Question | Decision |
+|----------|----------|
+| Growth Mindset Tracker | **Level 2** (core to philosophy) |
+| Your Edge Tab | **Level 10** (end of Practice phase) |
+| New Features (LinkedIn, STAR, Skills) | **Plan now** (include in roadmap) |
+| Existing Users | **Grandfathered** (full access preserved) |
 
 ---
 
@@ -50,8 +62,8 @@
 | Level | Unlock | Component | Celebration Message |
 |-------|--------|-----------|---------------------|
 | 1 | Welcome + First Entry Prompt | `OnboardingTour.tsx` | "Welcome to your journey of golden repair" |
-| 2 | View Past Entries | `EnhancedProgressJournal.tsx` | "You're building your story" |
-| 3 | Growth Mindset Tracker | `GrowthMindsetTracker.tsx` | "Now track how setbacks become strengths" |
+| 2 | **Growth Mindset Tracker** | `GrowthMindsetTracker.tsx` | "Now track how setbacks become strengths" |
+| 3 | View Past Entries | `EnhancedProgressJournal.tsx` | "You're building your story" |
 | 4 | Mood Tracking (Basic) | `MoodTracker.tsx` | "Understanding your patterns begins" |
 | 5 | **PHASE COMPLETE** - Insights Tab Unlocks | `InsightsTab` | "You've embraced imperfection. Now see your patterns." |
 
@@ -72,9 +84,10 @@
 | 7 | Entry Categories & Tags | Enhanced `QuickCapture` | "Organize your impact by type" |
 | 8 | Mood Analytics & Trends | `MoodAnalytics.tsx` | "Your emotional patterns revealed" |
 | 9 | Journal Prompts | `JournalPromptCarousel.tsx` | "Guided reflection unlocked" |
-| 10 | **PHASE COMPLETE** - Golden Avatars | `emojiCharacters.ts` | "The Golden Thread is yours. You honor your history." |
+| 10 | **PHASE COMPLETE** - Your Edge Tab + Golden Avatars | `YourEdgeTab` | "The Golden Thread is yours. Professional tools await!" |
 
 **Level 10 Unlock Bundle:**
+- **Your Edge Tab** (Performance Reviews, Resume, Portfolio)
 - Golden Avatar Collection (5 rare avatars)
 - Advanced Search
 - Export to Markdown
@@ -92,19 +105,19 @@
 | 12 | Strength Archaeology | `StrengthArchaeology.tsx` | "Uncover hidden strengths" |
 | 13 | Bias Awareness Insights | `BiasInsightModal.tsx` | "See what holds you back" |
 | 14 | Confidence Score Tracking | `AIConfidenceScoreTracker.tsx` | "Track your growing confidence" |
-| 15 | **Your Edge Tab Unlocks** | `YourEdgeTab` | "Professional tools await you" |
-| 16 | Basic Performance Review | `AIPerformanceReviewGenerator.tsx` | "Generate your first review" |
-| 17 | Transformation Heatmap | `TransformationHeatmap.tsx` | "Visualize your growth journey" |
-| 18 | Goal Setting | `GoalsManager.tsx` | "Set intentions, track progress" |
-| 19 | Before/After Reframing | `BeforeAfterReframing.tsx` | "See your transformation" |
+| 15 | Transformation Heatmap | `TransformationHeatmap.tsx` | "Visualize your growth journey" |
+| 16 | Goal Setting | `GoalsManager.tsx` | "Set intentions, track progress" |
+| 17 | Before/After Reframing | `BeforeAfterReframing.tsx` | "See your transformation" |
+| 18 | **LinkedIn Post Generator** | *New Feature* | "Share your wins professionally" |
+| 19 | **STAR Story Formatter** | *New Feature* | "One-click interview stories" |
 | 20 | **PHASE COMPLETE** - Transformer Avatars | `emojiCharacters.ts` | "You transform through healing. Mastery awaits." |
 
 **Level 20 Unlock Bundle:**
 - Transformer Avatar Collection (5 epic avatars)
-- Full Performance Review features
-- Resume bullet generator
-- Portfolio preview
+- LinkedIn Post Generator
+- STAR Story Formatter
 - Voice Profile analysis
+- Full analytics suite
 
 ---
 
@@ -114,21 +127,21 @@
 | Level | Unlock | Component | Celebration Message |
 |-------|--------|-----------|---------------------|
 | 21 | Interview Prep Generator | `AIInterviewPrepGenerator.tsx` | "Turn entries into interview gold" |
-| 22 | LinkedIn Post Generator | *New Feature* | "Share your wins professionally" |
-| 23 | STAR Story Formatter | *New Feature* | "One-click interview stories" |
-| 24 | Skills Evidence Tracker | *New Feature* | "Link accomplishments to skills" |
-| 25 | Full Portfolio Generator | `KintsugiPortfolioGenerator.tsx` | "Create your career portfolio" |
-| 26 | Advanced Export (PDF/Word) | `ExportManager.tsx` | "Professional document exports" |
-| 27 | Career Gap Analyzer | `AICareerGapAnalyzer.tsx` | "Identify growth opportunities" |
-| 28 | Accomplishment Enhancer | `AIAccomplishmentEnhancer.tsx` | "AI-powered writing improvement" |
-| 29 | Custom Affirmations | `CustomAffirmationsManager.tsx` | "Create personal affirmations" |
+| 22 | **Skills Evidence Tracker** | *New Feature* | "Link accomplishments to skills" |
+| 23 | Full Portfolio Generator | `KintsugiPortfolioGenerator.tsx` | "Create your career portfolio" |
+| 24 | Advanced Export (PDF/Word) | `ExportManager.tsx` | "Professional document exports" |
+| 25 | Career Gap Analyzer | `AICareerGapAnalyzer.tsx` | "Identify growth opportunities" |
+| 26 | Accomplishment Enhancer | `AIAccomplishmentEnhancer.tsx` | "AI-powered writing improvement" |
+| 27 | Custom Affirmations | `CustomAffirmationsManager.tsx` | "Create personal affirmations" |
+| 28 | **Career Milestone Linking** | *New Feature* | "Connect entries to promotions" |
+| 29 | Advanced Voice Profile | `VoiceProfileManager.tsx` | "Perfect your professional voice" |
 | 30 | **PHASE COMPLETE** - Master Avatars | `emojiCharacters.ts` | "What was broken is now MORE valuable. Wisdom calls." |
 
 **Level 30 Unlock Bundle:**
 - Master Avatar Collection (5 legendary avatars)
-- All AI-powered tools
+- Skills Evidence Tracker
+- Career Milestone Linking
 - Full export capabilities
-- Career milestone tracking
 - "Kintsugi Master" title
 
 ---
@@ -160,7 +173,9 @@
 | **Home** | Always | Full access |
 | **Golden Seams** | Always | Impact entries list |
 | **Insights** | Level 5 | Hidden (shows "Unlock at Level 5" teaser) |
-| **Your Edge** | Level 15 | Hidden (shows "Unlock at Level 15" teaser) |
+| **Your Edge** | Level 10 | Hidden (shows "Unlock at Level 10" teaser) |
+
+> **Note:** Existing users are **grandfathered** with full access to all tabs regardless of level.
 
 ---
 
@@ -190,7 +205,7 @@
 │  └─────────────────────────────────┘   │
 │                                         │
 │  🔒 Insights unlock at Level 5         │
-│  🔒 Your Edge unlocks at Level 15      │
+│  🔒 Your Edge unlocks at Level 10      │
 │                                         │
 └─────────────────────────────────────────┘
 ```
@@ -272,25 +287,27 @@ When a user unlocks a new feature:
 
 ---
 
-## Questions for Review
+## Questions - RESOLVED ✅
 
-1. **Growth Mindset at Level 3** - Should this be earlier (Level 2) since it's core to philosophy?
-
-2. **Your Edge at Level 15** - Is this too late? Users might want performance reviews sooner.
-
-3. **New Features (LinkedIn, STAR, Skills)** - Should these be Phase 2 additions or planned now?
-
-4. **Existing Users** - Should current users (like you at Level 4) be grandfathered with full access?
+| Question | Decision | Rationale |
+|----------|----------|-----------|
+| Growth Mindset Level | **Level 2** | Core to Kintsugi philosophy |
+| Your Edge Tab | **Level 10** | Don't discourage users from progressing |
+| New Features | **Plan now** | LinkedIn, STAR, Skills in roadmap |
+| Existing Users | **Grandfathered** | Full access preserved |
 
 ---
 
-## Next Steps After Approval
+## Next Steps - Implementation
 
-1. Review this document
-2. Answer the questions above
-3. I'll implement Phase 1.2-1.6
-4. Test with fresh browser (new user simulation)
-5. Test with your account (existing user)
+1. ✅ Document approved with user decisions
+2. 🔲 Phase 1.2: Create simplified Home tab for new users
+3. 🔲 Phase 1.3: Build level-gated tab visibility system
+4. 🔲 Phase 1.4: Add 'First Win' celebration for first entry
+5. 🔲 Phase 1.5: Update onboarding tour for simplified flow
+6. 🔲 Phase 1.6: Update FAQ for Phase 1 changes
+7. 🔲 Test with fresh browser (new user simulation)
+8. 🔲 Test with existing account (grandfathered access)
 
 ---
 
